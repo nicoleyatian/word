@@ -19,6 +19,15 @@ body {
   margin: 0 auto;
 }
 
+#grid {
+border: 10px solid black;
+}
+#grid .cell{
+border: 5px solid black; 
+border-radius:50%;
+text-align:center;
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
