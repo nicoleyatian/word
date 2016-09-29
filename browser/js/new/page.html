@@ -1,22 +1,13 @@
-<html>
-<head>
-<title>Words</title>
-<link rel="stylesheet" type="text/css" href="style.css">
-<!-- <script>window.onload=function(){
-	setup(3, x);
-}
-</script> -->
-</head>
-<body ng-controller="GameCtrl">
-<h1 id="title">Wordgamesssssssssssss </h1>
+
+<div ng-controller="GameCtrl">
+<h1 id="title">Wordgame</h1>
 <div id="start">
-<table id="grid">
-<tr ng-repeat="row in board">
-<td ng-repeat="space in row" style="margin: 500px;">
-{{space}}
-</td>
-</tr>
-</table>
+	<div id="grid">
+		<div class='row' ng-repeat="row in board">
+			<div class="cell col-md-4" ng-repeat="space in row">
+			{{space}}
+			</div>
+		</div>
+	</div>
 </div>
-</body>
-</html>
+</div>

@@ -22,8 +22,12 @@ body {
 #grid {
 border: 10px solid black;
 }
-#grid td{
-height: 50px; width: 38px; border: 5px solid black; 
+#grid.row{
+display: inline-block;
+}
+#grid.cell{
+display: inline-block;
+height: 50px; width: 50px; border: 5px solid black; 
 border-radius:50%;
 text-align:center;
 }
