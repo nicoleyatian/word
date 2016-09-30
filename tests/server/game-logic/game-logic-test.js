@@ -1,23 +1,34 @@
 var chai = require('chai');
+
 var expect = chai.expect;
 
 
-describe("Mammal class", function() {
-  var game;
-      tileCountObj = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6};
-      sideLength = 3;
-      minWordLength = 3;
+describe("Game class", function() {
+  var game,
+      tileCountObj = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6},
+      sideLength = 3,
+      minWordLength = 3,
+      numOfTiles;
+
+      for(var i in tileCountObj){
+        numOfTiles += i;
+      }
 
 
-  // Mammal is a constructor function
+  // Game is a constructor function
   beforeEach(function() {
-    game = new Game(tileCountObj, sideLength);
+    var
+    game = new GameObject(tileCountObj, sideLength, minWordLength);
+    console.log("Game", game);
   });
 
-  // myMammal is an instance of Mammal
-  it("should take name as a parameter", function() {
-    expect(myMammal.name).toEqual("Joe");
+  // game is an instance of Game
+  it("it has a tileArray", function() {
+    expect(typeof game.tileArray).toEqual('array');
+    expect(game.tileArray.length).to.be.equal(numOfTiles);
   });
+
+  // ******
 
   it("should have an array called offspring", function() {
     expect(myMammal.offspring).toEqual([]);
@@ -100,5 +111,3 @@ describe("Cat class", function() {
     expect(blueCat instanceof Cat).toEqual(true);
     expect(blueCat.constructor).toEqual(Cat);
   });
-
-});

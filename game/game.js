@@ -2,10 +2,9 @@
 //board history object, check states
 
 
-<<<<<<< HEAD
 //THE "MASTER OBJECT", HOLDS THE DEFINITIVE STATE OF THE BOARD
-//AND HISTORY, AND HAS METHODS FOR 
-=======
+//AND HISTORY, AND HAS METHODS FOR
+
 // var scrabTileCounts = {
 //     'A': 9,
 //     'B': 2,
@@ -36,10 +35,9 @@
 // };
 
 
-
->>>>>>> master
 function GameObject(tileCountObj, sideLength, minWordLength) {
     var tileArray = tileCountToArray(tileCountObj);
+    console.log('tileArray', tileArray);
     var board = generateBoardMutating(tileArray, sideLength);
     this.sideLength = sideLength;
     this.stateNumber = 0;
@@ -83,8 +81,6 @@ function tileCountToArray(tileCountObj) {
     return tileArray;
 }
 
-<<<<<<< HEAD
-=======
 
 // function generateBoard(tileArray, sideLength) {
 //     var board = [];
@@ -99,7 +95,7 @@ function tileCountToArray(tileCountObj) {
 //     return board;
 // }
 
->>>>>>> master
+
 //exists off of gameObj because utilized in init board gen
 function drawLetter(tileArray) {
     var rnd = Math.floor(Math.random() * tileArray.length);
@@ -109,8 +105,6 @@ GameObject.prototype.drawLetter = function() {
     return drawLetter(this.remainingTilesArray);
 };
 
-<<<<<<< HEAD
-=======
 function generateBoardMutating(tileArray, sideLength) {
     var board = [];
     for (var row = 0; row < sideLength; row++) {
@@ -153,25 +147,18 @@ GameObject.prototype.stateConflicts = function(wordObj, prevState) {
     return false;
 };
 
->>>>>>> master
+
 //EXPECTS: OBJECT with stateNumber, wordObj, word, playerId
 //A "STATENUMBER" TO MAKE SURE THIS MOVE ISNT COMING
 //AFTER ANOTHER MOVE THAT ALREADY CHANGED THE BOARD
 //obj with "wordObj" of format: {'0-1': 'T', '1-2': 'O'}
 //meaning letter 'T' placed at row-0 col-1..., word: , player: id
 //RETURNS: new stateNumber, obj with wordObj of same type of letters pulled from bag
-<<<<<<< HEAD
-//to replace the "removed" letters with, word:, playerId: id, pointsEarned: 
+//to replace the "removed" letters with, word:, playerId: id, pointsEarned:
 GameObject.prototype.wordPlayed = function(playObj) {
     if (playObj.word.length < this.minWordLength) return; //throw error?
-    if (playObj.stateNumber < this.stateNumber && 
+    if (playObj.stateNumber < this.stateNumber &&
     	this.stateConflicts(playObj.wordObj, playObj.stateNumber)) return;
-=======
-//to replace the "removed" letters with, word:, playerId: id, pointsEarned:
-GameObject.prototype.wordPlayed = function(obj) {
-    if (obj.word.length < this.minWordLength) return; //throw error?
-    if (obj.stateNumber < this.stateNumber && this.stateConflicts(obj.wordObj, obj.stateNumber)) return;
->>>>>>> master
     var coordArray, row, col;
     for (var ltrCoord in playObj.wordObj) {
         coordArray = ltrCoord.split('-');
@@ -207,7 +194,7 @@ GameObject.prototype.stateConflicts = function(wordObj, prevState) {
     var tilesMoved = Object.keys(wordObj);
     for (var state in this.stateHistory) {
         if (state >= prevState) {
-        	var stateTilesMoved = this.stateHistory[state]; 
+        	var stateTilesMoved = this.stateHistory[state];
             if (stateTilesMoved === 'shuffled' || stateTilesMoved.some(coord => tilesMoved.includes(coord))) return true;
         }
     }
@@ -258,6 +245,7 @@ console.log('2nd: ', GO);
 
 console.log('3rd: ', GO.wordPlayed(testWord));
 // console.log(GO);
+
 
 // var scrabTileCounts = {
 //     'A': 9,
