@@ -12,6 +12,10 @@ module.exports = db.define('game', {
     inProgress: {
         type: Sequelize.BOOLEAN,
         defaultValue: true
+    },
+    isWaiting: {
+    	type: Sequelize.BOOLEAN,
+        defaultValue: true
     }
 });
 
