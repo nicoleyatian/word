@@ -64,23 +64,20 @@ module.exports = function (app, db) {
         })
         .then(user => {
             if (user) {
-                res.sendStatus(203)
+                res.resStatus(203)
             } else {
-                return req.body
-            }
-        })
-        .then(user => {
-            return User.create(user)
-        })
-        .then(createdUser => {
-            if (createdUser) {
-                res.status(201).send({
-                    user: createdUser.sanitize()
-                });
-            } else {
-                    res.status(203).send({
-                    user: 'not created'
-                });
+                User.create(req.body)
+                .then(createdUser => {
+                    if (createdUser) {
+                        res.status(201).send({
+                            user: createdUser.sanitize()
+                        });
+                    } else {
+                            res.status(203).send({
+                            user: 'not created'
+                        });
+                    }
+                })
             }
         })
         .catch(next);

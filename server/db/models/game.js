@@ -11,7 +11,7 @@ module.exports = db.define('game', {
     },
     inProgress: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false
+        defaultValue: true
     }
 });
 
