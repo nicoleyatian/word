@@ -4,64 +4,65 @@ var game = require('../../../server/game/game.js');
 
 
 describe("Game class", function() {
-  var aGame,
-      tileCountObj = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6},
-      sideLength = 3,
-      minWordLength = 3,
-      numOfTiles = 0;
+    var aGame,
+        tileCountObj = { 'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6 },
+        sideLength = 3,
+        minWordLength = 3,
+        numOfTiles = 0;
 
-      for(var i in tileCountObj){
+    for (var i in tileCountObj) {
         numOfTiles += tileCountObj[i];
-      }
-
-
-  // Game is a constructor function
-  beforeEach(function() {
-    aGame = new game.GameObject(tileCountObj, sideLength, minWordLength);
-  });
-
-  // A new Game object has remainingTimesArray that has been decremented by the number of tiles on the new board
-  it("has a tileArray", function() {
-    expect(Array.isArray(aGame.remainingTilesArray)).to.be.true;
-    expect(aGame.remainingTilesArray.length + (sideLength * sideLength)).to.be.equal(numOfTiles);
-  });
-
-  // test that board is generated to correct dimensions
-  it("has a board that has equal sideLengths", function() {
-    expect(aGame.board.length).to.equal(sideLength);
-    expect(aGame.board[0].length).to.equal(sideLength);
-  });
-
-
-  it("draws a letter from tileArray", function() {
-    var tileArray = game.tileCountToArray(tileCountObj);
-    var tileArrayCopy = tileArray.slice();
-    var drawnLetter = game.drawLetter(tileArray);
-
-    expect(tileArray.length).to.equal(tileArrayCopy.length - 1);
-    expect(typeof drawnLetter).to.be.equal('string');
-    expect(drawnLetter.length).to.be.equal(1);
-
-    tileArray.push(drawnLetter);
-    expect(tileArray.sort()).to.deep.equal(tileArrayCopy.sort());
-  });
-
-  describe("wordPlayed function", function() {
-    var playObj = {
-      stateNumber: 2,
-      wordObj: {'0-1': 'T', '1-2': 'O'},
-      word: "TO",
-      playerId: 3
     }
 
+
+    // Game is a constructor function
     beforeEach(function() {
-      playObj
+        aGame = new game.GameObject(tileCountObj, sideLength, minWordLength);
     });
 
-    it("test", function() {
-      console.log('aGame', aGame);
+    // A new Game object has remainingTimesArray that has been decremented by the number of tiles on the new board
+    it("has a tileArray", function() {
+        expect(Array.isArray(aGame.remainingTilesArray)).to.be.true;
+        expect(aGame.remainingTilesArray.length + (sideLength * sideLength)).to.be.equal(numOfTiles);
     });
-  });
+
+    // test that board is generated to correct dimensions
+    it("has a board that has equal sideLengths", function() {
+        expect(aGame.board.length).to.equal(sideLength);
+        expect(aGame.board[0].length).to.equal(sideLength);
+    });
+
+
+    it("draws a letter from tileArray", function() {
+        var tileArray = game.tileCountToArray(tileCountObj);
+        var tileArrayCopy = tileArray.slice();
+        var drawnLetter = game.drawLetter(tileArray);
+
+        expect(tileArray.length).to.equal(tileArrayCopy.length - 1);
+        expect(typeof drawnLetter).to.be.equal('string');
+        expect(drawnLetter.length).to.be.equal(1);
+
+        tileArray.push(drawnLetter);
+        expect(tileArray.sort()).to.deep.equal(tileArrayCopy.sort());
+    });
+
+    describe("wordPlayed function", function() {
+
+      var playObj;
+
+        it("returns undefined if word length is less than minWordLength", function() {
+            playObj = {
+                stateNumber: 2,
+                wordObj: { '0-1': 'T', '1-2': 'O' },
+                word: "TO",
+                playerId: 3
+            };
+            expect(aGame.wordPlayed(playObj)).to.be.undefined;
+
+        });
+
+
+    });
 
 });
 
@@ -147,4 +148,3 @@ describe("Game class", function() {
 //     expect(blueCat instanceof Cat).toEqual(true);
 //     expect(blueCat.constructor).toEqual(Cat);
 //   });
-

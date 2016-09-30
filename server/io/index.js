@@ -1,9 +1,11 @@
 'use strict';
 var socketio = require('socket.io');
-// var Game = require();
+var game = require('../game/game.js');
 var io = null;
 
 module.exports = function (server) {
+
+  var thisGame = new game.GameObject(game.tileCounts, 6, 2);
 
     if (io) return io;
 
@@ -13,11 +15,7 @@ module.exports = function (server) {
         // Now have access to socket, wowzers!
         socket.on('wordPlayed', function(playObj){
           console.log('word is being played');
-          var potentialUpdateObj = {
-            word: "bird",
-            playerId: 2
-          };
-
+          var potentialUpdateObj = thisGame.wordPlayed(playObj);
           // game.wordPlayed(playObj);
           if(potentialUpdateObj){
             io.emit('boardUpdated', potentialUpdateObj);
