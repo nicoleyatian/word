@@ -6,7 +6,7 @@ app.config(function($stateProvider){
 	})
 })
 
-app.controller('GameCtrl', function($scope){
+app.controller('GameCtrl', function($scope, BoardFactory){
 $scope.export={
 	wordObj: {},
 	word:"",
@@ -20,15 +20,21 @@ $scope.board=[
 ];
 $scope.word="";
 $scope.size=3;
+$scope.score=0;
+$scope.playerName='';
+$scope.player=$scope.export.playerId;
 $scope.click=function(space, id){
 	$scope.export.word+=space;
 	$scope.export.wordObj[id]=space
-	console.log($scope.export);
+	//console.log($scope.export);
 }
 
 $scope.submit=function(){
-	$scope.export.wordObj={};
-	$scope.export.word="";
+	return BoardFactory.submit()
+	.then(function(x){
+		$scope.export.wordObj={};
+		$scope.export.word="";
+	})
 }
 
 })
