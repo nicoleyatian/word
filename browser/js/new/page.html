@@ -1,0 +1,16 @@
+
+<div ng-controller="GameCtrl">
+<h1 id="title">Wordgame</h1>
+<div id="start"> 
+	<div class='row'>
+		<div id="grid" class="col-md-6">
+			<div class='row' ng-repeat="(x,row) in board">
+				<div ng-click="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="col-md-4 cell" ng-repeat="(y, space) in row">
+				{{space}}
+				</div>
+			</div>
+		</div>
+	</div>
+	<button ng-click="submit()">Submit</button>
+</div>
+</div>
