@@ -38,7 +38,14 @@ describe("front-end testing", function(){
    				expect(scope.click).to.be.a('function');
    				expect(scope.submit).to.be.a('function');
    			})
-   			//it("")
+   			it("click adds letters to the word and wordObj", function(){
+   				scope.click(scope.board[0][0],'0-0');
+   				scope.click(scope.board[0][1], '0-1');
+   				scope.click(scope.board[0][2], '0-2');
+   				console.log(scope.exports.wordObj);
+   				expect(scope.exports.word).to.be.equal("abc");
+   				expect(scope.exports.wordObj).to.deep.equal({'0-0': 'a', '0-1': 'b', '0-2': 'c'});
+   			})
     	})
     // 	beforeEach("get Controllers", inject)
     // })
