@@ -6,6 +6,9 @@ var Sequelize = require('sequelize');
 var db = require('../_db');
 
 module.exports = db.define('user', {
+    name: {
+        type: Sequelize.STRING
+    },
     email: {
         type: Sequelize.STRING
     },
@@ -23,6 +26,9 @@ module.exports = db.define('user', {
     },
     google_id: {
         type: Sequelize.STRING
+    },
+    highestScore: {
+        type: Sequelize.INTEGER
     }
 }, {
     instanceMethods: {
