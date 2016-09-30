@@ -2,7 +2,7 @@ app.controller('LobbyCtrl', function ($scope, LobbyFactory, rooms, $state) {
 	$scope.rooms = rooms;
 	$scope.roomNameForm = false;
 	$scope.user = {
-		id: 2
+		id: 1
 	}
 
 	LobbyFactory.AllPlayers()
@@ -14,7 +14,6 @@ app.controller('LobbyCtrl', function ($scope, LobbyFactory, rooms, $state) {
 	})
 
 	$scope.joinGame =  function(roomId) {
-		console.log(roomId)
 		LobbyFactory.joinGame(roomId, $scope.user.id);
 	}
 	
