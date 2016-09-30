@@ -4,7 +4,7 @@ var _ = require('lodash');
 var Sequelize = require('sequelize');
 
 var db = require('../_db');
-var UserGame = require('./UserGame')
+var UserGame = require('./userGame.js')
 
 module.exports = db.define('user', {
     username: {

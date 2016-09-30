@@ -37,4 +37,11 @@ $scope.submit=function(){
 	})
 }
 
+$scope.updateBoard=function(object){
+	console.log($scope.board);
+	for (var key in object){
+		$scope.board[key[0]][key[2]]=object[key];
+	}
+}
+
 })
