@@ -56,4 +56,31 @@ module.exports = function (app, db) {
 
     });
 
+    app.post('/signup', function(req, res, next) {
+        User.findOne({
+            where: {
+                email: req.body.email
+            }
+        })
+        .then(user => {
+            if (user) {
+                res.resStatus(203)
+            } else {
+                User.create(req.body)
+                .then(createdUser => {
+                    if (createdUser) {
+                        res.status(201).send({
+                            user: createdUser.sanitize()
+                        });
+                    } else {
+                            res.status(203).send({
+                            user: 'not created'
+                        });
+                    }
+                })
+            }
+        })
+        .catch(next);
+    })
+
 };

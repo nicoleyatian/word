@@ -4,9 +4,10 @@ var _ = require('lodash');
 var Sequelize = require('sequelize');
 
 var db = require('../_db');
+var UserGame = require('./UserGame')
 
 module.exports = db.define('user', {
-    name: {
+    username: {
         type: Sequelize.STRING
     },
     email: {
@@ -28,7 +29,8 @@ module.exports = db.define('user', {
         type: Sequelize.STRING
     },
     highestScore: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0
     }
 }, {
     instanceMethods: {
@@ -52,7 +54,10 @@ module.exports = db.define('user', {
     },
     hooks: {
         beforeCreate: setSaltAndPassword,
-        beforeUpdate: setSaltAndPassword
+        beforeUpdate: function(user){
+            setSaltAndPassword(user);
+            getHighestScore(user)
+        }
     }
 });
 
@@ -61,4 +66,13 @@ function setSaltAndPassword(user) {
         user.salt = user.Model.generateSalt();
         user.password = user.Model.encryptPassword(user.password, user.salt);
     }
+}
+
+function getHighestScore(user) {
+    UserGame.max('score', {
+        where: {
+            userId: user.id
+        }
+    })
+    .then(max => {user.highestScore = max})
 }
