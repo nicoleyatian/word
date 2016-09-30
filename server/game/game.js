@@ -37,7 +37,6 @@
 
 function GameObject(tileCountObj, sideLength, minWordLength) {
     var tileArray = tileCountToArray(tileCountObj);
-    console.log('tileArray', tileArray);
     var board = generateBoardMutating(tileArray, sideLength);
     this.sideLength = sideLength;
     this.stateNumber = 0;
@@ -220,30 +219,30 @@ GameObject.prototype.computeScore = function(word) {
 
 
 //testing & experimentation
-var GO = new GameObject(tileCounts, 6, 2);
+// var GO = new GameObject(tileCounts, 6, 2);
 
-GO.stateHistory = {
-	0: ['1-1', '1-0'],
-	1: ['2-3', '3-3']
-};
+// GO.stateHistory = {
+// 	0: ['1-1', '1-0'],
+// 	1: ['2-3', '3-3']
+// };
 
-GO.stateNumber = 2;
+// GO.stateNumber = 2;
 
-console.log('init: ', GO);
+// // console.log('init: ', GO);
 
-GO.addPlayer(1);
-GO.addPlayer(2);
+// GO.addPlayer(1);
+// GO.addPlayer(2);
 
-var testWord = {
-    stateNumber: 3,
-    wordObj: { '0-1': 'T', '1-2': 'O', '1-1': 'P' },
-    word: 'TOP',
-    playerId: 2
-};
-GO.shuffle();
-console.log('2nd: ', GO);
+// var testWord = {
+//     stateNumber: 3,
+//     wordObj: { '0-1': 'T', '1-2': 'O', '1-1': 'P' },
+//     word: 'TOP',
+//     playerId: 2
+// };
+// GO.shuffle();
+// console.log('2nd: ', GO);
 
-console.log('3rd: ', GO.wordPlayed(testWord));
+// console.log('3rd: ', GO.wordPlayed(testWord));
 // console.log(GO);
 
 
@@ -290,3 +289,10 @@ console.log('3rd: ', GO.wordPlayed(testWord));
 //     }
 //     return board;
 // }
+
+module.exports = {
+    GameObject: GameObject,
+    generateBoardMutating: generateBoardMutating,
+    drawLetter: drawLetter,
+    tileCountToArray: tileCountToArray
+};
