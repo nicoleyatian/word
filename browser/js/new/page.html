@@ -1,12 +1,24 @@
 
 <div ng-controller="GameCtrl">
+<div id="top">
+<h1> Your Word: {{exports.word}}</h1>
+<label id="name">
+	<p class="Game-info">{{playerName}}</p>
+</label>
+<label id="score">
+	Score: {{score}}
+</label>
+<label id="players">
+	<p class="Game-info"> Player # {{player}}</p>
+</label>
 <h1 id="title">Wordgame</h1>
+</div>
 <div id="start"> 
 	<div class='row'>
 		<div id="grid" class="col-md-6">
 			<div class='row' ng-repeat="(x,row) in board">
 				<div ng-click="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="col-md-4 cell" ng-repeat="(y, space) in row">
-				{{space}}
+					{{space}}
 				</div>
 			</div>
 		</div>
