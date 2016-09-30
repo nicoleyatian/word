@@ -2,7 +2,7 @@ app.controller('LobbyCtrl', function ($scope, LobbyFactory, rooms, $state) {
 	$scope.rooms = rooms;
 	$scope.roomNameForm = false;
 	$scope.user = {
-		id: 1
+		id: 2
 	}
 
 	LobbyFactory.AllPlayers()

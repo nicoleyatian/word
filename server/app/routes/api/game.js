@@ -28,7 +28,7 @@ router.get('/', (req, res, next) => {
 router.get('/rooms', (req, res, next) => {
     Game.findAll({
         where: {
-            inProgress: true
+            isWaiting: true
         },
         include:[{model: User}]
     })
