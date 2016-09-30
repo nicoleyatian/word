@@ -59,7 +59,8 @@ var tileCounts = {
 //     'Z': 1
 // };
 
-//
+
+
 function GameObject(tileCountObj, sideLength, minWordLength) {
     var tileArray = tileCountToArray(tileCountObj);
     var board = generateBoardMutating(tileArray, sideLength);
@@ -74,7 +75,7 @@ function GameObject(tileCountObj, sideLength, minWordLength) {
 
 //called once with the countObj at creation of game instance.
 //obj simplifies visualizing/altering letter counts, but array
-//is better for drawing and keeping track of remaining tiles 
+//is better for drawing and keeping track of remaining tiles
 function tileCountToArray(tileCountObj) {
     var tileArray = [];
     for (var l in tileCountObj) {
@@ -84,7 +85,6 @@ function tileCountToArray(tileCountObj) {
     }
     return tileArray;
 }
-
 
 
 // function generateBoard(tileArray, sideLength) {
@@ -122,6 +122,7 @@ function generateBoardMutating(tileArray, sideLength) {
     return board;
 }
 
+
 //add player id to playerScores obj with init score 0
 GameObject.prototype.addPlayer = function(id) {
     this.playerScores[id] = 0;
@@ -132,6 +133,7 @@ GameObject.prototype.addToScore = function(playerId, word) {
     this.playerScores[playerId] += pointsEarned;
     return pointsEarned;
 };
+
 
 GameObject.prototype.computeScore = function(word) {
     return word.length - this.minWordLength + 1;
@@ -150,12 +152,12 @@ GameObject.prototype.stateConflicts = function(wordObj, prevState) {
 };
 
 //EXPECTS: OBJECT with stateNumber, wordObj, word, playerId
-//A "STATENUMBER" TO MAKE SURE THIS MOVE ISNT COMING 
+//A "STATENUMBER" TO MAKE SURE THIS MOVE ISNT COMING
 //AFTER ANOTHER MOVE THAT ALREADY CHANGED THE BOARD
 //obj with "wordObj" of format: {'0-1': 'T', '1-2': 'O'}
 //meaning letter 'T' placed at row-0 col-1..., word: , player: id
 //RETURNS: new stateNumber, obj with wordObj of same type of letters pulled from bag
-//to replace the "removed" letters with, word:, playerId: id, pointsEarned: 
+//to replace the "removed" letters with, word:, playerId: id, pointsEarned:
 GameObject.prototype.wordPlayed = function(obj) {
     if (obj.word.length < this.minWordLength) return; //throw error?
     if (obj.stateNumber < this.stateNumber && this.stateConflicts(obj.wordObj, obj.stateNumber)) return;
@@ -183,7 +185,7 @@ var GO = new GameObject(tileCounts, 6, 2);
 
 GO.stateHistory = {
 	0: ['1-1', '1-0'],
-	1: ['2-3', '3-3']	
+	1: ['2-3', '3-3']
 };
 
 GO.stateNumber = 2;
