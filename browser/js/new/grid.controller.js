@@ -1,6 +1,6 @@
 app.config(function($stateProvider){
 	$stateProvider.state('Game', {
-		url: '/game',
+		url: '/game/',
 		templateUrl: 'js/new/page.html',
 		controller: "GameCtrl"
 	})
