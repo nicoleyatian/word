@@ -2,6 +2,8 @@ var Trie = require('trie-hard');
 
 var dicTrie = new Trie();
 
+//try shuffling, testing many words, find avg speed
+
 var dict = `aa
 aah
 aahed
