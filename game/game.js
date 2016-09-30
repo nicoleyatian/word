@@ -63,6 +63,7 @@ var tileCounts = {
 
 function GameObject(tileCountObj, sideLength, minWordLength) {
     var tileArray = tileCountToArray(tileCountObj);
+    console.log('tileArray', tileArray);
     var board = generateBoardMutating(tileArray, sideLength);
     this.stateNumber = 0;
     this.minWordLength = minWordLength;
@@ -204,3 +205,4 @@ var testWord = {
 
 console.log(GO.wordPlayed(testWord));
 // console.log(GO);
+
