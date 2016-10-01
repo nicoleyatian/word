@@ -1,17 +1,26 @@
-
 <div ng-controller="GameCtrl">
 <div id="top">
 <h1 id="title">Wordgame</h1>
-<h1 id="word"> Your Word: {{exports.word}}</h1>
+<div id="panel" class="players">
 <label id="name">
 	<p class="Game-info">{{playerName}}</p>
 </label>
+	<h1> Your Word: {{exports.word}}</h1>
+	<button ng-click="submit()">Submit</button>
+</div>
+<div id="right" class="players">
+<ul ng-repeat="option in otherPlayers">
+<li>{{option[0]}}: {{option[1]}}</li>
+</ul>
+</div>
+<div id="display">
 <label id="score">
-	Score: {{score}}
+	Your Score: {{score}}
 </label>
 <label id="players">
 	<p class="Game-info"> Player # {{player}}</p>
 </label>
+</div>
 </div>
 <div id="start"> 
 	<div class='row'>
@@ -23,7 +32,6 @@
 			</div>
 		</div>
 	</div>
-	<button ng-click="submit()">Submit</button>
 	<button ng-click="updateBoard({'0-0': 'x', '0-1':'y', '0-2': 'z'})">
 	Update
 	</button>

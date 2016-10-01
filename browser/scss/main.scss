@@ -31,6 +31,7 @@ div #start {
 	border: 10px solid black;
 	width: 50%;
 	margin: auto;
+	padding: 1%;
 }
 
 #grid .cell{
@@ -39,18 +40,34 @@ div #start {
 	text-align:center;
 	width: 30%;
 	display: inline-block;
-	margin: 1%;
 	height: 15vw;
+	padding: 12%
+}
+#panel{
+	width: 50%;
+	border: 5px solid black;
 }
 
 #top {
 	font-size: 18pt;
-	text-align:center;
 }
-#word{
-	text-align: left;
+.players{
+	display: inline-block;
 }
-
+#right{
+	float: right;
+	clear: right;
+}
+#right li{
+	list-style: none;
+}
+#display{
+	width: 50%;
+	margin: auto;
+}
+#score{
+	margin-right: 25%
+}
 
 @import 'directives/main';
 @import 'home/main';
