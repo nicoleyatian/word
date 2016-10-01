@@ -23,32 +23,34 @@ body {
 	text-align: center;
 }
 
-#start{
+div #start {
 	text-align: center;
 }
 
 #grid {
 	border: 10px solid black;
-	margin: 0px auto 0px auto;
-}
-
-.row {
-	margin-left: auto;
-	margin-right: auto;
+	width: 50%;
+	margin: auto;
 }
 
 #grid .cell{
 	border: 5px solid black; 
 	border-radius:50%;
 	text-align:center;
+	width: 30%;
+	display: inline-block;
+	margin: 1%;
+	height: 15vw;
 }
 
 #top {
 	font-size: 18pt;
+	text-align:center;
 }
-.Game-info {
-	text-align: right;
+#word{
+	text-align: left;
 }
+
 
 @import 'directives/main';
 @import 'home/main';
