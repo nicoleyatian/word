@@ -1,6 +1,4 @@
-//UNIT TESTS:::
-//board history object, check states
-
+var wordLookup = require('./spellCheck').isMatch;
 
 //THE "MASTER OBJECT", HOLDS THE DEFINITIVE STATE OF THE BOARD
 //AND HISTORY, AND HAS METHODS FOR MANIPULATING THE BOARD
@@ -107,12 +105,15 @@ GameObject.prototype.stateConflicts = function(wordObj, prevState) {
 // -wordObj: keys = board coords, vals = ltrs {'0-1': 'T', '1-2': 'O'}
 // -word: word played 'TO'
 // -playerId: id of player who played the word
-//RETURNS: 'updateObj' with new stateNumber, wordObj with ltrs 'drawn' from the
+//RETURNS: undefined if word too short, or the letter tiles have already
+//been used (by another move moments prior), or word invalid. ortherwise:
+//'updateObj' with new stateNumber, wordObj with ltrs 'drawn' from the
 //remainingTilesArray to replace ltrs played, the word, playerId, pointsEarned
 GameObject.prototype.wordPlayed = function(playObj) {
-    if (playObj.word.length < this.minWordLength) return; //throw error?
+    if (playObj.word.length < this.minWordLength) return;
     if (playObj.stateNumber < this.stateNumber &&
     	this.stateConflicts(playObj.wordObj, playObj.stateNumber)) return;
+    if (!wordLookup(playObj.word.toLowerCase())) return;
     var coordArray, row, col;
     for (var ltrCoord in playObj.wordObj) {
         coordArray = ltrCoord.split('-');

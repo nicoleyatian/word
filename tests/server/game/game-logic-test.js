@@ -54,20 +54,31 @@ describe("the GameObject", function() {
 
     describe("the wordPlayed method of the GameObject", function() {
 
-        var playObj = {
-            stateNumber: 0,
-            wordObj: { '0-1': 'T', '1-2': 'O' },
-            word: "TO",
-            playerId: 3
-        };
-
         it("returns undefined if word length is less than minWordLength", function() {
+            var playObj = {
+                stateNumber: 0,
+                wordObj: { '0-1': 'T', '1-2': 'O' },
+                word: "TO",
+                playerId: 3
+            };
+
+            expect(aGame.wordPlayed(playObj)).to.be.undefined;
+        });
+
+        it("returns undefined if word does not exist in TWL06 official Scrabble dictionary", function() {
+            var playObj = {
+                stateNumber: 0,
+                wordObj: { '0-1': 'X', '1-2': 'K', '2-2': 'C', '2-1': 'D' },
+                word: "XKCD",
+                playerId: 3
+            };
+
             expect(aGame.wordPlayed(playObj)).to.be.undefined;
         });
 
         describe("the updateObject returned by valid calls to wordPlayed method", function() {
 
-            var playObj1 = {
+            var playObj = {
                 stateNumber: 0,
                 wordObj: { '0-1': 'T', '1-2': 'O', '1-1': 'P' },
                 word: "TOP",
@@ -75,13 +86,13 @@ describe("the GameObject", function() {
             };
 
             it("does indeed return, and is indeed an object", function() {
-                expect(typeof aGame.wordPlayed(playObj1)).to.be.equal('object');
+                expect(typeof aGame.wordPlayed(playObj)).to.be.equal('object');
             });
 
             //updateObject's wordObj represents the new tiles that should replace the tiles of the word that was played
             it("updateObject contains a wordObj with the same keys (letter coordinates) as the playObj's wordObj", function() {
-                var playObjWOKeys = Object.keys(playObj1.wordObj);
-                var updateObj = aGame.wordPlayed(playObj1);
+                var playObjWOKeys = Object.keys(playObj.wordObj);
+                var updateObj = aGame.wordPlayed(playObj);
                 var updateObjWOKeys = Object.keys(updateObj.wordObj);
 
                 expect(playObjWOKeys).to.be.deep.equal(updateObjWOKeys);
@@ -90,7 +101,7 @@ describe("the GameObject", function() {
             //stateNumber represents how many changes have been made since the initial board (which had stateNumber of 0)
             it("has a stateNumber equal to the game's new stateNumber and one greater than the game's prior stateNumber", function() {
                 var priorStateNumber = aGame.stateNumber;
-                var updateObj = aGame.wordPlayed(playObj1);
+                var updateObj = aGame.wordPlayed(playObj);
                 var newStateNumber = aGame.stateNumber;
                 var updateObjStateNumber = updateObj.stateNumber;
 
@@ -99,7 +110,7 @@ describe("the GameObject", function() {
             });
 
             it("has a pointsEarned property, which is a number", function() {
-                var updateObj = aGame.wordPlayed(playObj1);
+                var updateObj = aGame.wordPlayed(playObj);
 
                 expect(typeof updateObj.pointsEarned).to.be.equal('number');
             });
