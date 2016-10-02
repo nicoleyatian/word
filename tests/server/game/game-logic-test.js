@@ -3,37 +3,32 @@ var expect = chai.expect;
 var game = require('../../../server/game/game.js');
 
 
-describe("Game class", function() {
+describe("the GameObject", function() {
     var aGame,
         tileCountObj = { 'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6 },
         sideLength = 3,
         minWordLength = 3,
         numOfTiles = 0;
 
-    for (var i in tileCountObj) {
-        numOfTiles += tileCountObj[i];
+    for (var ltr in tileCountObj) {
+        numOfTiles += tileCountObj[ltr];
     }
 
-
-    // Game is a constructor function
     beforeEach(function() {
         aGame = new game.GameObject(tileCountObj, sideLength, minWordLength);
     });
 
-    // A new Game object has remainingTimesArray that has been decremented by the number of tiles on the new board
-    it("has a tileArray", function() {
+    it("has a remainingTilesArray, which initially contains all the tiles from the tileCountObj not used to populate the board", function() {
         expect(Array.isArray(aGame.remainingTilesArray)).to.be.true;
-        expect(aGame.remainingTilesArray.length + (sideLength * sideLength)).to.be.equal(numOfTiles);
+        expect(aGame.remainingTilesArray.length).to.be.equal(numOfTiles - (sideLength * sideLength));
     });
 
-    // test that board is generated to correct dimensions
-    it("has a board that has equal sideLengths", function() {
+    it("has a board: an array of arrays where the length of each array as well as the quantity of them is dictated by the sideLength", function() {
         expect(aGame.board.length).to.equal(sideLength);
         expect(aGame.board[0].length).to.equal(sideLength);
     });
 
-
-    it("draws a letter from tileArray", function() {
+    it("has a drawLetter method; calling it selects a random letter from tileArray (and removes the letter from the array) ", function() {
         var tileArray = game.tileCountToArray(tileCountObj);
         var tileArrayCopy = tileArray.slice();
         var drawnLetter = game.drawLetter(tileArray);
@@ -46,105 +41,118 @@ describe("Game class", function() {
         expect(tileArray.sort()).to.deep.equal(tileArrayCopy.sort());
     });
 
-    describe("wordPlayed function", function() {
+    it("has a shuffle method; calling it rearranges the tiles on the board) ", function() {
+        var initTileLayout = [];
+        aGame.board.forEach(r=>initTileLayout = initTileLayout.concat(r));
+        aGame.shuffle();
+        var endTileLayout = [];
+        aGame.board.forEach(r=>endTileLayout = endTileLayout.concat(r));
 
-      var playObj;
+        expect(initTileLayout).not.to.deep.equal(endTileLayout);
+        expect(initTileLayout.sort()).to.deep.equal(endTileLayout.sort());
+    });
+
+    describe("the wordPlayed method of the GameObject", function() {
+
+        var playObj = {
+            stateNumber: 0,
+            wordObj: { '0-1': 'T', '1-2': 'O' },
+            word: "TO",
+            playerId: 3
+        };
 
         it("returns undefined if word length is less than minWordLength", function() {
-            playObj = {
-                stateNumber: 2,
-                wordObj: { '0-1': 'T', '1-2': 'O' },
-                word: "TO",
+            expect(aGame.wordPlayed(playObj)).to.be.undefined;
+        });
+
+        describe("the updateObject returned by valid calls to wordPlayed method", function() {
+
+            var playObj1 = {
+                stateNumber: 0,
+                wordObj: { '0-1': 'T', '1-2': 'O', '1-1': 'P' },
+                word: "TOP",
                 playerId: 3
             };
-            expect(aGame.wordPlayed(playObj)).to.be.undefined;
+
+            it("does indeed return, and is indeed an object", function() {
+                expect(typeof aGame.wordPlayed(playObj1)).to.be.equal('object');
+            });
+
+            //updateObject's wordObj represents the new tiles that should replace the tiles of the word that was played
+            it("updateObject contains a wordObj with the same keys (letter coordinates) as the playObj's wordObj", function() {
+                var playObjWOKeys = Object.keys(playObj1.wordObj);
+                var updateObj = aGame.wordPlayed(playObj1);
+                var updateObjWOKeys = Object.keys(updateObj.wordObj);
+
+                expect(playObjWOKeys).to.be.deep.equal(updateObjWOKeys);
+            });
+
+            //stateNumber represents how many changes have been made since the initial board (which had stateNumber of 0)
+            it("has a stateNumber equal to the game's new stateNumber and one greater than the game's prior stateNumber", function() {
+                var priorStateNumber = aGame.stateNumber;
+                var updateObj = aGame.wordPlayed(playObj1);
+                var newStateNumber = aGame.stateNumber;
+                var updateObjStateNumber = updateObj.stateNumber;
+
+                expect(updateObjStateNumber).to.be.equal(newStateNumber);
+                expect(newStateNumber).to.be.equal(priorStateNumber + 1);
+            });
+
+            it("has a pointsEarned property, which is a number", function() {
+                var updateObj = aGame.wordPlayed(playObj1);
+
+                expect(typeof updateObj.pointsEarned).to.be.equal('number');
+            });
 
         });
 
+        describe("correctly handles sequential plays", function() {
+
+            var playObj1 = {
+                stateNumber: 0,
+                wordObj: { '0-1': 'T', '1-2': 'O', '1-1': 'P' },
+                word: "TOP",
+                playerId: 3
+            };
+
+            var playObj2 = {
+                stateNumber: 0,
+                wordObj: { '2-2': 'M', '2-1': 'A', '1-1': 'P' },
+                word: "MAP",
+                playerId: 2
+            };
+
+            var playObj3 = {
+                stateNumber: 0,
+                wordObj: { '2-0': 'M', '1-0': 'A', '0-0': 'P' },
+                word: "MAP",
+                playerId: 1
+            };
+
+            it("a word played from a prior state (meaning a player makes a move immediately after another player, and before having received the updateObj from the earlier move) is not allowed (returns undefined, does not change stateNumber) if it includes tiles that the earlier word used", function() {
+                aGame.wordPlayed(playObj1);
+                var stateNumber = aGame.stateNumber;
+                var responseToConflictingMove = aGame.wordPlayed(playObj2);
+                expect(responseToConflictingMove).to.be.undefined;
+                expect(aGame.stateNumber).to.be.equal(stateNumber);
+            });
+
+            it("however a word played from a prior state IS allowed (returns updateObj, increments stateNumber) if it doesn't include tiles that the earlier word used", function() {
+                aGame.wordPlayed(playObj1);
+                var stateNumber = aGame.stateNumber;
+                var responseToNonConflictingMove = aGame.wordPlayed(playObj3);
+                expect(responseToNonConflictingMove).to.be.ok;
+                expect(aGame.stateNumber).to.be.equal(stateNumber + 1);
+            });
+
+            it("if a word is played from a state prior and a shuffle has occurred since, it will not be allowed", function() {
+              aGame.shuffle();
+              var stateNumber = aGame.stateNumber;
+              var responseToNonConflictingMove = aGame.wordPlayed(playObj1);
+              expect(responseToNonConflictingMove).to.be.undefined;
+              expect(aGame.stateNumber).to.be.equal(stateNumber);
+            });
+        });
 
     });
-
 });
-
-
-//   it("should have an array called offspring", function() {
-//     expect(myMammal.offspring).toEqual([]);
-//   });
-
-//   // myMammal's prototype is the prototype of its contructor function which is Mammal.prototype
-//   it("should have a sayHello function on it's prototype", function() {
-//     expect(myMammal.sayHello()).toEqual("My name is Joe, I'm a Mammal");
-//     // these functions should be on Mammal.prototype
-//     expect(myMammal.hasOwnProperty("sayHello")).toEqual(false);
-//   });
-
-//   it("should have a haveBaby function", function() {
-//     child = myMammal.haveBaby();
-//     expect(child.name).toEqual("Baby Joe");
-//     expect(myMammal.offspring).toEqual([child]);
-
-//     // these functions should be on Mammal.prototype
-//     expect(myMammal.hasOwnProperty("haveBaby")).toEqual(false);
-//   });
-// });
-
-
-// // Cat instances inherit from Mammals, all the properties
-// // Mammals have, Cat's will have as well.
-// describe("Cat class", function() {
-//   var cat;
-
-//   // Cat is a constructor function
-//   beforeEach(function() {
-//     spyOn(Mammal, 'call').and.callThrough();
-//     cat = new Cat("Garfield", "yellow");
-//   });
-
-//   // Review how .call() and .apply() work.
-//   it("calls the Mammal Constructor Function", function() {
-//     // Inside the Cat constructor function, you should also call `Mammal.call`
-//     // and use the Mammal constructor function to create the basic properties of a `Cat` instance
-//     expect(Mammal.call).toHaveBeenCalled();
-//   });
-
-//   it("should have an array called offspring and name property from the Mammal constructor function", function() {
-//     expect(cat.offspring).toEqual([]);
-//     expect(cat.name).toEqual("Garfield");
-//   });
-
-//   it("should have a color in its constructor function", function() {
-//     expect(cat.color).toEqual("yellow");
-//   });
-
-//   // Testing if new Mammal vs Object.create(Mammal) is used to set up the chain or inheritance
-//   // of the prototype chain.  (In the lecture videos we covered how to impelement inheritance
-//   // using the classical model, in the earlier videos we demonstrated how to chain prototypes with
-//   // Object.create() )
-
-//   it("should use Object.create to inherit methods from Mammal", function() {
-//     expect(typeof Cat.prototype.sayHello).toEqual('function');
-//     expect(Cat.prototype.offspring).toEqual(undefined);
-//   });
-
-//   // What is the constructor property? We did not cover this in the lecture video.
-//   it('should have its prototype object and a constructor property that points back to Cat', function() {
-//     expect(Cat.prototype.constructor).toEqual(Cat);
-//   });
-
-
-//   // Even though Cat inherits many of its properties from Mammal, we can override methods
-//   // to perform different actions (polymorphism).
-//   it("should have it's own haveBaby method that takes only a color", function() {
-//     var greenCat = cat.haveBaby("green");
-//     expect(cat.offspring).toEqual([greenCat]);
-//     expect(greenCat.name).toEqual("Baby Garfield");
-//     expect(greenCat.color).toEqual("green");
-
-//   });
-
-//   // Research the constructor property
-//   it("the cat haveBaby is actually a Cat and not a Mammal", function() {
-//     var blueCat = cat.haveBaby("blue");
-//     expect(blueCat instanceof Cat).toEqual(true);
-//     expect(blueCat.constructor).toEqual(Cat);
-//   });

@@ -3,9 +3,8 @@
 
 
 //THE "MASTER OBJECT", HOLDS THE DEFINITIVE STATE OF THE BOARD
-//AND HISTORY, AND HAS METHODS FOR
-
-
+//AND HISTORY, AND HAS METHODS FOR MANIPULATING THE BOARD
+//(THROUGH MOVEPLAYED, SHUFFLE)
 function GameObject(tileCountObj, sideLength, minWordLength) {
     var tileArray = tileCountToArray(tileCountObj);
     var board = generateBoardMutating(tileArray, sideLength);
@@ -50,21 +49,6 @@ function tileCountToArray(tileCountObj) {
     }
     return tileArray;
 }
-
-
-// function generateBoard(tileArray, sideLength) {
-//     var board = [];
-//     for (var row = 0; row < sideLength; row++) {
-//         var nextRow = [];
-//         for (var col = 0; col < sideLength; col++) {
-//             var rnd = Math.floor(Math.random() * tileArray.length);
-//             nextRow.push(tileArray[rnd][0]);
-//         }
-//         board.push(nextRow);
-//     }
-//     return board;
-// }
-
 
 //exists off of gameObj because utilized in init board gen
 function drawLetter(tileArray) {
@@ -118,13 +102,13 @@ GameObject.prototype.stateConflicts = function(wordObj, prevState) {
 };
 
 
-//EXPECTS: OBJECT with stateNumber, wordObj, word, playerId
-//A "STATENUMBER" TO MAKE SURE THIS MOVE ISNT COMING
-//AFTER ANOTHER MOVE THAT ALREADY CHANGED THE BOARD
-//obj with "wordObj" of format: {'0-1': 'T', '1-2': 'O'}
-//meaning letter 'T' placed at row-0 col-1..., word: , player: id
-//RETURNS: new stateNumber, obj with wordObj of same type of letters pulled from bag
-//to replace the "removed" letters with, word:, playerId: id, pointsEarned:
+//EXPECTS: 'playObj' with stateNumber, wordObj, word, playerId
+// -stateNumber: int representing # of 'moves' since init board
+// -wordObj: keys = board coords, vals = ltrs {'0-1': 'T', '1-2': 'O'}
+// -word: word played 'TO'
+// -playerId: id of player who played the word
+//RETURNS: 'updateObj' with new stateNumber, wordObj with ltrs 'drawn' from the
+//remainingTilesArray to replace ltrs played, the word, playerId, pointsEarned
 GameObject.prototype.wordPlayed = function(playObj) {
     if (playObj.word.length < this.minWordLength) return; //throw error?
     if (playObj.stateNumber < this.stateNumber &&
@@ -186,37 +170,6 @@ GameObject.prototype.computeScore = function(word) {
     return word.length - this.minWordLength + 1;
 };
 
-
-
-
-//testing & experimentation
-// var GO = new GameObject(tileCounts, 6, 2);
-
-// GO.stateHistory = {
-// 	0: ['1-1', '1-0'],
-// 	1: ['2-3', '3-3']
-// };
-
-// GO.stateNumber = 2;
-
-// // console.log('init: ', GO);
-
-// GO.addPlayer(1);
-// GO.addPlayer(2);
-
-// var testWord = {
-//     stateNumber: 3,
-//     wordObj: { '0-1': 'T', '1-2': 'O', '1-1': 'P' },
-//     word: 'TOP',
-//     playerId: 2
-// };
-// GO.shuffle();
-// console.log('2nd: ', GO);
-
-// console.log('3rd: ', GO.wordPlayed(testWord));
-// console.log(GO);
-
-
 // var scrabTileCounts = {
 //     'A': 9,
 //     'B': 2,
@@ -265,5 +218,6 @@ module.exports = {
     GameObject: GameObject,
     generateBoardMutating: generateBoardMutating,
     drawLetter: drawLetter,
-    tileCountToArray: tileCountToArray
+    tileCountToArray: tileCountToArray,
+    tileCounts: tileCounts
 };
