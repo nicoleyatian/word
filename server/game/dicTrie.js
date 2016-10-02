@@ -1,3 +1,5 @@
+//this file shouldn't be necessary: consult spellCheck.js instead
+
 var Trie = require('trie-hard');
 
 var dicTrie = new Trie();
