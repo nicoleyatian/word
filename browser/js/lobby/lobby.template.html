@@ -15,12 +15,12 @@
 			<ul>
 				<li>Room: {{room.roomname}}</li>
 				<li>Players: {{room.users.length}}/4</li>
-				<button ng-click='joinGame(room.id)'>Join the game</button>
+				<button ng-click='joinGame(room)'>Join the game</button>
 			</ul>
 		</div>
-	<div class='col-md-3'>
-		<rank-directive rankName='Highest Score' players='players'></rank-directive>
-	</div>
+		<div class='col-md-3'>
+			<rank-directive rankName='Highest Score' players='players'></rank-directive>
+		</div>
 		
 	</div>
 </div>

@@ -7,7 +7,7 @@ const path = require('path');
 // const User = require(path.join('..', '..', '..', '/db/models/user'));
 const Game = require('../../../db/models/game');
 const User = require('../../../db/models/user');
-
+const Promise = require('sequelize').Promise;
 
 // Get all games
 router.get('/', (req, res, next) => {
@@ -58,7 +58,7 @@ router.get('/:gameId', (req, res, next) => {
 })
 
 // Update a Game
-// Finish a game or update the room name
+// update the room name, start the game
 router.put('/:gameId', (req, res, next) => {
     Game.findById(req.params.gameId)
     .then(game => {
@@ -69,6 +69,27 @@ router.put('/:gameId', (req, res, next) => {
     })
     .catch(next)
 })
+
+router.put('/:gameId/over', (req, res, next) => {
+    Game.findById(req.params.gameId, {
+        include: [{
+            model: User,
+            attributes: ['id']
+        }]
+    })
+    .then(game => {
+        let updatePromises = [];
+        game.users.forEach(user=>{
+            updatePromises.push(user.userGame.update({
+                score: req.body[user.id]
+            }))
+        });
+        updatePromises.push(game.update({inProgress: false}))
+        return Promise.all(updatePromises)    
+    })
+    .catch(next)
+})
+
 
 
 //create a new game(with room name)
