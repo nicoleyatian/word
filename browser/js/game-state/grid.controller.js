@@ -8,20 +8,20 @@ app.config(function($stateProvider) {
 
 app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService) {
 
-    AuthService.getLoggedInUser()
-        .then(function(user) {
-            console.log('user from AuthService', user);
-            $scope.user = user;
-        });
-
-
     $scope.exports = {
         wordObj: {},
         word: "",
-        playerId: 2,
+        playerId: null,
         stateNumber: 1,
         pointsEarned: 500
     }
+
+        AuthService.getLoggedInUser()
+        .then(function(user) {
+            console.log('user from AuthService', user);
+            $scope.user = user;
+            $scope.exports.playerId = user.id;
+        });
 
     $scope.board = [
         ['b', 'a', 'd', 'e', 'a', 'r'],
