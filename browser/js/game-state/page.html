@@ -12,7 +12,7 @@
 </div>
 <div id="right" class="players">
 <ul ng-repeat="option in otherPlayers">
-<li>{{option[0]}}: {{option[1]}}</li>
+<li>{{option.name}}: {{option.score}}</li>
 </ul>
 </div>
 <div id="display">
@@ -36,6 +36,8 @@
 	</div>
 	<button ng-click="updateBoard({'0-0': 'x', '0-1':'y', '0-2': 'z'})">
 	Update
+	</button>
+	<button ng-click="updateScore(exports.pointsEarned, exports.playerId)">Update Score
 	</button>
 </div>
 </div>
