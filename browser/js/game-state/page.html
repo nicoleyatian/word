@@ -1,9 +1,10 @@
 <div ng-controller="GameCtrl">
+<div><span>{{messages}}</span></div>
 <div id="top">
 <h1 id="title">Wordgame</h1>
 <div id="panel" class="players">
 <label id="name">
-	<p class="Game-info">{{playerName}}</p>
+	<p class="Game-info">{{user.username}}</p>
 </label>
 	<h1> Your Word: {{exports.word}}</h1>
 	<button ng-click="submit()">Submit</button>
@@ -18,11 +19,11 @@
 	Your Score: {{score}}
 </label>
 <label id="players">
-	<p class="Game-info"> Player # {{player}}</p>
+	<p class="Game-info"> Player # {{user.id}}</p>
 </label>
 </div>
 </div>
-<div id="start"> 
+<div id="start">
 	<div class='row'>
 		<div id="grid" class="board">
 			<div class='row' ng-repeat="(x,row) in board">
