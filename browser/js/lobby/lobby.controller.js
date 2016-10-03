@@ -8,7 +8,13 @@ app.controller('LobbyCtrl', function ($scope, LobbyFactory, rooms, $state) {
 	LobbyFactory.AllPlayers()
 	.then(players=>{	
 		players.forEach(player => {
-			player.score = player.highestScore
+			if (player.games.length > 0){
+				var scores = player.games.map(game => game.userGame.score)
+				player.score = Math.max(...scores)
+			} else {
+				player.score = 0;
+			}
+			
 		})
 		$scope.players = players;
 	})

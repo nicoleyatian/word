@@ -16,73 +16,192 @@ fsg scaffolding, keep in mind that fsg always uses the same database
 name in the environment files.
 
 */
+const faker = require('faker');
 
 var chalk = require('chalk');
 var db = require('./server/db');
 var User = db.model('user');
 var Game = db.model('game');
+var UserGame = db.model('userGame')
 var Promise = require('sequelize').Promise;
 
-var seedUsers = function () {
+// var seedUsers = function () {
 
-    var users = [
-        {
-            email: 'testing@fsa.com',
-            password: 'password'
-        },
-        {
-            email: 'obama@gmail.com',
-            password: 'potus'
+//     var users = [
+//         {
+//             email: 'testing@fsa.com',
+//             password: 'password'
+//         },
+//         {
+//             email: 'obama@gmail.com',
+//             password: 'potus'
+//         }
+//     ];
+
+//     var creatingUsers = users.map(function (userObj) {
+//         return User.create(userObj);
+//     });
+
+//     return Promise.all(creatingUsers);
+
+// };
+
+// var seedGames = function () {
+
+//     var users = [
+//         {},
+//         {}
+//     ];
+
+//     var creatingUsers = users.map(function (userObj) {
+//         return Game.create(userObj);
+//     });
+
+//     return Promise.all(creatingUsers);
+
+// };
+
+let user = {
+    username: faker.internet.userName,
+    email: faker.internet.email,
+    password: () => 'test'
+};
+
+let game = {
+    roomname: faker.hacker.noun,
+    isWaiting: ()=> false,
+    inProgress: () => false
+};
+
+
+let userGame = {
+    gameId: () => Math.ceil(Math.random() * 49),
+    userId: () => Math.ceil(Math.random() * 49),
+    score: () => Math.ceil(Math.random() * 99)
+};
+
+
+// db.sync({ force: true })
+//     .then(function () {
+//         return seedUsers();
+//     })
+//     .then(()=>seedGames())
+//     .then(()=>{
+//         Game.findAll()
+//         .then(games=>{
+//             let settingUsers = [];
+//                 while (games.length > 0) {
+//                     settingUsers.push(games.pop().setUser(randomInt(2)))
+//                 }
+//                 return Promise.all(settingUsers)
+//                     .then(() => console.log('users set.'))
+//         })
+//     })
+//     .then(function () {
+//         console.log(chalk.green('Seed successful!'));
+//         process.exit(0);
+//     })
+//     .catch(function (err) {
+//         console.error(err);
+//         process.exit(1);
+//     });
+
+function generateRows (model, number) {
+    let rows = [];
+    for (let i = 0; i < number; i++) {
+        let row = {};
+        for (let field in model) {
+            if (Array.isArray(model[field])) { // for tag arrays
+                row[field] = model[field].map(fn => fn());
+            } else if (field === 'releaseDate') { // edge case until we get proper date
+                row[field] = faker.date.recent().toString();
+            } else {
+                row[field] = model[field]();
+            }
         }
+        rows.push(row);
+    }
+    return rows;
+}
+
+function addRows (rows, model) {
+    let promises = [];
+    while (rows.length > 0) {
+        let row = model.create(rows.pop());
+        promises.push(row);
+    }
+    return promises;
+}
+
+var seedRooms = function () {
+
+    var rooms = [
+        {roomname: 'room1'},
+        {roomname: 'room2'},
+        {roomname: 'room3'},
+        {roomname: 'room4'}
     ];
 
-    var creatingUsers = users.map(function (userObj) {
-        return User.create(userObj);
+    var creatingRooms = rooms.map(function (room) {
+        return Game.create(room);
     });
 
-    return Promise.all(creatingUsers);
+    return Promise.all(creatingRooms);
 
 };
 
-var seedGames = function () {
+function randomInt (int) {
+    return Math.ceil(Math.random() * int);
+}
 
-    var users = [
-        {},
-        {}
-    ];
+function addPlayers (game) {
+    let addData = [game.addUser(randomInt(9)), game.addUser(randomInt(9)+10), game.addUser(randomInt(9)+20), game.addUser(randomInt(9)+30)]
+    return Promise.all(addData)
+}
 
-    var creatingUsers = users.map(function (userObj) {
-        return Game.create(userObj);
-    });
+// var seedScores = function() {
+//     var sets = [];
+//     Game.findAll()
+//     .then(games=>{
+//         sets = games.map((game)=> game.addUsers(Math.ceil(Math.random() * 49),Math.ceil(Math.random() * 49),Math.ceil(Math.random() * 49),Math.ceil(Math.random() * 49)))
+//     })
 
-    return Promise.all(creatingUsers);
-
-};
-
-
+//     return Promise.all(sets);
+    
+// }
 
 
-db.sync({ force: true })
-    .then(function () {
-        return seedUsers();
-    })
-    .then(()=>seedGames())
-    .then(()=>{
-        Game.findAll()
-        .then(games=>{
-            let settingUsers = [];
-                while (games.length > 0) {
-                    settingUsers.push(games.pop().setUser(randomInt(2)))
-                }
-                return Promise.all(settingUsers)
-                    .then(() => console.log('users set.'))
+db.sync({
+    force: true
+})
+    
+    .then(() => Promise.all(addRows(generateRows(game, 50), Game)))
+    .then(() => Promise.all(addRows(generateRows(user, 50), User)))
+    .then(() => Game.findAll()
+        .then(games => {
+            let add = [];
+            games.forEach(game => {
+                add.push(addPlayers(game))
+            })
+            return Promise.all(add)
         })
-    })
-    .then(function () {
+    )
+    .then(() => UserGame.findAll()
+        .then(userGames => {
+            let updates = [];
+            userGames.forEach(userGame => {updates.push(userGame.update({score: randomInt(100)}))});
+            return Promise.all(updates)
+        }))
+    //.then(() => Promise.all(addRows(generateRows(userGame, 150), UserGame)))
+    .then(seedRooms)
+
+    //.then(seedScores)
+    .then(() => {
         console.log(chalk.green('Seed successful!'));
         process.exit(0);
     })
-    .catch(function (err) {
+    .catch((err) => {
         console.error(err);
         process.exit(1);
     });
+

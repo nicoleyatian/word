@@ -6,11 +6,17 @@ const path = require('path');
 
 // const User = require(path.join('..', '..', '..', '/db/models/user'));
 const User = require('../../../db/models/user');
+const UserGame = require('../../../db/models/userGame');
+const Game = require('../../../db/models/game');
 
 
 // Get all users
 router.get('/', (req, res, next) => {
-    User.findAll()
+    User.findAll({
+        include: [{
+            model: Game
+        }]
+    })
         .then(users => {
             if (!users) {
                 throw new Error('Unable to access user list');
@@ -20,6 +26,7 @@ router.get('/', (req, res, next) => {
         })
         .catch(next);
 });
+
 
 
 // Update user

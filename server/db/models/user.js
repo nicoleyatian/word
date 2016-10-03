@@ -53,11 +53,16 @@ module.exports = db.define('user', {
         }
     },
     hooks: {
-        beforeCreate: setSaltAndPassword,
+        beforeCreate: function(user){
+            setSaltAndPassword(user);
+            //getHighestScore(user)
+        },
         beforeUpdate: function(user){
             setSaltAndPassword(user);
-            getHighestScore(user)
-        }
+            //getHighestScore(user)
+        },
+        afterCreate: getHighestScore,
+        afterUpdate: getHighestScore
     }
 });
 
