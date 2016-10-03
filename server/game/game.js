@@ -84,7 +84,7 @@ GameObject.prototype.addToScore = function(playerId, word) {
     return pointsEarned;
 };
 
- 
+
 GameObject.prototype.computeScore = function(word) {
     return word.length - this.minWordLength + 1;
 };
