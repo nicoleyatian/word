@@ -21,6 +21,19 @@ router.get('/', (req, res, next) => {
         .catch(next);
 });
 
+// GET one user
+router.get('/:userId', (req, res, next) => {
+    User.findById(req.params.userId)
+        .then(user => {
+            if (!user) {
+                throw new Error('Unable to access user data');
+            } else {
+                res.json(user);
+            }
+        })
+        .catch(next);
+});
+
 
 // Update user
 router.put('/:userId', (req, res, next) => {

@@ -1,31 +1,34 @@
-
 <div ng-controller="GameCtrl">
-<div id="top">
-<h1> Your Word: {{exports.word}}</h1>
-<label id="name">
-	<p class="Game-info">{{playerName}}</p>
-</label>
-<label id="score">
-	Score: {{score}}
-</label>
-<label id="players">
-	<p class="Game-info"> Player # {{player}}</p>
-</label>
-<h1 id="title">Wordgame</h1>
-</div>
-<div id="start"> 
-	<div class='row'>
-		<div id="grid" class="col-md-6">
-			<div class='row' ng-repeat="(x,row) in board">
-				<div ng-click="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="col-md-4 cell" ng-repeat="(y, space) in row">
-					{{space}}
-				</div>
-			</div>
-		</div>
-	</div>
-	<button ng-click="submit()">Submit</button>
-	<button ng-click="updateBoard({'0-0': 'x', '0-1':'y', '0-2': 'z'})">
-	Update
-	</button>
-</div>
+    <div id="top">
+        <h1 class="Game-info"> Your Word: {{playObj.word}}</h1>
+        <label id="score">
+            <ul>
+                <li>Room Name: {{ roomName }}</li>
+                <li>Score: {{score}}</li>
+                <label id="players">
+                    <li>Player # {{player}}</li>
+                    <li>Player Name: {{ playerName }}</li>
+                </label>
+            </ul>
+        </label>
+           </div>
+       <div ng-show="messages"><span>{{messages}}</span></div>
+
+        <h1 id="title">Wordgame</h1>
+    </div>
+    <div id="start">
+        <div class='row'>
+            <div id="grid" class="col-md-6">
+                <div class='row' ng-repeat="(x,row) in board">
+                    <div ng-click="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="col-md-4 cell" ng-repeat="(y, space) in row">
+                        {{space}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button ng-click="submit()">Submit</button>
+        <button ng-click="updateBoard({'0-0': 'x', '0-1':'y', '0-2': 'z'})">
+            Update
+        </button>
+    </div>
 </div>
