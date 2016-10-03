@@ -1,13 +1,15 @@
 <div ng-controller="GameCtrl">
-<div><span>{{messages}}</span></div>
+<!-- <div><span>{{messages}}</span></div> -->
 <div id="top">
 <h1 id="title">Wordgame</h1>
 <div id="panel" class="players">
 <label id="name">
 	<p class="Game-info">{{user.username}}</p>
 </label>
-	<h1> Your Word: {{exports.word}}</h1>
-	<button ng-click="submit()">Submit</button>
+	<h1> Your Word: {{ exports.word }}</h1>
+
+	<button ng-click="submit(exports)">Submit</button>
+	<button ng-click="clear()">Clear</button>
 </div>
 <div id="right" class="players">
 <ul ng-repeat="option in otherPlayers">
@@ -26,8 +28,8 @@
 <div id="start">
 	<div class='row'>
 		<div id="grid" class="board">
-			<div class='row' ng-repeat="(x,row) in board">
-				<div ng-click="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell" ng-repeat="(y, space) in row">
+			<div class='row' ng-repeat="(x,row) in board track by $index">
+				<div ng-click="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell" ng-repeat="(y, space) in row track by $index">
 					<span id="space">{{space}}</span>
 				</div>
 			</div>

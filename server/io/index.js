@@ -26,10 +26,10 @@ module.exports = function(server) {
             roomName = room;
             socket.join(roomName);
             console.log('A client joined this room: ', roomName);
-            io.sockets.in(roomName).emit('roomData', {
-                count: io.sockets.adapter.rooms[roomName]
-            })
-            console.log('roomData count has been updated');
+            // io.sockets.in(roomName).emit('roomData', {
+            //     count: io.sockets.adapter.rooms[roomName]
+            // })
+            // console.log('roomData count has been updated');
         });
 
         socket.on('disconnect', function() {
@@ -37,6 +37,14 @@ module.exports = function(server) {
             socket.broadcast.to(roomName).emit('playerDisconnected', 'some data about player');
         });
 
+        socket.on('submitWord', function(playObj){
+            console.log('play obj before it is checked', playObj);
+            var potentialUpdateObj = thisGame.wordPlayed(playObj);
+            if(potentialUpdateObj){
+                console.log('play obj being checked', potentialUpdateObj)
+                io.to(roomName).emit('wordValidated', potentialUpdateObj);
+            }
+        });
     });
     return io;
 
