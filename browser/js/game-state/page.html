@@ -6,7 +6,9 @@
 	<p class="Game-info">{{playerName}}</p>
 </label>
 	<h1> Your Word: {{exports.word}}</h1>
+
 	<button ng-click="submit()">Submit</button>
+	<button ng-click="clear()">Clear</button>
 </div>
 <div id="right" class="players">
 <ul ng-repeat="option in otherPlayers">
