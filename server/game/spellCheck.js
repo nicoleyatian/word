@@ -6,5 +6,6 @@ var dict = ['aa','aah','aahed','aahing','aahs','aal','aalii','aaliis','aals','aa
 
 dict.forEach(w=>spellCheck.add(w));
 
+
 module.exports = spellCheck;
 

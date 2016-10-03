@@ -60,9 +60,7 @@ module.exports = db.define('user', {
         beforeUpdate: function(user){
             setSaltAndPassword(user);
             //getHighestScore(user)
-        },
-        afterCreate: getHighestScore,
-        afterUpdate: getHighestScore
+        }
     }
 });
 

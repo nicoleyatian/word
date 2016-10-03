@@ -1,4 +1,6 @@
-var wordLookup = require('./spellCheck').isMatch;
+
+var wordLookup = require('./dicTrie').isMatch;
+
 
 //THE "MASTER OBJECT", HOLDS THE DEFINITIVE STATE OF THE BOARD
 //AND HISTORY, AND HAS METHODS FOR MANIPULATING THE BOARD
