@@ -11,7 +11,8 @@ module.exports = db.define('user', {
         type: Sequelize.STRING
     },
     email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
     },
     password: {
         type: Sequelize.STRING
@@ -31,8 +32,21 @@ module.exports = db.define('user', {
     highestScore: {
         type: Sequelize.INTEGER,
         defaultValue: 0
+    },
+    games_won:{
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    },
+    games_played: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
     }
 }, {
+    getterMethods:{
+        win_percentage: function(){
+            return  (this.games_won/this.games_played)*100;
+        }
+    },
     instanceMethods: {
         sanitize: function () {
             return _.omit(this.toJSON(), ['password', 'salt']);

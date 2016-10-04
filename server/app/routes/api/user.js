@@ -9,9 +9,18 @@ const User = require('../../../db/models/user');
 const UserGame = require('../../../db/models/userGame');
 const Game = require('../../../db/models/game');
 
+function verifyUser(req, res, next){
+    if (req.user && req.user===req.params.id){
+        next();
+    }else{
+        res.sendStatus(401);
+    }
+}
+
 
 // Get all users
 router.get('/', (req, res, next) => {
+    console.log(req.user);
     User.findAll({
         include: [{
             model: Game
@@ -27,10 +36,21 @@ router.get('/', (req, res, next) => {
         .catch(next);
 });
 
+router.get('/:userId',  (req, res, next) => {
+    if (+req.user.dataValues.id===+req.params.userId){
+        User.findById(req.params.userId)
+            .then(user => {
+                res.send(user);
+            })
+            .catch(next);
+    } else {
+        res.status(403).send();
+    }
+});
 
 
 // Update user
-router.put('/:userId', (req, res, next) => {
+router.put('/:userId',  (req, res, next) => {
 
     if (req.user.adminStatus) {
         User.findById(req.params.userId)
