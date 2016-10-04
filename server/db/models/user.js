@@ -44,6 +44,9 @@ module.exports = db.define('user', {
 }, {
     getterMethods:{
         win_percentage: function(){
+            if (this.games_played===0){
+                return 0;
+            }
             return  (this.games_won/this.games_played)*100;
         }
     },
