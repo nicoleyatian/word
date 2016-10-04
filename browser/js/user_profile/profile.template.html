@@ -8,5 +8,5 @@
 	<p class="user-info">Games Played: {{user.games_played}}</p>
 	<p class="user-info">Games Won: {{user.games_won}}</p>
 	<p class="user-info">Win Percentage: {{user.win_percentage}}%</p>
-	<h1>View game History</h1>
+	<h1 ui-sref="GameRecord({userId: user.id})">View game History</h1>
 </div>
