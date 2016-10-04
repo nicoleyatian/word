@@ -1,5 +1,6 @@
 <ul class='rank'>
-	<li ng-repeat="player in players | orderBy:'-score'">
+<h2>{{rankName}}</h2>
+	<li ng-repeat="player in players | orderBy:'-score' | limitTo: 10">
 		{{player.username}}: {{player.score}}
 	</li>
 </ul>
