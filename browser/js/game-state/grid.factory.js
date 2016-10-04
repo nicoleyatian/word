@@ -12,6 +12,10 @@ app.factory ("BoardFactory", function($http, Socket){
 		getCurrentRoom: function(roomname) {
 			return $http.get('/api/games/rooms/'+roomname) 
 			.then(res => res.data)
+		},
+
+		quitFromRoom: function(roomId, userId) {
+			return $http.delete('/api/games/'+roomId+'/'+userId)
 		}
 
 	}

@@ -6,7 +6,7 @@ app.config(function($stateProvider) {
     })
 })
 
-app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService) {
+app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state) {
 
     $scope.exports = {
         wordObj: {},
@@ -32,6 +32,15 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         $scope.otherPlayers = room.users.filter(user => user.id !== $scope.user.id);
         $scope.otherPlayers.forEach(player => {player.score = 0})
     })
+
+    //Quit the room, back to lobby
+    $scope.quit = function() {
+        BoardFactory.quitFromRoom($scope.gameId, $scope.user.id)
+        .then(()=>{
+            $state.go('lobby');
+        })
+    }
+
 
 
 
