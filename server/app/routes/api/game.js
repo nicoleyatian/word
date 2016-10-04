@@ -42,6 +42,25 @@ router.get('/rooms', (req, res, next) => {
         .catch(next);
 });
 
+//Get game id with roomname
+router.get('/rooms/:roomname', (req, res, next) => {
+    Game.findOne({
+        where: {
+            isWaiting: true,
+            roomname: req.params.roomname
+        },
+        include:[{model: User}]
+    })
+        .then(games => {
+            if (!games) {
+                throw new Error();
+            } else {
+                res.json(games);
+            }
+        })
+        .catch(next);
+});
+
 // Get a game with id
 router.get('/:gameId', (req, res, next) => {
     Game.findById(req.params.gameId, {

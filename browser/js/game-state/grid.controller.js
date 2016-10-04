@@ -16,12 +16,25 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         pointsEarned: 500
     }
 
-        AuthService.getLoggedInUser()
-        .then(function(user) {
-            console.log('user from AuthService', user);
-            $scope.user = user;
-            $scope.exports.playerId = user.id;
-        });
+    AuthService.getLoggedInUser()
+    .then(function(user) {
+        console.log('user from AuthService', user);
+        $scope.user = user;
+        $scope.exports.playerId = user.id;
+    });
+
+
+    //get the current room info
+    BoardFactory.getCurrentRoom($stateParams.roomname)
+    .then(room => {
+        console.log(room)
+        $scope.gameId = room.id;
+        $scope.otherPlayers = room.users.filter(user => user.id !== $scope.user.id);
+        $scope.otherPlayers.forEach(player => {player.score = 0})
+    })
+
+
+
 
     $scope.board = [
         ['b', 'a', 'd', 'e', 'a', 'r'],
@@ -39,10 +52,12 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     // $scope.playerName = 'Me';
     // $scope.player = $scope.user.id;
 
-    $scope.otherPlayers = [{ name: 'You', score: 0, id: 1 },
-        { name: 'Him', score: 0, id: 2 },
-        { name: 'Her', score: 0, id: 3 }
-    ];
+
+
+    // $scope.otherPlayers = [{ name: 'You', score: 0, id: 1 },
+    //     { name: 'Him', score: 0, id: 2 },
+    //     { name: 'Her', score: 0, id: 3 }
+    // ];
 
     $scope.click = function(space, id) {
         console.log('clicked ', space, id);
