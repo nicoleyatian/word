@@ -6,7 +6,7 @@ app.config(function($stateProvider) {
     })
 })
 
-app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService) {
+app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, LobbyFactory) {
 
     $scope.exports = {
         wordObj: {},
