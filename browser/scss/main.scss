@@ -1,17 +1,17 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  background: #fdfdfd;
+    background: #fdfdfd;
 }
 
 @mixin clearfix {
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 }
 
 .lobby-button {
@@ -19,58 +19,73 @@ body {
 }
 
 #main {
-  padding-top: 60px;
-  margin: 0 auto;
+    padding-top: 60px;
+    margin: 0 auto;
 }
 
 #title {
-	text-align: center;
+    text-align: center;
 }
 
 div #start {
-	text-align: center;
+    text-align: center;
 }
 
 #grid {
-	border: 10px solid black;
-	width: 50%;
-	margin: auto;
-	padding: 1%;
+    border: 10px solid black;
+    width: 50%;
+    margin: auto;
+    padding: 1%;
 }
 
-#grid .cell{
-	border: 5px solid black;
-	border-radius:50%;
-	text-align:center;
-	width: 16%;
-	display: inline-block;
-	height: 8vw;
-	padding: 1%
+#space {
+    user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
 }
-#panel{
-	width: 50%;
-	border: 5px solid black;
+
+#grid .cell {
+    border: 5px solid black;
+    border-radius: 50%;
+    text-align: center;
+    width: 16%;
+    display: inline-block;
+    height: 8vw;
+    padding: 1%;
+}
+
+
+#panel {
+    width: 50%;
+    border: 5px solid black;
 }
 
 #top {
-	font-size: 18pt;
+    font-size: 18pt;
 }
-.players{
-	display: inline-block;
+
+.players {
+    display: inline-block;
 }
-#right{
-	float: right;
-	clear: right;
+
+#right {
+    float: right;
+    clear: right;
 }
-#right li{
-	list-style: none;
+
+#right li {
+    list-style: none;
 }
-#display{
-	width: 50%;
-	margin: auto;
+
+#display {
+    width: 50%;
+    margin: auto;
 }
-#score{
-	margin-right: 25%
+
+#score {
+    margin-right: 25%
 }
 .user-info{
 	font-size: 18pt;

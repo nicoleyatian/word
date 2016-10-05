@@ -3,8 +3,8 @@ app.config(function($stateProvider) {
         url: '/game/:roomname',
         templateUrl: 'js/game-state/page.html',
         controller: "GameCtrl"
-    })
-})
+    });
+});
 
 app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state) {
 
@@ -14,7 +14,29 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         playerId: null,
         stateNumber: 1,
         pointsEarned: 500
-    }
+    };
+
+    $scope.mouseIsDown = false;
+    $scope.draggingAllowed = false;
+
+    $scope.toggleDrag = function(){
+        $scope.draggingAllowed = !$scope.draggingAllowed;
+    };
+
+    $scope.mouseDown = function() {
+        $scope.mouseIsDown = true;
+    };
+
+    $scope.mouseUp = function() {
+        $scope.mouseIsDown = false;
+        if ($scope.draggingAllowed && $scope.exports.word.length>1) $scope.submit($scope.exports); 
+    };
+
+    $scope.drag = function(space, id){
+        if ($scope.mouseIsDown && $scope.draggingAllowed){
+            $scope.click(space, id);
+        }
+    };
 
     AuthService.getLoggedInUser()
         .then(function(user) {
@@ -31,7 +53,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.gameId = room.id;
             $scope.otherPlayers = room.users.filter(user => user.id !== $scope.user.id);
             $scope.otherPlayers.forEach(player => { player.score = 0 })
-        })
+        });
 
 
     $scope.hideBoard = true;
@@ -40,15 +62,17 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     // Start the game when all players have joined room
     $scope.startGame = function() {
         $scope.hideBoard = false;
-    }
+    };
+
 
     //Quit the room, back to lobby
     $scope.quit = function() {
         BoardFactory.quitFromRoom($scope.gameId, $scope.user.id)
             .then(() => {
                 $state.go('lobby');
-            })
-    }
+            });
+    };
+
 
     $scope.board = [
         ['b', 'a', 'd', 'e', 'a', 'r'],
@@ -115,9 +139,10 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     //         });
     // };
     $scope.submit = function(obj) {
+        console.log('submitting ', obj);
         BoardFactory.submit(obj);
         $scope.clear();
-    }
+    };
 
     $scope.updateBoard = function(wordObj) {
         console.log('scope.board', $scope.board);
@@ -143,7 +168,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             }
             $scope.exports.pointsEarned = null;
         }
-    }
+    };
 
     $scope.roomName = $stateParams.roomname;
 
@@ -190,6 +215,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         Socket.on('wordValidated', function(updateObj) {
             console.log('word is validated');
             $scope.update(updateObj);
-        })
-    })
+        });
+    });
 });
