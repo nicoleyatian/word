@@ -1,5 +1,9 @@
 app.factory ("BoardFactory", function($http, Socket){
 	return{
+		getStartBoard: function(){
+			Socket.emit('getStartBoard');
+		},
+
 		submit: function(obj){
 			Socket.emit('submitWord', obj);
 		},
@@ -14,7 +18,8 @@ app.factory ("BoardFactory", function($http, Socket){
 			.then(res => res.data)
 		},
 
-		quitFromRoom: function(roomId, userId) {
+		quitFromRoom: function(gameId, userId) {
+			// Socket.emit('disconnect', roomName, userId);
 			return $http.delete('/api/games/'+roomId+'/'+userId)
 		}
 	}
