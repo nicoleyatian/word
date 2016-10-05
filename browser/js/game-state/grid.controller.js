@@ -6,7 +6,7 @@ app.config(function($stateProvider) {
     })
 })
 
-app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state) {
+app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory) {
 
     $scope.exports = {
         wordObj: {},
@@ -164,6 +164,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
         Socket.on('roomJoinSuccess', function(user) {
             console.log('new user joining');
+            LobbyFactory.joinGame(room.id, $scope.user.id);
             // BoardFactory.getCurrentRoom($stateParams.roomname)
             //     .then(room => {
             //         console.log(room)
