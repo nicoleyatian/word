@@ -12,6 +12,7 @@ app.factory('LobbyFactory', function ($http) {
 	};
 
 	LobbyFactory.joinGame = function(roomId, userId) {
+    console.log('lobby factory join game');
 		return $http.put('/api/games/'+ roomId +'/player', {id: userId})
 		.then(res=>res.data)
 	};

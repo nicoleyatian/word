@@ -59,20 +59,6 @@ GameObject.prototype.drawLetter = function() {
     return drawLetter(this.remainingTilesArray);
 };
 
-function generateBoardMutating(tileArray, sideLength) {
-    var board = [];
-    for (var row = 0; row < sideLength; row++) {
-        var nextRow = [];
-        for (var col = 0; col < sideLength; col++) {
-            var nextLetter = drawLetter(tileArray);
-            nextRow.push(nextLetter);
-        }
-        board.push(nextRow);
-    }
-    return board;
-}
-
-
 //add player id to playerScores obj with init score 0
 GameObject.prototype.addPlayer = function(id) {
     this.playerScores[id] = 0;
