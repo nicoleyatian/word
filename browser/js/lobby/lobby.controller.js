@@ -28,11 +28,7 @@ app.controller('LobbyCtrl', function($scope, LobbyFactory, rooms, $state, AuthSe
         })
 
     $scope.joinGame = function(room) {
-        LobbyFactory.joinGame(room.id, $scope.user.id)
-            .then(() => {
-                $state.go('Game', { roomname: room.roomname })
-            });
-
+        $state.go('Game', { roomname: room.roomname })
     }
 
     $scope.newRoom = function(roomInfo) {
