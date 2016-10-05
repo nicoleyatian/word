@@ -49,11 +49,21 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     //get the current room info
     BoardFactory.getCurrentRoom($stateParams.roomname)
         .then(room => {
-            console.log(room);
+            console.log(room)
             $scope.gameId = room.id;
             $scope.otherPlayers = room.users.filter(user => user.id !== $scope.user.id);
             $scope.otherPlayers.forEach(player => { player.score = 0 })
         });
+
+
+    $scope.hideBoard = true;
+
+
+    // Start the game when all players have joined room
+    $scope.startGame = function() {
+        $scope.hideBoard = false;
+    };
+
 
     //Quit the room, back to lobby
     $scope.quit = function() {
@@ -62,6 +72,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
                 $state.go('lobby');
             });
     };
+
 
     $scope.board = [
         ['b', 'a', 'd', 'e', 'a', 'r'],
@@ -78,8 +89,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.score = 0;
     // $scope.playerName = 'Me';
     // $scope.player = $scope.user.id;
-
-
 
     // $scope.otherPlayers = [{ name: 'You', score: 0, id: 1 },
     //     { name: 'Him', score: 0, id: 2 },
@@ -136,7 +145,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     };
 
     $scope.updateBoard = function(wordObj) {
-        console.log('scope.bord', $scope.board);
+        console.log('scope.board', $scope.board);
         for (var key in wordObj) {
             var coords = key.split('-');
             var row = coords[0];
@@ -175,8 +184,23 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     Socket.on('connect', function() {
 
-        Socket.emit('joinRoom', $scope.roomName);
+        Socket.emit('joinRoom', $scope.user, $scope.roomName);
         console.log('emitting "join room" event to server', $scope.roomName);
+
+        Socket.on('roomJoinSuccess', function(user) {
+            console.log('new user joining');
+            // BoardFactory.getCurrentRoom($stateParams.roomname)
+            //     .then(room => {
+            //         console.log(room)
+            //         $scope.gameId = room.id;
+            //         $scope.otherPlayers = room.users.filter(user => user.id !== $scope.user.id);
+            //         $scope.otherPlayers.forEach(player => { player.score = 0 })
+            //     })
+            user.score = 0;
+            $scope.otherPlayers.push(user);
+                $scope.$digest();
+        })
+
 
         // Socket.on('roomData', function(data) {
         //     console.log('listening for roomData event from server')
