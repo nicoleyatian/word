@@ -122,11 +122,19 @@ router.put('/', (req, res, next) => {
 
 
 //join a game;
+//limit to 4 players
 router.put('/:gameId/player', (req, res, next) => {
     let userId = req.body.id;
-    Game.findById(req.params.gameId)
+    Game.findById(req.params.gameId, {
+        include: [User]
+    })
     .then(game => {
-        return game.addUser(userId)
+        if (game.users.length < 4) {
+            return game.addUser(userId)
+        } else {
+
+            throw new Error ('The room is full!')
+        } 
     })
     .then(game => {
         res.status(201).json(game)
