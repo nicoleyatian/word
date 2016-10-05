@@ -2,11 +2,15 @@ app.config(function($stateProvider) {
     $stateProvider.state('Game', {
         url: '/game/:roomname',
         templateUrl: 'js/game-state/page.html',
-        controller: "GameCtrl"
+        controller: "GameCtrl",
+        data: {
+            authenticate: true
+        }
     })
 })
 
-app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state) {
+
+app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory) {
 
     $scope.exports = {
         wordObj: {},
@@ -14,7 +18,29 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         playerId: null,
         stateNumber: 1,
         pointsEarned: 500
-    }
+    };
+
+    $scope.mouseIsDown = false;
+    $scope.draggingAllowed = false;
+
+    $scope.toggleDrag = function(){
+        $scope.draggingAllowed = !$scope.draggingAllowed;
+    };
+
+    $scope.mouseDown = function() {
+        $scope.mouseIsDown = true;
+    };
+
+    $scope.mouseUp = function() {
+        $scope.mouseIsDown = false;
+        if ($scope.draggingAllowed && $scope.exports.word.length>1) $scope.submit($scope.exports);
+    };
+
+    $scope.drag = function(space, id){
+        if ($scope.mouseIsDown && $scope.draggingAllowed){
+            $scope.click(space, id);
+        }
+    };
 
     AuthService.getLoggedInUser()
         .then(function(user) {
@@ -23,16 +49,16 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.exports.playerId = user.id;
         });
 
-
     //get the current room info
     BoardFactory.getCurrentRoom($stateParams.roomname)
-        .then(room => {
-            console.log(room)
-            $scope.gameId = room.id;
-            $scope.otherPlayers = room.users.filter(user => user.id !== $scope.user.id);
-            $scope.otherPlayers.forEach(player => { player.score = 0 })
-        })
 
+    .then(room => {
+        console.log(room)
+        $scope.gameId = room.id;
+        $scope.otherPlayers = room.users.filter(user => user.id !== $scope.user.id);
+        $scope.otherPlayers.forEach(player => { player.score = 0 })
+        LobbyFactory.joinGame(room.id, $scope.user.id);
+    })
 
     $scope.hideBoard = true;
 
@@ -40,15 +66,17 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     // Start the game when all players have joined room
     $scope.startGame = function() {
         $scope.hideBoard = false;
-    }
+    };
+
 
     //Quit the room, back to lobby
     $scope.quit = function() {
         BoardFactory.quitFromRoom($scope.gameId, $scope.user.id)
             .then(() => {
                 $state.go('lobby');
-            })
-    }
+            });
+    };
+
 
     $scope.board = [
         ['b', 'a', 'd', 'e', 'a', 'r'],
@@ -115,9 +143,10 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     //         });
     // };
     $scope.submit = function(obj) {
+        console.log('submitting ', obj);
         BoardFactory.submit(obj);
         $scope.clear();
-    }
+    };
 
     $scope.updateBoard = function(wordObj) {
         console.log('scope.board', $scope.board);
@@ -143,7 +172,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             }
             $scope.exports.pointsEarned = null;
         }
-    }
+    };
 
     $scope.roomName = $stateParams.roomname;
 
@@ -163,7 +192,18 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         console.log('emitting "join room" event to server', $scope.roomName);
 
         Socket.on('roomJoinSuccess', function(user) {
-            console.log('new user joining');
+            console.log('new user joining', user.id);
+
+            user.score = 0;
+            var playerIds = [];
+            $scope.otherPlayers.forEach(otherPlayer=>{
+                playerIds.push(otherPlayer.id)
+            })
+            if (playerIds.indexOf(user.id) === -1){
+                $scope.otherPlayers.push(user);
+            }
+            $scope.$digest();
+
             // BoardFactory.getCurrentRoom($stateParams.roomname)
             //     .then(room => {
             //         console.log(room)
@@ -171,9 +211,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             //         $scope.otherPlayers = room.users.filter(user => user.id !== $scope.user.id);
             //         $scope.otherPlayers.forEach(player => { player.score = 0 })
             //     })
-            user.score = 0;
-            $scope.otherPlayers.push(user);
-                $scope.$digest();
+
         })
 
 
@@ -190,6 +228,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         Socket.on('wordValidated', function(updateObj) {
             console.log('word is validated');
             $scope.update(updateObj);
-        })
-    })
+        });
+    });
 });
