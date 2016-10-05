@@ -5,6 +5,12 @@ app.factory("UserFactory", function($http){
 			.then(function(user){
 				return user.data;
 			})
+		},
+		fetchGames: function(id){
+			return $http.get("/api/users/"+id+"/games")
+			.then(function(games){
+				return games.data;
+			})
 		}
 	}
 })
