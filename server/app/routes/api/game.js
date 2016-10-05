@@ -132,9 +132,9 @@ router.put('/:gameId/player', (req, res, next) => {
         if (game.users.length < 4) {
             return game.addUser(userId)
         } else {
-            throw new Error;
-        }
-        
+
+            throw new Error ('The room is full!')
+        } 
     })
     .then(game => {
         res.status(201).json(game)

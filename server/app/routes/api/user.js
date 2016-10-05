@@ -47,6 +47,22 @@ router.get('/:userId',  (req, res, next) => {
         res.status(403).send();
     }
 });
+//get a user's games
+router.get('/:userId/games', function(req, res, next){
+    if (+req.user.dataValues.id===+req.params.userId){
+        UserGame.findAll({
+            where:{
+                userId: req.params.userId
+            }
+        })
+        .then(function(games){
+            res.send(games);
+        })
+        .catch(next);
+    } else {
+        res.status(403).send();
+    }
+})
 
 
 // Update user
