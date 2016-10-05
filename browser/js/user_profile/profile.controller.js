@@ -15,6 +15,10 @@ app.controller("UserCtrl", function($scope, UserFactory, $stateParams){
 	UserFactory.fetchInformation($stateParams.userId)
 	.then(function(user){
 		$scope.user=user;
+		return user
+	})
+	.then(function(user){
+		$scope.updated=$scope.user.updatedAt.getDay();
 	})
 })
 
