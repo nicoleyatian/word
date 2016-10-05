@@ -86,6 +86,11 @@ div #start {
 	text-align: center;
 	margin: auto;
 }
+#timer {
+	border: 5px dotted black;
+	width: 20%;
+	margin: auto;
+}
 
 @import 'directives/main';
 @import 'home/main';
