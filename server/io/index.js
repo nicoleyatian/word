@@ -22,10 +22,12 @@ module.exports = function(server) {
             data[roomName].push(playerMove);
         }
 
-        socket.on('joinRoom', function(room) {
+        socket.on('joinRoom', function(user, room) {
             roomName = room;
+
             socket.join(roomName);
             console.log('A client joined this room: ', roomName);
+            socket.broadcast.to(roomName).emit('roomJoinSuccess', user);
             // io.sockets.in(roomName).emit('roomData', {
             //     count: io.sockets.adapter.rooms[roomName]
             // })
