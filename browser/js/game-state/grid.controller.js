@@ -25,7 +25,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.mouseIsDown = false;
     $scope.draggingAllowed = false;
     $scope.style=null;
-    $scope.last_plays={0: 'a', 1: 'b', 2:'c', 3:'d'};
+    $scope.last_plays={0: '', 1: '', 2:'', 3:''};
 
     $scope.updatePlays=function(){
         $scope.last_plays[3]=$scope.last_plays[2];
@@ -119,10 +119,17 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.click = function(space, id) {
         console.log('clicked ', space, id);
         var ltrsSelected = Object.keys($scope.exports.wordObj);
+        var previousLtr=ltrsSelected[ltrsSelected.length-2];
+        var lastLtr=ltrsSelected[ltrsSelected.length-1];
+        console.log('!!!!!!!'+previousLtr+'!!!!!!!!');
         if (!ltrsSelected.length || validSelect(id, ltrsSelected)) {
             $scope.exports.word += space;
             $scope.exports.wordObj[id] = space;
             console.log($scope.exports);
+        }
+        if (id===previousLtr){
+            $scope.exports.word=$scope.exports.word.substring(0, $scope.exports.word.length-1);
+            delete $scope.exports.wordObj[lastLtr];
         }
     };
 
