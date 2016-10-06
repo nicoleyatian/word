@@ -44,12 +44,6 @@
         </div>
 </div> -->
 
-<!-- this is the display for the last_words played... Right now not ready.-->
-<!--     <div id="plays">
-        <ul ng-repeat="message in last_plays">
-            <li> {{message}}</li>
-        </ul>
-    </div> -->
 
     <h1 id="title">Wordgame</h1>
     <div id="start" ng-hide="!hideBoard">
@@ -76,6 +70,9 @@
         <button ng-click="toggleDrag()">{{draggingAllowed ? 'Click ':'Drag '}}To Select</button>
         <label id="score">
             Your Score: {{score}}
+        </label id="last_word">
+        {{message}}
+        <label>
         </label>
         <!-- <div class='row'> -->
             <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()">
