@@ -25,16 +25,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.mouseIsDown = false;
     $scope.draggingAllowed = false;
     $scope.style=null;
-    $scope.last_plays={0: '', 1: '', 2:'', 3:''};
-
-    $scope.updatePlays=function(){
-        $scope.last_plays[3]=$scope.last_plays[2];
-        $scope.last_plays[2]=$scope.last_plays[1];
-        $scope.last_plays[1]=$scope.last_plays[0];
-        $scope.last_plays[0]="Player " +$scope.exports.playerId+" just played "+$scope.exports.word+"!";
-        $scope.$digest();
-        //console.log($scope.last_plays);
-    }
+    $scope.message='';
 
     $scope.checkSelected=function(id){
         // console.log("----------"+id+"------------");
@@ -205,7 +196,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.update = function(updateObj) {
         $scope.updateScore(updateObj.pointsEarned, updateObj.playerId);
         $scope.updateBoard(updateObj.wordObj);
-        $scope.updatePlays();
+        $scope.message=updateObj.playerId+" played "+updateObj.word+" for "+updateObj.pointsEarned+" points!";
         console.log('its updating!');
         clearIfConflicting(updateObj, $scope.exports.wordObj);
         $scope.exports.stateNumber = updateObj.stateNumber;
