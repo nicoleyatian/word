@@ -4,7 +4,8 @@ app.config(function($stateProvider) {
         templateUrl: 'js/game-state/page.html',
         controller: "GameCtrl",
         data: {
-            authenticate: true
+            authenticate: true,
+            enterRoom: true
         }
     })
 })

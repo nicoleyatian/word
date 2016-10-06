@@ -8,7 +8,10 @@ app.config(function ($stateProvider) {
         		return LobbyFactory.getAllRooms();
         	}
         },
-        controller: 'LobbyCtrl'
+        controller: 'LobbyCtrl',
+        data: {
+            authenticate: true
+        }
     });
 
 });
