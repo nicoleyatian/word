@@ -2,7 +2,7 @@
 var crypto = require('crypto');
 var _ = require('lodash');
 var Sequelize = require('sequelize');
-// var User = require('./user.js')
+// var User = require('./user.js');
 
 var db = require('../_db');
 

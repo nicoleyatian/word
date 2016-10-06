@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,
+    user-scalable=0, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app- status-bar-style" content="black-translucent" />
 
 <head>
     <base href="/" />
@@ -18,7 +24,7 @@
 </head>
 
 <body ng-app="FullstackGeneratedApp">
-    <navbar></navbar>
+    <navbar ng-hide="hideNavbar"></navbar>
     <div id="main" ui-view></div>
 </body>
 

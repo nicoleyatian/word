@@ -8,7 +8,6 @@ app.directive("timer", function($q, $interval, Socket) {
         link: function(scope) {
             var time = scope.time;
             scope.time_remaining = convert(time);
-            // scope.messages = ["Get Ready!", "Get Set!", "Go!", '/'];
             scope.countdown = function() {
                 var timer = $interval(function() {
                     time -= 1;
@@ -20,6 +19,7 @@ app.directive("timer", function($q, $interval, Socket) {
                 }, 1000);
             };
 
+            // scope.messages = ["Get Ready!", "Get Set!", "Go!", '/'];
             //     var index = 0;
             //     var prepare = $interval(function() {
             //         scope.time_remaining = scope.messages[index];
@@ -43,6 +43,7 @@ app.directive("timer", function($q, $interval, Socket) {
             Socket.on('startBoard', function() {
                 scope.countdown(time);
             });
+
 
             function convert(time) {
                 var seconds = (time % 60).toString();
