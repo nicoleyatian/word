@@ -1,36 +1,10 @@
 'use strict';
 var socketio = require('socket.io');
 var game = require('../game/game.js');
+var persistGame = require('./persistGame.js');
 var io = null;
 var data = {};
-var User = require('../db/models/user');
-var Game = require('../db/models/game');
-var UserGame = require('../db/models/userGame');
 
-
-function saveGame(gameObj) {
-    console.log('save game go.id: ',gameObj.gameId);
-    Game.findById(gameObj.id, {
-            include: [{
-                model: User,
-                attributes: ['id']
-            }]
-        })
-        .then(game => {
-            let updatePromises = [];
-            game.users.forEach(user => {
-                updatePromises.push(user.userGame.update({
-                    score: gameObj.playerScores[user.id]
-                }));
-            });
-            updatePromises.push(game.update({ inProgress: false }));
-            console.log('about to run updated scores: ',updatePromises);
-            return Promise.all(updatePromises);
-        })
-        .catch(function(e) {
-            console.error(e)
-        });
-}
 
 module.exports = function(server) {
 
@@ -55,7 +29,6 @@ module.exports = function(server) {
 
         socket.on('joinRoom', function(user, roomName) {
 
-
             // if (!thisGame) {
             //     thisGame.user = user;
             // }
@@ -75,18 +48,29 @@ module.exports = function(server) {
                 socket.broadcast.to(roomName).emit('playerDisconnected', 'some data about player');
             });
 
-            socket.on('getStartBoard', function(gameLength, gameId) {
+            socket.on('getStartBoard', function(gameLength, gameId, userIds) {
+                //initialize GameObj for the room in the mapper
                 roomGameMapper[roomName] = new game.GameObject(game.tileCounts, 6, 2);
                 var thisGame = roomGameMapper[roomName];
+                //associate its game id for use in persistence
                 thisGame.id = gameId;
+                //add each user to the game (enters them into scoreObj with score 0)
+                userIds.forEach(userId => thisGame.addPlayer(userId));
                 console.log(`Room ${roomName} has begun playing with game # ${gameId}`);
+                
                 io.to(roomName).emit('startBoard', thisGame.board);
+
+                //set isPlaying to true in db
+                persistGame.startGame(thisGame.id);
+
                 setTimeout(function() {
-                    //send some data to server and:
+
                     console.log('game over', gameId);
 
                     io.to(roomName).emit('gameOver');
-                    saveGame(thisGame);
+
+                    //send scores to db, set isPlaying to false
+                    persistGame.saveGame(thisGame);
                 }, gameLength * 1000);
             });
 

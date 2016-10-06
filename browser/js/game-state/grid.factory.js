@@ -1,8 +1,8 @@
 app.factory ("BoardFactory", function($http, Socket){
 	return{
-		getStartBoard: function(gameLength, gameId){
+		getStartBoard: function(gameLength, gameId, userIds){
 			console.log('factory. gl: ', gameLength);
-			Socket.emit('getStartBoard', gameLength, gameId);
+			Socket.emit('getStartBoard', gameLength, gameId, userIds);
 		},
 
 		submit: function(obj){

@@ -66,9 +66,7 @@ GameObject.prototype.addPlayer = function(id) {
 
 GameObject.prototype.addToScore = function(playerId, word) {
     var pointsEarned = this.computeScore(word);
-    var myScore = this.playerScores[playerId];
-    if (!myScore) myScore = pointsEarned;
-    myScore += pointsEarned;
+    this.playerScores[playerId] += pointsEarned;
     return pointsEarned;
 };
 

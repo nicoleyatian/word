@@ -6,15 +6,17 @@ app.config(function($stateProvider) {
         data: {
             authenticate: true
         }
-    })
-})
+    });
+});
 
 
 app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory) {
 
     $scope.roomName = $stateParams.roomname;
 
-    $scope.gameLength = 3;
+    $scope.otherPlayers = [];
+
+    $scope.gameLength = 22;
 
     $scope.exports = {
         wordObj: {},
@@ -67,7 +69,10 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     // Start the game when all players have joined room
     $scope.startGame = function() {
-        BoardFactory.getStartBoard($scope.gameLength, $scope.gameId);
+        var userIds = $scope.otherPlayers.map(user => user.id);
+        userIds.push($scope.user.id);
+        console.log('op', $scope.otherPlayers, 'ui', userIds);
+        BoardFactory.getStartBoard($scope.gameLength, $scope.gameId, userIds);
     };
 
 
@@ -199,13 +204,13 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             console.log('new user joining', user.id);
 
             user.score = 0;
-            var playerIds = [];
-            $scope.otherPlayers.forEach(otherPlayer => {
-                playerIds.push(otherPlayer.id)
-            });
-            if (playerIds.indexOf(user.id) === -1) {
-                $scope.otherPlayers.push(user);
-            }
+            // var playerIds = [];
+            // $scope.otherPlayers.forEach(otherPlayer => {
+            //     playerIds.push(otherPlayer.id)
+            // });
+            // if (playerIds.indexOf(user.id) === -1) {
+            // }
+            $scope.otherPlayers.push(user);
             $scope.$digest();
 
             // BoardFactory.getCurrentRoom($stateParams.roomname)
@@ -241,6 +246,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         Socket.on('wordValidated', function(updateObj) {
             console.log('word is validated');
             $scope.update(updateObj);
+            $scope.lastWordPlayed = updateObj.word;
             $scope.$evalAsync();
         });
 
