@@ -25,6 +25,19 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.mouseIsDown = false;
     $scope.draggingAllowed = false;
     $scope.style=null;
+    $scope.last_plays={0: '', 1: '', 2:'', 3:''};
+
+    // $scope.recordPlays=function(){
+    //     $scope.last_plays[3]=$scope.last_plays[2];
+    //     $scope.last_plays[2]=$scope.last_plays[1];
+    //     $scope.last_plays[1]=$scope.last_plays[0];
+    //     $scope.last_plays[]
+    // }
+
+    $scope.checkSelected=function(id){
+        console.log("----------"+id+"------------");
+        return id in $scope.exports.wordObj;
+    }
 
     $scope.toggleDrag = function() {
         $scope.draggingAllowed = !$scope.draggingAllowed;
@@ -108,7 +121,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.exports.word += space;
             $scope.exports.wordObj[id] = space;
             console.log($scope.exports);
-            document.getElementById(id).style="border: 5px solid yellow"
         }
     };
 
@@ -134,9 +146,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     }
 
     $scope.clear = function() {
-        for (var i in $scope.exports.wordObj){
-            document.getElementById(i).style="border: .5px solid black";
-        }
         $scope.exports.word = "";
         $scope.exports.wordObj = {};
     };
