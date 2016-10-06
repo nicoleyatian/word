@@ -23,7 +23,8 @@ module.exports = function(server) {
 
         socket.on('joinRoom', function(user, roomName) {
 
-            let thisGame = new game.GameObject(game.tileCounts, 6, 2);
+            
+            let thisGame;
 
             socket.join(roomName);
             console.log('A client joined this room: ', roomName);
@@ -41,6 +42,7 @@ module.exports = function(server) {
             });
 
             socket.on('getStartBoard', function() {
+                thisGame = new game.GameObject(game.tileCounts, 6, 2);
                 console.log(`Room ${roomName} has begun playing`);
                 io.to(roomName).emit('startBoard', thisGame.board);
             });
