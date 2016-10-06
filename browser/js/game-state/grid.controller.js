@@ -27,15 +27,17 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.style=null;
     $scope.last_plays={0: '', 1: '', 2:'', 3:''};
 
-    // $scope.recordPlays=function(){
-    //     $scope.last_plays[3]=$scope.last_plays[2];
-    //     $scope.last_plays[2]=$scope.last_plays[1];
-    //     $scope.last_plays[1]=$scope.last_plays[0];
-    //     $scope.last_plays[]
-    // }
+    $scope.updatePlays=function(){
+        $scope.last_plays[3]=$scope.last_plays[2];
+        $scope.last_plays[2]=$scope.last_plays[1];
+        $scope.last_plays[1]=$scope.last_plays[0];
+        $scope.last_plays[0]="Player " +$scope.exports.playerId+" just played "+$scope.exports.word+"!";
+        $scope.$digest();
+        //console.log($scope.last_plays);
+    }
 
     $scope.checkSelected=function(id){
-        console.log("----------"+id+"------------");
+        // console.log("----------"+id+"------------");
         return id in $scope.exports.wordObj;
     }
 
@@ -117,10 +119,17 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.click = function(space, id) {
         console.log('clicked ', space, id);
         var ltrsSelected = Object.keys($scope.exports.wordObj);
+        var previousLtr=ltrsSelected[ltrsSelected.length-2];
+        var lastLtr=ltrsSelected[ltrsSelected.length-1];
+        console.log('!!!!!!!'+previousLtr+'!!!!!!!!');
         if (!ltrsSelected.length || validSelect(id, ltrsSelected)) {
             $scope.exports.word += space;
             $scope.exports.wordObj[id] = space;
             console.log($scope.exports);
+        }
+        if (id===previousLtr){
+            $scope.exports.word=$scope.exports.word.substring(0, $scope.exports.word.length-1);
+            delete $scope.exports.wordObj[lastLtr];
         }
     };
 
@@ -196,6 +205,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.update = function(updateObj) {
         $scope.updateScore(updateObj.pointsEarned, updateObj.playerId);
         $scope.updateBoard(updateObj.wordObj);
+        $scope.updatePlays();
         console.log('its updating!');
         clearIfConflicting(updateObj, $scope.exports.wordObj);
         $scope.exports.stateNumber = updateObj.stateNumber;
