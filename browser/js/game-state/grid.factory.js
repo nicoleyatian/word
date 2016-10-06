@@ -20,7 +20,7 @@ app.factory ("BoardFactory", function($http, Socket){
 
 		quitFromRoom: function(gameId, userId) {
 			// Socket.emit('disconnect', roomName, userId);
-			return $http.delete('/api/games/'+roomId+'/'+userId)
+			return $http.delete('/api/games/'+gameId+'/'+userId)
 		}
 	}
 });

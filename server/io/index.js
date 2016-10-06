@@ -12,6 +12,9 @@ module.exports = function(server) {
 
     io = socketio(server);
 
+    //as games begin, this associates the roomname with its shared gameObject
+    var roomGameMapper = {};
+    
     io.on('connection', function(socket) {
         // Now have access to socket, wowzers!
         console.log('A new client with the socket ID of ' + socket.id + ' has connected');
@@ -21,10 +24,13 @@ module.exports = function(server) {
         //     data[roomName].push(playerMove);
         // };
 
+
         socket.on('joinRoom', function(user, roomName) {
 
-            
-            let thisGame;
+
+            // if (!thisGame) {
+            //     thisGame.user = user;
+            // }
 
             socket.join(roomName);
             console.log('A client joined this room: ', roomName);
@@ -42,12 +48,14 @@ module.exports = function(server) {
             });
 
             socket.on('getStartBoard', function() {
-                thisGame = new game.GameObject(game.tileCounts, 6, 2);
+                roomGameMapper[roomName] = new game.GameObject(game.tileCounts, 6, 2);
+                var thisGame = roomGameMapper[roomName];
                 console.log(`Room ${roomName} has begun playing`);
                 io.to(roomName).emit('startBoard', thisGame.board);
             });
 
             socket.on('submitWord', function(playObj) {
+                var thisGame = roomGameMapper[roomName];
                 console.log('play obj before it is checked', playObj);
                 var potentialUpdateObj = thisGame.wordPlayed(playObj);
                 if (potentialUpdateObj) {
