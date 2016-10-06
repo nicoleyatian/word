@@ -74,21 +74,22 @@ router.get('/:gameId', (req, res, next) => {
             }
         })
         .catch(next);
-})
+});
 
 // Update a Game
 // update the room name, start the game
 router.put('/:gameId', (req, res, next) => {
     Game.findById(req.params.gameId)
     .then(game => {
-        return game.update(req.body)
+        return game.update(req.body);
     })
     .then(game => {
-        res.status(201).json(game)
+        res.status(201).json(game);
     })
-    .catch(next)
-})
+    .catch(next);
+});
 
+//probably unnecessary--accomplished directly in sockets
 router.put('/:gameId/over', (req, res, next) => {
     Game.findById(req.params.gameId, {
         include: [{
@@ -101,13 +102,13 @@ router.put('/:gameId/over', (req, res, next) => {
         game.users.forEach(user=>{
             updatePromises.push(user.userGame.update({
                 score: req.body[user.id]
-            }))
+            }));
         });
-        updatePromises.push(game.update({inProgress: false}))
-        return Promise.all(updatePromises)    
+        updatePromises.push(game.update({inProgress: false}));
+        return Promise.all(updatePromises)  ;  
     })
-    .catch(next)
-})
+    .catch(next);
+});
 
 
 
@@ -115,10 +116,10 @@ router.put('/:gameId/over', (req, res, next) => {
 router.put('/', (req, res, next) => {
     Game.create(req.body)
     .then(game => {
-        res.status(201).json(game)
+        res.status(201).json(game);
     })
-    .catch(next)
-})
+    .catch(next);
+});
 
 
 //join a game;
@@ -130,29 +131,29 @@ router.put('/:gameId/player', (req, res, next) => {
     })
     .then(game => {
         if (game.users.length < 4) {
-            return game.addUser(userId)
+            return game.addUser(userId);
         } else {
 
-            throw new Error ('The room is full!')
+            throw new Error ('The room is full!');
         } 
     })
     .then(game => {
-        res.status(201).json(game)
+        res.status(201).json(game);
     })
-    .catch(next)
-})
+    .catch(next);
+});
 
 //leave from a game;
 router.delete('/:gameId/:userId', (req, res, next) => {
     Game.findById(req.params.gameId)
     .then(game => {
-        return game.removeUser(req.params.userId)
+        return game.removeUser(req.params.userId);
     })
     .then(() => {
-        res.sendStatus(204)
+        res.sendStatus(204);
     })
-    .catch(next)
-})
+    .catch(next);
+});
 
 
 module.exports = router;
