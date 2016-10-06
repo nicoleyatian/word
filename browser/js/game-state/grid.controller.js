@@ -12,19 +12,21 @@ app.config(function($stateProvider) {
 
 app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory) {
 
+    $scope.roomName = $stateParams.roomname;
+
     $scope.exports = {
         wordObj: {},
         word: "",
         playerId: null,
-        stateNumber: 1,
-        pointsEarned: 500
+        stateNumber: 0,
+        pointsEarned: null
     };
 
     $scope.mouseIsDown = false;
     $scope.draggingAllowed = false;
     $scope.style=null;
 
-    $scope.toggleDrag = function(){
+    $scope.toggleDrag = function() {
         $scope.draggingAllowed = !$scope.draggingAllowed;
     };
 
@@ -34,11 +36,11 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.mouseUp = function() {
         $scope.mouseIsDown = false;
-        if ($scope.draggingAllowed && $scope.exports.word.length>1) $scope.submit($scope.exports);
+        if ($scope.draggingAllowed && $scope.exports.word.length > 1) $scope.submit($scope.exports);
     };
 
-    $scope.drag = function(space, id){
-        if ($scope.mouseIsDown && $scope.draggingAllowed){
+    $scope.drag = function(space, id) {
+        if ($scope.mouseIsDown && $scope.draggingAllowed) {
             $scope.click(space, id);
         }
     };
@@ -52,21 +54,20 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     //get the current room info
     BoardFactory.getCurrentRoom($stateParams.roomname)
-
-    .then(room => {
-        console.log(room)
-        $scope.gameId = room.id;
-        $scope.otherPlayers = room.users.filter(user => user.id !== $scope.user.id);
-        $scope.otherPlayers.forEach(player => { player.score = 0 })
-        LobbyFactory.joinGame(room.id, $scope.user.id);
-    })
+        .then(room => {
+            console.log(room)
+            $scope.gameId = room.id;
+            $scope.otherPlayers = room.users.filter(user => user.id !== $scope.user.id);
+            $scope.otherPlayers.forEach(player => { player.score = 0 })
+            LobbyFactory.joinGame(room.id, $scope.user.id);
+        });
 
     $scope.hideBoard = true;
 
 
     // Start the game when all players have joined room
     $scope.startGame = function() {
-        $scope.hideBoard = false;
+        BoardFactory.getStartBoard($scope.roomName);
     };
 
 
@@ -147,11 +148,14 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     //         //     $scope.exports.word = "";
     //         });
     // };
+
+
     $scope.submit = function(obj) {
         console.log('submitting ', obj);
         BoardFactory.submit(obj);
         $scope.clear();
     };
+
 
     $scope.updateBoard = function(wordObj) {
         console.log('scope.board', $scope.board);
@@ -179,7 +183,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         }
     };
 
-    $scope.roomName = $stateParams.roomname;
 
     $scope.update = function(updateObj) {
         $scope.updateScore(updateObj.pointsEarned, updateObj.playerId);
@@ -201,10 +204,10 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
             user.score = 0;
             var playerIds = [];
-            $scope.otherPlayers.forEach(otherPlayer=>{
+            $scope.otherPlayers.forEach(otherPlayer => {
                 playerIds.push(otherPlayer.id)
-            })
-            if (playerIds.indexOf(user.id) === -1){
+            });
+            if (playerIds.indexOf(user.id) === -1) {
                 $scope.otherPlayers.push(user);
             }
             $scope.$digest();
@@ -217,7 +220,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             //         $scope.otherPlayers.forEach(player => { player.score = 0 })
             //     })
 
-        })
+        });
 
 
         // Socket.on('roomData', function(data) {
@@ -230,9 +233,17 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         //     }
         // })
 
+        Socket.on('startBoard', function(board) {
+            console.log('board! ', board);
+            $scope.board = board;
+            $scope.hideBoard = false;
+            $scope.$evalAsync();
+        });
+
         Socket.on('wordValidated', function(updateObj) {
             console.log('word is validated');
             $scope.update(updateObj);
+            $scope.$evalAsync();
         });
     });
 });

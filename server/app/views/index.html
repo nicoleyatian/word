@@ -14,24 +14,7 @@
     <script src="/angular-ui-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="/socket.io-client/socket.io.js"></script>
     <script src="/main.js"></script>
-    <script>
-    var socket = io();
 
-    function buttonClicked() {
-        socket.emit('wordPlayed', {
-                stateNumber: 2,
-                wordObj: { '0-1': 'T', '1-2': 'O' },
-                word: "TO",
-                playerId: 3
-            });
-    }
-
-    socket.on('boardUpdated', function(updateObj) {
-        console.log('word:' + Object.keys(updateObj));
-    });
-    
-    buttonClicked();
-    </script>
 </head>
 
 <body ng-app="FullstackGeneratedApp">
