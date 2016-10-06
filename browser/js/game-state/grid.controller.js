@@ -244,5 +244,9 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.update(updateObj);
             $scope.$evalAsync();
         });
+
+        Socket.on('playerDisconnected', function(data){
+            console.log('data for playerDisconnected', data);
+        })
     });
 });

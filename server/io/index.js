@@ -44,7 +44,8 @@ module.exports = function(server) {
 
             socket.on('disconnect', function(userId) {
                 console.log('A client with the socket ID of ' + socket.id + ' has diconnected :(');
-                socket.broadcast.to(roomName).emit('playerDisconnected', 'some data about player');
+                console.log('userrrrr', user)
+                socket.broadcast.to(roomName).emit('playerDisconnected', user.id);
             });
 
             socket.on('getStartBoard', function() {
