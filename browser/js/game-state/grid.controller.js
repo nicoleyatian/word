@@ -36,7 +36,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     // }
 
     $scope.checkSelected=function(id){
-        console.log("----------"+id+"------------");
+        // console.log("----------"+id+"------------");
         return id in $scope.exports.wordObj;
     }
 
@@ -205,7 +205,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
 
     Socket.on('connect', function() {
-
+        console.log($scope.user)
         Socket.emit('joinRoom', $scope.user, $scope.roomName);
         console.log('emitting "join room" event to server', $scope.roomName);
 
@@ -255,5 +255,12 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.update(updateObj);
             $scope.$evalAsync();
         });
+
+ 
+        
+        Socket.on('playerDisconnected', function(data) {
+            console.log('playerDisconnected', data)
+        })
     });
+    
 });

@@ -35,10 +35,8 @@ app.run(function($rootScope, AuthService, $state, BoardFactory) {
     // $stateChangeStart is an event fired
     // whenever the process of changing a state begins.
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
-        console.log('update 1.3');
 
         if (!destinationStateRequiresAuth(toState) && !destinationStateWithLimits(toState)) {
-            console.log('dont need auth & no limit')
                 // The destination state does not require authentication
                 // Short circuit with return.
             return;
@@ -47,7 +45,6 @@ app.run(function($rootScope, AuthService, $state, BoardFactory) {
         if (!destinationStateWithLimits(toState) && destinationStateRequiresAuth(toState)) {
             console.log(AuthService.isAuthenticated())
             if (AuthService.isAuthenticated()) {
-                console.log('auth')
                     // The user is authenticated.
                     // Short circuit with return.
                 return;
@@ -58,7 +55,6 @@ app.run(function($rootScope, AuthService, $state, BoardFactory) {
                 // (the second time, AuthService.isAuthenticated() will work)
                 // otherwise, if no user is logged in, go to "login" state.
                 if (user) {
-                    console.log('state.go')
                     $state.go(toState.name, toParams);
 
                 } else {
@@ -73,7 +69,7 @@ app.run(function($rootScope, AuthService, $state, BoardFactory) {
             BoardFactory.getCurrentRoom(toParams.roomname)
                 .then(room => {
                     let permit = false
-                    if (room.users.length < 4) {
+                    if (room && room.users.length < 4) {
                         permit = true;
                     }
                     if (permit && AuthService.isAuthenticated()) {
@@ -86,7 +82,6 @@ app.run(function($rootScope, AuthService, $state, BoardFactory) {
                         // If a user is retrieved, then renavigate to the destination
                         // (the second time, AuthService.isAuthenticated() will work)
                         // otherwise, if no user is logged in, go to "login" state.
-                        console.log('here?')
                         if (user && permit) {
                             $state.go(toState.name, toParams);
                         } else if (user && !permit) {

@@ -42,9 +42,12 @@ module.exports = function(server) {
             // console.log('roomData count has been updated');
 
 
-            socket.on('disconnect', function(userId) {
-                console.log('A client with the socket ID of ' + socket.id + ' has diconnected :(');
+            socket.on('disconnect', function() {
+                console.log(user)
+                console.log('A client with the socket ID of ' + socket.id + ' has diconnected :( from', roomName);
+                // io.emit('hello', 'hello')
                 socket.broadcast.to(roomName).emit('playerDisconnected', 'some data about player');
+                // io.to(roomName).emit('disconnectFromServer', socket.id)
             });
 
             socket.on('getStartBoard', function() {
