@@ -18,6 +18,7 @@ function GameObject(tileCountObj, sideLength, minWordLength) {
     this.stateHistory = {};
 }
 
+
 function generateBoardMutating(tileArray, sideLength) {
     var board = [];
     for (var row = 0; row < sideLength; row++) {

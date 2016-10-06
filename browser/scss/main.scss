@@ -4,7 +4,7 @@
 
 body {
     background: #fdfdfd;
-// mobile solution? vv
+// mobile solution?
     // overflow: hidden;
     // position:fixed;
 }
@@ -29,11 +29,12 @@ body {
 //Experimental design layout/////////
 //var rows = r; cell width =
 
-$board-width: 80%;
+$board-width: 100%;
 $number-cells: 6;
 $cell-diameter: 100%/($number-cells+.5);
 $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
 $letter-width: $cell-height/2;
+
 
 body {
     background: #fdfdfd;
@@ -138,7 +139,8 @@ div #start {
 }
 
 #display {
-    width: 50%;
+    width: 100%;
+    // this was originally 50% width: 50%;
     margin: auto;
 }
 
@@ -174,3 +176,497 @@ div #start {
 @import 'tutorial/main';
 @import 'login/main';
 @import 'lobby/main';
+
+
+/* ----------- Media Queries ----------- */
+
+// $board-width: 80%;
+// $number-cells: 6;
+// $cell-diameter: 100%/($number-cells+.5);
+// $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+// $letter-width: $cell-height/2;
+
+/* ----------- iPhone 4 and 4S ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+    $board-width: 100%;
+    $number-cells: 6;
+    $cell-diameter: 100%/($number-cells+.5);
+    $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+    $letter-width: $cell-height/2;
+
+    body {
+        // overflow: hidden;
+        position:fixed;
+    }
+
+    #grid {
+        width: $board-width;
+        border: 2px solid black;
+        background: url('http://www.bloggerluv.com/images/lawn-turf-1215-sports-turf-630-x-420.jpg');
+        margin: auto;
+        padding: 0%;
+    }
+
+    #grid .cell {
+        border: .5px solid black;
+        font-size: $letter-width;
+        width: $cell-diameter;
+        height: $cell-height;
+        // padding: 12%;
+        background: url('https://s-media-cache-ak0.pinimg.com/564x/a1/92/17/a19217cf19b94ba46e6aadc28140279c.jpg');
+    }
+
+    #grid .cell {
+        // border: 5px solid black;
+        border-radius: 50%;
+        text-align: center;
+        // width: 15%;
+        display: inline-block;
+        // height: 8vw;
+        // padding: 1%;
+    }
+
+    #main {
+    padding-top: 0px;
+    margin: 0 auto;
+    }
+
+}
+
+
+
+/* ----------- iPhone 5 and 5S ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+    $board-width: 100%;
+    $number-cells: 6;
+    $cell-diameter: 100%/($number-cells+.5);
+    $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+    $letter-width: $cell-height/2;
+
+    body {
+        // overflow: hidden;
+        position:fixed;
+    }
+
+    #grid {
+        width: $board-width;
+        border: 2px solid black;
+        background: url('http://www.bloggerluv.com/images/lawn-turf-1215-sports-turf-630-x-420.jpg');
+        padding: 0%;
+        margin: auto;
+
+    }
+
+    #grid .cell {
+        border: .5px solid black;
+        font-size: $letter-width;
+        width: $cell-diameter;
+        height: $cell-height;
+        // padding: 12%;
+        background: url('https://s-media-cache-ak0.pinimg.com/564x/a1/92/17/a19217cf19b94ba46e6aadc28140279c.jpg');
+    }
+
+    #grid .cell {
+        // border: 5px solid black;
+        border-radius: 50%;
+        text-align: center;
+        // width: 15%;
+        display: inline-block;
+        // height: 8vw;
+        // padding: 1%;
+    }
+
+    #main {
+    padding-top: 0px;
+    margin: 0 auto;
+    }
+
+}
+
+
+/* ----------- iPhone 6 ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+    $board-width: 100%;
+    $number-cells: 6;
+    $cell-diameter: 100%/($number-cells+.5);
+    $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+    $letter-width: $cell-height/2;
+
+    body {
+        overflow: hidden;
+        // position:fixed;
+        width: 100%;
+    }
+
+    #grid {
+        width: $board-width;
+        border: 2px solid black;
+        background: url('http://www.bloggerluv.com/images/lawn-turf-1215-sports-turf-630-x-420.jpg');
+        padding: 0%;
+        margin: auto;
+    }
+
+    #grid .cell {
+        border: .5px solid black;
+        font-size: $letter-width;
+        width: $cell-diameter;
+        height: $cell-height;
+        // padding: 12%;
+        background: url('https://s-media-cache-ak0.pinimg.com/564x/a1/92/17/a19217cf19b94ba46e6aadc28140279c.jpg');
+    }
+
+    #grid .cell {
+        // border: 5px solid black;
+        border-radius: 50%;
+        text-align: center;
+        // width: 15%;
+        display: inline-block;
+        // height: 8vw;
+        // padding: 1%;
+    }
+
+    // #main {
+    //     padding-top: 60px;
+    //     margin: 0 auto;
+    //     width: 100%;
+    // }
+
+    #mobile {
+      margin: 0 auto;
+      width: 90%; }
+      #mobile:after {
+        content: "";
+        display: table;
+        clear: both; }
+      #mobile p {
+        width: 40%;
+        margin: 0 auto;
+        text-align: justify;
+        font-size: 22px;
+        font-weight: 300;
+        float: left; }
+      #mobile .carousel {
+        float: right;
+        width: 55%;
+        overflow: hidden;
+        margin: 0 auto; }
+        #mobile .carousel .carousel-inner {
+          height: 500px !important; }
+        #mobile .carousel .carousel-control {
+          background: none; }
+        #mobile .carousel .carousel-indicators {
+          display: none; }
+        #mobile .carousel img {
+          max-width: 100%;
+          max-height: 500px;
+          display: block;
+          margin: 0 auto; }
+
+
+}
+
+
+/* ----------- iPhone 6+ ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+  and (min-device-width: 414px)
+  and (max-device-width: 736px)
+  and (-webkit-min-device-pixel-ratio: 3) {
+
+    $board-width: 100%;
+    $number-cells: 6;
+    $cell-diameter: 100%/($number-cells+.5);
+    $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+    $letter-width: $cell-height/2;
+
+    body {
+        //overflow: hidden;
+        position:fixed;
+    }
+
+    #grid {
+        width: $board-width;
+        border: 2px solid black;
+        background: url('http://www.bloggerluv.com/images/lawn-turf-1215-sports-turf-630-x-420.jpg');
+        padding: 0%;
+        margin: auto;
+    }
+
+    #grid .cell {
+        border: .5px solid black;
+        font-size: $letter-width;
+        width: $cell-diameter;
+        height: $cell-height;
+        // padding: 12%;
+        background: url('https://s-media-cache-ak0.pinimg.com/564x/a1/92/17/a19217cf19b94ba46e6aadc28140279c.jpg');
+    }
+
+    #grid .cell {
+        // border: 5px solid black;
+        border-radius: 50%;
+        text-align: center;
+        // width: 15%;
+        display: inline-block;
+        // height: 8vw;
+        // padding: 1%;
+    }
+
+    #main {
+    padding-top: 0px;
+    margin: 0 auto;
+    }
+
+}
+
+
+
+// /* ----------- Galaxy S3 ----------- */
+
+// /* Portrait and Landscape */
+// @media screen
+//   and (device-width: 320px)
+//   and (device-height: 640px)
+//   and (-webkit-device-pixel-ratio: 2) {
+
+// }
+
+// /* Portrait */
+// @media screen
+//   and (device-width: 320px)
+//   and (device-height: 640px)
+//   and (-webkit-device-pixel-ratio: 2)
+//   and (orientation: portrait) {
+
+// }
+
+// /* Landscape */
+// @media screen
+//   and (device-width: 320px)
+//   and (device-height: 640px)
+//   and (-webkit-device-pixel-ratio: 2)
+//   and (orientation: landscape) {
+
+// }
+
+// /* ----------- Galaxy S4 ----------- */
+
+// /* Portrait and Landscape */
+// @media screen
+//   and (device-width: 320px)
+//   and (device-height: 640px)
+//   and (-webkit-device-pixel-ratio: 3) {
+
+// }
+
+// /* Portrait */
+// @media screen
+//   and (device-width: 320px)
+//   and (device-height: 640px)
+//   and (-webkit-device-pixel-ratio: 3)
+//   and (orientation: portrait) {
+
+// }
+
+// /* Landscape */
+// @media screen
+//   and (device-width: 320px)
+//   and (device-height: 640px)
+//   and (-webkit-device-pixel-ratio: 3)
+//   and (orientation: landscape) {
+
+// }
+
+// /* ----------- Galaxy S5 ----------- */
+
+// /* Portrait and Landscape */
+// @media screen
+//   and (device-width: 360px)
+//   and (device-height: 640px)
+//   and (-webkit-device-pixel-ratio: 3) {
+
+// }
+
+// /* Portrait */
+// @media screen
+//   and (device-width: 360px)
+//   and (device-height: 640px)
+//   and (-webkit-device-pixel-ratio: 3)
+//   and (orientation: portrait) {
+
+// }
+
+// /* Landscape */
+// @media screen
+//   and (device-width: 360px)
+//   and (device-height: 640px)
+//   and (-webkit-device-pixel-ratio: 3)
+//   and (orientation: landscape) {
+
+// }
+
+// /* ----------- HTC One ----------- */
+
+// /* Portrait and Landscape */
+// @media screen
+//   and (device-width: 360px)
+//   and (device-height: 640px)
+//   and (-webkit-device-pixel-ratio: 3) {
+
+// }
+
+// /* Portrait */
+// @media screen
+//   and (device-width: 360px)
+//   and (device-height: 640px)
+//   and (-webkit-device-pixel-ratio: 3)
+//   and (orientation: portrait) {
+
+// }
+
+// /* Landscape */
+// @media screen
+//   and (device-width: 360px)
+//   and (device-height: 640px)
+//   and (-webkit-device-pixel-ratio: 3)
+//   and (orientation: landscape) {
+
+// }
+
+// /* ----------- iPad mini ----------- */
+
+// /* Portrait and Landscape */
+// @media only screen
+//   and (min-device-width: 768px)
+//   and (max-device-width: 1024px)
+//   and (-webkit-min-device-pixel-ratio: 1) {
+
+// }
+
+// /* Portrait */
+// @media only screen
+//   and (min-device-width: 768px)
+//   and (max-device-width: 1024px)
+//   and (orientation: portrait)
+//   and (-webkit-min-device-pixel-ratio: 1) {
+
+// }
+
+// /* Landscape */
+// @media only screen
+//   and (min-device-width: 768px)
+//   and (max-device-width: 1024px)
+//   and (orientation: landscape)
+//   and (-webkit-min-device-pixel-ratio: 1) {
+
+// }
+
+// /* ----------- iPad 1 and 2 ----------- */
+// /* Portrait and Landscape */
+// @media only screen
+//   and (min-device-width: 768px)
+//   and (max-device-width: 1024px)
+//   and (-webkit-min-device-pixel-ratio: 1) {
+
+// }
+
+// /* Portrait */
+// @media only screen
+//   and (min-device-width: 768px)
+//   and (max-device-width: 1024px)
+//   and (orientation: portrait)
+//   and (-webkit-min-device-pixel-ratio: 1) {
+
+// }
+
+// /* Landscape */
+// @media only screen
+//   and (min-device-width: 768px)
+//   and (max-device-width: 1024px)
+//   and (orientation: landscape)
+//   and (-webkit-min-device-pixel-ratio: 1) {
+
+// }
+
+// /* ----------- iPad 3 and 4 ----------- */
+// /* Portrait and Landscape */
+// @media only screen
+//   and (min-device-width: 768px)
+//   and (max-device-width: 1024px)
+//   and (-webkit-min-device-pixel-ratio: 2) {
+
+// }
+
+// /* Portrait */
+// @media only screen
+//   and (min-device-width: 768px)
+//   and (max-device-width: 1024px)
+//   and (orientation: portrait)
+//   and (-webkit-min-device-pixel-ratio: 2) {
+
+// }
+
+// /* Landscape */
+// @media only screen
+//   and (min-device-width: 768px)
+//   and (max-device-width: 1024px)
+//   and (orientation: landscape)
+//   and (-webkit-min-device-pixel-ratio: 2) {
+
+// }
+
+// /* ----------- Galaxy Tab 10.1 ----------- */
+
+// /* Portrait and Landscape */
+// @media
+//   (min-device-width: 800px)
+//   and (max-device-width: 1280px) {
+
+// }
+
+// /* Portrait */
+// @media
+//   (max-device-width: 800px)
+//   and (orientation: portrait) {
+
+// }
+
+// /* Landscape */
+// @media
+//   (max-device-width: 1280px)
+//   and (orientation: landscape) {
+
+// }
+
+// /* ----------- Non-Retina Screens ----------- */
+// @media screen
+//   and (min-device-width: 1200px)
+//   and (max-device-width: 1600px)
+//   and (-webkit-min-device-pixel-ratio: 1) {
+// }
+
+// /* ----------- Retina Screens ----------- */
+// @media screen
+//   and (min-device-width: 1200px)
+//   and (max-device-width: 1600px)
+//   and (-webkit-min-device-pixel-ratio: 2)
+//   and (min-resolution: 192dpi) {
+// }

@@ -14,7 +14,7 @@ module.exports = function(server) {
 
     //as games begin, this associates the roomname with its shared gameObject
     var roomGameMapper = {};
-    
+
     io.on('connection', function(socket) {
         // Now have access to socket, wowzers!
         console.log('A new client with the socket ID of ' + socket.id + ' has connected');

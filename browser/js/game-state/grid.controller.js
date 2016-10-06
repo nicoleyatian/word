@@ -10,7 +10,7 @@ app.config(function($stateProvider) {
 })
 
 
-app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory) {
+app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory, $rootScope) {
 
     $scope.roomName = $stateParams.roomname;
 
@@ -76,6 +76,8 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             .then(() => {
                 $state.go('lobby');
             });
+
+        $rootScope.hideNavbar = false;
     };
 
 
@@ -187,6 +189,8 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         $scope.exports.stateNumber = updateObj.stateNumber;
         $scope.$evalAsync();
     };
+
+    $rootScope.hideNavbar = true;
 
 
     Socket.on('connect', function() {
