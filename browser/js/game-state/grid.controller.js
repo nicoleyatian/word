@@ -14,6 +14,8 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.roomName = $stateParams.roomname;
 
+    $scope.gameLength = 3;
+
     $scope.exports = {
         wordObj: {},
         word: "",
@@ -63,10 +65,9 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.hideBoard = true;
 
-
     // Start the game when all players have joined room
     $scope.startGame = function() {
-        BoardFactory.getStartBoard($scope.roomName);
+        BoardFactory.getStartBoard($scope.gameLength, $scope.gameId);
     };
 
 
@@ -231,14 +232,20 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         Socket.on('startBoard', function(board) {
             console.log('board! ', board);
             $scope.board = board;
+            // setInterval(function(){
             $scope.hideBoard = false;
             $scope.$evalAsync();
+            // }, 3000);
         });
 
         Socket.on('wordValidated', function(updateObj) {
             console.log('word is validated');
             $scope.update(updateObj);
             $scope.$evalAsync();
+        });
+
+        Socket.on('gameOver', function() {
+            console.log('game is over');
         });
     });
 });
