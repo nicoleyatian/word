@@ -1,8 +1,10 @@
 'use strict';
 var socketio = require('socket.io');
 var game = require('../game/game.js');
+var persistGame = require('./persistGame.js');
 var io = null;
 var data = {};
+
 
 module.exports = function(server) {
 
@@ -27,7 +29,6 @@ module.exports = function(server) {
 
         socket.on('joinRoom', function(user, roomName) {
 
-
             // if (!thisGame) {
             //     thisGame.user = user;
             // }
@@ -48,11 +49,30 @@ module.exports = function(server) {
                 socket.broadcast.to(roomName).emit('playerDisconnected', user.id);
             });
 
-            socket.on('getStartBoard', function() {
+            socket.on('getStartBoard', function(gameLength, gameId, userIds) {
+                //initialize GameObj for the room in the mapper
                 roomGameMapper[roomName] = new game.GameObject(game.tileCounts, 6, 2);
                 var thisGame = roomGameMapper[roomName];
-                console.log(`Room ${roomName} has begun playing`);
+                //associate its game id for use in persistence
+                thisGame.id = gameId;
+                //add each user to the game (enters them into scoreObj with score 0)
+                userIds.forEach(userId => thisGame.addPlayer(userId));
+                console.log(`Room ${roomName} has begun playing with game # ${gameId}`);
+                
                 io.to(roomName).emit('startBoard', thisGame.board);
+
+                //set isPlaying to true in db
+                persistGame.startGame(thisGame.id);
+
+                setTimeout(function() {
+
+                    console.log('game over', gameId);
+
+                    io.to(roomName).emit('gameOver');
+
+                    //send scores to db, set isPlaying to false
+                    persistGame.saveGame(thisGame);
+                }, gameLength * 1000);
             });
 
             socket.on('submitWord', function(playObj) {

@@ -6,13 +6,17 @@ app.config(function($stateProvider) {
         data: {
             authenticate: true
         }
-    })
-})
+    });
+});
 
 
 app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory, $rootScope) {
 
     $scope.roomName = $stateParams.roomname;
+
+    $scope.otherPlayers = [];
+
+    $scope.gameLength = 22;
 
     $scope.exports = {
         wordObj: {},
@@ -24,6 +28,13 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.mouseIsDown = false;
     $scope.draggingAllowed = false;
+    $scope.style=null;
+    $scope.message='';
+
+    $scope.checkSelected=function(id){
+        // console.log("----------"+id+"------------");
+        return id in $scope.exports.wordObj;
+    }
 
     $scope.toggleDrag = function() {
         $scope.draggingAllowed = !$scope.draggingAllowed;
@@ -63,10 +74,12 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.hideBoard = true;
 
-
     // Start the game when all players have joined room
     $scope.startGame = function() {
-        BoardFactory.getStartBoard($scope.roomName);
+        var userIds = $scope.otherPlayers.map(user => user.id);
+        userIds.push($scope.user.id);
+        console.log('op', $scope.otherPlayers, 'ui', userIds);
+        BoardFactory.getStartBoard($scope.gameLength, $scope.gameId, userIds);
     };
 
 
@@ -105,10 +118,17 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.click = function(space, id) {
         console.log('clicked ', space, id);
         var ltrsSelected = Object.keys($scope.exports.wordObj);
+        var previousLtr=ltrsSelected[ltrsSelected.length-2];
+        var lastLtr=ltrsSelected[ltrsSelected.length-1];
+        console.log('!!!!!!!'+previousLtr+'!!!!!!!!');
         if (!ltrsSelected.length || validSelect(id, ltrsSelected)) {
             $scope.exports.word += space;
             $scope.exports.wordObj[id] = space;
             console.log($scope.exports);
+        }
+        if (id===previousLtr){
+            $scope.exports.word=$scope.exports.word.substring(0, $scope.exports.word.length-1);
+            delete $scope.exports.wordObj[lastLtr];
         }
     };
 
@@ -184,6 +204,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.update = function(updateObj) {
         $scope.updateScore(updateObj.pointsEarned, updateObj.playerId);
         $scope.updateBoard(updateObj.wordObj);
+        $scope.message=updateObj.playerId+" played "+updateObj.word+" for "+updateObj.pointsEarned+" points!";
         console.log('its updating!');
         clearIfConflicting(updateObj, $scope.exports.wordObj);
         $scope.exports.stateNumber = updateObj.stateNumber;
@@ -202,13 +223,13 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             console.log('new user joining', user.id);
 
             user.score = 0;
-            var playerIds = [];
-            $scope.otherPlayers.forEach(otherPlayer => {
-                playerIds.push(otherPlayer.id)
-            });
-            if (playerIds.indexOf(user.id) === -1) {
-                $scope.otherPlayers.push(user);
-            }
+            // var playerIds = [];
+            // $scope.otherPlayers.forEach(otherPlayer => {
+            //     playerIds.push(otherPlayer.id)
+            // });
+            // if (playerIds.indexOf(user.id) === -1) {
+            // }
+            $scope.otherPlayers.push(user);
             $scope.$digest();
 
             // BoardFactory.getCurrentRoom($stateParams.roomname)
@@ -235,18 +256,26 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         Socket.on('startBoard', function(board) {
             console.log('board! ', board);
             $scope.board = board;
+            // setInterval(function(){
             $scope.hideBoard = false;
             $scope.$evalAsync();
+            // }, 3000);
         });
 
         Socket.on('wordValidated', function(updateObj) {
             console.log('word is validated');
             $scope.update(updateObj);
+            $scope.lastWordPlayed = updateObj.word;
             $scope.$evalAsync();
         });
+
 
         Socket.on('playerDisconnected', function(data){
             console.log('data for playerDisconnected', data);
         })
+
+        Socket.on('gameOver', function() {
+            console.log('game is over');
+        });
     });
 });

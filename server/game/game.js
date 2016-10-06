@@ -76,17 +76,32 @@ GameObject.prototype.computeScore = function(word) {
     return word.length - this.minWordLength + 1;
 };
 
+
+// //checking whether coords of tiles for proposed move have been moved
+// //since the state of the player trying to make a move
+// GameObject.prototype.stateConflicts = function(wordObj, prevState) {
+//     var tilesMoved = Object.keys(wordObj);
+//     for (var state in this.stateHistory) {
+//         if (state >= prevState) {
+//             if (this.stateHistory[state].some(coord => tilesMoved.indexOf(coord) > -1)) return true;
+//         }
+//     }
+//     return false;
+// };
+
 //checking whether coords of tiles for proposed move have been moved
-//since the state of the player trying to make a move
+//since the state of the player trying to make a move, OR board has been shuffled
 GameObject.prototype.stateConflicts = function(wordObj, prevState) {
     var tilesMoved = Object.keys(wordObj);
     for (var state in this.stateHistory) {
         if (state >= prevState) {
-            if (this.stateHistory[state].some(coord => tilesMoved.indexOf(coord) > -1)) return true;
+            var stateTilesMoved = this.stateHistory[state];
+            if (stateTilesMoved === 'shuffled' || stateTilesMoved.some(coord => tilesMoved.includes(coord))) return true;
         }
     }
     return false;
 };
+
 
 
 //EXPECTS: 'playObj' with stateNumber, wordObj, word, playerId
@@ -132,33 +147,7 @@ GameObject.prototype.shuffle = function(){
 	this.stateNumber++;
 };
 
-//checking whether coords of tiles for proposed move have been moved
-//since the state of the player trying to make a move, OR board has been shuffled
-GameObject.prototype.stateConflicts = function(wordObj, prevState) {
-    var tilesMoved = Object.keys(wordObj);
-    for (var state in this.stateHistory) {
-        if (state >= prevState) {
-        	var stateTilesMoved = this.stateHistory[state];
-            if (stateTilesMoved === 'shuffled' || stateTilesMoved.some(coord => tilesMoved.includes(coord))) return true;
-        }
-    }
-    return false;
-};
 
-//add player id to playerScores obj with init score 0
-GameObject.prototype.addPlayer = function(id) {
-    this.playerScores[id] = 0;
-};
-
-GameObject.prototype.addToScore = function(playerId, word) {
-    var pointsEarned = this.computeScore(word);
-    this.playerScores[playerId] += pointsEarned;
-    return pointsEarned;
-};
-
-GameObject.prototype.computeScore = function(word) {
-    return word.length - this.minWordLength + 1;
-};
 
 // var scrabTileCounts = {
 //     'A': 9,
