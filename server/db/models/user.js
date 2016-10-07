@@ -28,19 +28,19 @@ module.exports = db.define('user', {
     },
     google_id: {
         type: Sequelize.STRING
-    },
-    highestScore: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
-    },
-    games_won:{
-        type: Sequelize.INTEGER,
-        defaultValue: 0
-    },
-    games_played: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
     }
+    // highestScore: {
+    //     type: Sequelize.INTEGER,
+    //     defaultValue: 0
+    // },
+    // games_won:{
+    //     type: Sequelize.INTEGER,
+    //     defaultValue: 0
+    // },
+    // games_played: {
+    //     type: Sequelize.INTEGER,
+    //     defaultValue: 0
+    // }
 }, {
     getterMethods:{
         win_percentage: function(){
@@ -68,6 +68,7 @@ module.exports = db.define('user', {
             hash.update(salt);
             return hash.digest('hex');
         }
+
     },
     hooks: {
         beforeCreate: function(user){
@@ -88,11 +89,3 @@ function setSaltAndPassword(user) {
     }
 }
 
-function getHighestScore(user) {
-    UserGame.max('score', {
-        where: {
-            userId: user.id
-        }
-    })
-    .then(max => {user.highestScore = max})
-}

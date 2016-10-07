@@ -7,6 +7,7 @@ app.directive("timer", function($q, $interval, Socket) {
         templateUrl: "js/common/directives/timer/timer.html",
         link: function(scope) {
             var time = scope.time;
+            var start=scope.time;
             scope.time_remaining = convert(time);
             scope.countdown = function() {
                 var timer = $interval(function() {
@@ -15,6 +16,7 @@ app.directive("timer", function($q, $interval, Socket) {
                     if (time < 1) {
                         scope.time_remaining = "Time up!";
                         $interval.cancel(timer);
+                        time=start;
                     }
                 }, 1000);
             };
