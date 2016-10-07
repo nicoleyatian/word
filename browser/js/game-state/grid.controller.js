@@ -86,12 +86,13 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     //Quit the room, back to lobby
     $scope.quit = function() {
-        BoardFactory.quitFromRoom($scope.gameId, $scope.user.id)
-            .then(() => {
-                $state.go('lobby');
-            });
+        // BoardFactory.quitFromRoom($scope.gameId, $scope.user.id)
+        //     .then(() => {
+        //         $state.go('lobby');
+        //     });
 
         $rootScope.hideNavbar = false;
+        $state.go('lobby')
     };
 
 
@@ -215,10 +216,11 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $rootScope.hideNavbar = true;
 
-
+    $scope.$on('$destroy', function(){ Socket.disconnect();});
+    console.log('update 1.1')
     Socket.on('connect', function() {
 
-        Socket.emit('joinRoom', $scope.user, $scope.roomName);
+        Socket.emit('joinRoom', $scope.user, $scope.roomName, $scope.gameId);
         console.log('emitting "join room" event to server', $scope.roomName);
 
         Socket.on('roomJoinSuccess', function(user) {
@@ -273,8 +275,11 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         });
 
 
-        Socket.on('playerDisconnected', function(data){
-            console.log('data for playerDisconnected', data);
+        Socket.on('playerDisconnected', function(user){
+            console.log('playerDisconnected', user.id);
+            $scope.otherPlayers = $scope.otherPlayers.map(otherPlayers => otherPlayers.id !== user.id)
+            
+            $scope.$evalAsync();
         })
 
         Socket.on('gameOver', function() {
