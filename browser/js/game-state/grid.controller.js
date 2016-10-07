@@ -16,7 +16,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.otherPlayers = [];
 
-    $scope.gameLength = 22;
+    $scope.gameLength = 10;
 
     $scope.exports = {
         wordObj: {},
@@ -28,13 +28,14 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.mouseIsDown = false;
     $scope.draggingAllowed = false;
-    $scope.style = null;
-    $scope.message = '';
 
-    $scope.checkSelected = function(id) {
-        // console.log("----------"+id+"------------");
+    $scope.style=null;
+    $scope.message='';
+    $scope.freeze=false;
+
+    $scope.checkSelected=function(id){
         return id in $scope.exports.wordObj;
-    }
+    };
 
     $scope.toggleDrag = function() {
         $scope.draggingAllowed = !$scope.draggingAllowed;
@@ -117,11 +118,11 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     // ];
 
     $scope.click = function(space, id) {
+        if ($scope.freeze){return ;}
         console.log('clicked ', space, id);
         var ltrsSelected = Object.keys($scope.exports.wordObj);
         var previousLtr = ltrsSelected[ltrsSelected.length - 2];
         var lastLtr = ltrsSelected[ltrsSelected.length - 1];
-        console.log('!!!!!!!'+lastLtr+'!!!!!!!!');
         if (!ltrsSelected.length || validSelect(id, ltrsSelected)) {
             $scope.exports.word += space;
             $scope.exports.wordObj[id] = space;
@@ -214,6 +215,12 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         $scope.$evalAsync();
     };
 
+    $scope.replay=function(){
+        console.log("GO!");
+        LobbyFactory.newGame($scope.roomName);
+        $scope.startGame();
+    };
+
     $rootScope.hideNavbar = true;
 
     $scope.$on('$destroy', function() { Socket.disconnect(); });
@@ -258,6 +265,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         // })
 
         Socket.on('startBoard', function(board) {
+            $scope.freeze=false;
             console.log('board! ', board);
             $scope.board = board;
             // setInterval(function(){
@@ -279,9 +287,12 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.otherPlayers = $scope.otherPlayers.map(otherPlayers => otherPlayers.id !== user.id)
 
             $scope.$evalAsync();
-        })
+        });
 
         Socket.on('gameOver', function() {
+            $scope.clear();
+            $scope.$digest();
+            $scope.freeze=true;
             console.log('game is over');
         });
     });
