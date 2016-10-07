@@ -11,6 +11,9 @@ var UserGame = require('./models/userGame');
 Game.belongsToMany(User, {through: UserGame})
 User.belongsToMany(Game, {through: UserGame})
 
+Game.belongsTo(User, {as: 'winner'})
+User.hasMany(Game, {as: 'winner', foreignKey: 'winnerId'})
+
 
 // if we had more models, we could associate them in this file
 // e.g. User.hasMany(Reports)
