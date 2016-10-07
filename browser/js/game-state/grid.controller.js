@@ -16,7 +16,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.otherPlayers = [];
 
-    $scope.gameLength = 22;
+    $scope.gameLength = 10;
 
     $scope.exports = {
         wordObj: {},
@@ -30,10 +30,9 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.draggingAllowed = false;
     $scope.style=null;
     $scope.message='';
-    $scope.freeze=true;
+    $scope.freeze=false;
 
     $scope.checkSelected=function(id){
-        // console.log("----------"+id+"------------");
         return id in $scope.exports.wordObj;
     }
 
@@ -123,7 +122,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         var ltrsSelected = Object.keys($scope.exports.wordObj);
         var previousLtr=ltrsSelected[ltrsSelected.length-2];
         var lastLtr=ltrsSelected[ltrsSelected.length-1];
-        console.log('!!!!!!!'+previousLtr+'!!!!!!!!');
         if (!ltrsSelected.length || validSelect(id, ltrsSelected)) {
             $scope.exports.word += space;
             $scope.exports.wordObj[id] = space;
@@ -214,6 +212,12 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         $scope.$evalAsync();
     };
 
+    $scope.replay=function(){
+        console.log("GO!")
+        LobbyFactory.newGame($scope.roomName);
+        $scope.startGame();
+    }
+
     $rootScope.hideNavbar = true;
 
     $scope.$on('$destroy', function(){ Socket.disconnect();});
@@ -283,6 +287,8 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         })
 
         Socket.on('gameOver', function() {
+            $scope.clear();
+            $scope.$digest();
             $scope.freeze=true;
             console.log('game is over');
         });
