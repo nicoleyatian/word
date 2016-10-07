@@ -3,7 +3,7 @@ var Game = require('../db/models/game');
 var UserGame = require('../db/models/userGame');
 
 module.exports = {
-    startGame: function(gameId){
+    startGame: function(gameId) {
         Game.findById(gameId)
             .then(game => game.update({
                 isWaiting: false
@@ -34,6 +34,16 @@ module.exports = {
             })
             .catch(function(e) {
                 console.error('the game did not save correctly!', e);
+            });
+    },
+
+    quitGame: function(gameId, userId) {
+        Game.findById(gameId)
+            .then(game => {
+                return game.removeUser(userId);
+            })
+            .catch(e => {
+                console.log('the user was not removed correctly!')
             });
     }
 };

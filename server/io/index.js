@@ -27,7 +27,7 @@ module.exports = function(server) {
         // };
 
 
-        socket.on('joinRoom', function(user, roomName) {
+        socket.on('joinRoom', function(user, roomName, gameId) {
 
             // if (!thisGame) {
             //     thisGame.user = user;
@@ -43,9 +43,9 @@ module.exports = function(server) {
             // console.log('roomData count has been updated');
 
 
-            socket.on('disconnect', function(userId) {
+            socket.on('disconnect', function() {
                 console.log('A client with the socket ID of ' + socket.id + ' has diconnected :(');
-                console.log('userrrrr', user)
+                persistGame.quitGame(gameId, user.id)
                 socket.broadcast.to(roomName).emit('playerDisconnected', user.id);
             });
 
