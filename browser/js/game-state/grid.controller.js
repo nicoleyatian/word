@@ -207,7 +207,20 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.update = function(updateObj) {
         $scope.updateScore(updateObj.pointsEarned, updateObj.playerId);
         $scope.updateBoard(updateObj.wordObj);
-        $scope.message=updateObj.playerId+" played "+updateObj.word+" for "+updateObj.pointsEarned+" points!";
+        if (+$scope.user.id===+updateObj.playerId){
+            //console.log("Not cool!");
+            var player=$scope.user.username;
+        }
+        else{
+            for (var key in $scope.otherPlayers){
+                //console.log("The Others!", $scope.otherPlayers)
+                if (+$scope.otherPlayers[key].id===+updateObj.playerId){
+                    var player=$scope.otherPlayers[key].username;
+                    break;
+                }
+            }
+        }
+        $scope.message=player+" played "+updateObj.word+" for "+updateObj.pointsEarned+" points!";
         console.log('its updating!');
         clearIfConflicting(updateObj, $scope.exports.wordObj);
         $scope.exports.stateNumber = updateObj.stateNumber;
