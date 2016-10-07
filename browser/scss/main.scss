@@ -65,6 +65,32 @@ div #start {
     -ms-user-select: none;
 }
 
+.boardTitle {
+    clear: both;
+    width: $board-width;
+    margin: auto;
+    padding: 1%;
+    display: inline-block;
+
+    .col-6 {
+        float: left;
+        width: $board-width/2;
+        text-align: center;
+        padding: 1%;
+    }
+
+    .col-4 {
+        float: left;
+        width: $board-width/3;
+        text-align: center;
+        padding: 1%;
+    }
+}
+
+timer {
+    margin: auto
+}
+
 
 
 #grid .cell {
@@ -72,12 +98,16 @@ div #start {
     width: $cell-diameter;
     height: $cell-height;
     // padding: 12%;
+    // padding: 5px;
     background: url(images/sand.png);
     border: .2px solid black;
     border-radius: 50%;
     text-align: center;
     // width: 15%;
     display: inline-block;
+    margin:0 !important;
+    padding:0 !important;
+    vertical-align: bottom;
     // height: 8vw;
     // padding: 1%;
 }
