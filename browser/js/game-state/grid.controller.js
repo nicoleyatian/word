@@ -23,7 +23,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.otherPlayers = [];
 
-    $scope.gameLength = 330;
+    $scope.gameLength = 10;
 
     $scope.exports = {
         wordObj: {},
@@ -258,11 +258,11 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.$evalAsync();
         });
 
-        Socket.on('gameOver', function() {
+        Socket.on('gameOver', function(winnersArray, words) {
             $scope.clear();
             $scope.$digest();
             $scope.freeze = true;
-            console.log('game is over');
+            console.log('game is over, winners: ', winnersArray, words);
         });
     });
 });
