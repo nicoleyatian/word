@@ -31,6 +31,8 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.style=null;
     $scope.message='';
     $scope.freeze=false;
+    $scope.winOrLose=null;
+    $scope.timeout=null;
 
     $scope.checkSelected=function(id){
         return id in $scope.exports.wordObj;
@@ -206,12 +208,10 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         $scope.updateScore(updateObj.pointsEarned, updateObj.playerId);
         $scope.updateBoard(updateObj.wordObj);
         if (+$scope.user.id===+updateObj.playerId){
-            //console.log("Not cool!");
             var player=$scope.user.username;
         }
         else{
             for (var key in $scope.otherPlayers){
-                //console.log("The Others!", $scope.otherPlayers)
                 if (+$scope.otherPlayers[key].id===+updateObj.playerId){
                     var player=$scope.otherPlayers[key].username;
                     break;
@@ -219,6 +219,12 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             }
         }
         $scope.message=player+" played "+updateObj.word+" for "+updateObj.pointsEarned+" points!";
+        if ($scope.timeout){
+            clearTimeout($scope.timeout);
+        }
+        $scope.timeout=setTimeout(function(){
+            $scope.message='';
+        }, 3000)
         console.log('its updating!');
         clearIfConflicting(updateObj, $scope.exports.wordObj);
         $scope.exports.stateNumber = updateObj.stateNumber;
@@ -226,9 +232,40 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     };
 
     $scope.replay=function(){
-        console.log("GO!")
         LobbyFactory.newGame($scope.roomName);
         $scope.startGame();
+    }
+    $scope.determineWinner=function(){
+        var scores=[+$scope.score];
+        for (var player in $scope.otherPlayers){
+            scores.push(+$scope.otherPlayers[player].score);
+        }
+        var max=Math.max(scores);
+        console.log(max);
+        var winners=[];
+            if ($scope.score==max){
+                winners.push($scope.user.username);
+            }
+            console.log(winners);
+        for (var player in $scope.otherPlayers){
+            if ($scope.otherPlayers[player].score==max){
+                winners.push($scope.otherPlayers[player].username);
+            }
+        }
+        console.log("WINNERS:" +winners);
+        if (winners.length>1){
+            $scope.winOrLose="The game is a tie.";
+        }
+        else{
+            if (winners[0]===$scope.user.username){
+                $scope.winOrLose="You are a word wizard! You won!!!";
+            }
+            else{
+                console.log("THE WINNER IS:"+winners[0]);
+                $scope.winOrLose="Tough luck... "+winners[0]+" has won the game. :("
+            }
+        }
+        console.log($scope.winOrLose);
     }
 
     $rootScope.hideNavbar = true;
@@ -301,8 +338,9 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
         Socket.on('gameOver', function() {
             $scope.clear();
-            $scope.$digest();
             $scope.freeze=true;
+            $scope.determineWinner();
+            $scope.$digest();
             console.log('game is over');
         });
     });
