@@ -21,27 +21,12 @@ module.exports = function(server) {
         // Now have access to socket, wowzers!
         console.log('A new client with the socket ID of ' + socket.id + ' has connected');
 
-        // let addData = function(playerMove) {
-        //     if (!data[roomName]) data[roomName] = [];
-        //     data[roomName].push(playerMove);
-        // };
-
-
         socket.on('joinRoom', function(user, roomName, gameId) {
-
-            // if (!thisGame) {
-            //     thisGame.user = user;
-            // }
 
             socket.join(roomName);
             console.log('A client joined this room: ', roomName);
 
             socket.broadcast.to(roomName).emit('roomJoinSuccess', user);
-            // io.sockets.in(roomName).emit('roomData', {
-            //     count: io.sockets.adapter.rooms[roomName]
-            // })
-            // console.log('roomData count has been updated');
-
 
             socket.on('disconnect', function() {
                 console.log('A client with the socket ID of ' + socket.id + ' has diconnected :(');
@@ -83,6 +68,14 @@ module.exports = function(server) {
                     console.log('update object sending!', potentialUpdateObj);
                     io.to(roomName).emit('wordValidated', potentialUpdateObj);
                 }
+            });
+
+            socket.on('shuffleBoard', function(userId){
+                var thisGame = roomGameMapper[roomName];
+                thisGame.shuffle();
+                thisGame.playerScores[userId]-=5;
+                console.log('server shuffling');
+                io.to(roomName).emit('boardShuffled', thisGame.board, userId, thisGame.stateNumber);
             });
         });
     });

@@ -9,6 +9,11 @@ app.factory ("BoardFactory", function($http, Socket){
 			Socket.emit('submitWord', obj);
 		},
 
+		shuffle: function(user){
+			console.log('gridfactory u',user.id);
+			Socket.emit('shuffleBoard',user.id);
+		},
+
 		// findAllOtherUsers: function(game) {
 		// 	return $http.get('/api/games/'+ game.id)
 		// 	.then(res => res.data)
