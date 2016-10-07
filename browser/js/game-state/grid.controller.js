@@ -30,6 +30,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.draggingAllowed = false;
     $scope.style=null;
     $scope.message='';
+    $scope.freeze=true;
 
     $scope.checkSelected=function(id){
         // console.log("----------"+id+"------------");
@@ -116,6 +117,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     // ];
 
     $scope.click = function(space, id) {
+        if ($scope.freeze){return ;}
         console.log('clicked ', space, id);
         var ltrsSelected = Object.keys($scope.exports.wordObj);
         var previousLtr=ltrsSelected[ltrsSelected.length-2];
@@ -254,6 +256,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         // })
 
         Socket.on('startBoard', function(board) {
+            $scope.freeze=false;
             console.log('board! ', board);
             $scope.board = board;
             // setInterval(function(){
@@ -275,6 +278,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         })
 
         Socket.on('gameOver', function() {
+            $scope.freeze=true;
             console.log('game is over');
         });
     });
