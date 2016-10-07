@@ -69,8 +69,8 @@ let user = {
 
 let game = {
     roomname: faker.hacker.noun,
-    isWaiting: ()=> false,
-    inProgress: () => false
+    isWaiting: ()=> true,
+    inProgress: () => true
 };
 
 
@@ -190,6 +190,12 @@ db.sync({
         .then(userGames => {
             let updates = [];
             userGames.forEach(userGame => {updates.push(userGame.update({score: randomInt(100)}))});
+            return Promise.all(updates)
+        }))
+    .then(() => Game.findAll()
+        .then(games=> {
+            let updates = [];
+            games.forEach(game => {updates.push(game.update({isWaiting:false})); updates.push(game.update({inProgress:false}))});
             return Promise.all(updates)
         }))
     //.then(() => Promise.all(addRows(generateRows(userGame, 150), UserGame)))

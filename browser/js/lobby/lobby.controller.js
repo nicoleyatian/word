@@ -12,21 +12,6 @@ app.controller('LobbyCtrl', function($scope, LobbyFactory, rooms, $state, AuthSe
     //  id: 3
     // }
 
-
-    LobbyFactory.AllPlayers()
-        .then(players => {
-            players.forEach(player => {
-                if (player.games.length > 0) {
-                    var scores = player.games.map(game => game.userGame.score)
-                    player.score = Math.max(...scores)
-                } else {
-                    player.score = 0;
-                }
-
-            })
-            $scope.players = players;
-        })
-
     $scope.joinGame = function(room) {
         $state.go('Game', { roomname: room.roomname })
     }

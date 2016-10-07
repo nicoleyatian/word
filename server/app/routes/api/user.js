@@ -22,8 +22,9 @@ function verifyUser(req, res, next){
 router.get('/', (req, res, next) => {
     console.log(req.user);
     User.findAll({
-        include: [{
-            model: Game
+        include: [Game, {
+            model: Game,
+            as: 'winner'
         }]
     })
         .then(users => {
@@ -36,9 +37,18 @@ router.get('/', (req, res, next) => {
         .catch(next);
 });
 
+
+
+
+
 router.get('/:userId',  (req, res, next) => {
     if (+req.user.dataValues.id===+req.params.userId){
-        User.findById(req.params.userId)
+        User.findById(req.params.userId, {
+            include: [Game, {
+                model: Game,
+                as: 'winner'
+            }]
+        })
             .then(user => {
                 res.send(user);
             })
