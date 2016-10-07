@@ -16,7 +16,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.otherPlayers = [];
 
-    $scope.gameLength = 10;
+    $scope.gameLength = 30;
 
     $scope.exports = {
         wordObj: {},
@@ -28,13 +28,14 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.mouseIsDown = false;
     $scope.draggingAllowed = false;
+
     $scope.style=null;
     $scope.message='';
     $scope.freeze=false;
 
     $scope.checkSelected=function(id){
         return id in $scope.exports.wordObj;
-    }
+    };
 
     $scope.toggleDrag = function() {
         $scope.draggingAllowed = !$scope.draggingAllowed;
@@ -120,15 +121,17 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         if ($scope.freeze){return ;}
         console.log('clicked ', space, id);
         var ltrsSelected = Object.keys($scope.exports.wordObj);
-        var previousLtr=ltrsSelected[ltrsSelected.length-2];
-        var lastLtr=ltrsSelected[ltrsSelected.length-1];
+        var previousLtr = ltrsSelected[ltrsSelected.length - 2];
+        var lastLtr = ltrsSelected[ltrsSelected.length - 1];
         if (!ltrsSelected.length || validSelect(id, ltrsSelected)) {
             $scope.exports.word += space;
             $scope.exports.wordObj[id] = space;
             console.log($scope.exports);
-        }
-        if (id===previousLtr){
-            $scope.exports.word=$scope.exports.word.substring(0, $scope.exports.word.length-1);
+        } else if (id === previousLtr) {
+            $scope.exports.word = $scope.exports.word.substring(0, $scope.exports.word.length - 1);
+            delete $scope.exports.wordObj[lastLtr];
+        } else if (ltrsSelected.length === 1 && id === lastLtr) {
+            $scope.exports.word="";
             delete $scope.exports.wordObj[lastLtr];
         }
     };
@@ -205,7 +208,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.update = function(updateObj) {
         $scope.updateScore(updateObj.pointsEarned, updateObj.playerId);
         $scope.updateBoard(updateObj.wordObj);
-        $scope.message=updateObj.playerId+" played "+updateObj.word+" for "+updateObj.pointsEarned+" points!";
+        $scope.message = updateObj.playerId + " played " + updateObj.word + " for " + updateObj.pointsEarned + " points!";
         console.log('its updating!');
         clearIfConflicting(updateObj, $scope.exports.wordObj);
         $scope.exports.stateNumber = updateObj.stateNumber;
@@ -213,14 +216,14 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     };
 
     $scope.replay=function(){
-        console.log("GO!")
+        console.log("GO!");
         LobbyFactory.newGame($scope.roomName);
         $scope.startGame();
-    }
+    };
 
     $rootScope.hideNavbar = true;
 
-    $scope.$on('$destroy', function(){ Socket.disconnect();});
+    $scope.$on('$destroy', function() { Socket.disconnect(); });
     console.log('update 1.1')
     Socket.on('connect', function() {
 
@@ -279,12 +282,12 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         });
 
 
-        Socket.on('playerDisconnected', function(user){
+        Socket.on('playerDisconnected', function(user) {
             console.log('playerDisconnected', user.id);
             $scope.otherPlayers = $scope.otherPlayers.map(otherPlayers => otherPlayers.id !== user.id)
-            
+
             $scope.$evalAsync();
-        })
+        });
 
         Socket.on('gameOver', function() {
             $scope.clear();

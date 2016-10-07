@@ -3,11 +3,14 @@
 }
 
 
+$board-width: 80%;
+$number-cells: 6;
+$cell-diameter: 100%/($number-cells+.5);
+$cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+$letter-width: $cell-height/2;
+
 body {
     background: #fdfdfd;
-// mobile solution?
-    // overflow: hidden;
-    // position:fixed;
 }
 
 @mixin clearfix {
@@ -25,58 +28,15 @@ body {
 #main {
     padding-top: 60px;
     margin: 0 auto;
+    background: url(images/ocean.jpg);
 }
 
-//Experimental design layout/////////
-//var rows = r; cell width =
 
-$board-width: 80%;
-$number-cells: 6;
-$cell-diameter: 100%/($number-cells+.5);
-$cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
-$letter-width: $cell-height/2;
-
-
-body {
-    background: #fdfdfd;
+#your-word {
+    height: $cell-height/2;
 }
 
-#main {
-    background: url('http://orig04.deviantart.net/8efe/f/2011/010/6/1/6113bdcc14035e679f91f4eb8f651865-d36ujmh.png');
-}
 
-#grid {
-    width: $board-width;
-    border: 2px solid black;
-    background: url('http://www.bloggerluv.com/images/lawn-turf-1215-sports-turf-630-x-420.jpg');
-}
-
-#grid .cell {
-    border: .5px solid black;
-    font-size: $letter-width;
-    width: $cell-diameter;
-    height: $cell-height;
-    // padding: 12%;
-    background: url('https://s-media-cache-ak0.pinimg.com/564x/a1/92/17/a19217cf19b94ba46e6aadc28140279c.jpg');
-}
-
-// .row {
-//     width: 100%
-// }
-
-#space {
-    color: black;
-}
-
-#space .active {
-    color: brown;
-}
-
-#grid .cell .active {
-    border: 3px solid brown;
-}
-
-/////////////////////////////////////
 #title {
     text-align: center;
 }
@@ -86,13 +46,13 @@ div #start {
 }
 
 #grid {
-    // border: 10px solid black;
-    // width: 50%;
+    width: $board-width;
     margin: auto;
     padding: 1%;
 }
 
 #space {
+    color: black;
     user-select: none;
     -o-user-select: none;
     -moz-user-select: none;
@@ -108,13 +68,22 @@ div #start {
 
 
 #grid .cell {
-    // border: 5px solid black;
+    font-size: $letter-width;
+    width: $cell-diameter;
+    height: $cell-height;
+    // padding: 12%;
+    background: url(images/sand.png);
+    border: .2px solid black;
     border-radius: 50%;
     text-align: center;
     // width: 15%;
     display: inline-block;
     // height: 8vw;
     // padding: 1%;
+}
+
+#grid .selected {
+    border: 5px solid #c3f4eb;
 }
 
 #panel {
@@ -166,13 +135,13 @@ div #start {
     margin: auto;
 }
 #timer {
-	border: 5px dotted black;
+	// border: 5px dotted black;
 	width: 20%;
 	margin: auto;
 }
-#grid .selected {
-    border: 5px solid yellow;
-}
+
+
+
 #plays{
 
 }
@@ -216,33 +185,13 @@ div #start {
 
     #grid {
         width: $board-width;
-        border: 2px solid black;
-        background: url('http://www.bloggerluv.com/images/lawn-turf-1215-sports-turf-630-x-420.jpg');
-        padding: 0%;
-        margin: auto;
     }
 
     #grid .cell {
-        border: .5px solid black;
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        background: url('https://s-media-cache-ak0.pinimg.com/564x/a1/92/17/a19217cf19b94ba46e6aadc28140279c.jpg');
-    }
-
-    #grid .cell {
-        border-radius: 50%;
-        text-align: center;
-        display: inline-block;
-    }
-
-    #main {
-        padding-top: 0.5px;
-        margin: 0 auto;
-        width: 100%;
-    }
-
-
+       }
 }
 
 
@@ -274,32 +223,13 @@ div #start {
 
     #grid {
         width: $board-width;
-        border: 2px solid black;
-        background: url('http://www.bloggerluv.com/images/lawn-turf-1215-sports-turf-630-x-420.jpg');
-        padding: 0%;
-        margin: auto;
     }
 
     #grid .cell {
-        border: .5px solid black;
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        background: url('https://s-media-cache-ak0.pinimg.com/564x/a1/92/17/a19217cf19b94ba46e6aadc28140279c.jpg');
     }
-
-    #grid .cell {
-        border-radius: 50%;
-        text-align: center;
-        display: inline-block;
-    }
-
-    #main {
-        padding-top: 0.5px;
-        margin: 0 auto;
-        width: 100%;
-    }
-
 
 }
 
@@ -332,31 +262,14 @@ div #start {
 
     #grid {
         width: $board-width;
-        border: 2px solid black;
-        background: url('http://www.bloggerluv.com/images/lawn-turf-1215-sports-turf-630-x-420.jpg');
-        padding: 0%;
-        margin: auto;
+       
     }
 
     #grid .cell {
-        border: .5px solid black;
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        background: url('https://s-media-cache-ak0.pinimg.com/564x/a1/92/17/a19217cf19b94ba46e6aadc28140279c.jpg');
-    }
-
-    #grid .cell {
-        border-radius: 50%;
-        text-align: center;
-        display: inline-block;
-    }
-
-    #main {
-        padding-top: 0.5px;
-        margin: 0 auto;
-        width: 100%;
-    }
+        }
 }
 
 
@@ -388,30 +301,12 @@ div #start {
 
     #grid {
         width: $board-width;
-        border: 2px solid black;
-        background: url('http://www.bloggerluv.com/images/lawn-turf-1215-sports-turf-630-x-420.jpg');
-        padding: 0%;
-        margin: auto;
     }
 
     #grid .cell {
-        border: .5px solid black;
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        background: url('https://s-media-cache-ak0.pinimg.com/564x/a1/92/17/a19217cf19b94ba46e6aadc28140279c.jpg');
-    }
-
-    #grid .cell {
-        border-radius: 50%;
-        text-align: center;
-        display: inline-block;
-    }
-
-    #main {
-        padding-top: 0.5px;
-        margin: 0 auto;
-        width: 100%;
     }
 
 }
@@ -446,31 +341,14 @@ div #start {
 
     #grid {
         width: $board-width;
-        border: 2px solid black;
-        background: url('http://www.bloggerluv.com/images/lawn-turf-1215-sports-turf-630-x-420.jpg');
-        padding: 0%;
-        margin: auto;
     }
 
     #grid .cell {
-        border: .5px solid black;
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        background: url('https://s-media-cache-ak0.pinimg.com/564x/a1/92/17/a19217cf19b94ba46e6aadc28140279c.jpg');
     }
 
-    #grid .cell {
-        border-radius: 50%;
-        text-align: center;
-        display: inline-block;
-    }
-
-    #main {
-        padding-top: 0.5px;
-        margin: 0 auto;
-        width: 100%;
-    }
 }
 
 /* ----------- Galaxy S4 ----------- */
@@ -501,30 +379,12 @@ div #start {
 
     #grid {
         width: $board-width;
-        border: 2px solid black;
-        background: url('http://www.bloggerluv.com/images/lawn-turf-1215-sports-turf-630-x-420.jpg');
-        padding: 0%;
-        margin: auto;
     }
 
     #grid .cell {
-        border: .5px solid black;
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        background: url('https://s-media-cache-ak0.pinimg.com/564x/a1/92/17/a19217cf19b94ba46e6aadc28140279c.jpg');
-    }
-
-    #grid .cell {
-        border-radius: 50%;
-        text-align: center;
-        display: inline-block;
-    }
-
-    #main {
-        padding-top: 0.5px;
-        margin: 0 auto;
-        width: 100%;
     }
 }
 
@@ -556,32 +416,13 @@ div #start {
 
     #grid {
         width: $board-width;
-        border: 2px solid black;
-        background: url('http://www.bloggerluv.com/images/lawn-turf-1215-sports-turf-630-x-420.jpg');
-        padding: 0%;
-        margin: auto;
     }
 
     #grid .cell {
-        border: .5px solid black;
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        background: url('https://s-media-cache-ak0.pinimg.com/564x/a1/92/17/a19217cf19b94ba46e6aadc28140279c.jpg');
     }
-
-    #grid .cell {
-        border-radius: 50%;
-        text-align: center;
-        display: inline-block;
-    }
-
-    #main {
-        padding-top: 0.5px;
-        margin: 0 auto;
-        width: 100%;
-    }
-
 }
 
 
@@ -613,32 +454,13 @@ div #start {
 
     #grid {
         width: $board-width;
-        border: 2px solid black;
-        background: url('http://www.bloggerluv.com/images/lawn-turf-1215-sports-turf-630-x-420.jpg');
-        padding: 0%;
-        margin: auto;
     }
 
     #grid .cell {
-        border: .5px solid black;
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        background: url('https://s-media-cache-ak0.pinimg.com/564x/a1/92/17/a19217cf19b94ba46e6aadc28140279c.jpg');
     }
-
-    #grid .cell {
-        border-radius: 50%;
-        text-align: center;
-        display: inline-block;
-    }
-
-    #main {
-        padding-top: 0.5px;
-        margin: 0 auto;
-        width: 100%;
-    }
-
 }
 
 
@@ -671,30 +493,12 @@ div #start {
 
     #grid {
         width: $board-width;
-        border: 2px solid black;
-        background: url('http://www.bloggerluv.com/images/lawn-turf-1215-sports-turf-630-x-420.jpg');
-        padding: 0%;
-        margin: auto;
     }
 
     #grid .cell {
-        border: .5px solid black;
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        background: url('https://s-media-cache-ak0.pinimg.com/564x/a1/92/17/a19217cf19b94ba46e6aadc28140279c.jpg');
-    }
-
-    #grid .cell {
-        border-radius: 50%;
-        text-align: center;
-        display: inline-block;
-    }
-
-    #main {
-        padding-top: 0.5px;
-        margin: 0 auto;
-        width: 100%;
     }
 }
 
@@ -725,30 +529,12 @@ div #start {
 
     #grid {
         width: $board-width;
-        border: 2px solid black;
-        background: url('http://www.bloggerluv.com/images/lawn-turf-1215-sports-turf-630-x-420.jpg');
-        padding: 0%;
-        margin: auto;
     }
 
     #grid .cell {
-        border: .5px solid black;
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        background: url('https://s-media-cache-ak0.pinimg.com/564x/a1/92/17/a19217cf19b94ba46e6aadc28140279c.jpg');
-    }
-
-    #grid .cell {
-        border-radius: 50%;
-        text-align: center;
-        display: inline-block;
-    }
-
-    #main {
-        padding-top: 0.5px;
-        margin: 0 auto;
-        width: 100%;
     }
 
 }
@@ -780,32 +566,14 @@ div #start {
     }
 
     #grid {
-        width: $board-width;
-        border: 2px solid black;
-        background: url('http://www.bloggerluv.com/images/lawn-turf-1215-sports-turf-630-x-420.jpg');
-        padding: 0%;
-        margin: auto;
-    }
+        width: $board-width;    }
 
     #grid .cell {
-        border: .5px solid black;
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        background: url('https://s-media-cache-ak0.pinimg.com/564x/a1/92/17/a19217cf19b94ba46e6aadc28140279c.jpg');
     }
 
-    #grid .cell {
-        border-radius: 50%;
-        text-align: center;
-        display: inline-block;
-    }
-
-    #main {
-        padding-top: 1px;
-        margin: 0 auto;
-        width: 100%;
-    }
 
 }
 
