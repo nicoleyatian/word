@@ -45,56 +45,65 @@
 <div>
     <!-- <h1 id="title">Wordgame</h1> -->
     <div id="start" ng-hide="!hideBoard">
-        <div class="Game-info">{{ user.username }}</div>
+        <ul class="Game-info">
+        <li id='user'>{{ user.username }}</li>
+        <div ng-hide="otherPlayer.length > 0">
+            <li>Waiting for other players</li>
+        </div>
         <div ng-repeat="otherPlayer in otherPlayers">
-            <div class="Game-info">{{ otherPlayer.username }}</div>
+            <li>{{ otherPlayer.username }}</li>
         </div>
         <br>
         <button class='btn btn-primary' ng-click='quit()'>Quit</button>
         <button class='btn btn-primary' ng-click='startGame()'>Start Game</button>
     </div>
-    <div id="start" ng-hide="hideBoard">
+    <div id="start" ng-hide="!hideBoard">
         <!-- <div class="Game-info">{{ user.username }}</div> -->
         <!-- <div class='row'> -->
-        <div class="boardTitle">
-            <div class="col-4">
-
-                <label id="score">
-                    {{user.username}}
-                    Your Score: {{score}}   
-                </label id="last_word">
-            </div>
-            <div class="col-4">
-                <div ng-repeat="otherPlayer in otherPlayers | orderBy: '-score'">
-                    <div>{{ otherPlayer.username }}: {{ otherPlayer.score}}</div>
+        <div id="scoreBoard">
+            <div class="boardRow wood-board-lg">
+                <div class='col-6 vcenter'>
+                    <ul id="score">
+                        <li>{{user.username}} </li>
+                        <li> Your Score: {{score}}</li>
+                    </ul>
                 </div>
-            </div>
-             <div class="col-4">
-                {{message}}
+                <div class='col-6 vcenter'>
+                    <ul id='otherPlayers'>
+                        <div ng-repeat="otherPlayer in otherPlayers | orderBy: '-score'">
+                            <li>{{ otherPlayer.username }}: {{ otherPlayer.score}}</li>
+                        </div>
+                    </ul>
+                    <div id="message">
+                        <p>message{{message}}</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="boardTitle">
-            <div class="col-6">
+        <div class="boardRow">
+            <div class="col-6 wood-board-sm">
                 <div id="your-word">
-                    <h1 ng-click="submit(exports)"> {{ exports.word }} </h1>
+                    <h1 ng-click="submit(exports)"> WORD{{ exports.word }} </h1>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-6 wood-board-sm">
                 <timer time="gameLength"></timer>
             </div>
         </div>
-        <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()">
-            <div class='row' ng-repeat="(x,row) in board track by $index">
-                <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
-                    <span id="space">{{space}}</span>
-                </div>
-            </div>
-        </div>
-
-        <button ng-click="shuffle(user)">Shuffle</button>
-        <button ng-click="toggleDrag()">{{ draggingAllowed ? 'Click ':'Drag '}}To Select</button>
-
     </div>
+</div>
+<div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()">
+    <div class='row' ng-repeat="(x,row) in board track by $index">
+        <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
+            <span id="space">{{space}}</span>
+        </div>
+    </div>
+</div>
+<div class='flexbox'>
+    <button class='btn btn-wood' ng-click="shuffle(user)">Shuffle</button>
+    <button class='btn btn-wood' ng-click="toggleDrag()">{{ draggingAllowed ? 'Click ':'Drag '}}To Select</button>
+</div>
+</div>
 </div>
 <!-- </div> -->
 <!--     <br>
