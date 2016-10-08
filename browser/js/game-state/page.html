@@ -64,7 +64,7 @@
         <!-- <button ng-click="clear()">Clear</button> -->
         <button class='btn btn-primary' ng-click='quit()'>Quit</button>
         <br>
-        <div ng-repeat="otherPlayer in otherPlayers">
+        <div ng-repeat="otherPlayer in otherPlayers track by $index">
             <div>{{ otherPlayer.username }}: {{ otherPlayer.score}}</div>
         </div>
         <p class="Game-info"> Player # {{user.id}}</p>

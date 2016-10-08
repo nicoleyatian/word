@@ -20,13 +20,16 @@ app.factory('LobbyFactory', function ($http) {
 	LobbyFactory.newGame = function(roomInfo) {
 		return $http.put('/api/games', roomInfo)
 		.then(res => res.data)
-		.then(room => {tempRooms.push(room)})
-	}
+	 	.then(room => {
+	 		tempRooms.push(room);
+	 		return room;
+	 		});
+	};
 
 	LobbyFactory.AllPlayers = function() {
 		return $http.get('/api/users')
 		.then(res=>res.data)
-	}
+	};
 
 	return LobbyFactory;
 });
