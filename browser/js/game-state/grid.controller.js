@@ -35,10 +35,11 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.mouseIsDown = false;
     $scope.draggingAllowed = false;
-
-    $scope.style = null;
-    $scope.message = '';
-    $scope.freeze = false;
+    $scope.style=null;
+    $scope.message='';
+    $scope.freeze=false;
+    $scope.winOrLose=null;
+    $scope.timeout=null;
 
     $scope.checkSelected = function(id) {
         return id in $scope.exports.wordObj;
@@ -195,12 +196,10 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         $scope.updateScore(updateObj.pointsEarned, updateObj.playerId);
         $scope.updateBoard(updateObj.wordObj);
         if (+$scope.user.id===+updateObj.playerId){
-            //console.log("Not cool!");
             var player=$scope.user.username;
         }
         else{
             for (var key in $scope.otherPlayers){
-                //console.log("The Others!", $scope.otherPlayers)
                 if (+$scope.otherPlayers[key].id===+updateObj.playerId){
                     var player=$scope.otherPlayers[key].username;
                     break;
@@ -208,17 +207,57 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             }
         }
         $scope.message=player+" played "+updateObj.word+" for "+updateObj.pointsEarned+" points!";
+        if ($scope.timeout){
+            clearTimeout($scope.timeout);
+        }
+        $scope.timeout=setTimeout(function(){
+            $scope.message='';
+        }, 3000)
         console.log('its updating!');
         clearIfConflicting(updateObj, $scope.exports.wordObj);
         $scope.exports.stateNumber = updateObj.stateNumber;
         $scope.$evalAsync();
     };
 
-    $scope.replay = function() {
-        console.log("GO!");
+    $scope.replay=function(){
         LobbyFactory.newGame($scope.roomName);
         $scope.startGame();
-    };
+    }
+
+    $scope.determineWinner=function(winnersArray){
+        if (winnersArray.length===1){
+            if (+winnersArray[0]===+$scope.user.id){
+                $scope.winOrLose="Congratulation! You are a word wizard! You won!!!";
+            }
+            else{
+                for (var player in $scope.otherPlayers){
+                    if (+$scope.otherPlayers[player].id===+winnersArray[0]){
+                        var winner=$scope.otherPlayers[player].username;
+                        $scope.winOrLose="Tough luck. "+winner+" has beaten you. Better Luck next time. :("
+                    }
+                }
+            }
+        }
+        else{
+            let winners=[];
+            for (var i in winnersArray){
+                if (+winnersArray[i]===+$scope.user.id){winners.push($scope.user.username);}
+                else{
+                    for (var player in $scope.otherPlayers){
+                        if ($scope.otherPlayers[player].id==winnersArray[i]){
+                            winners.push($scope.otherPlayers[player].username);
+                            break;
+                        }
+                    }
+                }
+            $scope.winOrLose="The game was a tie between ";
+            for (var i=0; i<winners.length; i++){
+                if (i===winners.length-1){$scope.winOrLose+="and "+winners[i]+".";}
+                else{$scope.winOrLose+=winners[i]+", ";}
+            }
+        }
+    }
+}
 
     $rootScope.hideNavbar = true;
 
@@ -271,11 +310,12 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.$evalAsync();
         });
 
-        Socket.on('gameOver', function(winnersArray, words) {
+        Socket.on('gameOver', function(winnersArray) {
             $scope.clear();
-            $scope.$digest();
-            $scope.freeze = true;
-            console.log('game is over, winners: ', winnersArray, words);
+            $scope.freeze=true;
+            $scope.determineWinner(winnersArray);
+            $scope.$evalAsync();
+            console.log('game is over, winners: ', winnersArray);
         });
     });
 });
