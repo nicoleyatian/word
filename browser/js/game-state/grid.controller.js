@@ -83,6 +83,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         var userIds = $scope.otherPlayers.map(user => user.id);
         userIds.push($scope.user.id);
         console.log('op', $scope.otherPlayers, 'ui', userIds);
+        $scope.winOrLose=null;
         BoardFactory.getStartBoard($scope.gameLength, $scope.gameId, userIds);
     };
 
@@ -250,7 +251,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
                         }
                     }
                 }
-            console.log(winners);
             $scope.winOrLose="The game was a tie between ";
             for (var i=0; i<winners.length; i++){
                 if (i===winners.length-1){$scope.winOrLose+="and "+winners[i]+".";}
