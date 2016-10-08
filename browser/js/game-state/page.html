@@ -51,7 +51,7 @@
         </div>
         <br>
         <button class='btn btn-primary' ng-click='quit()'>Quit</button>
-        <button class='btn btn-primary' ng-click='startGame()'>Start Game</button>
+        <button ng-hide="hideStart" class='btn btn-primary' ng-click='startGame()'>Start Game</button>
     </div>
 
     <div id="start" ng-hide="hideBoard">

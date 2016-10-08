@@ -10,16 +10,10 @@ app.config(function($stateProvider) {
 });
 
 
-app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory, $rootScope) {
-
-    AuthService.getLoggedInUser()
-        .then(function(user) {
-            console.log('user from AuthService', user);
-            $scope.user = user;
-            $scope.exports.playerId = user.id;
-        });
+app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory, $rootScope, $q) {
 
     $scope.roomName = $stateParams.roomname;
+    $scope.hideStart = true;
 
     $scope.otherPlayers = [];
 
@@ -39,6 +33,8 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.style = null;
     $scope.message = '';
     $scope.freeze = false;
+
+    $rootScope.hideNavbar = true;
 
     $scope.checkSelected = function(id) {
         return id in $scope.exports.wordObj;
@@ -62,18 +58,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.click(space, id);
         }
     };
-
-
-
-    //get the current room info
-    BoardFactory.getCurrentRoom($stateParams.roomname)
-        .then(room => {
-            console.log(room)
-            $scope.gameId = room.id;
-            $scope.otherPlayers = room.users.filter(user => user.id !== $scope.user.id);
-            $scope.otherPlayers.forEach(player => { player.score = 0 })
-            LobbyFactory.joinGame(room.id, $scope.user.id);
-        });
 
     $scope.hideBoard = true;
 
@@ -110,7 +94,8 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.click = function(space, id) {
         if ($scope.freeze) {
-            return; }
+            return;
+        }
         console.log('clicked ', space, id);
         var ltrsSelected = Object.keys($scope.exports.wordObj);
         var previousLtr = ltrsSelected[ltrsSelected.length - 2];
@@ -207,14 +192,36 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         $scope.startGame();
     };
 
-    $rootScope.hideNavbar = true;
 
-    $scope.$on('$destroy', function() { Socket.disconnect(); });
-    console.log('update 1.1')
+    $scope.$on('$destroy', function() { 
+
+        Socket.disconnect(); });
+
     Socket.on('connect', function() {
+        console.log('connecting');
+        $q.all([
+            AuthService.getLoggedInUser()
+            .then(function(user) {
+                console.log('user from AuthService', user);
+                $scope.user = user;
+                $scope.exports.playerId = user.id;
+            }),
 
-        Socket.emit('joinRoom', $scope.user, $scope.roomName, $scope.gameId);
-        console.log('emitting "join room" event to server', $scope.roomName);
+            //get the current room info
+            BoardFactory.getCurrentRoom($stateParams.roomname)
+            .then(room => {
+                console.log(room);
+                $scope.gameId = room.id;
+                $scope.otherPlayers = room.users.filter(user => user.id !== $scope.user.id);
+                $scope.otherPlayers.forEach(player => { player.score = 0 });
+                LobbyFactory.joinGame(room.id, $scope.user.id);
+            })
+        ]).then(function() {
+            Socket.emit('joinRoom', $scope.user, $scope.roomName, $scope.gameId);
+            $scope.hideStart = false;
+            console.log('emitting "join room" event to server', $scope.roomName);
+        });
+
 
         Socket.on('roomJoinSuccess', function(user) {
             console.log('new user joining', user.id);
