@@ -76,6 +76,9 @@
         </label>
         <!-- <div class='row'> -->
         <timer time="gameLength"></timer>
+        <div id="win?" ng-show="winOrLose">
+            <h1> {{winOrLose}}</h1>
+        </div>
         <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()">
             <div class='row' ng-repeat="(x,row) in board track by $index">
                 <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
@@ -89,13 +92,9 @@
     </div>
 </div>
     <!-- </div> -->
-<!--     <br>
-    <button ng-click="updateBoard({'0-0': 'x', '0-1':'y', '0-2': 'z'})">
-        Update
-    </button>
+    <br>
     <button ng-show="freeze" ng-click="replay()">Play Again
     </button>
-    <br> -->
 
 <!-- <div><span>{{messages}}</span></div> -->
 <!-- <div id="top">
