@@ -63,6 +63,7 @@ div #start {
     -webkit-user-drag: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+    height: $cell-height/2;
 }
 
 
@@ -71,6 +72,7 @@ div #start {
     font-size: $letter-width;
     width: $cell-diameter;
     height: $cell-height;
+    line-height: $cell-height/2 + 5.75;
     // padding: 12%;
     background: url(images/sand.png);
     border: .2px solid black;
@@ -190,6 +192,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
        }
 }
 
@@ -228,6 +231,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
     }
 
 }
@@ -261,14 +265,15 @@ div #start {
 
     #grid {
         width: $board-width;
-       
+
     }
 
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        }
+        line-height: $cell-height/2 + 6;
+    }
 }
 
 
@@ -306,6 +311,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
     }
 
 }
@@ -346,6 +352,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
     }
 
 }
@@ -384,6 +391,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
     }
 }
 
@@ -421,6 +429,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
     }
 }
 
@@ -459,6 +468,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
     }
 }
 
@@ -498,6 +508,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
     }
 }
 
@@ -534,6 +545,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
     }
 
 }
@@ -571,6 +583,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
     }
 
 
