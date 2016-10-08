@@ -1,0 +1,148 @@
+Searching 110 files for "fullstack"
+
+/Users/darellkoh/Desktop/Senior-Phase/word/.eslintrc.json:
+    2  {
+    3    "root": true,
+    4:   "extends": "fullstack", // from the `eslint-config-fullstack` npm module,
+    5    "env": {
+    6      "es6": true,
+    .
+   16      "no-debugger": 1,
+   17      "comma-spacing": 0
+   18:     // add more rules here to override the fullstack config
+   19    }
+   20  }
+
+/Users/darellkoh/Desktop/Senior-Phase/word/package.json:
+   30      "cookie-parser": "^1.3.4",
+   31      "eslint": "^3.4.0",
+   32:     "eslint-config-fullstack": "^1.5.0",
+   33      "express": "^4.12.0",
+   34      "express-session": "^1.10.3",
+
+/Users/darellkoh/Desktop/Senior-Phase/word/browser/js/app.js:
+    1  'use strict';
+    2: window.app = angular.module('FullstackGeneratedApp', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngAnimate']);
+    3
+    4  app.config(function ($urlRouterProvider, $locationProvider) {
+
+/Users/darellkoh/Desktop/Senior-Phase/word/browser/js/about/about.html:
+    2      <p>
+    3          This website--the very one at which you currently gaze--was created by a basic scaffolding
+    4:         concocted at Fullstack Academy. Here are some of the people who make it all very real:
+    5      </p>
+    6      <carousel interval="2000">
+
+/Users/darellkoh/Desktop/Senior-Phase/word/browser/js/about/about.js:
+   10  // });
+   11
+   12: // app.controller('AboutController', function ($scope, FullstackPics) {
+   13
+   14: //     // Images of beautiful Fullstack people.
+   15: //     $scope.images = _.shuffle(FullstackPics);
+   16
+   17  // });
+
+/Users/darellkoh/Desktop/Senior-Phase/word/browser/js/common/factories/FullstackPics.js:
+    1: app.factory('FullstackPics', function () {
+    2      return [
+    3          'https://pbs.twimg.com/media/B7gBXulCAAAXQcE.jpg:large',
+
+/Users/darellkoh/Desktop/Senior-Phase/word/browser/js/docs/docs.html:
+    1  <h3>
+    2      Documentation can be found in
+    3:     <a target="_blank" href="https://github.com/FullstackAcademy/fsg/wiki/Getting-Started">the project's Github wiki</a>.
+    4  </h3>
+    5
+
+/Users/darellkoh/Desktop/Senior-Phase/word/browser/js/home/home.html:
+    1  <section id="home">
+    2:     <logo></logo>
+    3      <enter-lobby></enter-lobby>
+    4  </section>
+
+/Users/darellkoh/Desktop/Senior-Phase/word/browser/scss/directives/_main.scss:
+    1: @import "logo";
+    2  @import "navbar";
+
+/Users/darellkoh/Desktop/Senior-Phase/word/browser/scss/directives/fullstack-logo.scss:
+    1: logo {
+    2    display: block;
+    3    img {
+
+/Users/darellkoh/Desktop/Senior-Phase/word/browser/scss/directives/navbar.scss:
+   12    }
+   13
+   14:   logo {
+   15      margin-top: 5px;
+   16      margin-right: 20px;
+
+/Users/darellkoh/Desktop/Senior-Phase/word/browser/scss/home/main.scss:
+    1  #home {
+    2:   logo {
+    3      padding-top: 30px;
+    4      width: 150px;
+
+/Users/darellkoh/Desktop/Senior-Phase/word/public/main.js:
+    3  function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+    4
+    5: window.app = angular.module('FullstackGeneratedApp', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngAnimate']);
+    6
+    7  app.config(function ($urlRouterProvider, $locationProvider) {
+    .
+   74  });
+   75
+   76: app.controller('AboutController', function ($scope, FullstackPics) {
+   77
+   78:     // Images of beautiful Fullstack people.
+   79:     $scope.images = _.shuffle(FullstackPics);
+   80  });
+   81
+   ..
+  784      };
+  785  });
+  786: app.factory('FullstackPics', function () {
+  787      return ['https://pbs.twimg.com/media/B7gBXulCAAAXQcE.jpg:large', 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xap1/t31.0-8/10862451_10205622990359241_8027168843312841137_o.jpg', 'https://pbs.twimg.com/media/B-LKUshIgAEy9SK.jpg', 'https://pbs.twimg.com/media/B79-X7oCMAAkw7y.jpg', 'https://pbs.twimg.com/media/B-Uj9COIIAIFAh0.jpg:large', 'https://pbs.twimg.com/media/B6yIyFiCEAAql12.jpg:large', 'https://pbs.twimg.com/media/CE-T75lWAAAmqqJ.jpg:large', 'https://pbs.twimg.com/media/CEvZAg-VAAAk932.jpg:large', 'https://pbs.twimg.com/media/CEgNMeOXIAIfDhK.jpg:large', 'https://pbs.twimg.com/media/CEQyIDNWgAAu60B.jpg:large', 'https://pbs.twimg.com/media/CCF3T5QW8AE2lGJ.jpg:large', 'https://pbs.twimg.com/media/CAeVw5SWoAAALsj.jpg:large', 'https://pbs.twimg.com/media/CAaJIP7UkAAlIGs.jpg:large', 'https://pbs.twimg.com/media/CAQOw9lWEAAY9Fl.jpg:large', 'https://pbs.twimg.com/media/B-OQbVrCMAANwIM.jpg:large', 'https://pbs.twimg.com/media/B9b_erwCYAAwRcJ.png:large', 'https://pbs.twimg.com/media/B5PTdvnCcAEAl4x.jpg:large', 'https://pbs.twimg.com/media/B4qwC0iCYAAlPGh.jpg:large', 'https://pbs.twimg.com/media/B2b33vRIUAA9o1D.jpg:large', 'https://pbs.twimg.com/media/BwpIwr1IUAAvO2_.jpg:large', 'https://pbs.twimg.com/media/BsSseANCYAEOhLw.jpg:large', 'https://pbs.twimg.com/media/CJ4vLfuUwAAda4L.jpg:large', 'https://pbs.twimg.com/media/CI7wzjEVEAAOPpS.jpg:large', 'https://pbs.twimg.com/media/CIdHvT2UsAAnnHV.jpg:large', 'https://pbs.twimg.com/media/CGCiP_YWYAAo75V.jpg:large', 'https://pbs.twimg.com/media/CIS4JPIWIAI37qu.jpg:large'];
+  788  });
+  ...
+  807      return {
+  808          restrict: 'E',
+  809:         templateUrl: 'js/common/directives/fullstack-logo/logo.html'
+  810      };
+  811  });
+
+/Users/darellkoh/Desktop/Senior-Phase/word/public/style.css:
+  112    border: 5px solid yellow; }
+  113
+  114: logo {
+  115    display: block; }
+  116:   logo img {
+  117      display: block;
+  118      width: 100%; }
+  ...
+  127      max-width: 1340px;
+  128      padding-top: 20px; }
+  129:   navbar logo {
+  130      margin-top: 5px;
+  131      margin-right: 20px;
+  ...
+  161        cursor: pointer; }
+  162
+  163: #home logo {
+  164    padding-top: 30px;
+  165    width: 150px;
+
+/Users/darellkoh/Desktop/Senior-Phase/word/server/app/views/index.html:
+   27  </head>
+   28
+   29: <body ng-app="FullstackGeneratedApp">
+   30      <navbar ng-hide="hideNavbar"></navbar>
+   31      <div id="main" ui-view></div>
+
+/Users/darellkoh/Desktop/Senior-Phase/word/tests/browser/tests.js:
+    1  describe("front-end testing", function(){
+    2:  beforeEach(module('FullstackGeneratedApp'));
+    3
+    4   var $httpBackend;
+
+29 matches across 16 files

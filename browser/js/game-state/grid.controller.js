@@ -23,7 +23,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.otherPlayers = [];
 
-    $scope.gameLength = 330;
+    $scope.gameLength = 10;
 
     $scope.exports = {
         wordObj: {},
@@ -223,6 +223,43 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         LobbyFactory.newGame($scope.roomName);
         $scope.startGame();
     }
+
+    $scope.determineWinner=function(winnersArray){
+        if (winnersArray.length===1){
+            if (+winnersArray[0]===+$scope.user.id){
+                $scope.winOrLose="Congratulation! You are a word wizard! You won!!!";
+            }
+            else{
+                for (var player in $scope.otherPlayers){
+                    if (+$scope.otherPlayers[player].id===+winnersArray[0]){
+                        var winner=$scope.otherPlayers[player].username;
+                        $scope.winOrLose="Tough luck. "+winner+" has beaten you. Better Luck next time. :("
+                    }
+                }
+            }
+        }
+        else{
+            let winners=[];
+            for (var i in winnersArray){
+                if (+winnersArray[i]===+$scope.user.id){winners.push($scope.user.username);}
+                else{
+                    for (var player in $scope.otherPlayers){
+                        if ($scope.otherPlayers[player].id==winnersArray[i]){
+                            winners.push($scope.otherPlayers[player].username);
+                            break;
+                        }
+                    }
+                }
+            console.log(winners);
+            $scope.winOrLose="The game was a tie between ";
+            for (var i=0; i<winners.length; i++){
+                if (i===winners.length-1){$scope.winOrLose+="and "+winners[i]+".";}
+                else{$scope.winOrLose+=winners[i]+", ";}
+            }
+        }
+    }
+}
+
     $rootScope.hideNavbar = true;
 
     $scope.$on('$destroy', function() { Socket.disconnect(); });
@@ -274,12 +311,12 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.$evalAsync();
         });
 
-        Socket.on('gameOver', function() {
+        Socket.on('gameOver', function(winnersArray) {
             $scope.clear();
             $scope.freeze=true;
-
-            $scope.$digest();
-            console.log('game is over');
+            $scope.determineWinner(winnersArray);
+            $scope.$evalAsync();
+            console.log('game is over, winners: ', winnersArray);
         });
     });
 });
