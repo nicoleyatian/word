@@ -14,7 +14,7 @@ module.exports = {
     },
 
     saveGame: function(gameObj) {
-        console.log('save game go.id: ', gameObj.id);
+        console.log('save game gameObject.id: ', gameObj.id);
         Game.findById(gameObj.id, {
                 include: [{
                     model: User,
