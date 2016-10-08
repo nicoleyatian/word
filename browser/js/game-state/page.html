@@ -43,7 +43,7 @@
         </div>
 </div> -->
 <div>
-    <h1 id="title">Wordgame</h1>
+    <!-- <h1 id="title">Wordgame</h1> -->
     <div id="start" ng-hide="!hideBoard">
         <div class="Game-info">{{ user.username }}</div>
         <div ng-repeat="otherPlayer in otherPlayers">
@@ -53,19 +53,21 @@
         <button class='btn btn-primary' ng-click='quit()'>Quit</button>
         <button class='btn btn-primary' ng-click='startGame()'>Start Game</button>
     </div>
+
     <div id="start" ng-hide="hideBoard">
-        <div class="Game-info">{{ user.username }}</div>
-        <h1> Your Word: {{ exports.word }}</h1>
+        <!-- <div class="Game-info">{{ user.username }}</div> -->
+        <div id="your-word">
+        <h1 ng-click="submit(exports)"> {{ exports.word }} </h1>
+        </div>
         <br>
-        <button ng-click="submit(exports)">Submit</button>
-        <button ng-click="clear()">Clear</button>
+        <!-- <button >Submit</button> -->
+        <!-- <button ng-click="clear()">Clear</button> -->
         <button class='btn btn-primary' ng-click='quit()'>Quit</button>
         <br>
         <div ng-repeat="otherPlayer in otherPlayers">
             <div>{{ otherPlayer.username }}: {{ otherPlayer.score}}</div>
         </div>
         <p class="Game-info"> Player # {{user.id}}</p>
-        <button ng-click="toggleDrag()">{{ draggingAllowed ? 'Click ':'Drag '}}To Select</button>
         <label id="score">
             Your Score: {{score}}
         </label id="last_word">
@@ -82,17 +84,19 @@
                 </div>
             </div>
         </div>
+        <button ng-click="shuffle(user)">Shuffle</button>
+        <button ng-click="toggleDrag()">{{ draggingAllowed ? 'Click ':'Drag '}}To Select</button>
     </div>
+</div>
     <!-- </div> -->
-    <br>
+<!--     <br>
     <button ng-click="updateBoard({'0-0': 'x', '0-1':'y', '0-2': 'z'})">
         Update
     </button>
     <button ng-show="freeze" ng-click="replay()">Play Again
     </button>
-    <br>
-</div>
-</div>
+    <br> -->
+
 <!-- <div><span>{{messages}}</span></div> -->
 <!-- <div id="top">
     <h1 id="title">Wordgame</h1>
