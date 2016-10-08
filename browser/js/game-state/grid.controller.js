@@ -67,6 +67,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         var userIds = $scope.otherPlayers.map(user => user.id);
         userIds.push($scope.user.id);
         console.log('op', $scope.otherPlayers, 'ui', userIds);
+        $scope.winOrLose=null;
         BoardFactory.getStartBoard($scope.gameLength, $scope.gameId, userIds);
     };
 
