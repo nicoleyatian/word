@@ -194,8 +194,10 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
 
     $scope.$on('$destroy', function() { 
+        
+        Socket.disconnect(); 
 
-        Socket.disconnect(); });
+    });
 
     Socket.on('connect', function() {
         console.log('connecting');
@@ -219,7 +221,10 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         ]).then(function() {
             Socket.emit('joinRoom', $scope.user, $scope.roomName, $scope.gameId);
             $scope.hideStart = false;
-            console.log('emitting "join room" event to server', $scope.roomName);
+            $scope.$evalAsync();
+            console.log('emitting "join room" event to server 8P', $scope.roomName);
+        }).catch(function(e){
+            console.error('error grabbing user or room from db: ', e);
         });
 
 
@@ -227,7 +232,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             console.log('new user joining', user.id);
             user.score = 0;
             $scope.otherPlayers.push(user);
-            $scope.$digest();
+            $scope.$evalAsync();
 
         });
 
