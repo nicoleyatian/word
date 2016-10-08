@@ -3,12 +3,9 @@ var socketio = require('socket.io');
 var game = require('../game/game.js');
 var persistGame = require('./persistGame.js');
 var io = null;
-var data = {};
 
 
 module.exports = function(server) {
-
-    // let name2gameMapper = { room: game };
 
     if (io) return io;
 
@@ -17,41 +14,47 @@ module.exports = function(server) {
     //as games begin, this associates the roomname with its shared gameObject
     var roomGameMapper = {};
 
+    //associates roomname with objects containing each player's longest word
+    var roomWordMapper = {};
+
+    function trackLongestWord(roomName, playerId, word){
+        var ourWordMapper = roomWordMapper[roomName];
+        var myLongestWord = ourWordMapper[playerId];
+        if (!myLongestWord) ourWordMapper[playerId] = word;
+        else if (myLongestWord.length < word.length) ourWordMapper[playerId] = word;
+    }
+
+    function getWinner(scoreObj){
+        var winners = [];
+        for (var id in scoreObj){
+            if (winners.length === 0) winners.push(id);
+            else if (scoreObj[id] > scoreObj[winners[0]]) winners = [id];
+            else if (scoreObj[id] === scoreObj[winners[0]]) winners.push(id);
+        }
+        return winners;
+    }
+
     io.on('connection', function(socket) {
         // Now have access to socket, wowzers!
         console.log('A new client with the socket ID of ' + socket.id + ' has connected');
 
-        // let addData = function(playerMove) {
-        //     if (!data[roomName]) data[roomName] = [];
-        //     data[roomName].push(playerMove);
-        // };
-
-
         socket.on('joinRoom', function(user, roomName, gameId) {
-
-            // if (!thisGame) {
-            //     thisGame.user = user;
-            // }
 
             socket.join(roomName);
             console.log('A client joined this room: ', roomName);
 
             socket.broadcast.to(roomName).emit('roomJoinSuccess', user);
-            // io.sockets.in(roomName).emit('roomData', {
-            //     count: io.sockets.adapter.rooms[roomName]
-            // })
-            // console.log('roomData count has been updated');
-
 
             socket.on('disconnect', function() {
                 console.log('A client with the socket ID of ' + socket.id + ' has diconnected :(');
-                persistGame.quitGame(gameId, user.id)
+                persistGame.quitGame(gameId, user.id);
                 socket.broadcast.to(roomName).emit('playerDisconnected', user.id);
             });
 
             socket.on('getStartBoard', function(gameLength, gameId, userIds) {
                 //initialize GameObj for the room in the mapper
                 roomGameMapper[roomName] = new game.GameObject(game.tileCounts, 6, 2);
+                roomWordMapper[roomName] = {};
                 var thisGame = roomGameMapper[roomName];
                 //associate its game id for use in persistence
                 thisGame.id = gameId;
@@ -67,10 +70,11 @@ module.exports = function(server) {
                 setTimeout(function() {
 
                     console.log('game over', gameId);
+                    var winnersArray = getWinner(thisGame.playerScores);
+                    var ourWords = roomWordMapper[roomName];
+                    io.to(roomName).emit('gameOver', winnersArray, ourWords);
 
-                    io.to(roomName).emit('gameOver');
-
-                    //send scores to db, set isPlaying to false
+                    //send scores to db (AND WORDS?!), set isPlaying to false
                     persistGame.saveGame(thisGame);
                 }, gameLength * 1000);
             });
@@ -82,7 +86,16 @@ module.exports = function(server) {
                 if (potentialUpdateObj) {
                     console.log('update object sending!', potentialUpdateObj);
                     io.to(roomName).emit('wordValidated', potentialUpdateObj);
+                    trackLongestWord(roomName, playObj.playerId, playObj.word);
                 }
+            });
+
+            socket.on('shuffleBoard', function(userId){
+                var thisGame = roomGameMapper[roomName];
+                thisGame.shuffle();
+                thisGame.playerScores[userId]-=5;
+                console.log('server shuffling');
+                io.to(roomName).emit('boardShuffled', thisGame.board, userId, thisGame.stateNumber);
             });
         });
     });

@@ -12,11 +12,18 @@ app.config(function($stateProvider) {
 
 app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory, $rootScope) {
 
+    AuthService.getLoggedInUser()
+        .then(function(user) {
+            console.log('user from AuthService', user);
+            $scope.user = user;
+            $scope.exports.playerId = user.id;
+        });
+
     $scope.roomName = $stateParams.roomname;
 
     $scope.otherPlayers = [];
 
-    $scope.gameLength = 30;
+    $scope.gameLength = 10;
 
     $scope.exports = {
         wordObj: {},
@@ -29,11 +36,11 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.mouseIsDown = false;
     $scope.draggingAllowed = false;
 
-    $scope.style=null;
-    $scope.message='';
-    $scope.freeze=false;
+    $scope.style = null;
+    $scope.message = '';
+    $scope.freeze = false;
 
-    $scope.checkSelected=function(id){
+    $scope.checkSelected = function(id) {
         return id in $scope.exports.wordObj;
     };
 
@@ -56,12 +63,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         }
     };
 
-    AuthService.getLoggedInUser()
-        .then(function(user) {
-            console.log('user from AuthService', user);
-            $scope.user = user;
-            $scope.exports.playerId = user.id;
-        });
+
 
     //get the current room info
     BoardFactory.getCurrentRoom($stateParams.roomname)
@@ -86,11 +88,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     //Quit the room, back to lobby
     $scope.quit = function() {
-        // BoardFactory.quitFromRoom($scope.gameId, $scope.user.id)
-        //     .then(() => {
-        //         $state.go('lobby');
-        //     });
-
         $rootScope.hideNavbar = false;
         $state.go('lobby')
     };
@@ -109,16 +106,11 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.size = 3;
     $scope.score = 0;
-    // $scope.playerName = 'Me';
-    // $scope.player = $scope.user.id;
 
-    // $scope.otherPlayers = [{ name: 'You', score: 0, id: 1 },
-    //     { name: 'Him', score: 0, id: 2 },
-    //     { name: 'Her', score: 0, id: 3 }
-    // ];
 
     $scope.click = function(space, id) {
-        if ($scope.freeze){return ;}
+        if ($scope.freeze) {
+            return; }
         console.log('clicked ', space, id);
         var ltrsSelected = Object.keys($scope.exports.wordObj);
         var previousLtr = ltrsSelected[ltrsSelected.length - 2];
@@ -131,7 +123,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.exports.word = $scope.exports.word.substring(0, $scope.exports.word.length - 1);
             delete $scope.exports.wordObj[lastLtr];
         } else if (ltrsSelected.length === 1 && id === lastLtr) {
-            $scope.exports.word="";
+            $scope.exports.word = "";
             delete $scope.exports.wordObj[lastLtr];
         }
     };
@@ -162,20 +154,14 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         $scope.exports.wordObj = {};
     };
 
-    // $scope.submit = function() {
-    //     return BoardFactory.submit()
-    //         // .then(function(x) {
-    //         //     $scope.exports.wordObj = {};
-    //         //     $scope.exports.word = "";
-    //         });
-    // };
-
 
     $scope.submit = function(obj) {
         console.log('submitting ', obj);
         BoardFactory.submit(obj);
         $scope.clear();
     };
+
+    $scope.shuffle = BoardFactory.shuffle;
 
 
     $scope.updateBoard = function(wordObj) {
@@ -215,7 +201,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         $scope.$evalAsync();
     };
 
-    $scope.replay=function(){
+    $scope.replay = function() {
         console.log("GO!");
         LobbyFactory.newGame($scope.roomName);
         $scope.startGame();
@@ -232,40 +218,14 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
         Socket.on('roomJoinSuccess', function(user) {
             console.log('new user joining', user.id);
-
             user.score = 0;
-            // var playerIds = [];
-            // $scope.otherPlayers.forEach(otherPlayer => {
-            //     playerIds.push(otherPlayer.id)
-            // });
-            // if (playerIds.indexOf(user.id) === -1) {
-            // }
             $scope.otherPlayers.push(user);
             $scope.$digest();
 
-            // BoardFactory.getCurrentRoom($stateParams.roomname)
-            //     .then(room => {
-            //         console.log(room)
-            //         $scope.gameId = room.id;
-            //         $scope.otherPlayers = room.users.filter(user => user.id !== $scope.user.id);
-            //         $scope.otherPlayers.forEach(player => { player.score = 0 })
-            //     })
-
         });
 
-
-        // Socket.on('roomData', function(data) {
-        //     console.log('listening for roomData event from server')
-        //     if (data.count.length < 2) {
-        //         $scope.messages = "Waiting for another player";
-        //         console.log('scope message: ', $scope.messages)
-        //     } else {
-        //         $scope.messages = null;
-        //     }
-        // })
-
         Socket.on('startBoard', function(board) {
-            $scope.freeze=false;
+            $scope.freeze = false;
             console.log('board! ', board);
             $scope.board = board;
             // setInterval(function(){
@@ -281,19 +241,28 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.$evalAsync();
         });
 
+        Socket.on('boardShuffled', function(board, userId, stateNumber) {
+            $scope.board = board;
+            $scope.updateScore(-5, userId);
+            $scope.clear();
+            $scope.exports.stateNumber = stateNumber;
+            $scope.message = userId + " shuffled the board!";
+            console.log($scope.message);
+            $scope.$evalAsync();
+        });
 
         Socket.on('playerDisconnected', function(user) {
             console.log('playerDisconnected', user.id);
-            $scope.otherPlayers = $scope.otherPlayers.map(otherPlayers => otherPlayers.id !== user.id)
+            $scope.otherPlayers = $scope.otherPlayers.map(otherPlayers => otherPlayers.id !== user.id);
 
             $scope.$evalAsync();
         });
 
-        Socket.on('gameOver', function() {
+        Socket.on('gameOver', function(winnersArray, words) {
             $scope.clear();
             $scope.$digest();
-            $scope.freeze=true;
-            console.log('game is over');
+            $scope.freeze = true;
+            console.log('game is over, winners: ', winnersArray, words);
         });
     });
 });
