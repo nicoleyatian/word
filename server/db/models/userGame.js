@@ -9,6 +9,9 @@ var db = require('../_db');
 module.exports = db.define('userGame', {
         score: {
             type: Sequelize.INTEGER
+        },
+        longestWord: {
+        	type: Sequelize.STRING
         }
     }
 );

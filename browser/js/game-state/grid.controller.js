@@ -23,7 +23,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.otherPlayers = [];
 
-    $scope.gameLength = 10;
+    $scope.gameLength = 15;
 
     $scope.exports = {
         wordObj: {},

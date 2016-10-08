@@ -13,7 +13,7 @@ module.exports = {
             });
     },
 
-    saveGame: function(gameObj) {
+    saveGame: function(gameObj, ourWords) {
         console.log('save game gameObject.id: ', gameObj.id);
         Game.findById(gameObj.id, {
                 include: [{
@@ -25,7 +25,8 @@ module.exports = {
                 let updatePromises = [];
                 game.users.forEach(user => {
                     updatePromises.push(user.userGame.update({
-                        score: gameObj.playerScores[user.id]
+                        score: gameObj.playerScores[user.id],
+                        longestWord: ourWords[user.id]
                     }));
                 });
                 updatePromises.push(game.update({ inProgress: false }));
