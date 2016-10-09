@@ -3,13 +3,13 @@
 	<div class='col-md-9'>
 		<div class='row'>
 			<div class='col-md-12'>
-				<button ng-click='showForm()'>New Room</button>
+				<button class="btn btn-primary" ng-click='showForm()'>New Room</button>
 				<form name="roomForm" ng-submit="newRoom(roomInfo)" ng-show="roomNameForm">
 					 <div class="form-group">
 				        <label for="roomName">Room Name</label>
 				        <input type="text" ng-model="roomInfo.roomname" class="form-control" id="roomname" placeholder="Enter a Room Name" required>
 				    </div>
-				    <button type="submit" class="btn btn-default">Submit</button>
+				    <button type="submit" class="btn btn-primary">Submit</button>
 				</form>
 			</div>
 
@@ -17,7 +17,7 @@
 				<ul>
 					<li>Room: {{room.roomname}}</li>
 					<li>Players: {{room.users.length}}/4</li>
-					<button ng-click='joinGame(room)'>Join the game</button>
+					<button class="btn btn-primary" ng-click='joinGame(room)'>Join the game</button>
 				</ul>
 			</div>
 		</div>

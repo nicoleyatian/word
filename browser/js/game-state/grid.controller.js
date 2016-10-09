@@ -10,7 +10,7 @@ app.config(function($stateProvider) {
 });
 
 
-app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory, $rootScope) {
+app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory, $rootScope, $element) {
 
     AuthService.getLoggedInUser()
         .then(function(user) {
@@ -23,7 +23,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.otherPlayers = [];
 
-    $scope.gameLength = 10;
+    $scope.gameLength = 1000;
 
     $scope.exports = {
         wordObj: {},
@@ -40,6 +40,8 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.freeze=false;
     $scope.winOrLose=null;
     $scope.timeout=null;
+    $scope.isSelecting = false;
+
 
     $scope.checkSelected = function(id) {
         return id in $scope.exports.wordObj;
@@ -58,12 +60,48 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         if ($scope.draggingAllowed && $scope.exports.word.length > 1) $scope.submit($scope.exports);
     };
 
+    // $element.bind('touchstart', function (e) {
+    //   $scope.isSelecting = true;
+    //   $scope.click(e)
+    // })
+
+    // $element.bind('mousemove touchmove', function (e) {
+    //   if ($scope.isSelecting) {
+    //     $scope.click(e)
+    //   }
+    // })
+
+    // $element.bind('mouseup touchend', function (e) {
+    //   $scope.isSelecting = false;
+    //   if ($scope.draggingAllowed && $scope.exports.word.length > 1) $scope.submit($scope.exports);
+    // })
+
+
     $scope.drag = function(space, id) {
         if ($scope.mouseIsDown && $scope.draggingAllowed) {
             $scope.click(space, id);
         }
     };
 
+    $scope.click = function(space, id) {
+        if ($scope.freeze) {
+            return; }
+        console.log('clicked ', space, id);
+        var ltrsSelected = Object.keys($scope.exports.wordObj);
+        var previousLtr = ltrsSelected[ltrsSelected.length - 2];
+        var lastLtr = ltrsSelected[ltrsSelected.length - 1];
+        if (!ltrsSelected.length || validSelect(id, ltrsSelected)) {
+            $scope.exports.word += space;
+            $scope.exports.wordObj[id] = space;
+            console.log($scope.exports);
+        } else if (id === previousLtr) {
+            $scope.exports.word = $scope.exports.word.substring(0, $scope.exports.word.length - 1);
+            delete $scope.exports.wordObj[lastLtr];
+        } else if (ltrsSelected.length === 1 && id === lastLtr) {
+            $scope.exports.word = "";
+            delete $scope.exports.wordObj[lastLtr];
+        }
+    };
 
 
     //get the current room info
@@ -109,25 +147,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.score = 0;
 
 
-    $scope.click = function(space, id) {
-        if ($scope.freeze) {
-            return; }
-        console.log('clicked ', space, id);
-        var ltrsSelected = Object.keys($scope.exports.wordObj);
-        var previousLtr = ltrsSelected[ltrsSelected.length - 2];
-        var lastLtr = ltrsSelected[ltrsSelected.length - 1];
-        if (!ltrsSelected.length || validSelect(id, ltrsSelected)) {
-            $scope.exports.word += space;
-            $scope.exports.wordObj[id] = space;
-            console.log($scope.exports);
-        } else if (id === previousLtr) {
-            $scope.exports.word = $scope.exports.word.substring(0, $scope.exports.word.length - 1);
-            delete $scope.exports.wordObj[lastLtr];
-        } else if (ltrsSelected.length === 1 && id === lastLtr) {
-            $scope.exports.word = "";
-            delete $scope.exports.wordObj[lastLtr];
-        }
-    };
 
     //makes sure letter is adjacent to prev ltr, and hasn't been used yet
     function validSelect(ltrId, otherLtrsIds) {

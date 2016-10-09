@@ -53,11 +53,10 @@
         <button class='btn btn-primary' ng-click='quit()'>Quit</button>
         <button class='btn btn-primary' ng-click='startGame()'>Start Game</button>
     </div>
-
     <div id="start" ng-hide="hideBoard">
         <!-- <div class="Game-info">{{ user.username }}</div> -->
         <div id="your-word">
-        <h1 ng-click="submit(exports)"> {{ exports.word }} </h1>
+            <h1 ng-click="submit(exports)"> {{ exports.word }} </h1>
         </div>
         <br>
         <!-- <button >Submit</button> -->
@@ -79,23 +78,37 @@
         <div id="win?" ng-show="winOrLose">
             <h1> {{winOrLose}}</h1>
         </div>
-        <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()">
+        <div id="grid" class="board" ng-touchstart="mouseDown()" ng-touchend="mouseUp()">
+            <div class='row' ng-repeat="(x,row) in board track by $index">
+                <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-touchmove="drag(space, x+'-'+y)" ng-touchend="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
+                    <span id="space">{{space}}</span>
+                </div>
+            </div>
+        </div>
+
+      <!--    <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()" ng-touchstart="mouseDown()" ng-touchend="mouseUp()">
+            <div class='row' ng-repeat="(x,row) in board track by $index">
+                <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" ng-touchmove="drag(space, x+'-'+y)" ng-touchend="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
+                    <span id="space">{{space}}</span>
+                </div>
+            </div>
+        </div> -->
+
+        <!--    <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()">
             <div class='row' ng-repeat="(x,row) in board track by $index">
                 <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
                     <span id="space">{{space}}</span>
 
                 </div>
             </div>
-        </div>
-        <button ng-click="shuffle(user)">Shuffle</button>
-        <button ng-click="toggleDrag()">{{ draggingAllowed ? 'Click ':'Drag '}}To Select</button>
+        </div> -->
+        <button class="btn btn-primary" ng-click="shuffle(user)">Shuffle</button>
+        <button class="btn btn-primary" ng-click="toggleDrag()">{{ draggingAllowed ? 'Click ':'Drag '}}To Select</button>
     </div>
 </div>
-    <!-- </div> -->
-    <br>
-    <button ng-show="freeze" ng-click="replay()">Play Again
-    </button>
-
+<!-- </div> -->
+<br>
+<button class="btn btn-primary" ng-show="freeze" ng-click="replay()">Play Again</button>
 <!-- <div><span>{{messages}}</span></div> -->
 <!-- <div id="top">
     <h1 id="title">Wordgame</h1>

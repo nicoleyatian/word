@@ -25,6 +25,10 @@ body {
     text-align: center;
 }
 
+.btn-primary {
+    margin-right: 5px;
+}
+
 #main {
     padding-top: 60px;
     margin: 0 auto;
@@ -151,7 +155,6 @@ div #start {
 
 @import 'directives/main';
 @import 'home/main';
-@import 'tutorial/main';
 @import 'login/main';
 @import 'lobby/main';
 
