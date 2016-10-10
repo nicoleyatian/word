@@ -324,19 +324,12 @@ div #start {
     }
     #grid {
         width: $board-width;
-<<<<<<< HEAD
-=======
-
->>>>>>> master
     }
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-<<<<<<< HEAD
-=======
         line-height: $cell-height/2 + 6;
->>>>>>> master
     }
 }
 
