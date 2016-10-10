@@ -2,15 +2,15 @@
     box-sizing: border-box;
 }
 
-
 $board-width: 80%;
 $number-cells: 6;
 $cell-diameter: 100%/($number-cells+.5);
 $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
 $letter-width: $cell-height/2;
-
 body {
     background: #fdfdfd;
+    font-family: Quicksand;
+    font-weight: 400;
 }
 
 @mixin clearfix {
@@ -35,11 +35,10 @@ body {
     background: url(images/ocean.jpg);
 }
 
-
 #your-word {
     height: $cell-height/2;
+    text-align: center;
 }
-
 
 #title {
     text-align: center;
@@ -70,7 +69,23 @@ div #start {
     height: $cell-height/2;
 }
 
+.boardRow {
+    width: 80%;
+    margin-left: auto;
+    padding: 3%;
+    display: inline-block;
+    .col-6 {
+        float: left;
+        width: 50%;
+        padding: 1%;
+    }
+}
 
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
 
 #grid .cell {
     font-size: $letter-width;
@@ -78,12 +93,16 @@ div #start {
     height: $cell-height;
     line-height: $cell-height/2 + 5.75;
     // padding: 12%;
+    // padding: 5px;
     background: url(images/sand.png);
     border: .2px solid black;
     border-radius: 50%;
     text-align: center;
     // width: 15%;
     display: inline-block;
+    margin: 0 !important;
+    padding: 0 !important;
+    vertical-align: bottom;
     // height: 8vw;
     // padding: 1%;
 }
@@ -129,8 +148,36 @@ div #start {
     margin: auto;
 }
 
+.Game-info {
+    li {
+        list-style: none;
+    }
+    #user {
+
+        font-size:16px;
+    }
+}
 #score {
-    margin-right: 25%
+    // margin-right: 25%;
+    padding-left: 5px;
+    text-align: left;
+    font-size: 18px;
+    li {
+        list-style: none;
+        text-align: left;
+    }
+}
+
+#otherPlayers {
+    // margin-right: 25%;
+    li {
+        list-style: none;
+        text-align: left;
+    }
+}
+
+#message {
+    text-align: center;
 }
 
 .user-info {
@@ -149,10 +196,12 @@ div #start {
     text-align: center;
     margin: auto;
 }
+
 #timer {
-	// border: 5px dotted black;
-	width: 20%;
-	margin: auto;
+    // border: 5px dotted black;
+    // width: 2%;
+    margin: auto;
+    text-align: center;
 }
 
 div.oauth {
@@ -160,11 +209,38 @@ div.oauth {
 }
 
 
-
-#plays{
-
+.flexbox {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
 }
 
+.btn-wood {
+    background-image: url(images/woodBtn.png);
+    background-color: transparent;
+    background-size: 100% 100%;
+    border: none;
+    font-weight: 1000;
+}
+
+.wood-board-lg {
+    background-image: url(images/woodBtn.png);
+    background-size: 100% 100%;
+    border: none;
+}
+.wood-board-sm {
+    background-image: url(images/woodBtn.png);
+    background-size: 80% 100%;
+    border: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 80px
+}
+
+#plays {}
 
 
 
@@ -173,25 +249,22 @@ div.oauth {
 @import 'login/main';
 @import 'lobby/main';
 
-
 /* ----------- Media Queries ----------- */
+
 
 /* ----------- iPhone 4 and 4S ----------- */
 
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 320px)
-  and (max-device-width: 480px)
-  and (-webkit-min-device-pixel-ratio: 2) {
 
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -201,36 +274,29 @@ div.oauth {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
         line-height: $cell-height/2 + 6;
-       }
-}
 
 
 /* ----------- iPhone 5 and 5S ----------- */
 
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 320px)
-  and (max-device-width: 568px)
-  and (-webkit-min-device-pixel-ratio: 2) {
 
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -240,37 +306,31 @@ div.oauth {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
-
 }
 
 
 /* ----------- iPhone 6 ----------- */
 
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 375px)
-  and (max-device-width: 667px)
-  and (-webkit-min-device-pixel-ratio: 2) {
 
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -280,37 +340,38 @@ div.oauth {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+<<<<<<< HEAD
+=======
         line-height: $cell-height/2 + 6;
+>>>>>>> master
     }
 }
 
 
 /* ----------- iPhone 6+ ----------- */
 
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 414px)
-  and (max-device-width: 736px)
-  and (-webkit-min-device-pixel-ratio: 3) {
 
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -320,38 +381,31 @@ div.oauth {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
-
 }
-
 
 
 /* ----------- Galaxy S3 ----------- */
 
-/* Portrait and Landscape */
-@media screen
-  and (device-width: 320px)
-  and (device-height: 640px)
-  and (-webkit-device-pixel-ratio: 2) {
 
+/* Portrait and Landscape */
+
+@media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -361,36 +415,31 @@ div.oauth {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
-
 }
+
 
 /* ----------- Galaxy S4 ----------- */
 
-/* Portrait and Landscape */
-@media screen
-  and (device-width: 320px)
-  and (device-height: 640px)
-  and (-webkit-device-pixel-ratio: 3) {
 
+/* Portrait and Landscape */
+
+@media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -400,11 +449,9 @@ div.oauth {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
@@ -413,22 +460,20 @@ div.oauth {
     }
 }
 
+
 /* ----------- Galaxy S5 ----------- */
 
-/* Portrait and Landscape */
-@media screen
-  and (device-width: 360px)
-  and (device-height: 640px)
-  and (-webkit-device-pixel-ratio: 3) {
 
+/* Portrait and Landscape */
+
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -438,11 +483,9 @@ div.oauth {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
@@ -454,20 +497,17 @@ div.oauth {
 
 /* ----------- iPad mini ----------- */
 
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (-webkit-min-device-pixel-ratio: 1) {
 
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -477,11 +517,9 @@ div.oauth {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
@@ -489,25 +527,21 @@ div.oauth {
         line-height: $cell-height/2 + 6;
     }
 }
-
-
 
 
 /* ----------- iPad 1 and 2 ----------- */
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (-webkit-min-device-pixel-ratio: 1) {
 
+
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -517,11 +551,9 @@ div.oauth {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
@@ -530,21 +562,20 @@ div.oauth {
     }
 }
 
-/* ----------- iPad 3 and 4 ----------- */
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (-webkit-min-device-pixel-ratio: 2) {
 
+/* ----------- iPad 3 and 4 ----------- */
+
+
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -554,32 +585,70 @@ div.oauth {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
-
 }
 
 
 /* ----------- Galaxy Tab 10.1 ----------- */
 
-/* Portrait and Landscape */
-@media
-  (min-device-width: 800px)
-  and (max-device-width: 1280px) {
 
+/* Portrait and Landscape */
+
+@media (min-device-width: 800px) and (max-device-width: 1280px) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+    $letter-width: $cell-height/2;
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        overflow-x: hidden;
+        position: relative;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+    #grid {
+        width: $board-width;
+    }
+    #grid .cell {
+        font-size: $letter-width;
+        width: $cell-diameter;
+        height: $cell-height;
+        line-height: $cell-height/2 + 6;
+    }
+}
+
+// /* ----------- Non-Retina Screens ----------- */
+// @media screen
+//   and (min-device-width: 1200px)
+//   and (max-device-width: 1600px)
+//   and (-webkit-min-device-pixel-ratio: 1) {
+// }
+// ----------- Retina Screens -----------
+// @media screen
+//   and (min-device-width: 1200px)
+//   and (max-device-width: 1600px)
+//   and (-webkit-min-device-pixel-ratio: 2)
+//   and (min-resolution: 192dpi) {
+// }
+
+@media screen and (min-width: 1200px){
+    $board-width: 1000px;
+    $number-cells: 6;
+    $cell-diameter: 1000px/($number-cells+.5);
+    $cell-height: 1000px * ($board-width/1000px)/($number-cells+.5);
     $letter-width: $cell-height/2;
 
     html,body
@@ -601,25 +670,6 @@ div.oauth {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        line-height: $cell-height/2 + 6;
+        line-height: $cell-height;
     }
-
-
 }
-
-
-
-// /* ----------- Non-Retina Screens ----------- */
-// @media screen
-//   and (min-device-width: 1200px)
-//   and (max-device-width: 1600px)
-//   and (-webkit-min-device-pixel-ratio: 1) {
-// }
-
-// ----------- Retina Screens -----------
-// @media screen
-//   and (min-device-width: 1200px)
-//   and (max-device-width: 1600px)
-//   and (-webkit-min-device-pixel-ratio: 2)
-//   and (min-resolution: 192dpi) {
-// }

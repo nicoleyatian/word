@@ -3,4 +3,4 @@ app.directive('logo', function () {
         restrict: 'E',
         templateUrl: 'js/common/directives/logo/logo.html'
     };
-});
+})

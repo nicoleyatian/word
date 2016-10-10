@@ -10,19 +10,12 @@ app.config(function($stateProvider) {
 });
 
 
-app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory, $rootScope, $element) {
-
-    AuthService.getLoggedInUser()
-        .then(function(user) {
-            console.log('user from AuthService', user);
-            $scope.user = user;
-            $scope.exports.playerId = user.id;
-        });
+app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory, $rootScope, $q) {
 
     $scope.roomName = $stateParams.roomname;
+    $scope.hideStart = true;
 
     $scope.otherPlayers = [];
-
     $scope.gameLength = 1000;
 
     $scope.exports = {
@@ -33,11 +26,15 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         pointsEarned: null
     };
 
+    $scope.mouseIsDown = false;
+    $scope.draggingAllowed = false;
     $scope.style = null;
     $scope.message = '';
     $scope.freeze = false;
     $scope.winOrLose = null;
     $scope.timeout = null;
+
+    $rootScope.hideNavbar = true;
 
 
     // $scope.checkSelected = function(id) {
@@ -48,27 +45,27 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         $scope.draggingAllowed = !$scope.draggingAllowed;
     };
 
-    // $scope.mouseDown = function() {
-    //     console.log('mouse is down')
-    //     $scope.mouseIsDown = true;
-    // };
+    $scope.mouseDown = function() {
+        console.log('mouse is down')
+        $scope.mouseIsDown = true;
+    };
 
-    // $scope.mouseUp = function() {
-    //     console.log('mouse is up');
-    //     $scope.mouseIsDown = false;
-    //     if ($scope.draggingAllowed && $scope.exports.word.length > 1) $scope.submit($scope.exports);
-    // };
+    $scope.mouseUp = function() {
+        console.log('mouse is up');
+        $scope.mouseIsDown = false;
+        if ($scope.draggingAllowed && $scope.exports.word.length > 1) $scope.submit($scope.exports);
+    };
 
-    // $scope.touchActivated = function() {
-    //     console.log('touch is activated: ' + arguments);
-    //     $scope.touchIsActivated = true;
-    // }
+    $scope.touchActivated = function() {
+        console.log('touch is activated: ' + arguments);
+        $scope.touchIsActivated = true;
+    }
 
-    // $scope.touchStopped = function(e) {
-    //     console.log('touch is stopped: ' + e);
-    //     $scope.touchIsActivated = false;
-    //     if ($scope.draggingAllowed && $scope.exports.word.length > 1) $scope.submit($scope.exports);
-    // }
+    $scope.touchStopped = function(e) {
+        console.log('touch is stopped: ' + e);
+        $scope.touchIsActivated = false;
+        if ($scope.draggingAllowed && $scope.exports.word.length > 1) $scope.submit($scope.exports);
+    }
 
     // $element.bind('touchstart', function (e) {
     //   $scope.isSelecting = true;
@@ -87,12 +84,12 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     // })
 
 
-    // $scope.drag = function(space, id) {
-    //     console.log('mouse enter: ' + id);
-    //     if ($scope.mouseIsDown && $scope.draggingAllowed) {
-    //         $scope.click(space, id);
-    //     }
-    // };
+    $scope.drag = function(space, id) {
+        console.log('mouse enter: ' + id);
+        if ($scope.mouseIsDown && $scope.draggingAllowed) {
+            $scope.click(space, id);
+        }
+    };
 
     // function div_overlap(jqo, left, top) {
     //     console.log('div overlapped: ' + jqo);
@@ -171,33 +168,33 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     //     });
     // });
 
-    // $scope.mobileDrag = function(space, id){
-    //     console.log('touch is dragged: ' + space + " : " + id);
-    //     if($scope.touchIsActivated && $scope.draggingAllowed){
-    //         $scope.click(space, id);
-    //     }
-    // };
+    $scope.mobileDrag = function(space, id){
+        console.log('touch is dragged: ' + space + " : " + id);
+        if($scope.touchIsActivated && $scope.draggingAllowed){
+            $scope.click(space, id);
+        }
+    };
 
-    // $scope.click = function(space, id) {
-    //     if ($scope.freeze) {
-    //         return;
-    //     }
-    //     console.log('clicked ', space, id);
-    //     var ltrsSelected = Object.keys($scope.exports.wordObj);
-    //     var previousLtr = ltrsSelected[ltrsSelected.length - 2];
-    //     var lastLtr = ltrsSelected[ltrsSelected.length - 1];
-    //     if (!ltrsSelected.length || validSelect(id, ltrsSelected)) {
-    //         $scope.exports.word += space;
-    //         $scope.exports.wordObj[id] = space;
-    //         console.log($scope.exports);
-    //     } else if (id === previousLtr) {
-    //         $scope.exports.word = $scope.exports.word.substring(0, $scope.exports.word.length - 1);
-    //         delete $scope.exports.wordObj[lastLtr];
-    //     } else if (ltrsSelected.length === 1 && id === lastLtr) {
-    //         $scope.exports.word = "";
-    //         delete $scope.exports.wordObj[lastLtr];
-    //     }
-    // };
+    $scope.click = function(space, id) {
+        if ($scope.freeze) {
+            return;
+        }
+        console.log('clicked ', space, id);
+        var ltrsSelected = Object.keys($scope.exports.wordObj);
+        var previousLtr = ltrsSelected[ltrsSelected.length - 2];
+        var lastLtr = ltrsSelected[ltrsSelected.length - 1];
+        if (!ltrsSelected.length || validSelect(id, ltrsSelected)) {
+            $scope.exports.word += space;
+            $scope.exports.wordObj[id] = space;
+            console.log($scope.exports);
+        } else if (id === previousLtr) {
+            $scope.exports.word = $scope.exports.word.substring(0, $scope.exports.word.length - 1);
+            delete $scope.exports.wordObj[lastLtr];
+        } else if (ltrsSelected.length === 1 && id === lastLtr) {
+            $scope.exports.word = "";
+            delete $scope.exports.wordObj[lastLtr];
+        }
+    };
 
 
     //get the current room info
@@ -210,6 +207,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             LobbyFactory.joinGame(room.id, $scope.user.id);
         });
 
+
     $scope.hideBoard = true;
 
     // Start the game when all players have joined room
@@ -217,6 +215,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         var userIds = $scope.otherPlayers.map(user => user.id);
         userIds.push($scope.user.id);
         console.log('op', $scope.otherPlayers, 'ui', userIds);
+        $scope.winOrLose=null;
         BoardFactory.getStartBoard($scope.gameLength, $scope.gameId, userIds);
     };
 
@@ -243,21 +242,20 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.score = 0;
 
 
-
     //makes sure letter is adjacent to prev ltr, and hasn't been used yet
-    // function validSelect(ltrId, otherLtrsIds) {
-    //     if (otherLtrsIds.includes(ltrId)) return false;
-    //     var coords = ltrId.split('-');
-    //     var row = coords[0];
-    //     var col = coords[1];
-    //     var lastLtrId = otherLtrsIds.pop();
-    //     var coordsLast = lastLtrId.split('-');
-    //     var rowLast = coordsLast[0];
-    //     var colLast = coordsLast[1];
-    //     var rowOffset = Math.abs(row - rowLast);
-    //     var colOffset = Math.abs(col - colLast);
-    //     return (rowOffset <= 1 && colOffset <= 1);
-    // }
+    function validSelect(ltrId, otherLtrsIds) {
+        if (otherLtrsIds.includes(ltrId)) return false;
+        var coords = ltrId.split('-');
+        var row = coords[0];
+        var col = coords[1];
+        var lastLtrId = otherLtrsIds.pop();
+        var coordsLast = lastLtrId.split('-');
+        var rowLast = coordsLast[0];
+        var colLast = coordsLast[1];
+        var rowOffset = Math.abs(row - rowLast);
+        var colOffset = Math.abs(col - colLast);
+        return (rowOffset <= 1 && colOffset <= 1);
+    }
 
     function clearIfConflicting(updateWordObj, exportWordObj) {
         var tilesMoved = Object.keys(updateWordObj);
@@ -334,9 +332,23 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     };
 
     $scope.replay = function() {
-        LobbyFactory.newGame($scope.roomName);
-        $scope.startGame();
-    }
+
+        LobbyFactory.newGame({ roomname: $scope.roomName })
+            .then(function(game) {
+                console.log("replay game obj:", game);
+
+                $scope.gameId = game.id;
+                $scope.startGame();
+                var allIds = $scope.otherPlayers.map(player => player.id);
+                allIds.push($scope.user.id);
+                $q.all(allIds.map(id => {
+                    LobbyFactory.joinGame($scope.gameId, id);
+                }));
+            })
+            .catch(function(e) {
+                console.error('error restarting the game', e);
+            });
+    };
 
     $scope.determineWinner = function(winnersArray) {
         if (winnersArray.length === 1) {
@@ -370,20 +382,47 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         }
     }
 
-    $rootScope.hideNavbar = true;
 
-    $scope.$on('$destroy', function() { Socket.disconnect(); });
-    console.log('update 1.1')
+    $scope.$on('$destroy', function() {
+        console.log('destroyed');
+        Socket.disconnect();
+
+    });
+
     Socket.on('connect', function() {
+        console.log('connecting');
+        $q.all([
+            AuthService.getLoggedInUser()
+            .then(function(user) {
+                console.log('user from AuthService', user);
+                $scope.user = user;
+                $scope.exports.playerId = user.id;
+            }),
 
-        Socket.emit('joinRoom', $scope.user, $scope.roomName, $scope.gameId);
-        console.log('emitting "join room" event to server', $scope.roomName);
+            //get the current room info
+            BoardFactory.getCurrentRoom($stateParams.roomname)
+            .then(room => {
+                console.log(room);
+                $scope.gameId = room.id;
+                $scope.otherPlayers = room.users.filter(user => user.id !== $scope.user.id);
+                $scope.otherPlayers.forEach(player => { player.score = 0 });
+                LobbyFactory.joinGame(room.id, $scope.user.id);
+            })
+        ]).then(function() {
+            Socket.emit('joinRoom', $scope.user, $scope.roomName, $scope.gameId);
+            $scope.hideStart = false;
+            $scope.$evalAsync();
+            console.log('emitting "join room" event to server 8P', $scope.roomName);
+        }).catch(function(e) {
+            console.error('error grabbing user or room from db: ', e);
+        });
+
 
         Socket.on('roomJoinSuccess', function(user) {
             console.log('new user joining', user.id);
             user.score = 0;
             $scope.otherPlayers.push(user);
-            $scope.$digest();
+            $scope.$evalAsync();
 
         });
 
@@ -392,6 +431,8 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             console.log('board! ', board);
             $scope.board = board;
             // setInterval(function(){
+            $scope.otherPlayers.forEach(player => { player.score = 0 });
+            $scope.score = 0;
             $scope.hideBoard = false;
             $scope.$evalAsync();
             // }, 3000);

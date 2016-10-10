@@ -17,7 +17,7 @@
 				<ul>
 					<li>Room: {{room.roomname}}</li>
 					<li>Players: {{room.users.length}}/4</li>
-					<button class="btn btn-primary" ng-click='joinGame(room)'>Join the game</button>
+					<button ui-sref='Game({roomname: room.roomname})' ui-sref-opts="{reload: true, notify: true}">Join the game</button>
 				</ul>
 			</div>
 		</div>
