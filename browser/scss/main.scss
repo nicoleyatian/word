@@ -92,6 +92,15 @@ div #start {
     border: 5px solid #c3f4eb;
 }
 
+.selected {
+    border: 5px solid #c3f4eb;
+}
+
+.green {
+ background-color: green;
+}
+
+
 #panel {
     width: 50%;
     border: 5px solid black;
@@ -146,11 +155,17 @@ div #start {
 	margin: auto;
 }
 
+div.oauth {
+  text-align: center;
+}
+
 
 
 #plays{
 
 }
+
+
 
 
 @import 'directives/main';

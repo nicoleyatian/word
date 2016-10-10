@@ -78,30 +78,24 @@
         <div id="win?" ng-show="winOrLose">
             <h1> {{winOrLose}}</h1>
         </div>
-        <div id="grid" class="board" ng-touchstart="mouseDown()" ng-touchend="mouseUp()">
-            <div class='row' ng-repeat="(x,row) in board track by $index">
-                <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-touchmove="drag(space, x+'-'+y)" ng-touchend="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
+
+         <!-- <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()" ng-touchstart="touchActivated()" ng-touchend="touchStopped()">
+                <div class='row' ng-repeat="(x,row) in board track by $index">
+                <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" ng-touchstart="click(space, x+'-'+y)" ng-touchmove="mobileDrag(space, x+'-'+y)" ng-touchend="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
                     <span id="space">{{space}}</span>
                 </div>
+            </div>
+        </div> -->
+
+           <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()">
+            <div class='row' ng-repeat="(x,row) in board track by $index">
+            <letter ng-repeat="(y, space) in row track by $index" x='x' y='y' space='space' draggingAllowed='draggingAllowed' exports='exports'></letter>
+              <!--   <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $insdex">
+                    <span id="space">{{space}}</span>
+
+                </div> -->
             </div>
         </div>
-
-      <!--    <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()" ng-touchstart="mouseDown()" ng-touchend="mouseUp()">
-            <div class='row' ng-repeat="(x,row) in board track by $index">
-                <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" ng-touchmove="drag(space, x+'-'+y)" ng-touchend="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
-                    <span id="space">{{space}}</span>
-                </div>
-            </div>
-        </div> -->
-
-        <!--    <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()">
-            <div class='row' ng-repeat="(x,row) in board track by $index">
-                <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
-                    <span id="space">{{space}}</span>
-
-                </div>
-            </div>
-        </div> -->
         <button class="btn btn-primary" ng-click="shuffle(user)">Shuffle</button>
         <button class="btn btn-primary" ng-click="toggleDrag()">{{ draggingAllowed ? 'Click ':'Drag '}}To Select</button>
     </div>
