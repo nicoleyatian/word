@@ -15,22 +15,24 @@ app.controller("UserCtrl", function($scope, UserFactory, $stateParams){
 	UserFactory.fetchInformation($stateParams.userId)
 	.then(function(user){
 		$scope.user=user;
-		return user
 	})
-	.then(function(user){
-		$scope.updated=$scope.user.updatedAt.getDay();
-	})
+
 })
 
 app.controller("GameRecordCtrl",function($scope, UserFactory, $stateParams){
 	UserFactory.fetchInformation($stateParams.userId)
 	.then(function(user){
-		$scope.user=user;
+		return $scope.user=user;
 	})
-	.then(function(user){
-	UserFactory.fetchGames($stateParams.userId)
-	})
-	.then(function(games){
-		$scope.games=games;
-	})
+	$scope.win=function(id){
+		if (!id){
+			return "Tie"
+		}
+		else if (id===$scope.user.id){
+			return "Win";
+		}
+		else if (id!=$scope.user.id){
+			return "Loss";
+		}
+	}
 })
