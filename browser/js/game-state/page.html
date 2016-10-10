@@ -43,7 +43,7 @@
         </div>
 </div> -->
 <!-- <h1 id="title">Wordgame</h1> -->
-<div id="start" ng-hide="!hideBoard">
+<div id="start" ng-hide="hideStart">
     <ul class="Game-info">
         <li id='user'>{{ user.username }}</li>
         <div ng-hide="otherPlayers.length > 0">
@@ -56,6 +56,10 @@
         <button class='btn btn-primary' ng-click='quit()'>Quit</button>
         <button class='btn btn-primary' ng-click='startGame()' ng-hide="otherPlayers.length===0">Start Game</button>
 </div>
+<div ng-hide="hideCrabdance">
+    <h1>{{ message }}</h1>
+    <img id="crabdance" src="/images/crabdance.gif">
+</div>
 <div id="start" ng-hide="hideBoard">
     <!-- <div class="Game-info">{{ user.username }}</div> -->
     <!-- <div class='row'> -->
@@ -63,11 +67,10 @@
         <div class="boardRow wood-board-lg">
             <div class='col-6 vcenter'>
                 <ul id="score">
-                    <li>{{user.username}} </li>
-                    <li> Your Score: {{score}}</li>
-                </ul>
-                
             </div>
+                    <li>{{ user.username }} </li>
+                    <li> Your Score: {{ score }}</li>
+                </ul>
             <div class='col-6 vcenter'>
                 <ul id='otherPlayers'>
                     <div ng-repeat="otherPlayer in otherPlayers | orderBy: '-score'">
@@ -75,14 +78,14 @@
                     </div>
                 </ul>
                 <div id="message" ng-show="">
-                    <p>{{message}}</p>
+                    <p>{{ message }}</p>
                 </div>
             </div>
         </div>
         <div class="boardRow">
             <div class="col-6 wood-board-sm">
                 <div id="your-word">
-                    <h1 ng-click="submit(exports)"> WORD: {{ exports.word }} </h1>
+                    <h1 ng-click="submit(exports)"> {{ exports.word }} </h1>
                 </div>
             </div>
             <div class="col-6 wood-board-sm">
@@ -91,7 +94,7 @@
         </div>
     </div>
     <div id="win?" ng-show="winOrLose">
-        <h1> {{winOrLose}}</h1>
+        <h1> {{ winOrLose }}</h1>
     </div>
     <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()">
         <div class='row' ng-repeat="(x,row) in board track by $index">
