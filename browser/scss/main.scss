@@ -2,13 +2,11 @@
     box-sizing: border-box;
 }
 
-
 $board-width: 80%;
 $number-cells: 6;
 $cell-diameter: 100%/($number-cells+.5);
 $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
 $letter-width: $cell-height/2;
-
 body {
     background: #fdfdfd;
 }
@@ -31,11 +29,9 @@ body {
     background: url(images/ocean.jpg);
 }
 
-
 #your-word {
     height: $cell-height/2;
 }
-
 
 #title {
     text-align: center;
@@ -65,8 +61,6 @@ div #start {
     -ms-user-select: none;
     height: $cell-height/2;
 }
-
-
 
 #grid .cell {
     font-size: $letter-width;
@@ -136,18 +130,19 @@ div #start {
     text-align: center;
     margin: auto;
 }
+
 #timer {
-	// border: 5px dotted black;
-	width: 20%;
-	margin: auto;
+    // border: 5px dotted black;
+    width: 20%;
+    margin: auto;
 }
 
+#plays {}
 
-
-#plays{
-
+#crabdance {
+    width: $board-width;
+    padding-left: $board-width/4;
 }
-
 
 @import 'directives/main';
 @import 'home/main';
@@ -155,25 +150,22 @@ div #start {
 @import 'login/main';
 @import 'lobby/main';
 
-
 /* ----------- Media Queries ----------- */
+
 
 /* ----------- iPhone 4 and 4S ----------- */
 
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 320px)
-  and (max-device-width: 480px)
-  and (-webkit-min-device-pixel-ratio: 2) {
 
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -183,36 +175,31 @@ div #start {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
         line-height: $cell-height/2 + 6;
-       }
+    }
 }
 
 
 /* ----------- iPhone 5 and 5S ----------- */
 
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 320px)
-  and (max-device-width: 568px)
-  and (-webkit-min-device-pixel-ratio: 2) {
 
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -222,37 +209,31 @@ div #start {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
-
 }
 
 
 /* ----------- iPhone 6 ----------- */
 
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 375px)
-  and (max-device-width: 667px)
-  and (-webkit-min-device-pixel-ratio: 2) {
 
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -262,37 +243,36 @@ div #start {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
-
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
         line-height: $cell-height/2 + 6;
+    }
+
+    #crabdance {
+        width: $board-width;
+        padding-left: $board-width/4;
     }
 }
 
 
 /* ----------- iPhone 6+ ----------- */
 
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 414px)
-  and (max-device-width: 736px)
-  and (-webkit-min-device-pixel-ratio: 3) {
 
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -302,38 +282,31 @@ div #start {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
-
 }
-
 
 
 /* ----------- Galaxy S3 ----------- */
 
-/* Portrait and Landscape */
-@media screen
-  and (device-width: 320px)
-  and (device-height: 640px)
-  and (-webkit-device-pixel-ratio: 2) {
 
+/* Portrait and Landscape */
+
+@media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -343,36 +316,31 @@ div #start {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
-
 }
+
 
 /* ----------- Galaxy S4 ----------- */
 
-/* Portrait and Landscape */
-@media screen
-  and (device-width: 320px)
-  and (device-height: 640px)
-  and (-webkit-device-pixel-ratio: 3) {
 
+/* Portrait and Landscape */
+
+@media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -382,11 +350,9 @@ div #start {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
@@ -395,22 +361,20 @@ div #start {
     }
 }
 
+
 /* ----------- Galaxy S5 ----------- */
 
-/* Portrait and Landscape */
-@media screen
-  and (device-width: 360px)
-  and (device-height: 640px)
-  and (-webkit-device-pixel-ratio: 3) {
 
+/* Portrait and Landscape */
+
+@media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -420,11 +384,9 @@ div #start {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
@@ -436,20 +398,17 @@ div #start {
 
 /* ----------- iPad mini ----------- */
 
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (-webkit-min-device-pixel-ratio: 1) {
 
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -459,11 +418,9 @@ div #start {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
@@ -471,25 +428,21 @@ div #start {
         line-height: $cell-height/2 + 6;
     }
 }
-
-
 
 
 /* ----------- iPad 1 and 2 ----------- */
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (-webkit-min-device-pixel-ratio: 1) {
 
+
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -499,11 +452,9 @@ div #start {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
@@ -512,21 +463,20 @@ div #start {
     }
 }
 
-/* ----------- iPad 3 and 4 ----------- */
-/* Portrait and Landscape */
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (-webkit-min-device-pixel-ratio: 2) {
 
+/* ----------- iPad 3 and 4 ----------- */
+
+
+/* Portrait and Landscape */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -536,36 +486,31 @@ div #start {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
         width: $board-width;
     }
-
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
-
 }
 
 
 /* ----------- Galaxy Tab 10.1 ----------- */
 
-/* Portrait and Landscape */
-@media
-  (min-device-width: 800px)
-  and (max-device-width: 1280px) {
 
+/* Portrait and Landscape */
+
+@media (min-device-width: 800px) and (max-device-width: 1280px) {
     $board-width: 100%;
     $number-cells: 6;
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -575,21 +520,21 @@ div #start {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
-        width: $board-width;    }
-
+        width: $board-width;
+    }
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
-
-
 }
 
-
+#crabdance {
+    width: $board-width;
+    padding-left: $board-width/4;
+}
 
 // /* ----------- Non-Retina Screens ----------- */
 // @media screen
@@ -597,7 +542,6 @@ div #start {
 //   and (max-device-width: 1600px)
 //   and (-webkit-min-device-pixel-ratio: 1) {
 // }
-
 // ----------- Retina Screens -----------
 // @media screen
 //   and (min-device-width: 1200px)

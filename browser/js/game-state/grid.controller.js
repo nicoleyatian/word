@@ -12,12 +12,15 @@ app.config(function($stateProvider) {
 
 app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory, $rootScope, $q) {
 
+    console.log('controller running');
+    Socket.connect();
+
     $scope.roomName = $stateParams.roomname;
     $scope.hideStart = true;
 
     $scope.otherPlayers = [];
 
-    $scope.gameLength = 15;
+    $scope.gameLength = 450;
 
     $scope.exports = {
         wordObj: {},
@@ -36,6 +39,8 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.timeout = null;
 
     $rootScope.hideNavbar = true;
+    $scope.hideBoard = true;
+    $scope.hideCrabdance = true;
 
     $scope.checkSelected = function(id) {
         return id in $scope.exports.wordObj;
@@ -60,14 +65,13 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         }
     };
 
-    $scope.hideBoard = true;
 
     // Start the game when all players have joined room
     $scope.startGame = function() {
         var userIds = $scope.otherPlayers.map(user => user.id);
         userIds.push($scope.user.id);
         console.log('op', $scope.otherPlayers, 'ui', userIds);
-        $scope.winOrLose=null;
+        $scope.winOrLose = null;
         BoardFactory.getStartBoard($scope.gameLength, $scope.gameId, userIds);
     };
 
@@ -181,6 +185,8 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.update = function(updateObj) {
         $scope.updateScore(updateObj.pointsEarned, updateObj.playerId);
         $scope.updateBoard(updateObj.wordObj);
+        console.log('UPDATE:', updateObj.word.length, updateObj.playerId, $scope.user.id);
+        if (updateObj.word.length > 3 && updateObj.playerId != $scope.user.id) crabdance();
         if (+$scope.user.id === +updateObj.playerId) {
             var player = $scope.user.username;
         } else {
@@ -204,18 +210,33 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         $scope.$evalAsync();
     };
 
+    function crabdance() {
+        $scope.hideBoard = true;
+        $scope.hideCrabdance = false;
+        console.log('dance crab!');
+        setTimeout(function() {
+            $scope.hideCrabdance = true;
+            $scope.hideBoard = false;
+        }, 7000);
+    }
+
     $scope.replay = function() {
         LobbyFactory.newGame({ roomname: $scope.roomName })
             .then(function(game) {
                 console.log("replay game obj:", game);
 
                 $scope.gameId = game.id;
-                $scope.startGame();
                 var allIds = $scope.otherPlayers.map(player => player.id);
                 allIds.push($scope.user.id);
                 $q.all(allIds.map(id => {
                     LobbyFactory.joinGame($scope.gameId, id);
                 }));
+            })
+            .then(function() {
+                $scope.otherPlayers.forEach(player => { player.score = 0 });
+                $scope.score = 0;
+                $scope.exports.stateNumber = 0;
+                $scope.startGame();
             })
             .catch(function(e) {
                 console.error('error restarting the game', e);
@@ -262,7 +283,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     });
 
     Socket.on('connect', function() {
-        console.log('connecting');
+        console.log('connecting~!! stateParam: ', $stateParam.roomname);
         $q.all([
             AuthService.getLoggedInUser()
             .then(function(user) {
@@ -303,8 +324,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             console.log('board! ', board);
             $scope.board = board;
             // setInterval(function(){
-            $scope.otherPlayers.forEach(player => { player.score = 0 });
-            $scope.score = 0;
             $scope.hideBoard = false;
             $scope.$evalAsync();
             // }, 3000);

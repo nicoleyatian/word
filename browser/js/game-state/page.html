@@ -53,11 +53,14 @@
         <button class='btn btn-primary' ng-click='quit()'>Quit</button>
         <button ng-hide="hideStart" class='btn btn-primary' ng-click='startGame()'>Start Game</button>
     </div>
-
+    <div ng-hide="hideCrabdance">
+        <h1>{{message}}</h1>
+        <img id="crabdance" src="/images/crabdance.gif">
+    </div>
     <div id="start" ng-hide="hideBoard">
         <!-- <div class="Game-info">{{ user.username }}</div> -->
         <div id="your-word">
-        <h1 ng-click="submit(exports)"> {{ exports.word }} </h1>
+            <h1 ng-click="submit(exports)"> {{ exports.word }} </h1>
         </div>
         <br>
         <!-- <button >Submit</button> -->
@@ -83,7 +86,6 @@
             <div class='row' ng-repeat="(x,row) in board track by $index">
                 <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
                     <span id="space">{{space}}</span>
-
                 </div>
             </div>
         </div>
@@ -91,11 +93,10 @@
         <button ng-click="toggleDrag()">{{ draggingAllowed ? 'Click ':'Drag '}}To Select</button>
     </div>
 </div>
-    <!-- </div> -->
-    <br>
-    <button ng-show="freeze" ng-click="replay()">Play Again
-    </button>
-
+<!-- </div> -->
+<br>
+<button ng-show="freeze" ng-click="replay()">Play Again
+</button>
 <!-- <div><span>{{messages}}</span></div> -->
 <!-- <div id="top">
     <h1 id="title">Wordgame</h1>

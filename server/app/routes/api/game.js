@@ -44,6 +44,7 @@ router.get('/rooms', (req, res, next) => {
 
 //Get game id with roomname
 router.get('/rooms/:roomname', (req, res, next) => {
+    console.log('getting room with roomname: ', req.params.roomname);
     Game.findOne({
         where: {
             isWaiting: true,
@@ -53,7 +54,7 @@ router.get('/rooms/:roomname', (req, res, next) => {
     })
         .then(games => {
             if (!games) {
-                throw new Error();
+                res.sendStatus(404);
             } else {
                 res.json(games);
             }
