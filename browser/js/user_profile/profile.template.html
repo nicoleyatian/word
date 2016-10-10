@@ -3,12 +3,12 @@
 	<div id="profile">
 		<p class="user-info">User Id: {{user.id}} </p>
 		<p class="user-info">Username: {{user.username}}</p>
-		<p class="user-info">E-mail: {{user.email}}</p>
-		<p class="user-info">Last Update: {{user.updatedAt}}</p>
+		<p ng-hide="!user.email"class="user-info">E-mail: {{user.email}}</p>
+		<!-- <p class="user-info">Last Update: {{user.updatedAt}}</p> -->
 		<p class="user-info">Highest Score: {{user.highestScore}}</p>
 		<p class="user-info">Games Played: {{user.games_played}}</p>
 		<p class="user-info">Games Won: {{user.games_won}}</p>
 		<p class="user-info">Win Percentage: {{user.win_percentage}}%</p>
-		<h1 class="user-title" ui-sref="GameRecord({userId: user.id})">View game History</h1>
+		<p class="user-info">Longest Word: {{user.longestWord}}</p>
+		<h1 class="user-title" ui-sref="GameRecord({userId: user.id})">View Game History</h1>
 	</div>
-</div>

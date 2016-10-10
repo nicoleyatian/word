@@ -21,7 +21,7 @@ module.exports = db.define('game', {
         type: Sequelize.BOOLEAN,
         defaultValue: true
     }
-}
+},
 // , {
 //     hooks: {
 //         beforeUpdate: function(game) {
@@ -41,10 +41,14 @@ module.exports = db.define('game', {
 //         }
 //     }
 // }
-);
 
 
-// getterMethods: {
+ {getterMethods: {
+    date: function(){
+        return this.updatedAt.toDateString()+" at "+this.updatedAt.getHours()+":"+this.updatedAt.getMinutes()+":"+this.updatedAt.getSeconds();
+    }
+ }
+})
 //     winner: function() {
 //         return this.getUsers()
 //             .then(function(players) {
