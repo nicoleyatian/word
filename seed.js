@@ -69,7 +69,7 @@ let user = {
 
 let game = {
     roomname: faker.hacker.noun,
-    isWaiting: ()=> true,
+    isWaiting: () => true,
     inProgress: () => true
 };
 
@@ -106,7 +106,7 @@ let userGame = {
 //         process.exit(1);
 //     });
 
-function generateRows (model, number) {
+function generateRows(model, number) {
     let rows = [];
     for (let i = 0; i < number; i++) {
         let row = {};
@@ -124,7 +124,7 @@ function generateRows (model, number) {
     return rows;
 }
 
-function addRows (rows, model) {
+function addRows(rows, model) {
     let promises = [];
     while (rows.length > 0) {
         let row = model.create(rows.pop());
@@ -133,16 +133,16 @@ function addRows (rows, model) {
     return promises;
 }
 
-var seedRooms = function () {
+var seedRooms = function() {
 
     var rooms = [
-        {roomname: 'room1'},
-        {roomname: 'room2'},
-        {roomname: 'room3'},
-        {roomname: 'room4'}
+        { roomname: 'room1' },
+        { roomname: 'room2' },
+        { roomname: 'room3' },
+        { roomname: 'room4' }
     ];
 
-    var creatingRooms = rooms.map(function (room) {
+    var creatingRooms = rooms.map(function(room) {
         return Game.create(room);
     });
 
@@ -150,12 +150,12 @@ var seedRooms = function () {
 
 };
 
-function randomInt (int) {
+function randomInt(int) {
     return Math.ceil(Math.random() * int);
 }
 
-function addPlayers (game) {
-    let addData = [game.addUser(randomInt(9)), game.addUser(randomInt(9)+10), game.addUser(randomInt(9)+20), game.addUser(randomInt(9)+30)]
+function addPlayers(game) {
+    let addData = [game.addUser(randomInt(9)), game.addUser(randomInt(9) + 10), game.addUser(randomInt(9) + 20), game.addUser(randomInt(9) + 30)]
     return Promise.all(addData)
 }
 
@@ -167,15 +167,15 @@ function addPlayers (game) {
 //     })
 
 //     return Promise.all(sets);
-    
+
 // }
 
 
 db.sync({
     force: true
 })
-    
-    .then(() => Promise.all(addRows(generateRows(game, 50), Game)))
+
+.then(() => Promise.all(addRows(generateRows(game, 50), Game)))
     .then(() => Promise.all(addRows(generateRows(user, 50), User)))
     .then(() => Game.findAll()
         .then(games => {
@@ -189,20 +189,26 @@ db.sync({
     .then(() => UserGame.findAll()
         .then(userGames => {
             let updates = [];
-            userGames.forEach(userGame => {updates.push(userGame.update({score: randomInt(100)}))});
+            userGames.forEach(userGame => {
+                updates.push(userGame.update({
+                    score: randomInt(100),
+                    longestWord: 'Here is a list of longest possible words'.split(' ')[Math.floor(Math.random() * 8)]
+                }));
+            });
             return Promise.all(updates)
         }))
     .then(() => Game.findAll()
-        .then(games=> {
+        .then(games => {
             let updates = [];
-            games.forEach(game => {updates.push(game.update({isWaiting:false})); updates.push(game.update({inProgress:false}))});
+            games.forEach(game => { updates.push(game.update({ isWaiting: false }));
+                updates.push(game.update({ inProgress: false })) });
             return Promise.all(updates)
         }))
     //.then(() => Promise.all(addRows(generateRows(userGame, 150), UserGame)))
     .then(seedRooms)
 
-    //.then(seedScores)
-    .then(() => {
+//.then(seedScores)
+.then(() => {
         console.log(chalk.green('Seed successful!'));
         process.exit(0);
     })
@@ -210,4 +216,3 @@ db.sync({
         console.error(err);
         process.exit(1);
     });
-

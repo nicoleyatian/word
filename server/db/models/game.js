@@ -21,25 +21,27 @@ module.exports = db.define('game', {
         type: Sequelize.BOOLEAN,
         defaultValue: true
     }
-}, {
-    hooks: {
-        beforeUpdate: function(game) {
-            if (!game.inProgress) {
-                this.findById(game.id, {
-                        include: [{
-                            model: User
-                        }],
-                        order: [
-                            [User, UserGame, 'score', 'DESC']
-                        ]
-                    })
-                    .then(game => {
-                        game.setWinner(game.users[0])
-                    })
-            }
-        }
-    }
-});
+}
+// , {
+//     hooks: {
+//         beforeUpdate: function(game) {
+//             if (!game.inProgress) {
+//                 this.findById(game.id, {
+//                         include: [{
+//                             model: User
+//                         }],
+//                         order: [
+//                             [User, UserGame, 'score', 'DESC']
+//                         ]
+//                     })
+//                     .then(game => {
+//                         game.setWinner(game.users[0])
+//                     })
+//             }
+//         }
+//     }
+// }
+);
 
 
 // getterMethods: {

@@ -54,6 +54,32 @@
         </div>
         <br>
         <button class='btn btn-primary' ng-click='quit()'>Quit</button>
+<<<<<<< HEAD
+        <button ng-hide="hideStart" class='btn btn-primary' ng-click='startGame()'>Start Game</button>
+    </div>
+
+    <div id="start" ng-hide="hideBoard">
+        <!-- <div class="Game-info">{{ user.username }}</div> -->
+        <div id="your-word">
+        <h1 ng-click="submit(exports)"> {{ exports.word }} </h1>
+        </div>
+        <br>
+        <!-- <button >Submit</button> -->
+        <!-- <button ng-click="clear()">Clear</button> -->
+        <button class='btn btn-primary' ng-click='quit()'>Quit</button>
+        <br>
+        <div ng-repeat="otherPlayer in otherPlayers track by $index">
+            <div>{{ otherPlayer.username }}: {{ otherPlayer.score}}</div>
+        </div>
+        <p class="Game-info"> Player # {{user.id}}</p>
+        <label id="score">
+            Your Score: {{score}}
+        </label id="last_word">
+        {{message}}
+        <label>
+        </label>
+        <!-- <div class='row'> -->
+=======
         <button class='btn btn-primary' ng-click='startGame()'>Start Game</button>
 </div>
 <div id="start" ng-hide="hideBoard">
@@ -67,6 +93,7 @@
                     <li> Your Score: {{score}}</li>
                 </ul>
                 <!-- =======
+>>>>>>> b1200ce8816a39919dbc49e764379003c31b87b7
         <timer time="gameLength"></timer>
         
         <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()">
