@@ -13,8 +13,10 @@ module.exports = {
             });
     },
 
-    saveGame: function(gameObj) {
+    saveGame: function(gameObj, winnersArray, ourWords) {
         console.log('save game gameObject.id: ', gameObj.id);
+        var winnerId = null;
+        if (winnersArray.length === 1) winnerId = winnersArray[0];
         Game.findById(gameObj.id, {
                 include: [{
                     model: User,
@@ -25,9 +27,11 @@ module.exports = {
                 let updatePromises = [];
                 game.users.forEach(user => {
                     updatePromises.push(user.userGame.update({
-                        score: gameObj.playerScores[user.id]
+                        score: gameObj.playerScores[user.id],
+                        longestWord: ourWords[user.id]
                     }));
                 });
+                updatePromises.push(game.setWinner(winnerId));
                 updatePromises.push(game.update({ inProgress: false }));
                 console.log('about to run updated scores: ', updatePromises);
                 return Promise.all(updatePromises);
@@ -40,7 +44,9 @@ module.exports = {
     quitGame: function(gameId, userId) {
         Game.findById(gameId)
             .then(game => {
-                return game.removeUser(userId);
+                if (game.inProgress) {
+                    return game.removeUser(userId);
+                } else return;
             })
             .catch(e => {
                 console.log('the user was not removed correctly!')

@@ -10,20 +10,14 @@ app.config(function($stateProvider) {
 });
 
 
-app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory, $rootScope) {
-
-    AuthService.getLoggedInUser()
-        .then(function(user) {
-            console.log('user from AuthService', user);
-            $scope.user = user;
-            $scope.exports.playerId = user.id;
-        });
+app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory, $rootScope, $q) {
 
     $scope.roomName = $stateParams.roomname;
+    $scope.hideStart = true;
 
     $scope.otherPlayers = [];
 
-    $scope.gameLength = 10;
+    $scope.gameLength = 15;
 
     $scope.exports = {
         wordObj: {},
@@ -35,11 +29,13 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.mouseIsDown = false;
     $scope.draggingAllowed = false;
-    $scope.style=null;
-    $scope.message='';
-    $scope.freeze=false;
-    $scope.winOrLose=null;
-    $scope.timeout=null;
+    $scope.style = null;
+    $scope.message = '';
+    $scope.freeze = false;
+    $scope.winOrLose = null;
+    $scope.timeout = null;
+
+    $rootScope.hideNavbar = true;
 
     $scope.checkSelected = function(id) {
         return id in $scope.exports.wordObj;
@@ -63,18 +59,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.click(space, id);
         }
     };
-
-
-
-    //get the current room info
-    BoardFactory.getCurrentRoom($stateParams.roomname)
-        .then(room => {
-            console.log(room)
-            $scope.gameId = room.id;
-            $scope.otherPlayers = room.users.filter(user => user.id !== $scope.user.id);
-            $scope.otherPlayers.forEach(player => { player.score = 0 })
-            LobbyFactory.joinGame(room.id, $scope.user.id);
-        });
 
     $scope.hideBoard = true;
 
@@ -112,7 +96,8 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.click = function(space, id) {
         if ($scope.freeze) {
-            return; }
+            return;
+        }
         console.log('clicked ', space, id);
         var ltrsSelected = Object.keys($scope.exports.wordObj);
         var previousLtr = ltrsSelected[ltrsSelected.length - 2];
@@ -196,23 +181,22 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.update = function(updateObj) {
         $scope.updateScore(updateObj.pointsEarned, updateObj.playerId);
         $scope.updateBoard(updateObj.wordObj);
-        if (+$scope.user.id===+updateObj.playerId){
-            var player=$scope.user.username;
-        }
-        else{
-            for (var key in $scope.otherPlayers){
-                if (+$scope.otherPlayers[key].id===+updateObj.playerId){
-                    var player=$scope.otherPlayers[key].username;
+        if (+$scope.user.id === +updateObj.playerId) {
+            var player = $scope.user.username;
+        } else {
+            for (var key in $scope.otherPlayers) {
+                if (+$scope.otherPlayers[key].id === +updateObj.playerId) {
+                    var player = $scope.otherPlayers[key].username;
                     break;
                 }
             }
         }
-        $scope.message=player+" played "+updateObj.word+" for "+updateObj.pointsEarned+" points!";
-        if ($scope.timeout){
+        $scope.message = player + " played " + updateObj.word + " for " + updateObj.pointsEarned + " points!";
+        if ($scope.timeout) {
             clearTimeout($scope.timeout);
         }
-        $scope.timeout=setTimeout(function(){
-            $scope.message='';
+        $scope.timeout = setTimeout(function() {
+            $scope.message = '';
         }, 3000)
         console.log('its updating!');
         clearIfConflicting(updateObj, $scope.exports.wordObj);
@@ -220,60 +204,97 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         $scope.$evalAsync();
     };
 
-    $scope.replay=function(){
-        LobbyFactory.newGame($scope.roomName);
-        $scope.startGame();
-    }
+    $scope.replay = function() {
+        LobbyFactory.newGame({ roomname: $scope.roomName })
+            .then(function(game) {
+                console.log("replay game obj:", game);
 
-    $scope.determineWinner=function(winnersArray){
-        if (winnersArray.length===1){
-            if (+winnersArray[0]===+$scope.user.id){
-                $scope.winOrLose="Congratulation! You are a word wizard! You won!!!";
-            }
-            else{
-                for (var player in $scope.otherPlayers){
-                    if (+$scope.otherPlayers[player].id===+winnersArray[0]){
-                        var winner=$scope.otherPlayers[player].username;
-                        $scope.winOrLose="Tough luck. "+winner+" has beaten you. Better Luck next time. :("
+                $scope.gameId = game.id;
+                $scope.startGame();
+                var allIds = $scope.otherPlayers.map(player => player.id);
+                allIds.push($scope.user.id);
+                $q.all(allIds.map(id => {
+                    LobbyFactory.joinGame($scope.gameId, id);
+                }));
+            })
+            .catch(function(e) {
+                console.error('error restarting the game', e);
+            });
+    };
+
+    $scope.determineWinner = function(winnersArray) {
+        if (winnersArray.length === 1) {
+            if (+winnersArray[0] === +$scope.user.id) {
+                $scope.winOrLose = "Congratulation! You are a word wizard! You won!!!";
+            } else {
+                for (var player in $scope.otherPlayers) {
+                    if (+$scope.otherPlayers[player].id === +winnersArray[0]) {
+                        var winner = $scope.otherPlayers[player].username;
+                        $scope.winOrLose = "Tough luck. " + winner + " has beaten you. Better Luck next time. :("
                     }
                 }
             }
-        }
-        else{
-            let winners=[];
-            for (var i in winnersArray){
-                if (+winnersArray[i]===+$scope.user.id){winners.push($scope.user.username);}
-                else{
-                    for (var player in $scope.otherPlayers){
-                        if ($scope.otherPlayers[player].id==winnersArray[i]){
+        } else {
+            let winners = [];
+            for (var i in winnersArray) {
+                if (+winnersArray[i] === +$scope.user.id) { winners.push($scope.user.username); } else {
+                    for (var player in $scope.otherPlayers) {
+                        if ($scope.otherPlayers[player].id == winnersArray[i]) {
                             winners.push($scope.otherPlayers[player].username);
                             break;
                         }
                     }
                 }
-            $scope.winOrLose="The game was a tie between ";
-            for (var i=0; i<winners.length; i++){
-                if (i===winners.length-1){$scope.winOrLose+="and "+winners[i]+".";}
-                else{$scope.winOrLose+=winners[i]+", ";}
+                console.log(winners);
+                $scope.winOrLose = "The game was a tie between ";
+                for (var i = 0; i < winners.length; i++) {
+                    if (i === winners.length - 1) { $scope.winOrLose += "and " + winners[i] + "."; } else { $scope.winOrLose += winners[i] + ", "; }
+                }
             }
         }
     }
-}
 
-    $rootScope.hideNavbar = true;
 
-    $scope.$on('$destroy', function() { Socket.disconnect(); });
-    console.log('update 1.1')
+    $scope.$on('$destroy', function() {
+        console.log('destroyed');
+        Socket.disconnect();
+
+    });
+
     Socket.on('connect', function() {
+        console.log('connecting');
+        $q.all([
+            AuthService.getLoggedInUser()
+            .then(function(user) {
+                console.log('user from AuthService', user);
+                $scope.user = user;
+                $scope.exports.playerId = user.id;
+            }),
 
-        Socket.emit('joinRoom', $scope.user, $scope.roomName, $scope.gameId);
-        console.log('emitting "join room" event to server', $scope.roomName);
+            //get the current room info
+            BoardFactory.getCurrentRoom($stateParams.roomname)
+            .then(room => {
+                console.log(room);
+                $scope.gameId = room.id;
+                $scope.otherPlayers = room.users.filter(user => user.id !== $scope.user.id);
+                $scope.otherPlayers.forEach(player => { player.score = 0 });
+                LobbyFactory.joinGame(room.id, $scope.user.id);
+            })
+        ]).then(function() {
+            Socket.emit('joinRoom', $scope.user, $scope.roomName, $scope.gameId);
+            $scope.hideStart = false;
+            $scope.$evalAsync();
+            console.log('emitting "join room" event to server 8P', $scope.roomName);
+        }).catch(function(e) {
+            console.error('error grabbing user or room from db: ', e);
+        });
+
 
         Socket.on('roomJoinSuccess', function(user) {
             console.log('new user joining', user.id);
             user.score = 0;
             $scope.otherPlayers.push(user);
-            $scope.$digest();
+            $scope.$evalAsync();
 
         });
 
@@ -282,6 +303,8 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             console.log('board! ', board);
             $scope.board = board;
             // setInterval(function(){
+            $scope.otherPlayers.forEach(player => { player.score = 0 });
+            $scope.score = 0;
             $scope.hideBoard = false;
             $scope.$evalAsync();
             // }, 3000);
@@ -313,7 +336,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
         Socket.on('gameOver', function(winnersArray) {
             $scope.clear();
-            $scope.freeze=true;
+            $scope.freeze = true;
             $scope.determineWinner(winnersArray);
             $scope.$evalAsync();
             console.log('game is over, winners: ', winnersArray);

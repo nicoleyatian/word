@@ -114,6 +114,7 @@ router.put('/:gameId/over', (req, res, next) => {
 
 //create a new game(with room name)
 router.put('/', (req, res, next) => {
+    console.log('the req body is: ', req.body);
     Game.create(req.body)
     .then(game => {
         res.status(201).json(game);

@@ -20,10 +20,12 @@ module.exports = function(server) {
     function trackLongestWord(roomName, playerId, word){
         var ourWordMapper = roomWordMapper[roomName];
         var myLongestWord = ourWordMapper[playerId];
-        if (!myLongestWord) ourWordMapper[playerId] = word;
-        else if (myLongestWord.length < word.length) ourWordMapper[playerId] = word;
+        // if (!myLongestWord) ourWordMapper[playerId] = word;
+        // else 
+        if (myLongestWord.length < word.length) ourWordMapper[playerId] = word;
     }
 
+    //returns an array with the winner(/winners if theres a tie)
     function getWinner(scoreObj){
         var winners = [];
         for (var id in scoreObj){
@@ -57,10 +59,14 @@ module.exports = function(server) {
                 roomGameMapper[roomName] = new game.GameObject(game.tileCounts, 6, 2);
                 roomWordMapper[roomName] = {};
                 var thisGame = roomGameMapper[roomName];
+                var ourWords = roomWordMapper[roomName];
                 //associate its game id for use in persistence
                 thisGame.id = gameId;
                 //add each user to the game (enters them into scoreObj with score 0)
-                userIds.forEach(userId => thisGame.addPlayer(userId));
+                userIds.forEach(userId => {
+                    thisGame.addPlayer(userId);
+                    ourWords[userId] = '';
+                });
                 console.log(`Room ${roomName} has begun playing with game # ${gameId}`);
                 
                 io.to(roomName).emit('startBoard', thisGame.board);
@@ -73,10 +79,10 @@ module.exports = function(server) {
                     console.log('game over', gameId);
                     var winnersArray = getWinner(thisGame.playerScores);
                     var ourWords = roomWordMapper[roomName];
-                    io.to(roomName).emit('gameOver', winnersArray, ourWords);
+                    io.to(roomName).emit('gameOver', winnersArray);
 
                     //send scores to db (AND WORDS?!), set isPlaying to false
-                    persistGame.saveGame(thisGame);
+                    persistGame.saveGame(thisGame, winnersArray, ourWords);
                 }, gameLength * 1000);
             });
 
