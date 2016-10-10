@@ -4,4 +4,6 @@ npm-debug.log
 main.js
 style.css
 .DS_Store
+server/env
 coverage
+
