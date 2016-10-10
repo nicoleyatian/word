@@ -64,7 +64,7 @@ module.exports = function (app, db) {
         })
         .then(user => {
             if (user) {
-                res.resStatus(203)
+                res.sendStatus(203)
             } else {
                 User.create(req.body)
                 .then(createdUser => {
