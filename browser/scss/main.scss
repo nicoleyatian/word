@@ -62,6 +62,7 @@ div #start {
     -webkit-user-drag: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+    height: $cell-height/2;
 }
 
 .boardRow {
@@ -86,6 +87,7 @@ div #start {
     font-size: $letter-width;
     width: $cell-diameter;
     height: $cell-height;
+    line-height: $cell-height/2 + 5.75;
     // padding: 12%;
     // padding: 5px;
     background: url(images/sand.png);
@@ -225,7 +227,6 @@ div #start {
 
 @import 'directives/main';
 @import 'home/main';
-@import 'about/main';
 @import 'tutorial/main';
 @import 'login/main';
 @import 'lobby/main';
@@ -262,8 +263,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-    }
-}
+        line-height: $cell-height/2 + 6;
 
 
 /* ----------- iPhone 5 and 5S ----------- */
@@ -295,6 +295,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
     }
 }
 
@@ -323,11 +324,19 @@ div #start {
     }
     #grid {
         width: $board-width;
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     }
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+<<<<<<< HEAD
+=======
+        line-height: $cell-height/2 + 6;
+>>>>>>> master
     }
 }
 
@@ -361,6 +370,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
     }
 }
 
@@ -394,6 +404,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
     }
 }
 
@@ -427,6 +438,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
     }
 }
 
@@ -460,6 +472,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
     }
 }
 
@@ -493,6 +506,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
     }
 }
 
@@ -526,6 +540,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
     }
 }
 
@@ -559,6 +574,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
     }
 }
 
@@ -592,6 +608,7 @@ div #start {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
+        line-height: $cell-height/2 + 6;
     }
 }
 

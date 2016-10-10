@@ -35,6 +35,7 @@ module.exports = function(server) {
     }
 
     io.on('connection', function(socket) {
+        console.log("ROOMYTHINGY!", roomGameMapper);
         // Now have access to socket, wowzers!
         console.log('A new client with the socket ID of ' + socket.id + ' has connected');
 

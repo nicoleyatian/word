@@ -2,5 +2,6 @@
 node_modules
 npm-debug.log
 main.js
+style.css
 .DS_Store
 coverage
