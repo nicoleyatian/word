@@ -22,8 +22,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.freeze = false;
 
     $scope.otherPlayers = [];
-    $scope.messages = null;
-    $scope.gameLength = 150;
+    $scope.gameLength = 15;
     $scope.mouseIsDown = false;
     $scope.draggingAllowed = false;
 
@@ -45,9 +44,9 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
 
 
-    // $scope.checkSelected = function(id) {
-    //     return id in $scope.exports.wordObj;
-    // };
+    $scope.checkSelected = function(id) {
+        return id in $scope.exports.wordObj;
+    };
 
     $scope.toggleDrag = function() {
         $scope.draggingAllowed = !$scope.draggingAllowed;
@@ -75,16 +74,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         if ($scope.draggingAllowed && $scope.exports.word.length > 1) $scope.submit($scope.exports);
     }
 
-
-    // Start the game when all players have joined room
-    $scope.startGame = function() {
-        var userIds = $scope.otherPlayers.map(user => user.id);
-        userIds.push($scope.user.id);
-        console.log('op', $scope.otherPlayers, 'ui', userIds);
-        
-        BoardFactory.getStartBoard($scope.gameLength, $scope.gameId, userIds);
-    };
-
     // $element.bind('touchstart', function (e) {
     //   $scope.isSelecting = true;
     //   $scope.click(e)
@@ -95,15 +84,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     //   if ($scope.isSelecting) {
     //     $scope.click(e)
     //   }
-    // })x
-
-
-    //Quit the room, back to lobby
-    $scope.quit = function() {
-        $rootScope.hideNavbar = false;
-        $state.go('lobby', {}, {reload: true})
-    };
-
+    // })
 
     // $element.bind('mouseup touchend', function (e) {
     //   $scope.isSelecting = false;
@@ -225,14 +206,14 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
 
     //get the current room info
-    BoardFactory.getCurrentRoom($stateParams.roomname)
-        .then(room => {
-            console.log(room)
-            $scope.gameId = room.id;
-            $scope.otherPlayers = room.users.filter(user => user.id !== $scope.user.id);
-            $scope.otherPlayers.forEach(player => { player.score = 0 })
-            LobbyFactory.joinGame(room.id, $scope.user.id);
-        });
+    // BoardFactory.getCurrentRoom($stateParams.roomname)
+    //     .then(room => {
+    //         console.log(room)
+    //         $scope.gameId = room.id;
+    //         $scope.otherPlayers = room.users.filter(user => user.id !== $scope.user.id);
+    //         $scope.otherPlayers.forEach(player => { player.score = 0 })
+    //         LobbyFactory.joinGame(room.id, $scope.user.id);
+    //     });
 
 
 
@@ -249,7 +230,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     //Quit the room, back to lobby
     $scope.quit = function() {
         $rootScope.hideNavbar = false;
-        $state.go('lobby')
+        $state.go('lobby', {reload: true})
     };
 
 
@@ -423,11 +404,8 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     // });
 
     $scope.$on('$destroy', function() {
-
         console.log('changestate close', $scope.user.id);
-
         Socket.emit('leaveRoom');
-
     });
 
 

@@ -67,17 +67,17 @@
         <div class="boardRow wood-board-lg">
             <div class='col-6 vcenter'>
                 <ul id="score">
-            </div>
                     <li>{{ user.username }} </li>
                     <li> Your Score: {{ score }}</li>
                 </ul>
+            </div>
             <div class='col-6 vcenter'>
                 <ul id='otherPlayers'>
                     <div ng-repeat="otherPlayer in otherPlayers | orderBy: '-score'">
                         <li>{{ otherPlayer.username }}: {{ otherPlayer.score}}</li>
                     </div>
                 </ul>
-                <div id="message" ng-show="">
+                <div id="message">
                     <p>{{ message }}</p>
                 </div>
             </div>
