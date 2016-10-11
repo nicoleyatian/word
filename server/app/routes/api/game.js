@@ -33,11 +33,7 @@ router.get('/rooms', (req, res, next) => {
         include:[{model: User}]
     })
         .then(games => {
-            if (!games) {
-                throw new Error();
-            } else {
                 res.json(games);
-            }
         })
         .catch(next);
 });
