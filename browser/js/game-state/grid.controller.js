@@ -17,7 +17,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.otherPlayers = [];
 
-    $scope.gameLength = 15;
+    $scope.gameLength = 150;
 
     $scope.exports = {
         wordObj: {},
@@ -201,6 +201,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         console.log('its updating!');
         clearIfConflicting(updateObj, $scope.exports.wordObj);
         $scope.exports.stateNumber = updateObj.stateNumber;
+        console.log('updated obj', updateObj)
         $scope.$evalAsync();
     };
 
@@ -256,12 +257,10 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
 
     $scope.$on('$destroy', function() {
-        console.log('destroyed');
-        Socket.disconnect();
-
+        Socket.emit('leaveRoom') ;
     });
 
-    Socket.on('connect', function() {
+    // Socket.on('connect', function() {
         console.log('connecting');
         $q.all([
             AuthService.getLoggedInUser()
@@ -306,6 +305,8 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.otherPlayers.forEach(player => { player.score = 0 });
             $scope.score = 0;
             $scope.hideBoard = false;
+            $scope.message = '';
+            $scope.winOrLose = null;
             $scope.$evalAsync();
             // }, 3000);
         });
@@ -329,7 +330,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
         Socket.on('playerDisconnected', function(user) {
             console.log('playerDisconnected', user.id);
-            $scope.otherPlayers = $scope.otherPlayers.map(otherPlayers => otherPlayers.id !== user.id);
+            $scope.otherPlayers = $scope.otherPlayers.filter(otherPlayer => otherPlayer.id !== user.id);
 
             $scope.$evalAsync();
         });
@@ -341,5 +342,5 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.$evalAsync();
             console.log('game is over, winners: ', winnersArray);
         });
-    });
+    // });
 });
