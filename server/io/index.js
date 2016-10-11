@@ -17,7 +17,7 @@ module.exports = function(server) {
     //associates roomname with objects containing each player's longest word
     var roomWordMapper = {};
 
-    function trackLongestWord(roomName, playerId, word){
+    function trackLongestWord(roomName, playerId, word) {
         var ourWordMapper = roomWordMapper[roomName];
         var myLongestWord = ourWordMapper[playerId];
         // if (!myLongestWord) ourWordMapper[playerId] = word;
@@ -26,9 +26,9 @@ module.exports = function(server) {
     }
 
     //returns an array with the winner(/winners if theres a tie)
-    function getWinner(scoreObj){
+    function getWinner(scoreObj) {
         var winners = [];
-        for (var id in scoreObj){
+        for (var id in scoreObj) {
             if (winners.length === 0) winners.push(id);
             else if (scoreObj[id] > scoreObj[winners[0]]) winners = [id];
             else if (scoreObj[id] === scoreObj[winners[0]]) winners.push(id);
@@ -54,64 +54,63 @@ module.exports = function(server) {
             //     persistGame.quitGame(gameId, user.id);
             //     socket.broadcast.to(roomName).emit('playerDisconnected', user.id);
             // });
-
-            socket.on('leaveRoom', function() {
-                console.log('A client with the socket ID of ' + socket.id + ' has diconnected :(');
-                persistGame.quitGame(gameId, user.id);
-                socket.broadcast.to(roomName).emit('playerDisconnected', user);
-                socket.leave(roomName);
+        });
+        socket.on('getStartBoard', function(gameLength, gameId, userIds, roomName) {
+            //initialize GameObj for the room in the mapper
+            roomGameMapper[roomName] = new game.GameObject(game.tileCounts, 6, 2);
+            roomWordMapper[roomName] = {};
+            var thisGame = roomGameMapper[roomName];
+            var ourWords = roomWordMapper[roomName];
+            //associate its game id for use in persistence
+            thisGame.id = gameId;
+            //add each user to the game (enters them into scoreObj with score 0)
+            userIds.forEach(userId => {
+                thisGame.addPlayer(userId);
+                ourWords[userId] = '';
             });
+            console.log(`Room ${roomName} has begun playing with game # ${gameId}`);
 
-            socket.on('getStartBoard', function(gameLength, gameId, userIds) {
-                //initialize GameObj for the room in the mapper
-                roomGameMapper[roomName] = new game.GameObject(game.tileCounts, 6, 2);
-                roomWordMapper[roomName] = {};
-                var thisGame = roomGameMapper[roomName];
+            io.to(roomName).emit('startBoard', thisGame.board);
+
+            //set isPlaying to true in db
+            persistGame.startGame(thisGame.id);
+
+            setTimeout(function() {
+
+                console.log('game over', gameId);
+                var winnersArray = getWinner(thisGame.playerScores);
                 var ourWords = roomWordMapper[roomName];
-                //associate its game id for use in persistence
-                thisGame.id = gameId;
-                //add each user to the game (enters them into scoreObj with score 0)
-                userIds.forEach(userId => {
-                    thisGame.addPlayer(userId);
-                    ourWords[userId] = '';
-                });
-                console.log(`Room ${roomName} has begun playing with game # ${gameId}`);
-                
-                io.to(roomName).emit('startBoard', thisGame.board);
+                io.to(roomName).emit('gameOver', winnersArray);
 
-                //set isPlaying to true in db
-                persistGame.startGame(thisGame.id);
+                //send scores to db (AND WORDS?!), set isPlaying to false
+                persistGame.saveGame(thisGame, winnersArray, ourWords);
+            }, gameLength * 1000);
+        });
 
-                setTimeout(function() {
+        socket.on('submitWord', function(playObj, roomName) {
+            var thisGame = roomGameMapper[roomName];
+            console.log('play obj before it is checked', playObj);
+            var potentialUpdateObj = thisGame.wordPlayed(playObj);
+            if (potentialUpdateObj) {
+                console.log('update object sending!', potentialUpdateObj);
+                io.to(roomName).emit('wordValidated', potentialUpdateObj);
+                trackLongestWord(roomName, playObj.playerId, playObj.word);
+            }
+        });
 
-                    console.log('game over', gameId);
-                    var winnersArray = getWinner(thisGame.playerScores);
-                    var ourWords = roomWordMapper[roomName];
-                    io.to(roomName).emit('gameOver', winnersArray);
+        socket.on('shuffleBoard', function(user, roomName) {
+            var thisGame = roomGameMapper[roomName];
+            thisGame.shuffle();
+            thisGame.playerScores[user.id] -= 5;
+            console.log('server shuffling');
+            io.to(roomName).emit('boardShuffled', thisGame.board, user, thisGame.stateNumber);
+        });
 
-                    //send scores to db (AND WORDS?!), set isPlaying to false
-                    persistGame.saveGame(thisGame, winnersArray, ourWords);
-                }, gameLength * 1000);
-            });
-
-            socket.on('submitWord', function(playObj) {
-                var thisGame = roomGameMapper[roomName];
-                console.log('play obj before it is checked', playObj);
-                var potentialUpdateObj = thisGame.wordPlayed(playObj);
-                if (potentialUpdateObj) {
-                    console.log('update object sending!', potentialUpdateObj);
-                    io.to(roomName).emit('wordValidated', potentialUpdateObj);
-                    trackLongestWord(roomName, playObj.playerId, playObj.word);
-                }
-            });
-
-            socket.on('shuffleBoard', function(userId){
-                var thisGame = roomGameMapper[roomName];
-                thisGame.shuffle();
-                thisGame.playerScores[userId]-=5;
-                console.log('server shuffling');
-                io.to(roomName).emit('boardShuffled', thisGame.board, userId, thisGame.stateNumber);
-            });
+        socket.on('leaveRoom', function(user, roomName, gameId) {
+            console.log('A client with the socket ID of ' + socket.id + ' has diconnected :(');
+            persistGame.quitGame(gameId, user.id);
+            socket.broadcast.to(roomName).emit('playerDisconnected', user);
+            socket.leave(roomName);
         });
     });
     return io;
