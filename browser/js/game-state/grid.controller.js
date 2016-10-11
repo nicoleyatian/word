@@ -75,7 +75,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     //Quit the room, back to lobby
     $scope.quit = function() {
         $rootScope.hideNavbar = false;
-        $state.go('lobby')
+        $state.go('lobby', {}, {reload: true})
     };
 
 

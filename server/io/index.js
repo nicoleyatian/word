@@ -58,7 +58,7 @@ module.exports = function(server) {
             socket.on('leaveRoom', function() {
                 console.log('A client with the socket ID of ' + socket.id + ' has diconnected :(');
                 persistGame.quitGame(gameId, user.id);
-                socket.broadcast.to(roomName).emit('playerDisconnected', user.id);
+                socket.broadcast.to(roomName).emit('playerDisconnected', user);
                 socket.leave(roomName);
             });
 
