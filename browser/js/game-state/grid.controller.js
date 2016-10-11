@@ -24,7 +24,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.otherPlayers = [];
     $scope.messages = null;
     $scope.gameLength = 150;
-
     $scope.mouseIsDown = false;
     $scope.draggingAllowed = false;
 
@@ -34,6 +33,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.timeout = null;
 
     $scope.score = 0;
+
 
     $scope.exports = {
         wordObj: {},
@@ -75,16 +75,35 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         if ($scope.draggingAllowed && $scope.exports.word.length > 1) $scope.submit($scope.exports);
     }
 
+
+    // Start the game when all players have joined room
+    $scope.startGame = function() {
+        var userIds = $scope.otherPlayers.map(user => user.id);
+        userIds.push($scope.user.id);
+        console.log('op', $scope.otherPlayers, 'ui', userIds);
+        
+        BoardFactory.getStartBoard($scope.gameLength, $scope.gameId, userIds);
+    };
+
     // $element.bind('touchstart', function (e) {
     //   $scope.isSelecting = true;
     //   $scope.click(e)
     // })
+
 
     // $element.bind('mousemove touchmove', function (e) {
     //   if ($scope.isSelecting) {
     //     $scope.click(e)
     //   }
     // })x
+
+
+    //Quit the room, back to lobby
+    $scope.quit = function() {
+        $rootScope.hideNavbar = false;
+        $state.go('lobby', {}, {reload: true})
+    };
+
 
     // $element.bind('mouseup touchend', function (e) {
     //   $scope.isSelecting = false;
@@ -324,6 +343,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         console.log('its updating!');
         clearIfConflicting(updateObj, $scope.exports.wordObj);
         $scope.exports.stateNumber = updateObj.stateNumber;
+        console.log('updated obj', updateObj)
         $scope.$evalAsync();
     };
 
@@ -395,13 +415,30 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     }
 
 
+    // $scope.$on('$stateChangeStart', function() {
+    //     console.log('changestate', $scope.user.id);
+    //     Socket.close();
+    //     // Socket.reconnect();
+
+    // });
+
     $scope.$on('$destroy', function() {
-        console.log('destroyed');
-        Socket.disconnect();
+
+        console.log('changestate close', $scope.user.id);
+
+        Socket.emit('leaveRoom');
 
     });
 
-    Socket.on('connect', function() {
+
+
+    
+
+console.log('update')
+
+    // Socket.on('connect', function() {
+        // $scope.checkConnect();
+
         console.log('connecting');
         $q.all([
             AuthService.getLoggedInUser()
@@ -446,6 +483,9 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.score = 0;
             $scope.hideStart = true;
             $scope.hideBoard = false;
+            $scope.message = '';
+            $scope.winOrLose = null;
+
             $scope.$evalAsync();
         });
 
@@ -468,7 +508,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
         Socket.on('playerDisconnected', function(user) {
             console.log('playerDisconnected', user.id);
-            $scope.otherPlayers = $scope.otherPlayers.map(otherPlayers => otherPlayers.id !== user.id);
+            $scope.otherPlayers = $scope.otherPlayers.filter(otherPlayer => otherPlayer.id !== user.id);
 
             $scope.$evalAsync();
         });
@@ -480,5 +520,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.$evalAsync();
             console.log('game is over, winners: ', winnersArray);
         });
-    });
+    // });
+
 });
