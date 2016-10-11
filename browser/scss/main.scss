@@ -709,3 +709,41 @@ div.oauth {
 #header{
     text-align: center;
 }
+
+#ugly {
+    width: 50%;
+    height: 30vw;
+    margin: auto;
+}
+
+#dance{
+    width: 20%;
+    height: 20vw;
+    margin: auto;
+}
+
+.instructions {
+    margin: auto;
+    text-align: center;
+}
+
+.instructions > p{
+    width: 50%;
+    margin: auto;
+    background-color: white;
+}
+
+.instructions > h1{
+    color: red;
+}
+
+#clicker{
+    color: white;
+    width: 25%;
+    text-align: center;
+    margin: auto;
+}
+
+#yeah{
+    font-size: 24pt;
+}
