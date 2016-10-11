@@ -9,15 +9,17 @@
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+
             <li>
-                <button ng-show="!user" ui-sref="signup" class="btn login-button">Signup</button>
+                <button ng-show="!user" ui-sref="signup" class="btn btn-primary">Signup</button>
             </li>
             <li>
-                <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
+                <button ng-show="!user" ui-sref="login" class="btn btn-primary">Login</button>
             </li>
+
         </ul>
         <div ng-show="user" class="welcome">
-            <span>Welcome, {{ user.email }}!</span>
+            <span>Welcome, {{ user.username }}!</span>
             <a ng-click="logout()">Logout</a>
         </div>
     </div>

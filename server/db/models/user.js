@@ -29,25 +29,46 @@ module.exports = db.define('user', {
     google_id: {
         type: Sequelize.STRING
     }
-    // highestScore: {
-    //     type: Sequelize.INTEGER,
-    //     defaultValue: 0
-    // },
-    // games_won:{
-    //     type: Sequelize.INTEGER,
-    //     defaultValue: 0
-    // },
-    // games_played: {
-    //     type: Sequelize.INTEGER,
-    //     defaultValue: 0
-    // }
 }, {
     getterMethods:{
+        highestScore:function(){
+            console.log(this.games)
+            var score=0;
+            for (var game in this.games){
+                if (this.games[game].userGame.score>score){score=this.games[game].userGame.score}
+            }
+        return score;
+        },
+        games_played: function(){
+            var total=0;
+            for (var game in this.games){
+                total+=1;
+            }
+            return total;
+        },
+        games_won: function(){
+            var total=0;
+            for (var game in this.games){
+                if (this.games[game].winnerId===this.id){
+                    total+=1;
+                }
+            }
+            return total;
+        },
         win_percentage: function(){
             if (this.games_played===0){
                 return 0;
             }
-            return  (this.games_won/this.games_played)*100;
+            return  ((this.games_won/this.games_played)*100).toFixed(2);
+        },
+        longestWord: function(){
+            var longest='';
+            for (var game in this.games){
+                if (this.games[game].userGame.longestWord.length>longest.length){
+                    longest=this.games[game].userGame.longestWord;
+                }
+            }
+            return longest;
         }
     },
     instanceMethods: {
