@@ -67,7 +67,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         var userIds = $scope.otherPlayers.map(user => user.id);
         userIds.push($scope.user.id);
         console.log('op', $scope.otherPlayers, 'ui', userIds);
-        $scope.winOrLose=null;
+        
         BoardFactory.getStartBoard($scope.gameLength, $scope.gameId, userIds);
     };
 
@@ -88,7 +88,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         ['h', 'i', 'j', 'f', 'o', 'a']
     ];
 
-    $scope.messages = null;
+
 
     $scope.size = 3;
     $scope.score = 0;
@@ -256,11 +256,30 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     }
 
 
+    // $scope.$on('$stateChangeStart', function() {
+    //     console.log('changestate', $scope.user.id);
+    //     Socket.close();
+    //     // Socket.reconnect();
+
+    // });
+
     $scope.$on('$destroy', function() {
-        Socket.emit('leaveRoom') ;
+
+        console.log('changestate close', $scope.user.id);
+
+        Socket.emit('leaveRoom');
+
     });
 
+
+
+    
+
+console.log('update')
+
     // Socket.on('connect', function() {
+        // $scope.checkConnect();
+
         console.log('connecting');
         $q.all([
             AuthService.getLoggedInUser()
@@ -307,6 +326,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.hideBoard = false;
             $scope.message = '';
             $scope.winOrLose = null;
+
             $scope.$evalAsync();
             // }, 3000);
         });
@@ -343,4 +363,5 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             console.log('game is over, winners: ', winnersArray);
         });
     // });
+
 });
