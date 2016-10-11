@@ -43,7 +43,7 @@
         </div>
 </div> -->
 <!-- <h1 id="title">Wordgame</h1> -->
-<div id="start" ng-hide="hideStart">
+<div id="start" ng-show="hideBoard">
     <ul class="Game-info">
         <li id='user'>{{ user.username }}</li>
         <div ng-hide="otherPlayers.length > 0">
@@ -104,7 +104,7 @@
         </div>
     </div>
     <div class='flexbox'>
-        <button class='btn btn-wood' ng-click="shuffle(user)">Shuffle</button>
+        <button class='btn btn-wood' ng-click="shuffle(user, roomName)">Shuffle</button>
         <button class='btn btn-wood' ng-click="toggleDrag()">{{ draggingAllowed ? 'Click ':'Drag '}}To Select</button>
         <button class='btn btn-primary' ng-click='quit()'>Quit</button>
     </div>
