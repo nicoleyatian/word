@@ -66,6 +66,7 @@ router.get('/:userId/games', function(req, res, next){
             }
         })
         .then(function(games){
+            console.log("GAMES!!!"+games)
             res.send(games);
         })
         .catch(next);
