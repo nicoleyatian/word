@@ -2,7 +2,8 @@
 var crypto = require('crypto');
 var _ = require('lodash');
 var Sequelize = require('sequelize');
-// var User = require('./user.js');
+//var User = require('./user.js');
+var Games=require("./game.js");
 
 var db = require('../_db');
 
@@ -12,6 +13,6 @@ module.exports = db.define('userGame', {
         },
         longestWord: {
         	type: Sequelize.STRING
-        }
+        }	
     }
 );

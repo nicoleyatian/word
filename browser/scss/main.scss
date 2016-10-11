@@ -673,3 +673,37 @@ div.oauth {
         line-height: $cell-height;
     }
 }
+
+//game record state
+
+#game_table {
+    width: 75%;
+    margin: auto;
+    border: 10px solid black;
+    background-color: white;
+}
+
+#game_table tr{
+    margin: auto;
+}
+
+#game_table .game_cell {
+    border: 5px solid black;
+    height: 50px;
+}
+
+#game_table .table_headers{
+    font-size: 24pt;
+    font-weight: bold;
+    text-align: center;
+}
+
+#game_table .cell_data {
+    font-size: 18pt;
+    text-align: center;
+    margin: auto;
+}
+
+#header{
+    text-align: center;
+}
