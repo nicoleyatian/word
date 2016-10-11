@@ -48,11 +48,21 @@ module.exports = function(server) {
 
             socket.broadcast.to(roomName).emit('roomJoinSuccess', user);
 
-            socket.on('disconnect', function() {
-                console.log('A client with the socket ID of ' + socket.id + ' has diconnected :(');
+            // socket.on('disconnect', function() {
+            //     console.log('A client with the socket ID of ' + socket.id + ' has diconnected :(');
+            //     
+            //     socket.broadcast.to(roomName).emit('playerDisconnected', user.id);
+            //     socket.leave(roomName);
+            //     socket.io.disconnect();
+            //     socket.socket.reconnect();
+            // });
+
+            socket.on('leaveRoom', function(){
+                console.log('A client with the socket ID of ' + socket.id + 'leave' + roomName);
                 persistGame.quitGame(gameId, user.id);
-                socket.broadcast.to(roomName).emit('playerDisconnected', user.id);
-            });
+                socket.broadcast.to(roomName).emit('playerDisconnected', user);
+                socket.leave(roomName);
+            })
 
             socket.on('getStartBoard', function(gameLength, gameId, userIds) {
                 //initialize GameObj for the room in the mapper

@@ -9,7 +9,7 @@
 
     app.factory('Socket', function () {
         if (!window.io) throw new Error('socket.io not found!');
-        return window.io(window.location.origin);
+        return window.io(window.location.origin,{'forceNew': true});
     });
 
     // AUTH_EVENTS is used throughout our app to
