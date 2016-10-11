@@ -204,8 +204,13 @@ div #start {
     text-align: center;
 }
 
+
 div.oauth {
   text-align: center;
+
+#crabdance {
+    width: $board-width;
+    padding-left: $board-width/4;
 }
 
 
@@ -282,6 +287,8 @@ div.oauth {
         width: $cell-diameter;
         height: $cell-height;
         line-height: $cell-height/2 + 6;
+    }
+}
 
 
 /* ----------- iPhone 5 and 5S ----------- */
@@ -342,19 +349,12 @@ div.oauth {
     }
     #grid {
         width: $board-width;
-<<<<<<< HEAD
-=======
-
->>>>>>> master
     }
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-<<<<<<< HEAD
-=======
         line-height: $cell-height/2 + 6;
->>>>>>> master
     }
 }
 

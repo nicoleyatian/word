@@ -13,10 +13,27 @@ app.config(function($stateProvider) {
 app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory, $rootScope, $q) {
 
     $scope.roomName = $stateParams.roomname;
+
+    $scope.hideBoard = true;
     $scope.hideStart = true;
+    $scope.hideCrabdance = true;
+    $scope.crabdances = 0;
+    $rootScope.hideNavbar = true;
+    $scope.freeze = false;
 
     $scope.otherPlayers = [];
-    $scope.gameLength = 1000;
+    $scope.messages = null;
+    $scope.gameLength = 150;
+
+    $scope.mouseIsDown = false;
+    $scope.draggingAllowed = false;
+
+    $scope.style = null;
+    $scope.message = '';
+    $scope.winOrLose = null;
+    $scope.timeout = null;
+
+    $scope.score = 0;
 
     $scope.exports = {
         wordObj: {},
@@ -26,15 +43,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         pointsEarned: null
     };
 
-    $scope.mouseIsDown = false;
-    $scope.draggingAllowed = false;
-    $scope.style = null;
-    $scope.message = '';
-    $scope.freeze = false;
-    $scope.winOrLose = null;
-    $scope.timeout = null;
-
-    $rootScope.hideNavbar = true;
 
 
     // $scope.checkSelected = function(id) {
@@ -208,14 +216,13 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         });
 
 
-    $scope.hideBoard = true;
 
     // Start the game when all players have joined room
     $scope.startGame = function() {
         var userIds = $scope.otherPlayers.map(user => user.id);
         userIds.push($scope.user.id);
         console.log('op', $scope.otherPlayers, 'ui', userIds);
-        $scope.winOrLose=null;
+        $scope.winOrLose = null;
         BoardFactory.getStartBoard($scope.gameLength, $scope.gameId, userIds);
     };
 
@@ -225,21 +232,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         $rootScope.hideNavbar = false;
         $state.go('lobby')
     };
-
-
-    $scope.board = [
-        ['b', 'a', 'd', 'e', 'a', 'r'],
-        ['e', 'f', 'g', 'l', 'm', 'e'],
-        ['h', 'i', 'j', 'f', 'o', 'a'],
-        ['c', 'a', 'd', 'e', 'a', 'r'],
-        ['e', 'f', 'g', 'l', 'd', 'e'],
-        ['h', 'i', 'j', 'f', 'o', 'a']
-    ];
-
-    $scope.messages = null;
-
-    $scope.size = 3;
-    $scope.score = 0;
 
 
     //makes sure letter is adjacent to prev ltr, and hasn't been used yet
@@ -308,6 +300,10 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.update = function(updateObj) {
         $scope.updateScore(updateObj.pointsEarned, updateObj.playerId);
         $scope.updateBoard(updateObj.wordObj);
+        if (updateObj.word.length > 3 && updateObj.playerId != $scope.user.id) {
+            if (!$scope.crabdances) crabdance();
+            $scope.crabdances++;
+        }
         if (+$scope.user.id === +updateObj.playerId) {
             var player = $scope.user.username;
         } else {
@@ -324,12 +320,28 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         }
         $scope.timeout = setTimeout(function() {
             $scope.message = '';
-        }, 3000)
+        }, 3000);
         console.log('its updating!');
         clearIfConflicting(updateObj, $scope.exports.wordObj);
         $scope.exports.stateNumber = updateObj.stateNumber;
         $scope.$evalAsync();
     };
+
+    function crabdance() {
+        $scope.hideBoard = true;
+        $scope.hideCrabdance = false;
+        console.log('dance crab!', $scope.crabdances);
+        setTimeout(function() {
+            $scope.crabdances--;
+            if ($scope.crabdances) {
+                crabdance();
+            }
+            else {
+                $scope.hideCrabdance = true;
+                $scope.hideBoard = false;
+            }
+        }, 3000);
+    }
 
     $scope.replay = function() {
 
@@ -430,12 +442,11 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.freeze = false;
             console.log('board! ', board);
             $scope.board = board;
-            // setInterval(function(){
             $scope.otherPlayers.forEach(player => { player.score = 0 });
             $scope.score = 0;
+            $scope.hideStart = true;
             $scope.hideBoard = false;
             $scope.$evalAsync();
-            // }, 3000);
         });
 
         Socket.on('wordValidated', function(updateObj) {
