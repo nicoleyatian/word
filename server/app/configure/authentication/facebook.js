@@ -26,7 +26,9 @@ module.exports = function (app, db) {
                     return user;
                 } else {
                     return User.create({
-                        facebook_id: profile.id
+                        facebook_id: profile.id,
+                        username: profile.displayName,
+                        email: profile.emails ? profile.emails[0].value : null
                     });
                 }
             })
