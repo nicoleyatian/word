@@ -7,7 +7,7 @@
         </form>
     </div>
     <div class='row'>
-        <a class='room col-md-4' ng-repeat='room in rooms' ui-sref='Game({roomname: room.roomname})' ui-sref-opts="{reload: true, notify: true}">
+        <a class='room col-md-4' ng-repeat='room in rooms | orderBy: "-room.id"' ui-sref='Game({roomname: room.roomname})' ui-sref-opts="{reload: true, notify: true}">
             <!-- <ul> -->
             <p>{{room.roomname}}</p>
             <!-- <li>Players: {{room.users.length}}/4</li> -->
