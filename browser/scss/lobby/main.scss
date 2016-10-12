@@ -1,1 +1,31 @@
-* {}
+#lobby {
+	.new {
+		display: block;
+		text-align: center;
+		form {
+			margin: 5px auto;
+			width: 400px;
+		}
+
+	}
+	.row {
+		display: flex;
+		flex-wrap: wrap;
+		width: 80%;
+		margin: 0 auto;
+	}
+	.room {
+		background-image: url(images/room.png);
+		background-color: transparent;
+	    background-size: 100% 100%;
+	    border: none;
+	    width: 120px;
+	    height: 120px;
+
+	    p {
+	    	text-align: center;
+	    	margin-top: 65px;
+	    	color: white;
+	    }
+	}
+}

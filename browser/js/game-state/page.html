@@ -43,7 +43,7 @@
         </div>
 </div> -->
 <!-- <h1 id="title">Wordgame</h1> -->
-<div id="start" ng-hide="hideStart">
+<div id="start" ng-hide="!hideStart">
     <ul class="Game-info">
         <li id='user'>{{ user.username }}</li>
         <div ng-hide="otherPlayers.length > 0">
@@ -54,13 +54,14 @@
         </div>
         <br>
         <button class='btn btn-primary' ng-click='quit()'>Quit</button>
-        <button class='btn btn-primary' ng-click='startGame()' ng-hide="otherPlayers.length===0">Start Game</button>
+        <button class='btn btn-primary' ng-click='startGame()' ng-hide="otherPlayers.length!==0">Start Game</button>
 </div>
 <div ng-hide="hideCrabdance">
     <h1>{{ message }}</h1>
     <img id="crabdance" src="/images/crabdance.gif">
 </div>
-<div id="start" ng-hide="hideBoard">
+<div id="start">
+ <!-- ng-hide="!hideBoard"> -->
     <!-- <div class="Game-info">{{ user.username }}</div> -->
     <!-- <div class='row'> -->
     <div id="scoreBoard">
