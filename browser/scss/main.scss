@@ -7,10 +7,16 @@ $number-cells: 6;
 $cell-diameter: 100%/($number-cells+.5);
 $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
 $letter-width: $cell-height/2;
+
 body {
-    background: #fdfdfd;
+    background: url(images/coral-background.jpg) no-repeat center center;
+    height: 100%;
+    background-size: cover;
     font-family: Quicksand;
     font-weight: 400;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
 }
 
 @mixin clearfix {
@@ -21,23 +27,104 @@ body {
     }
 }
 
+.crab-logo {
+    text-align: center;
+    margin-top: -50px;
+    margin-bottom: -30px;
+}
+
+#crab {
+    max-width: 200px;
+    max-height: 200px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.project-title {
+    margin: 0;
+    font: bold 110px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    letter-spacing: 5px;
+    color: #fff;
+    text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+    -webkit-transition: .2s all linear;
+}
+
 .lobby-button {
+    margin-top: 10px;
+    margin-right: 10px;
     text-align: center;
 }
 
+.btn-lobby {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    width: 225px;
+    height: 60px;
+    cursor: pointer;
+    margin: 0 auto;
+    border: 2px solid rgba(255, 255, 255, 1);
+    -webkit-border-radius: 40px;
+    border-radius: 40px;
+    font: normal 25px/50px "Advent Pro", Helvetica, sans-serif;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    letter-spacing: 1px;
+    background: rgba(179, 188, 204, 0.55);
+    -webkit-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+    -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+    -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+    transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+}
+
+.btn-lobby:hover {
+    color: rgba(255, 255, 255, 1);
+    background: rgba(11, 61, 142, 0.8);
+}
+
+
+.btn-lobby:active {
+    border: 2px solid rgba(33, 224, 163, 1);
+    background: rgba(33, 224, 163, 1);
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+
 .btn-primary {
-    margin-right: 5px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 100px;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: -10px;
 }
 
 #main {
     padding-top: 60px;
-    margin: 0 auto;
     background: url(images/ocean.jpg);
 }
 
 #your-word {
     height: $cell-height/2;
     text-align: center;
+}
+
+#signup-form {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+.form-group {
+    color: white;
 }
 
 #title {
@@ -116,9 +203,8 @@ div #start {
 }
 
 .green {
- background-color: green;
+    background-color: green;
 }
-
 
 #panel {
     width: 50%;
@@ -153,10 +239,10 @@ div #start {
         list-style: none;
     }
     #user {
-
-        font-size:16px;
+        font-size: 16px;
     }
 }
+
 #score {
     // margin-right: 25%;
     padding-left: 5px;
@@ -204,16 +290,16 @@ div #start {
     text-align: center;
 }
 
-
 div.oauth {
-  text-align: center;
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 40px;
 }
 
 #crabdance {
     width: $board-width;
     padding-left: $board-width/4;
 }
-
 
 .flexbox {
     width: 80%;
@@ -237,6 +323,7 @@ div.oauth {
     background-size: 100% 100%;
     border: none;
 }
+
 .wood-board-sm {
     background-image: url(images/woodBtn.png);
     background-size: 80% 100%;
@@ -246,9 +333,1291 @@ div.oauth {
     height: 80px
 }
 
-#plays {}
+// bubble animations
+.bubble_wrap {
+    height: 299px;
+    left: 7px;
+    position: absolute;
+    top: 30px;
+    width: 340px;
+}
+
+.bubbles {
+    background-color: rgba(255, 255, 255, 0.26);
+    border: 0px solid #585858;
+    border-radius: 100px 100px 100px 100px;
+    -moz-border-radius: 100px 100px 100px 100px;
+    -webkit-border-radius: 100px 100px 100px 100px;
+    -o-border-radius: 100px 100px 100px 100px;
+    -ms-border-radius: 100px 100px 100px 100px;
+    height: 20px;
+    left: 33px;
+    position: absolute;
+    top: 260px;
+    width: 20px;
+}
+
+.b2 {
+    left: 50px;
+    top: 260px;
+}
+
+.b3 {
+    left: 60px;
+    top: 260px;
+}
+
+.b4 {
+    left: 80px;
+    top: 260px;
+}
+
+.b5 {
+    left: 90px;
+    top: 260px;
+}
 
 
+/*start of bubble animations*/
+
+.b0 {
+    animation-name: bubbles;
+    animation-delay: 2s;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -moz-animation-name: bubbles;
+    -moz-animation-delay: 2s;
+    -moz-animation-duration: 4s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -webkit-animation-name: bubbles;
+    -webkit-animation-delay: 2s;
+    -webkit-animation-duration: 4s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+@keyframes bubbles {
+    from {
+        top: 260px;
+        left: 33px;
+    }
+    50% {
+        left: 39px;
+    }
+    to {
+        top: 0px;
+        left: 33px;
+    }
+}
+
+@-moz-keyframes bubbles {
+    from {
+        top: 260px;
+        left: 33px;
+    }
+    50% {
+        left: 39px;
+    }
+    to {
+        top: 0px;
+        left: 33px;
+    }
+}
+
+@-webkit-keyframes bubbles {
+    from {
+        top: 260px;
+        left: 33px;
+    }
+    50% {
+        left: 39px;
+    }
+    to {
+        top: 0px;
+        left: 33px;
+    }
+}
+
+.b1 {
+    animation-name: bubbles;
+    animation-duration: 7s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -moz-animation-name: bubbles;
+    -moz-animation-duration: 7s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -webkit-animation-name: bubbles;
+    -webkit-animation-duration: 7s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+@keyframes bubbles {
+    from {
+        top: 260px;
+    }
+    to {
+        top: 0px;
+    }
+}
+
+@-moz-keyframes bubbles {
+    from {
+        top: 260px;
+    }
+    to {
+        top: 0px;
+    }
+}
+
+@-webkit-keyframes bubbles {
+    from {
+        top: 260px;
+    }
+    to {
+        top: 0px;
+    }
+}
+
+.b2 {
+    animation-name: bubbles;
+    animation-delay: 1s;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -moz-animation-name: bubbles;
+    -moz-animation-delay: 1s;
+    -moz-animation-duration: 4s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -webkit-animation-name: bubbles;
+    -webkit-animation-delay: 1s;
+    -webkit-animation-duration: 4s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+@keyframes bubbles {
+    from {
+        top: 260px;
+    }
+    to {
+        top: 0px;
+    }
+}
+
+@-moz-keyframes bubbles {
+    from {
+        top: 260px;
+    }
+    to {
+        top: 0px;
+    }
+}
+
+@-webkit-keyframes bubbles {
+    from {
+        top: 260px;
+    }
+    to {
+        top: 0px;
+    }
+}
+
+.b3 {
+    animation-name: bubbles;
+    animation-delay: 3s;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -moz-animation-name: bubbles;
+    -moz-animation-delay: 3s;
+    -moz-animation-duration: 3s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -webkit-animation-name: bubbles;
+    -webkit-animation-delay: 3s;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+@keyframes bubbles {
+    from {
+        top: 260px;
+        left: 60px;
+    }
+    25% {
+        left: 30px;
+    }
+    50% {
+        left: 58px;
+    }
+    75% {
+        left: 37px;
+    }
+    to {
+        top: 0px;
+        left: 60px;
+    }
+}
+
+@-moz-keyframes bubbles {
+    from {
+        top: 260px;
+        left: 60px;
+    }
+    25% {
+        left: 30px;
+    }
+    50% {
+        left: 58px;
+    }
+    75% {
+        left: 37px;
+    }
+    to {
+        top: 0px;
+        left: 60px;
+    }
+}
+
+@-webkit-keyframes bubbles {
+    from {
+        top: 260px;
+        left: 60px;
+    }
+    25% {
+        left: 30px;
+    }
+    50% {
+        left: 58px;
+    }
+    75% {
+        left: 37px;
+    }
+    to {
+        top: 0px;
+        left: 60px;
+    }
+}
+
+.b4 {
+    animation-name: bubbles;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -moz-animation-name: bubbles;
+    -moz-animation-duration: 6s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -webkit-animation-name: bubbles;
+    -webkit-animation-duration: 6s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+@keyframes bubbles {
+    from {
+        top: 260px;
+    }
+    to {
+        top: 0px;
+    }
+}
+
+@-moz-keyframes bubbles {
+    from {
+        top: 260px;
+    }
+    to {
+        top: 0px;
+    }
+}
+
+@-webkit-keyframes bubbles {
+    from {
+        top: 260px;
+    }
+    to {
+        top: 0px;
+    }
+}
+
+.b5 {
+    animation-name: bubbles;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -moz-animation-name: bubbles;
+    -moz-animation-duration: 5s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -webkit-animation-name: bubbles;
+    -webkit-animation-duration: 5s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+@keyframes bubbles {
+    from {
+        top: 260px;
+    }
+    to {
+        top: 0px;
+    }
+}
+
+@-moz-keyframes bubbles {
+    from {
+        top: 260px;
+    }
+    to {
+        top: 0px;
+    }
+}
+
+@-webkit-keyframes bubbles {
+    from {
+        top: 260px;
+    }
+    to {
+        top: 0px;
+    }
+}
+
+
+/*tail bubbles*/
+
+.b6,
+.b7,
+.b8 {
+    opacity: 0;
+}
+
+.b6,
+.b8 {
+    transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    -webkit-transform: scale(0.5);
+    -ms-transform: scale(0.5);
+    -o-transform: scale(0.5);
+}
+
+.b7 {
+    transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    -o-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+}
+
+.bw2 {
+    width: 80px;
+    animation-name: tail_bubbles;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -moz-animation-name: tail_bubbles;
+    -moz-animation-duration: 30s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -webkit-animation-name: tail_bubbles;
+    -webkit-animation-duration: 30s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+@keyframes tail_bubbles {
+    from {
+        left: 30px;
+    }
+    48% {
+        left: 30px;
+    }
+    50.5% {
+        left: 760px;
+    }
+    65% {
+        left: 760px;
+    }
+    70.5% {
+        left: 30px;
+    }
+    78% {
+        left: 30px;
+    }
+    82.5% {
+        left: 720px;
+    }
+    92% {
+        left: 720px;
+    }
+    to {
+        left: 30px;
+    }
+}
+
+@-moz-keyframes tail_bubbles {
+    from {
+        left: 30px;
+    }
+    48% {
+        left: 30px;
+    }
+    50.5% {
+        left: 760px;
+    }
+    65% {
+        left: 760px;
+    }
+    70.5% {
+        left: 30px;
+    }
+    78% {
+        left: 30px;
+    }
+    82.5% {
+        left: 720px;
+    }
+    92% {
+        left: 720px;
+    }
+    to {
+        left: 30px;
+    }
+}
+
+@-webkit-keyframes tail_bubbles {
+    from {
+        left: 30px;
+    }
+    48% {
+        left: 30px;
+    }
+    50.5% {
+        left: 760px;
+    }
+    65% {
+        left: 760px;
+    }
+    70.5% {
+        left: 30px;
+    }
+    78% {
+        left: 30px;
+    }
+    82.5% {
+        left: 720px;
+    }
+    92% {
+        left: 720px;
+    }
+    to {
+        left: 30px;
+    }
+}
+
+.b6 {
+    animation-name: tail_bubble1;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -moz-animation-name: tail_bubble1;
+    -moz-animation-duration: 30s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -webkit-animation-name: tail_bubble1;
+    -webkit-animation-duration: 30s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+@keyframes tail_bubble1 {
+    from {
+        left: 30px;
+        top: 205px;
+    }
+    20.5% {
+        opacity: 0;
+    }
+    21% {
+        left: 30px;
+        top: 205px;
+        opacity: 1;
+    }
+    26% {
+        opacity: 1;
+        left: 60px;
+        top: 105px;
+    }
+    26.3% {
+        opacity: 0;
+    }
+    40% {
+        left: 60px;
+        top: 205px;
+    }
+    50% {
+        opacity: 0;
+    }
+    50.5% {
+        opacity: 1;
+        left: 60px;
+        top: 205px;
+    }
+    54.3% {
+        opacity: 0;
+    }
+    55% {
+        left: 60px;
+        top: 105px;
+    }
+    65% {
+        left: 60px;
+    }
+    70% {
+        opacity: 0;
+    }
+    70.5% {
+        opacity: 1;
+        left: 30px;
+        top: 210px;
+    }
+    73.3% {
+        opacity: 0;
+    }
+    73% {
+        left: 30px;
+        top: 105px;
+    }
+    78% {
+        left: 30px;
+    }
+    82.3% {
+        opacity: 0;
+    }
+    82.5% {
+        opacity: 1;
+        left: 20px;
+        top: 150px;
+    }
+    86.3% {
+        opacity: 0;
+    }
+    87% {
+        left: 20px;
+        top: 30px;
+    }
+    92% {
+        left: 20px;
+    }
+    to {
+        left: 30px;
+    }
+}
+
+@-moz-keyframes tail_bubble1 {
+    from {
+        left: 30px;
+        top: 205px;
+    }
+    20.5% {
+        opacity: 0;
+    }
+    21% {
+        left: 30px;
+        top: 205px;
+        opacity: 1;
+    }
+    26% {
+        opacity: 1;
+        left: 60px;
+        top: 105px;
+    }
+    26.3% {
+        opacity: 0;
+    }
+    40% {
+        left: 60px;
+        top: 205px;
+    }
+    50% {
+        opacity: 0;
+    }
+    50.5% {
+        opacity: 1;
+        left: 60px;
+        top: 205px;
+    }
+    54.3% {
+        opacity: 0;
+    }
+    55% {
+        left: 60px;
+        top: 105px;
+    }
+    65% {
+        left: 60px;
+    }
+    70% {
+        opacity: 0;
+    }
+    70.5% {
+        opacity: 1;
+        left: 30px;
+        top: 210px;
+    }
+    73.3% {
+        opacity: 0;
+    }
+    73% {
+        left: 30px;
+        top: 105px;
+    }
+    78% {
+        left: 30px;
+    }
+    82.3% {
+        opacity: 0;
+    }
+    82.5% {
+        opacity: 1;
+        left: 20px;
+        top: 150px;
+    }
+    86.3% {
+        opacity: 0;
+    }
+    87% {
+        left: 20px;
+        top: 30px;
+    }
+    92% {
+        left: 20px;
+    }
+    to {
+        left: 30px;
+    }
+}
+
+@-webkit-keyframes tail_bubble1 {
+    from {
+        left: 30px;
+        top: 205px;
+    }
+    20.5% {
+        opacity: 0;
+    }
+    21% {
+        left: 30px;
+        top: 205px;
+        opacity: 1;
+    }
+    26% {
+        opacity: 1;
+        left: 60px;
+        top: 105px;
+    }
+    26.3% {
+        opacity: 0;
+    }
+    40% {
+        left: 60px;
+        top: 205px;
+    }
+    50% {
+        opacity: 0;
+    }
+    50.5% {
+        opacity: 1;
+        left: 60px;
+        top: 205px;
+    }
+    54.3% {
+        opacity: 0;
+    }
+    55% {
+        left: 60px;
+        top: 105px;
+    }
+    65% {
+        left: 60px;
+    }
+    70% {
+        opacity: 0;
+    }
+    70.5% {
+        opacity: 1;
+        left: 30px;
+        top: 210px;
+    }
+    73.3% {
+        opacity: 0;
+    }
+    73% {
+        left: 30px;
+        top: 105px;
+    }
+    78% {
+        left: 30px;
+    }
+    82.3% {
+        opacity: 0;
+    }
+    82.5% {
+        opacity: 1;
+        left: 20px;
+        top: 150px;
+    }
+    86.3% {
+        opacity: 0;
+    }
+    87% {
+        left: 20px;
+        top: 30px;
+    }
+    92% {
+        left: 20px;
+    }
+    to {
+        left: 30px;
+    }
+}
+
+.b7 {
+    animation-name: tail_bubble2;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -moz-animation-name: tail_bubble2;
+    -moz-animation-duration: 30s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -webkit-animation-name: tail_bubble2;
+    -webkit-animation-duration: 30s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+@keyframes tail_bubble2 {
+    from {
+        left: 30px;
+        top: 205px;
+    }
+    20.5% {
+        opacity: 0;
+    }
+    21% {
+        /*turn one*/
+        opacity: 1;
+        left: 30px;
+        top: 205px;
+    }
+    25.5% {
+        opacity: 0;
+    }
+    26% {
+        left: -30px;
+        top: 105px;
+    }
+    40% {
+        left: 30px;
+        top: 205px;
+    }
+    49.5% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+        left: 30px;
+        top: 205px;
+    }
+    53% {
+        left: 70px;
+        top: 80px;
+    }
+    54.3% {
+        opacity: 0;
+    }
+    65% {
+        left: 30px;
+    }
+    69.5% {
+        opacity: 0;
+    }
+    70.5% {
+        opacity: 1;
+        left: 30px;
+        top: 210px;
+    }
+    73% {
+        left: 70px;
+        top: 55px;
+    }
+    73.5% {
+        opacity: 0;
+    }
+    78% {
+        left: 30px;
+    }
+    82% {
+        opacity: 0;
+    }
+    82.5% {
+        opacity: 1;
+        left: 50px;
+        top: 150px;
+    }
+    86.3% {
+        opacity: 0;
+    }
+    87% {
+        left: -20px;
+        top: 30px;
+    }
+    92% {
+        left: 20px;
+    }
+    to {
+        left: 30px;
+    }
+}
+
+@-moz-keyframes tail_bubble2 {
+    from {
+        left: 30px;
+        top: 205px;
+    }
+    20.5% {
+        opacity: 0;
+    }
+    21% {
+        /*turn one*/
+        opacity: 1;
+        left: 30px;
+        top: 205px;
+    }
+    25.5% {
+        opacity: 0;
+    }
+    26% {
+        left: -30px;
+        top: 105px;
+    }
+    40% {
+        left: 30px;
+        top: 205px;
+    }
+    49.5% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+        left: 30px;
+        top: 205px;
+    }
+    53% {
+        left: 70px;
+        top: 80px;
+    }
+    54.3% {
+        opacity: 0;
+    }
+    65% {
+        left: 30px;
+    }
+    69.5% {
+        opacity: 0;
+    }
+    70.5% {
+        opacity: 1;
+        left: 30px;
+        top: 210px;
+    }
+    73% {
+        left: 70px;
+        top: 55px;
+    }
+    73.5% {
+        opacity: 0;
+    }
+    78% {
+        left: 30px;
+    }
+    82% {
+        opacity: 0;
+    }
+    82.5% {
+        opacity: 1;
+        left: 50px;
+        top: 150px;
+    }
+    86.3% {
+        opacity: 0;
+    }
+    87% {
+        left: -20px;
+        top: 30px;
+    }
+    92% {
+        left: 20px;
+    }
+    to {
+        left: 30px;
+    }
+}
+
+@-webkit-keyframes tail_bubble2 {
+    from {
+        left: 30px;
+        top: 205px;
+    }
+    20.5% {
+        opacity: 0;
+    }
+    21% {
+        /*turn one*/
+        opacity: 1;
+        left: 30px;
+        top: 205px;
+    }
+    25.5% {
+        opacity: 0;
+    }
+    26% {
+        left: -30px;
+        top: 105px;
+    }
+    40% {
+        left: 30px;
+        top: 205px;
+    }
+    49.5% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+        left: 30px;
+        top: 205px;
+    }
+    53% {
+        left: 70px;
+        top: 80px;
+    }
+    54.3% {
+        opacity: 0;
+    }
+    65% {
+        left: 30px;
+    }
+    69.5% {
+        opacity: 0;
+    }
+    70.5% {
+        opacity: 1;
+        left: 30px;
+        top: 210px;
+    }
+    73% {
+        left: 70px;
+        top: 55px;
+    }
+    73.5% {
+        opacity: 0;
+    }
+    78% {
+        left: 30px;
+    }
+    82% {
+        opacity: 0;
+    }
+    82.5% {
+        opacity: 1;
+        left: 50px;
+        top: 150px;
+    }
+    86.3% {
+        opacity: 0;
+    }
+    87% {
+        left: -20px;
+        top: 30px;
+    }
+    92% {
+        left: 20px;
+    }
+    to {
+        left: 30px;
+    }
+}
+
+.b8 {
+    animation-name: tail_bubble3;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -moz-animation-name: tail_bubble3;
+    -moz-animation-duration: 30s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -webkit-animation-name: tail_bubble3;
+    -webkit-animation-duration: 30s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+@keyframes tail_bubble3 {
+    from {
+        left: 50px;
+        top: 205px;
+    }
+    20.5% {
+        opacity: 0;
+    }
+    21% {
+        opacity: 1;
+        left: 30px;
+        top: 205px;
+    }
+    25.5% {
+        opacity: 0;
+    }
+    26% {
+        left: 30px;
+        top: 105px;
+    }
+    40% {
+        left: 30px;
+        top: 205px;
+    }
+    49.5% {
+        opacity: 0;
+    }
+    50.5% {
+        opacity: 1;
+        left: 50px;
+        top: 205px;
+    }
+    53% {
+        left: 40px;
+        top: 80px;
+    }
+    54.3% {
+        opacity: 0;
+    }
+    65% {
+        left: 40px;
+    }
+    69.5% {
+        opacity: 0;
+    }
+    70.5% {
+        opacity: 1;
+        left: 40px;
+        top: 210px;
+    }
+    73% {
+        left: -20px;
+        top: 55px;
+    }
+    73.5% {
+        opacity: 0;
+    }
+    78% {
+        left: 40px;
+    }
+    82% {
+        opacity: 0;
+    }
+    82.5% {
+        opacity: 1;
+        left: 20px;
+        top: 150px;
+    }
+    86.3% {
+        opacity: 0;
+    }
+    87% {
+        left: 60px;
+        top: 30px;
+    }
+    92% {
+        left: 30px;
+    }
+    to {
+        left: 30px;
+    }
+}
+
+@-moz-keyframes tail_bubble3 {
+    from {
+        left: 50px;
+        top: 205px;
+    }
+    20.5% {
+        opacity: 0;
+    }
+    21% {
+        opacity: 1;
+        left: 30px;
+        top: 205px;
+    }
+    25.5% {
+        opacity: 0;
+    }
+    26% {
+        left: 30px;
+        top: 105px;
+    }
+    40% {
+        left: 30px;
+        top: 205px;
+    }
+    49.5% {
+        opacity: 0;
+    }
+    50.5% {
+        opacity: 1;
+        left: 50px;
+        top: 205px;
+    }
+    53% {
+        left: 40px;
+        top: 80px;
+    }
+    54.3% {
+        opacity: 0;
+    }
+    65% {
+        left: 40px;
+    }
+    69.5% {
+        opacity: 0;
+    }
+    70.5% {
+        opacity: 1;
+        left: 40px;
+        top: 210px;
+    }
+    73% {
+        left: -20px;
+        top: 55px;
+    }
+    73.5% {
+        opacity: 0;
+    }
+    78% {
+        left: 40px;
+    }
+    82% {
+        opacity: 0;
+    }
+    82.5% {
+        opacity: 1;
+        left: 20px;
+        top: 150px;
+    }
+    86.3% {
+        opacity: 0;
+    }
+    87% {
+        left: 60px;
+        top: 30px;
+    }
+    92% {
+        left: 30px;
+    }
+    to {
+        left: 30px;
+    }
+}
+
+@-webkit-keyframes tail_bubble3 {
+    from {
+        left: 50px;
+        top: 205px;
+    }
+    20.5% {
+        opacity: 0;
+    }
+    21% {
+        opacity: 1;
+        left: 30px;
+        top: 205px;
+    }
+    25.5% {
+        opacity: 0;
+    }
+    26% {
+        left: 30px;
+        top: 105px;
+    }
+    40% {
+        left: 30px;
+        top: 205px;
+    }
+    49.5% {
+        opacity: 0;
+    }
+    50.5% {
+        opacity: 1;
+        left: 50px;
+        top: 205px;
+    }
+    53% {
+        left: 40px;
+        top: 80px;
+    }
+    54.3% {
+        opacity: 0;
+    }
+    65% {
+        left: 40px;
+    }
+    69.5% {
+        opacity: 0;
+    }
+    70.5% {
+        opacity: 1;
+        left: 40px;
+        top: 210px;
+    }
+    73% {
+        left: -20px;
+        top: 55px;
+    }
+    73.5% {
+        opacity: 0;
+    }
+    78% {
+        left: 40px;
+    }
+    82% {
+        opacity: 0;
+    }
+    82.5% {
+        opacity: 1;
+        left: 20px;
+        top: 150px;
+    }
+    86.3% {
+        opacity: 0;
+    }
+    87% {
+        left: 60px;
+        top: 30px;
+    }
+    92% {
+        left: 30px;
+    }
+    to {
+        left: 30px;
+    }
+}
 
 @import 'directives/main';
 @import 'home/main';
@@ -269,6 +1638,7 @@ div.oauth {
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
+
     html,
     body {
         width: 100%;
@@ -279,7 +1649,72 @@ div.oauth {
         position: relative;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
+        background: url(images/coral-background.jpg) no-repeat center center;
+        background-size: cover;
     }
+
+    #crab {
+        max-width: 150px;
+        max-height: 150px;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+
+    .project-title {
+        margin: 0;
+        font: bold 50px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        letter-spacing: 3px;
+        color: #fff;
+        text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+        -webkit-transition: .2s all linear;
+    }
+
+    .lobby-button {
+        margin-top: 10px;
+        margin-right: 10px;
+        text-align: center;
+    }
+
+    .btn-lobby {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        width: 150px;
+        height: 40px;
+        cursor: pointer;
+        margin: 0 auto;
+        border: 2px solid rgba(255, 255, 255, 1);
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        font: normal 17px/40px "Helvetica Neue", Helvetica, sans-serif;
+        color: rgba(255, 255, 255, 1);
+        text-align: center;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        letter-spacing: 1px;
+        background: rgba(0, 0, 0, 0);
+        -webkit-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+    }
+
+    .btn-lobby:hover {
+        color: rgba(255, 255, 255, 1);
+        background: rgb(30, 205, 151);
+    }
+
+    .btn-lobby:active {
+        border: 2px solid rgba(33, 224, 163, 1);
+        background: rgba(33, 224, 163, 1);
+        -webkit-transition: none;
+        -moz-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+
     #grid {
         width: $board-width;
     }
@@ -303,6 +1738,7 @@ div.oauth {
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
+
     html,
     body {
         width: 100%;
@@ -313,7 +1749,72 @@ div.oauth {
         position: relative;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
+        background: url(images/coral-background.jpg) no-repeat center center;
+        background-size: cover;
     }
+
+    #crab {
+        max-width: 150px;
+        max-height: 150px;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+
+    .project-title {
+        margin: 0;
+        font: bold 50px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        letter-spacing: 3px;
+        color: #fff;
+        text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+        -webkit-transition: .2s all linear;
+    }
+
+    .lobby-button {
+        margin-top: 10px;
+        margin-right: 10px;
+        text-align: center;
+    }
+
+    .btn-lobby {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        width: 150px;
+        height: 40px;
+        cursor: pointer;
+        margin: 0 auto;
+        border: 2px solid rgba(255, 255, 255, 1);
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        font: normal 17px/40px "Helvetica Neue", Helvetica, sans-serif;
+        color: rgba(255, 255, 255, 1);
+        text-align: center;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        letter-spacing: 1px;
+        background: rgba(0, 0, 0, 0);
+        -webkit-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+    }
+
+    .btn-lobby:hover {
+        color: rgba(255, 255, 255, 1);
+        background: rgb(30, 205, 151);
+    }
+
+    .btn-lobby:active {
+        border: 2px solid rgba(33, 224, 163, 1);
+        background: rgba(33, 224, 163, 1);
+        -webkit-transition: none;
+        -moz-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+
     #grid {
         width: $board-width;
     }
@@ -337,6 +1838,7 @@ div.oauth {
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
+
     html,
     body {
         width: 100%;
@@ -347,7 +1849,72 @@ div.oauth {
         position: relative;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
+        background: url(images/coral-background.jpg) no-repeat center center;
+        background-size: cover;
     }
+
+    #crab {
+        max-width: 150px;
+        max-height: 150px;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+
+    .project-title {
+        margin: 0;
+        font: bold 50px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        letter-spacing: 3px;
+        color: #fff;
+        text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+        -webkit-transition: .2s all linear;
+    }
+
+    .lobby-button {
+        margin-top: 10px;
+        margin-right: 10px;
+        text-align: center;
+    }
+
+    .btn-lobby {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        width: 150px;
+        height: 40px;
+        cursor: pointer;
+        margin: 0 auto;
+        border: 2px solid rgba(255, 255, 255, 1);
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        font: normal 17px/40px "Helvetica Neue", Helvetica, sans-serif;
+        color: rgba(255, 255, 255, 1);
+        text-align: center;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        letter-spacing: 1px;
+        background: rgba(0, 0, 0, 0);
+        -webkit-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+    }
+
+    .btn-lobby:hover {
+        color: rgba(255, 255, 255, 1);
+        background: rgb(30, 205, 151);
+    }
+
+    .btn-lobby:active {
+        border: 2px solid rgba(33, 224, 163, 1);
+        background: rgba(33, 224, 163, 1);
+        -webkit-transition: none;
+        -moz-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+
     #grid {
         width: $board-width;
     }
@@ -371,6 +1938,7 @@ div.oauth {
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
+
     html,
     body {
         width: 100%;
@@ -381,7 +1949,71 @@ div.oauth {
         position: relative;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
+        background: url(images/coral-background.jpg) no-repeat center center;
+        background-size: cover;
     }
+
+    #crab {
+        max-width: 150px;
+        max-height: 150px;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .project-title {
+        margin: 0;
+        font: bold 50px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        letter-spacing: 3px;
+        color: #fff;
+        text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+        -webkit-transition: .2s all linear;
+    }
+
+    .lobby-button {
+        margin-top: 10px;
+        margin-right: 10px;
+        text-align: center;
+    }
+
+    .btn-lobby {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        width: 150px;
+        height: 40px;
+        cursor: pointer;
+        margin: 0 auto;
+        border: 2px solid rgba(255, 255, 255, 1);
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        font: normal 17px/40px "Helvetica Neue", Helvetica, sans-serif;
+        color: rgba(255, 255, 255, 1);
+        text-align: center;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        letter-spacing: 1px;
+        background: rgba(0, 0, 0, 0);
+        -webkit-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+    }
+
+    .btn-lobby:hover {
+        color: rgba(255, 255, 255, 1);
+        background: rgb(30, 205, 151);
+    }
+
+    .btn-lobby:active {
+        border: 2px solid rgba(33, 224, 163, 1);
+        background: rgba(33, 224, 163, 1);
+        -webkit-transition: none;
+        -moz-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+
     #grid {
         width: $board-width;
     }
@@ -405,6 +2037,7 @@ div.oauth {
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
+
     html,
     body {
         width: 100%;
@@ -415,7 +2048,72 @@ div.oauth {
         position: relative;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
+        background: url(images/coral-background.jpg) no-repeat center center;
+        background-size: cover;
     }
+
+    #crab {
+        max-width: 150px;
+        max-height: 150px;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+
+    .project-title {
+        margin: 0;
+        font: bold 50px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        letter-spacing: 3px;
+        color: #fff;
+        text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+        -webkit-transition: .2s all linear;
+    }
+
+    .lobby-button {
+        margin-top: 10px;
+        margin-right: 10px;
+        text-align: center;
+    }
+
+    .btn-lobby {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        width: 150px;
+        height: 40px;
+        cursor: pointer;
+        margin: 0 auto;
+        border: 2px solid rgba(255, 255, 255, 1);
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        font: normal 17px/40px "Helvetica Neue", Helvetica, sans-serif;
+        color: rgba(255, 255, 255, 1);
+        text-align: center;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        letter-spacing: 1px;
+        background: rgba(0, 0, 0, 0);
+        -webkit-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+    }
+
+    .btn-lobby:hover {
+        color: rgba(255, 255, 255, 1);
+        background: rgb(30, 205, 151);
+    }
+
+    .btn-lobby:active {
+        border: 2px solid rgba(33, 224, 163, 1);
+        background: rgba(33, 224, 163, 1);
+        -webkit-transition: none;
+        -moz-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+
     #grid {
         width: $board-width;
     }
@@ -439,6 +2137,7 @@ div.oauth {
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
+
     html,
     body {
         width: 100%;
@@ -449,7 +2148,71 @@ div.oauth {
         position: relative;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
+        background: url(images/coral-background.jpg) no-repeat center center;
+        background-size: cover;
     }
+
+    #crab {
+        max-width: 150px;
+        max-height: 150px;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .project-title {
+        margin: 0;
+        font: bold 50px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        letter-spacing: 3px;
+        color: #fff;
+        text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+        -webkit-transition: .2s all linear;
+    }
+
+    .lobby-button {
+        margin-top: 10px;
+        margin-right: 10px;
+        text-align: center;
+    }
+
+    .btn-lobby {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        width: 150px;
+        height: 40px;
+        cursor: pointer;
+        margin: 0 auto;
+        border: 2px solid rgba(255, 255, 255, 1);
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        font: normal 17px/40px "Helvetica Neue", Helvetica, sans-serif;
+        color: rgba(255, 255, 255, 1);
+        text-align: center;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        letter-spacing: 1px;
+        background: rgba(0, 0, 0, 0);
+        -webkit-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+    }
+
+    .btn-lobby:hover {
+        color: rgba(255, 255, 255, 1);
+        background: rgb(30, 205, 151);
+    }
+
+    .btn-lobby:active {
+        border: 2px solid rgba(33, 224, 163, 1);
+        background: rgba(33, 224, 163, 1);
+        -webkit-transition: none;
+        -moz-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+
     #grid {
         width: $board-width;
     }
@@ -473,6 +2236,7 @@ div.oauth {
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
+
     html,
     body {
         width: 100%;
@@ -483,7 +2247,72 @@ div.oauth {
         position: relative;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
+        background: url(images/coral-background.jpg) no-repeat center center;
+        background-size: cover;
     }
+
+    #crab {
+        max-width: 150px;
+        max-height: 150px;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+
+    .project-title {
+        margin: 0;
+        font: bold 50px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        letter-spacing: 3px;
+        color: #fff;
+        text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+        -webkit-transition: .2s all linear;
+    }
+
+    .lobby-button {
+        margin-top: 10px;
+        margin-right: 10px;
+        text-align: center;
+    }
+
+    .btn-lobby {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        width: 150px;
+        height: 40px;
+        cursor: pointer;
+        margin: 0 auto;
+        border: 2px solid rgba(255, 255, 255, 1);
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        font: normal 17px/40px "Helvetica Neue", Helvetica, sans-serif;
+        color: rgba(255, 255, 255, 1);
+        text-align: center;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        letter-spacing: 1px;
+        background: rgba(0, 0, 0, 0);
+        -webkit-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+    }
+
+    .btn-lobby:hover {
+        color: rgba(255, 255, 255, 1);
+        background: rgb(30, 205, 151);
+    }
+
+    .btn-lobby:active {
+        border: 2px solid rgba(33, 224, 163, 1);
+        background: rgba(33, 224, 163, 1);
+        -webkit-transition: none;
+        -moz-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+
     #grid {
         width: $board-width;
     }
@@ -507,6 +2336,7 @@ div.oauth {
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
+
     html,
     body {
         width: 100%;
@@ -517,7 +2347,72 @@ div.oauth {
         position: relative;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
+        background: url(images/coral-background.jpg) no-repeat center center;
+        background-size: cover;
     }
+
+    #crab {
+        max-width: 150px;
+        max-height: 150px;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+
+    .project-title {
+        margin: 0;
+        font: bold 100px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        letter-spacing: 3px;
+        color: #fff;
+        text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+        -webkit-transition: .2s all linear;
+    }
+
+    .lobby-button {
+        margin-top: 10px;
+        margin-right: 10px;
+        text-align: center;
+    }
+
+    .btn-lobby {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        width: 150px;
+        height: 40px;
+        cursor: pointer;
+        margin: 0 auto;
+        border: 2px solid rgba(255, 255, 255, 1);
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        font: normal 17px/40px "Helvetica Neue", Helvetica, sans-serif;
+        color: rgba(255, 255, 255, 1);
+        text-align: center;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        letter-spacing: 1px;
+        background: rgba(0, 0, 0, 0);
+        -webkit-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+    }
+
+    .btn-lobby:hover {
+        color: rgba(255, 255, 255, 1);
+        background: rgb(30, 205, 151);
+    }
+
+    .btn-lobby:active {
+        border: 2px solid rgba(33, 224, 163, 1);
+        background: rgba(33, 224, 163, 1);
+        -webkit-transition: none;
+        -moz-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+
     #grid {
         width: $board-width;
     }
@@ -541,6 +2436,7 @@ div.oauth {
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
+
     html,
     body {
         width: 100%;
@@ -551,7 +2447,72 @@ div.oauth {
         position: relative;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
+        background: url(images/coral-background.jpg) no-repeat center center;
+        background-size: cover;
     }
+
+    #crab {
+        max-width: 175px;
+        max-height: 175px;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+
+    .project-title {
+        margin: 0;
+        font: bold 80px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        letter-spacing: 3px;
+        color: #fff;
+        text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+        -webkit-transition: .2s all linear;
+    }
+
+    .lobby-button {
+        margin-top: 10px;
+        margin-right: 10px;
+        text-align: center;
+    }
+
+    .btn-lobby {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        width: 150px;
+        height: 40px;
+        cursor: pointer;
+        margin: 0 auto;
+        border: 2px solid rgba(255, 255, 255, 1);
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        font: normal 17px/40px "Helvetica Neue", Helvetica, sans-serif;
+        color: rgba(255, 255, 255, 1);
+        text-align: center;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        letter-spacing: 1px;
+        background: rgba(0, 0, 0, 0);
+        -webkit-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+    }
+
+    .btn-lobby:hover {
+        color: rgba(255, 255, 255, 1);
+        background: rgb(30, 205, 151);
+    }
+
+    .btn-lobby:active {
+        border: 2px solid rgba(33, 224, 163, 1);
+        background: rgba(33, 224, 163, 1);
+        -webkit-transition: none;
+        -moz-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+
     #grid {
         width: $board-width;
     }
@@ -585,6 +2546,8 @@ div.oauth {
         position: relative;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
+        background: url(images/coral-background.jpg) no-repeat center center;
+        background-size: cover;
     }
     #grid {
         width: $board-width;
@@ -619,6 +2582,8 @@ div.oauth {
         position: relative;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
+        background: url(images/coral-background.jpg) no-repeat center center;
+        background-size: cover;
     }
     #grid {
         width: $board-width;
@@ -644,16 +2609,14 @@ div.oauth {
 //   and (-webkit-min-device-pixel-ratio: 2)
 //   and (min-resolution: 192dpi) {
 // }
-
-@media screen and (min-width: 1200px){
-    $board-width: 1000px;
+@media screen {
+    $board-width: 100%;
     $number-cells: 6;
-    $cell-diameter: 1000px/($number-cells+.5);
-    $cell-height: 1000px * ($board-width/1000px)/($number-cells+.5);
+    $cell-diameter: 100%/($number-cells+.5);
+    $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -662,10 +2625,42 @@ div.oauth {
         position: relative;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
+        background: url(images/coral-background.jpg) no-repeat center center;
+        background-size: cover;
+    }
+    #grid {
+        width: $board-width;
+    }
+    #grid .cell {
+        font-size: $letter-width;
+        width: $cell-diameter;
+        height: $cell-height;
+        line-height: $cell-height;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    $board-width: 1000px;
+    $number-cells: 6;
+    $cell-diameter: 1000px/($number-cells+.5);
+    $cell-height: 1000px * ($board-width/1000px)/($number-cells+.5);
+    $letter-width: $cell-height/2;
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        overflow-x: hidden;
+        position: relative;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        background: url(images/coral-background.jpg) no-repeat center center;
+        background-size: cover;
     }
 
     #grid {
-        width: $board-width;    
+        width: $board-width;
     }
 
     #grid .cell {
@@ -677,7 +2672,6 @@ div.oauth {
 }
 
 //game record state
-
 #game_table {
     width: 75%;
     margin: auto;
@@ -685,7 +2679,7 @@ div.oauth {
     background-color: white;
 }
 
-#game_table tr{
+#game_table tr {
     margin: auto;
 }
 
@@ -694,7 +2688,7 @@ div.oauth {
     height: 50px;
 }
 
-#game_table .table_headers{
+#game_table .table_headers {
     font-size: 24pt;
     font-weight: bold;
     text-align: center;
@@ -706,7 +2700,7 @@ div.oauth {
     margin: auto;
 }
 
-#header{
+#header {
     text-align: center;
 }
 
