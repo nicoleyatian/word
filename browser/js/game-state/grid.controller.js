@@ -21,22 +21,29 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $rootScope.hideNavbar = true;
     $scope.freeze = false;
 
+    var user1 = {username: 'michelangelo', score: 89};
+    var user2 = {username: 'mustang', score: 6};
+    var user3 = {username: 'jeff', score: 1};
+
     $scope.otherPlayers = [];
-    $scope.gameLength = 15;
+    $scope.gameLength = 125;
     $scope.mouseIsDown = false;
     $scope.draggingAllowed = false;
 
     $scope.style = null;
-    $scope.message = '';
+    $scope.message = 'michelangelo played woooord for 44 points!';
     $scope.winOrLose = null;
     $scope.timeout = null;
 
     $scope.score = 0;
 
+    $scope.board = [['A', 'B', 'C','A', 'B', 'C'],
+                    ['D', 'E', 'F','A', 'B', 'C'],
+                    ['G', 'H', 'I','A', 'B', 'C']];
 
     $scope.exports = {
         wordObj: {},
-        word: "",
+        word: "telescope",
         playerId: null,
         stateNumber: 0,
         pointsEarned: null
@@ -324,7 +331,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         console.log('its updating!');
         clearIfConflicting(updateObj, $scope.exports.wordObj);
         $scope.exports.stateNumber = updateObj.stateNumber;
-        console.log('updated obj', updateObj)
+        console.log('updated obj', updateObj);
         $scope.$evalAsync();
     };
 

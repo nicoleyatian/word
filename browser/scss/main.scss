@@ -10,7 +10,7 @@ $letter-width: $cell-height/2;
 body {
     background: #fdfdfd;
     font-family: Quicksand;
-    font-weight: 400;
+    font-weight: 900;
 }
 
 @mixin clearfix {
@@ -29,10 +29,15 @@ body {
     margin-right: 5px;
 }
 
+.btn {
+    box-shadow: rgba(0, 0, 0, .5);
+}
+
 #main {
-    padding-top: 60px;
+    // padding-top: 60px;
     margin: 0 auto;
-    background: url(images/ocean.jpg);
+    background: url(images/board-ocean-background.jpg);
+    background-size: 100% 100%;
 }
 
 #your-word {
@@ -48,6 +53,10 @@ div #start {
     text-align: center;
 }
 
+#message {
+    margin: 0;
+}
+
 #grid {
     width: $board-width;
     margin: auto;
@@ -56,6 +65,7 @@ div #start {
 
 #space {
     color: black;
+    text-shadow: -1px 2px rgba(0, 0, 0, .5);
     user-select: none;
     -o-user-select: none;
     -moz-user-select: none;
@@ -69,26 +79,10 @@ div #start {
     height: $cell-height/2;
 }
 
-.boardRow {
-    width: 80%;
-    margin-left: auto;
-    padding: 3%;
-    display: inline-block;
-    .col-6 {
-        float: left;
-        width: 50%;
-        padding: 1%;
-    }
-}
-
-.vcenter {
-    display: inline-block;
-    vertical-align: middle;
-    float: none;
-}
-
 #grid .cell {
     font-size: $letter-width;
+    font-weight: 900;
+    box-shadow: -1px 3px rgba(0, 0, 0, .5);
     width: $cell-diameter;
     height: $cell-height;
     line-height: $cell-height/2 + 5.75;
@@ -115,31 +109,11 @@ div #start {
     border: 5px solid #c3f4eb;
 }
 
-.green {
- background-color: green;
-}
-
-
-#panel {
-    width: 50%;
-    border: 5px solid black;
-}
-
-#top {
-    font-size: 18pt;
-}
-
+// #top {
+//     font-size: 18pt;
+// }
 .players {
     display: inline-block;
-}
-
-#right {
-    float: right;
-    clear: right;
-}
-
-#right li {
-    list-style: none;
 }
 
 #display {
@@ -151,29 +125,41 @@ div #start {
 .Game-info {
     li {
         list-style: none;
+        font-weight: 600;
     }
     #user {
-
-        font-size:16px;
+        font-size: 16px;
     }
 }
-#score {
+
+#score-board {
     // margin-right: 25%;
-    padding-left: 5px;
-    text-align: left;
-    font-size: 18px;
+    ul {
+        padding-left: 10px;
+        padding-top: 20px;
+        text-align: left;
+        font-weight: 600;
+        color: black;
+    }
     li {
         list-style: none;
         text-align: left;
     }
 }
 
-#otherPlayers {
+#yours {
+    font-size: $cell-height/2;
+}
+
+#other-players {
     // margin-right: 25%;
-    li {
-        list-style: none;
-        text-align: left;
-    }
+    font-size: $cell-height/4;
+}
+
+#game {
+    color: rgb(237, 229, 206);
+    font-weight: 800;
+    text-shadow: 1px 1px black;
 }
 
 #message {
@@ -198,22 +184,21 @@ div #start {
 }
 
 #timer {
-    // border: 5px dotted black;
-    // width: 2%;
     margin: auto;
     text-align: center;
+    h1 {
+        font-size: $cell-height/2;
+    }
 }
 
-
 div.oauth {
-  text-align: center;
+    text-align: center;
 }
 
 #crabdance {
     width: $board-width;
     padding-left: $board-width/4;
 }
-
 
 .flexbox {
     width: 80%;
@@ -224,31 +209,78 @@ div.oauth {
     justify-content: center;
 }
 
+.board-row {
+    width: $board-width;
+    margin-left: auto;
+    // padding: 1%;
+    display: inline-block;
+}
+
+.col-6 {
+    float: left;
+    width: 50%;
+    // padding: 1%;
+}
+
+.col-3 {
+    float: left;
+    width: 25%;
+    // padding: 1%;
+}
+
+.col-4 {
+    float: left;
+    width: 33%;
+    // padding: 1%;
+}
+
+.col-8 {
+    float: left;
+    width: 66%;
+    // padding: 1%;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
 .btn-wood {
-    background-image: url(images/woodBtn.png);
+    background-image: url(images/board_.png);
     background-color: transparent;
     background-size: 100% 100%;
+    box-shadow: 6px;
     border: none;
     font-weight: 1000;
 }
 
 .wood-board-lg {
-    background-image: url(images/woodBtn.png);
+    background-image: url(images/driftwood_.png);
     background-size: 100% 100%;
     border: none;
+    height: 140px;
 }
+
 .wood-board-sm {
-    background-image: url(images/woodBtn.png);
-    background-size: 80% 100%;
+    background-image: url(images/board_.png);
+    background-size: 100% 100%;
     border: none;
     background-repeat: no-repeat;
     background-position: center;
     height: 80px
 }
 
+.time-rock {
+    background-image: url(images/stone_.png);
+    background-size: 100% 100%;
+    border: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 90px
+}
+
 #plays {}
-
-
 
 @import 'directives/main';
 @import 'home/main';
@@ -289,6 +321,9 @@ div.oauth {
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
+    .board-row {
+        width: $board-width;
+    }
 }
 
 
@@ -323,6 +358,9 @@ div.oauth {
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
+    .board-row {
+        width: $board-width;
+    }
 }
 
 
@@ -356,6 +394,9 @@ div.oauth {
         width: $cell-diameter;
         height: $cell-height;
         line-height: $cell-height/2 + 6;
+    }
+    .board-row {
+        width: $board-width;
     }
 }
 
@@ -644,16 +685,14 @@ div.oauth {
 //   and (-webkit-min-device-pixel-ratio: 2)
 //   and (min-resolution: 192dpi) {
 // }
-
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1200px) {
     $board-width: 1000px;
     $number-cells: 6;
     $cell-diameter: 1000px/($number-cells+.5);
     $cell-height: 1000px * ($board-width/1000px)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
-    html,body
-    {
+    html,
+    body {
         width: 100%;
         height: 100%;
         margin: 0px;
@@ -663,10 +702,9 @@ div.oauth {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-
     #grid {
-        width: $board-width;    }
-
+        width: $board-width;
+    }
     #grid .cell {
         font-size: $letter-width;
         width: $cell-diameter;
@@ -676,7 +714,6 @@ div.oauth {
 }
 
 //game record state
-
 #game_table {
     width: 75%;
     margin: auto;
@@ -684,7 +721,7 @@ div.oauth {
     background-color: white;
 }
 
-#game_table tr{
+#game_table tr {
     margin: auto;
 }
 
@@ -693,7 +730,7 @@ div.oauth {
     height: 50px;
 }
 
-#game_table .table_headers{
+#game_table .table_headers {
     font-size: 24pt;
     font-weight: bold;
     text-align: center;
@@ -705,6 +742,6 @@ div.oauth {
     margin: auto;
 }
 
-#header{
+#header {
     text-align: center;
 }

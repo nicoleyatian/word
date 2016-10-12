@@ -1,114 +1,70 @@
-<!--    <div>
-        <div id="top">
-            <h1 id="title">Wordgame</h1>
-            <div id="panel" class="players">
-                <label id="name">
-                    <p class="Game-info">{{user.username}}</p>
-                </label>
-                <h1> Your Word: {{ exports.word }}</h1>
-                <button ng-click="submit(exports)">Submit</button>
-                <button ng-click="clear()">Clear</button>
+<div id="game">
+    <div id="start" ng-hide="hideStart">
+        <ul class="Game-info">
+            <li id="user">{{ user.username }}</li>
+            <div ng-hide="otherPlayers.length > 0">
+                <li>Waiting for other players</li>
             </div>
-            <div id="right" class="players">
-                <ul ng-repeat="option in otherPlayers">
-                    <li>{{option.username}}: {{option.score}}</li>
-                </ul>
-                <button class='btn btn-primary' ng-click='quit()'>Quit</button>
+            <div ng-repeat="otherPlayer in otherPlayers track by $index">
+                <li>{{ otherPlayer.username }}</li>
             </div>
-            <div id="display">
-                <label id="score">
-                    Your Score: {{score}}
-                </label>
-                <label id="players">
-                    <p class="Game-info"> Player # {{user.id}}</p>
-                    <button ng-click="toggleDrag()">{{draggingAllowed ? 'Click ':'Drag '}}To Select</button>
-                </label>
-            </div>
-        </div>
-        <div id="start" class="noselect">
-            <div class='row'>
-                <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()">
-                    <div class='row' ng-repeat="(x,row) in board track by $index">
-                        <div ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell noselect" ng-repeat="(y, space) in row track by $index">
-                            <span id="space">{{space}}</span>
+            <br>
+            <button class="btn btn-primary" ng-click="quit()">Quit</button>
+            <button class="btn btn-primary" ng-click="startGame()" ng-hide="otherPlayers.length===0">Start Game</button>
+        </ul>
+    </div>
+    <div ng-hide="hideCrabdance">
+        <h1>{{ message }}</h1>
+        <img id="crabdance" src="/images/crabdance.gif">
+    </div>
+    <div id="start" ng-hide="hideBoard">
+        <div id="score-board">
+            <div class="board-row wood-board-lg">
+                <div class="vcenter">
+                    <ul id="yours">
+                        <li class="letters"> Score: {{ score }}</li>
+                    </ul>
+                </div>
+                <div class="col-6 vcenter">
+                    <ul id="other-players">
+                        <div ng-repeat="otherPlayer in otherPlayers | orderBy: '-score'">
+                            <li class="letters">{{ otherPlayer.username }}: {{ otherPlayer.score}}</li>
                         </div>
-                    </div>
+                    </ul>
+               
                 </div>
             </div>
-            <button ng-click="updateBoard({'0-0': 'x', '0-1':'y', '0-2': 'z'})">
-                Update
-            </button>
-            <button ng-click="updateScore(exports.pointsEarned, exports.playerId)">Update Score
-            </button>
+            <div class="board-row">
+                <div class="col-8 wood-board-sm" ng-click="submit(exports)">
+                    <div id="your-word">
+                        <h1 class="letters"> {{ exports.word }} </h1>
+                    </div>
+                </div>
+                <div class="col-4 time-rock">
+                    <timer time="gameLength"></timer>
+                </div>
+            </div>
         </div>
-</div> -->
-<!-- <h1 id="title">Wordgame</h1> -->
-<div id="start" ng-hide="hideStart">
-    <ul class="Game-info">
-        <li id='user'>{{ user.username }}</li>
-        <div ng-hide="otherPlayers.length > 0">
-            <li>Waiting for other players</li>
+        <div id="win?" ng-show="winOrLose">
+            <h1> {{ winOrLose }}</h1>
         </div>
-        <div ng-repeat="otherPlayer in otherPlayers track by $index">
-            <li>{{ otherPlayer.username }}</li>
+             <div id="message">
+                        <p>{{ message }}</p>
+                    </div>
+        <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()">
+            <div class="row" ng-repeat="(x,row) in board track by $index">
+                <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
+                    <span class="letters" id="space">{{space}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="flexbox">
+            <button class="btn btn-wood" ng-click="shuffle(user)">Shuffle</button>
+            <button class="btn btn-wood" ng-click="toggleDrag()">{{ draggingAllowed ? 'Click ':'Drag '}}To Select</button>
+            <button class='btn btn-primary' ng-click="quit()">Quit</button>
         </div>
         <br>
-        <button class='btn btn-primary' ng-click='quit()'>Quit</button>
-        <button class='btn btn-primary' ng-click='startGame()' ng-hide="otherPlayers.length===0">Start Game</button>
-</div>
-<div ng-hide="hideCrabdance">
-    <h1>{{ message }}</h1>
-    <img id="crabdance" src="/images/crabdance.gif">
-</div>
-<div id="start" ng-hide="hideBoard">
-    <!-- <div class="Game-info">{{ user.username }}</div> -->
-    <!-- <div class='row'> -->
-    <div id="scoreBoard">
-        <div class="boardRow wood-board-lg">
-            <div class='col-6 vcenter'>
-                <ul id="score">
-                    <li>{{ user.username }} </li>
-                    <li> Your Score: {{ score }}</li>
-                </ul>
-            </div>
-            <div class='col-6 vcenter'>
-                <ul id='otherPlayers'>
-                    <div ng-repeat="otherPlayer in otherPlayers | orderBy: '-score'">
-                        <li>{{ otherPlayer.username }}: {{ otherPlayer.score}}</li>
-                    </div>
-                </ul>
-                <div id="message">
-                    <p>{{ message }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="boardRow">
-            <div class="col-6 wood-board-sm">
-                <div id="your-word">
-                    <h1 ng-click="submit(exports)"> {{ exports.word }} </h1>
-                </div>
-            </div>
-            <div class="col-6 wood-board-sm">
-                <timer time="gameLength"></timer>
-            </div>
-        </div>
+        <button ng-show="freeze" ng-click="replay()">Play Again
+        </button>
     </div>
-    <div id="win?" ng-show="winOrLose">
-        <h1> {{ winOrLose }}</h1>
-    </div>
-    <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()">
-        <div class='row' ng-repeat="(x,row) in board track by $index">
-            <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
-                <span id="space">{{space}}</span>
-            </div>
-        </div>
-    </div>
-    <div class='flexbox'>
-        <button class='btn btn-wood' ng-click="shuffle(user)">Shuffle</button>
-        <button class='btn btn-wood' ng-click="toggleDrag()">{{ draggingAllowed ? 'Click ':'Drag '}}To Select</button>
-        <button class='btn btn-primary' ng-click='quit()'>Quit</button>
-    </div>
-    <br>
-    <button ng-show="freeze" ng-click="replay()">Play Again
-    </button>
 </div>

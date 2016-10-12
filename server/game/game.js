@@ -82,7 +82,7 @@ GameObject.prototype.addToScore = function(playerId, word) {
 GameObject.prototype.computeScore = function(word) {
     var points = 0;
     word.split('').forEach(ltr=>points+=tileScores[ltr]);
-    return points;
+    return points*word.length;
     // return word.length - this.minWordLength + 1;
 };
 
