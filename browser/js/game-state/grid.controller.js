@@ -22,7 +22,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.freeze = false;
 
     $scope.otherPlayers = [];
-    $scope.gameLength = 15;
+    $scope.gameLength = 90;
     $scope.mouseIsDown = false;
     $scope.draggingAllowed = false;
 
