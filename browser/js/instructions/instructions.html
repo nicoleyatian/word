@@ -1,0 +1,30 @@
+<div>
+	<div class="instructions">
+		<h1> Welcome to GrabGab!</h1>
+		<p>GrabGab is a wordgame similar to Boggle, but instead of being turn-based,  all play happens real-time. You might say speed is of the esssence! Whoever can submit the most words in a given time frame wins the game.</p>
+	</div>
+	<div class="instructions">
+		<h1>The Basics</h1>
+		<p> Once all players involved have joined a game, push the start button to begin. All players will be taken to a game state, and the game begins immediately! To play a word, click through all of its letters and then click on the word, where it appears near the top of your window, to 	submit. Alternately, if you set dragging to true, you can simply drag over all letters that you want to select and release to submit your word.</p>
+		<img src="/images/ugly.png" id="ugly">
+	</div>
+	<div class="instructions">
+		<h1> Continued...</h1>
+		<p> Every time a word is played by one of the players, the board will update for everyone with new letters to replace the ones just played by that player. If you are currently selecting a word using one of those letters when that happens, tough luck! Your word will be cleared and you will have to start from scratch. I guess the moral is: be faster next time! Play continues until the timer expires, and whoever has the most points then is the winner. After the game, you can all play again by just hitting the play again button at the bottom of the window.</p>
+	</div>
+	<div class="instructions">
+		<h1> Scoring</h1>
+		<p> After submit a word, your word will be sent to our server. The server will check whether your word is valid, and then score it according to two criteria: word length and letter values. First, your word will be given a base score determined by the values of the letters in it, with rare letters like x, q, and z receiving more points and more common letters like a and s receiving less. Then, that total will be multiplied by the word's length to get the final score. This is how many points you will receive for the word.</p>
+</div>
+	<div class="instructions">
+		<h1> Special Features</h1>
+		<p> In addition to all of that, the game has two features that add to gameplay and general fun-ness. At the bottom of your window, there is a shuffle button. Using it costs you five points, but it will discard all letters currently on the board and replace them with all new ones. The other special feature takes effect anytime someone plays a six letter word or longer. Whenever someone pulls this off, the screens of all other players will be replaced, for 5 seconds, with this:</p>
+		<h1 ng-click="clicked=true" id="clicker">Click here</h1>
+	</div>
+	<div class="instructions" ng-show="clicked===true">
+		<img src="/images/crabdance.gif" id="dance">
+		<p id="yeah"> Uh, Yeah...</p>
+	</div>
+	<br>
+	<br>
+</div>
