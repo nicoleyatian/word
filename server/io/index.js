@@ -57,7 +57,7 @@ module.exports = function(server) {
         });
         socket.on('getStartBoard', function(gameLength, gameId, userIds, roomName) {
             //initialize GameObj for the room in the mapper
-            roomGameMapper[roomName] = new game.GameObject(game.tileCounts, 6, 2); //you are going to make these variable right? how big the board can be and the min length of words?
+            roomGameMapper[roomName] = new game.GameObject(game.tileCounts, 6, 2); //you are going to make these variable right? how big the board can be and the min length of words? If so, it seems like tileCounts might increase?
             roomWordMapper[roomName] = {};
             var thisGame = roomGameMapper[roomName];
             var ourWords = roomWordMapper[roomName];
@@ -80,6 +80,7 @@ module.exports = function(server) {
                 console.log('game over', gameId);
                 var winnersArray = getWinner(thisGame.playerScores);
                 var ourWords = roomWordMapper[roomName];
+                // My only thoughts right now are that when you emit this, you make a request from the front which will make that call to persist the scores. The route jsut seems like the right place to save the game 
                 io.to(roomName).emit('gameOver', winnersArray);
 
                 //send scores to db (AND WORDS?!), set isPlaying to false

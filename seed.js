@@ -25,7 +25,7 @@ var Game = db.model('game');
 var UserGame = db.model('userGame')
 var Promise = require('sequelize').Promise;
 
-// var seedUsers = function () {
+// var seedUsers = function () { //get rid of the stuff you aren't using
 
 //     var users = [
 //         {
@@ -172,22 +172,23 @@ function addPlayers(game) {
 
 
 db.sync({
-    force: true
-})
-
-.then(() => Promise.all(addRows(generateRows(game, 50), Game)))
-    .then(() => Promise.all(addRows(generateRows(user, 50), User)))
-    .then(() => Game.findAll() 
-        .then(games => { //no need to nest this inside of the then on line 180. Game.findAll is an implicit return, so the next .then will have all of the games if you let it return.
+        force: true
+    })
+    .then(() => Promise.all(addRows(generateRows(game, 50), Game)))
+    .then(() => Promise.all(addRows(generateRows(user, 50), User))) //I would think that you would be able to combine these promise.alls; it doesn't seem to me that the user relies on the game being created yet. As such you might be able to just return the created games and users from 1 big ole Promise.all, but doing a find and then mapping is fine too -- KH
+    .then(() => Game.findAll()
+        .then(games => { //no need to nest this inside of the then on line 180. Game.findAll is an implicit return, so the next .then will have all of the games if you let it return. (see line 189) -- KH
             let add = [];
             games.forEach(game => {
                 add.push(addPlayers(game))
             })
             return Promise.all(add)
+            //if you map them to an array of promises you can just return that (see line 189) -- KH
         })
     )
+    // .then(games => Promise.all(games.map(game => addPlayers(game)))) -- KH
     .then(() => UserGame.findAll()
-        .then(userGames => {
+        .then(userGames => { //same with nested then here
             let updates = [];
             userGames.forEach(userGame => {
                 updates.push(userGame.update({
@@ -196,12 +197,18 @@ db.sync({
                 }));
             });
             return Promise.all(updates)
+            // return Promise.all(userGames.map(userGame => userGame.update({
+            //         score: randomInt(100),
+            //         longestWord: 'Here is a list of longest possible words'.split(' ')[Math.floor(Math.random() * 8)]
+            //     }))); -- KH
         }))
     .then(() => Game.findAll()
         .then(games => {
             let updates = [];
-            games.forEach(game => { updates.push(game.update({ isWaiting: false }));
-                updates.push(game.update({ inProgress: false })) });
+            games.forEach(game => { //why not do this while you are adding player? or creating for the first time?
+                updates.push(game.update({ isWaiting: false }));
+                updates.push(game.update({ inProgress: false }))
+            });
             return Promise.all(updates)
         }))
     //.then(() => Promise.all(addRows(generateRows(userGame, 150), UserGame)))

@@ -15,7 +15,7 @@ module.exports = db.define('game', {
     },
     inProgress: { //you could consider having a status and it being enum so that you don't have to keep adding attributes for new statuses (in some eventuality that you would)
         type: Sequelize.BOOLEAN,
-        defaultValue: true
+        defaultValue: true //how can we have a defaultValue of isWaiting true AND inProgress true? isWaiting true makes sense with inProgress false as defaults
     },
     isWaiting: {
         type: Sequelize.BOOLEAN,

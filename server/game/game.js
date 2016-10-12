@@ -62,7 +62,7 @@ function tileCountToArray(tileCountObj) {
 //exists off of gameObj because utilized in init board gen
 function drawLetter(tileArray) {
     var rnd = Math.floor(Math.random() * tileArray.length);
-    return tileArray.splice(rnd, 1)[0];
+    return tileArray.splice(rnd, 1)[0]; //I'm assuming you aren't having performance issues, but we could probably find a more optimized solution here by making it an object. But that is premature if you aren't having issues
 }
 GameObject.prototype.drawLetter = function() {
     return drawLetter(this.remainingTilesArray);
@@ -83,7 +83,7 @@ GameObject.prototype.computeScore = function(word) {
     var points = 0;
     word.split('').forEach(ltr=>points+=tileScores[ltr]);
     return points;
-    // return word.length - this.minWordLength + 1;
+    // return word.length - this.minWordLength + 1; //is this to make longer words better? I like that idea :)
 };
 
 
@@ -97,7 +97,7 @@ GameObject.prototype.computeScore = function(word) {
 //         }
 //     }
 //     return false;
-// };
+// }; //do we still need this version in master?
 
 //checking whether coords of tiles for proposed move have been moved
 //since the state of the player trying to make a move, OR board has been shuffled
@@ -106,7 +106,7 @@ GameObject.prototype.stateConflicts = function(wordObj, prevState) {
     for (var state in this.stateHistory) {
         if (state >= prevState) {
             var stateTilesMoved = this.stateHistory[state];
-            if (stateTilesMoved === 'shuffled' || stateTilesMoved.some(coord => tilesMoved.includes(coord))) return true;
+            if (stateTilesMoved === 'shuffled' || stateTilesMoved.some(coord => tilesMoved.includes(coord))) return true; //nice use of these functional array methods!
         }
     }
     return false;
@@ -135,7 +135,7 @@ GameObject.prototype.wordPlayed = function(playObj) {
         col = coordArray[1];
         var newLetter = this.drawLetter();
         this.board[row][col] = newLetter;
-        playObj.wordObj[ltrCoord] = newLetter;
+        playObj.wordObj[ltrCoord] = newLetter; //I'm not sure what all is on the playObj, but does it make sense to just copy this.board after you finish mutating it in this loop?
     }
     var pointsEarned = this.addToScore(playObj.playerId, playObj.word);
     this.stateHistory[this.stateNumber] = Object.keys(playObj.wordObj);
@@ -151,7 +151,7 @@ GameObject.prototype.wordPlayed = function(playObj) {
 //rearranges tiles on board. records in state history
 GameObject.prototype.shuffle = function(){
 	var currentTiles = [];
-	this.board.forEach(r => currentTiles = currentTiles.concat(r));
+	this.board.forEach(r => currentTiles = currentTiles.concat(r)); //we could optimize this concat if we need to (another micro optimization that could be premature if you don't have runtime issues)
 	this.board = generateBoardMutating(currentTiles, this.sideLength);
 	this.stateHistory[this.stateNumber] = 'shuffled';
 	this.stateNumber++;
