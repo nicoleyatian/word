@@ -56,7 +56,7 @@ module.exports = function (app, db) {
 
     });
 
-    app.post('/signup', function(req, res, next) {
+    app.post('/signup', function(req, res, next) { //great place for this!
         User.findOne({
             where: {
                 email: req.body.email

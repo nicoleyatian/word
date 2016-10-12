@@ -13,7 +13,7 @@ module.exports = db.define('game', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    inProgress: {
+    inProgress: { //you could consider having a status and it being enum so that you don't have to keep adding attributes for new statuses (in some eventuality that you would)
         type: Sequelize.BOOLEAN,
         defaultValue: true
     },
@@ -22,7 +22,7 @@ module.exports = db.define('game', {
         defaultValue: true
     }
 },
-// , {
+// , { //should this be in your master if it is all commented out??
 //     hooks: {
 //         beforeUpdate: function(game) {
 //             if (!game.inProgress) {
@@ -44,7 +44,7 @@ module.exports = db.define('game', {
 
 
  {getterMethods: {
-    date: function(){
+    date: function(){ //I'm not sure where you are using this, but look into Angular date filters https://docs.angularjs.org/api/ng/filter/date
         return this.updatedAt.toDateString()+" at "+this.updatedAt.getHours()+":"+this.updatedAt.getMinutes()+":"+this.updatedAt.getSeconds();
     }
  }

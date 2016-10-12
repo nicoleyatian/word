@@ -7,16 +7,17 @@ const path = require('path');
 // const User = require(path.join('..', '..', '..', '/db/models/user'));
 const Game = require('../../../db/models/game');
 const User = require('../../../db/models/user');
-const Promise = require('sequelize').Promise;
+const Promise = require('sequelize').Promise; //you don't need this for anything you are doing in this file. es6 Promise has Promise.all
 
 // Get all games
 router.get('/', (req, res, next) => {
     Game.findAll({
-        include:[{model: User}]
+        include:[{model: User}] //you should just be able to do 'include:[User]' here
     })
         .then(games => {
             if (!games) {
-                throw new Error();
+                throw new Error(); //do you want to throw an error for no games, or just have something on the front that says there are no games to display if the length is 0?
+                //if you still want to throw the error, make it meaningful
             } else {
                 res.json(games);
             }
@@ -25,7 +26,7 @@ router.get('/', (req, res, next) => {
 });
 
 //Get all inProgress Game (rooms in the lobby)
-router.get('/rooms', (req, res, next) => {
+router.get('/rooms', (req, res, next) => { //you could consider just making this a query in the original get('/' above -- that is what I would expect as you are just filtering
     Game.findAll({
         where: {
             isWaiting: true
@@ -47,9 +48,9 @@ router.get('/rooms/:roomname', (req, res, next) => {
         },
         include:[{model: User}]
     })
-        .then(games => {
+        .then(games => { //this should be a singular game
             if (!games) {
-                throw new Error();
+                throw new Error(); //if there is no game, throw a meaningful error (and status code)
             } else {
                 res.json(games);
             }
@@ -64,7 +65,7 @@ router.get('/:gameId', (req, res, next) => {
     })
         .then(game => {
             if (!game) {
-                throw new Error();
+                throw new Error(); //same as above
             } else {
                 res.json(game);
             }
@@ -74,18 +75,19 @@ router.get('/:gameId', (req, res, next) => {
 
 // Update a Game
 // update the room name, start the game
-router.put('/:gameId', (req, res, next) => {
+router.put('/:gameId', (req, res, next) => { //can just anyone update a game in any way? Maybe confine user updates to adding themselves, and Admin can do more. Because you can update associations with just req.body
     Game.findById(req.params.gameId)
     .then(game => {
-        return game.update(req.body);
+        return game.update(req.body); //if you get rid of the brackets, it is implicitly returned
     })
+    //.then(game => game.update(req.body))
     .then(game => {
         res.status(201).json(game);
     })
     .catch(next);
 });
 
-//probably unnecessary--accomplished directly in sockets
+//probably unnecessary--accomplished directly in sockets //I think it makes more sense here rather than in your sockets
 router.put('/:gameId/over', (req, res, next) => {
     Game.findById(req.params.gameId, {
         include: [{
@@ -100,7 +102,7 @@ router.put('/:gameId/over', (req, res, next) => {
                 score: req.body[user.id]
             }));
         });
-        updatePromises.push(game.update({inProgress: false}));
+        updatePromises.push(game.update({inProgress: false})); //this doesn't have all of the logic of the 'saveGame' from sockets, so if you go with this make sure to update it. If you don't, delete it
         return Promise.all(updatePromises)  ;  
     })
     .catch(next);
@@ -109,9 +111,9 @@ router.put('/:gameId/over', (req, res, next) => {
 
 
 //create a new game(with room name)
-router.put('/', (req, res, next) => {
+router.put('/', (req, res, next) => { //this is a POST not a PUT. You are creating not updating
     console.log('the req body is: ', req.body);
-    Game.create(req.body)
+    Game.create(req.body) //consider limiting the fields that are accepted
     .then(game => {
         res.status(201).json(game);
     })
@@ -143,7 +145,7 @@ router.put('/:gameId/player', (req, res, next) => {
 //leave from a game;
 router.delete('/:gameId/:userId', (req, res, next) => {
     Game.findById(req.params.gameId)
-    .then(game => {
+    .then(game => { //do you only want to do this if the game is inProgress?
         return game.removeUser(req.params.userId);
     })
     .then(() => {

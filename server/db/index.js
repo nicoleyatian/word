@@ -12,7 +12,7 @@ Game.belongsToMany(User, {through: UserGame})
 User.belongsToMany(Game, {through: UserGame})
 
 Game.belongsTo(User, {as: 'winner'})
-User.hasMany(Game, {as: 'winner', foreignKey: 'winnerId'})
+User.hasMany(Game, {as: 'winner', foreignKey: 'winnerId'}) // this is great! your associations look nice and the use of 'foreignKey' makes me happy
 
 
 // if we had more models, we could associate them in this file

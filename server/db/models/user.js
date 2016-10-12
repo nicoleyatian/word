@@ -31,15 +31,15 @@ module.exports = db.define('user', {
     }
 }, {
     getterMethods:{
-        highestScore:function(){
-            console.log(this.games)
+        highestScore:function(){ //if people play a crazy ton amount this might get slower; consider having this field on the user and an update hook that checks the score you are going to add against the highestScore and if greater replace. Consider this for all of the others except 'win_percentage'. But performance checks are obviously the best way to decide what it is you want
+            console.log(this.games) //mehhhh to logs in master
             var score=0;
             for (var game in this.games){
                 if (this.games[game].userGame.score>score){score=this.games[game].userGame.score}
             }
         return score;
         },
-        games_played: function(){
+        games_played: function(){ 
             var total=0;
             for (var game in this.games){
                 total+=1;
@@ -55,7 +55,7 @@ module.exports = db.define('user', {
             }
             return total;
         },
-        win_percentage: function(){
+        win_percentage: function(){ //this is a great getter!
             if (this.games_played===0){
                 return 0;
             }

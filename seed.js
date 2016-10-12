@@ -177,8 +177,8 @@ db.sync({
 
 .then(() => Promise.all(addRows(generateRows(game, 50), Game)))
     .then(() => Promise.all(addRows(generateRows(user, 50), User)))
-    .then(() => Game.findAll()
-        .then(games => {
+    .then(() => Game.findAll() 
+        .then(games => { //no need to nest this inside of the then on line 180. Game.findAll is an implicit return, so the next .then will have all of the games if you let it return.
             let add = [];
             games.forEach(game => {
                 add.push(addPlayers(game))

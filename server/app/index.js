@@ -11,7 +11,9 @@ module.exports = function (db) {
 
     // Routes that will be accessed via AJAX should be prepended with
     // /api so they are isolated from our GET /* wildcard.
-    app.use('/api', require('./routes/api/index'));
+    app.use('/api', require('./routes/api/index')); //index is implicit. Saying it explicitly is great; I just wnated to make sure that was understood
+    //by not requiring in routes/index and then mounting your game/user routes from there you are missing out on the error handling middleware written in routes/index.js
+    //what I would expect is to have /api send me to routes/index.js
 
 
     /*

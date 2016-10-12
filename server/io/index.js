@@ -37,7 +37,7 @@ module.exports = function(server) {
     }
 
     io.on('connection', function(socket) {
-        console.log("ROOMYTHINGY!", roomGameMapper);
+        console.log("ROOMYTHINGY!", roomGameMapper); //get rid of some of these logssss
         // Now have access to socket, wowzers!
         console.log('A new client with the socket ID of ' + socket.id + ' has connected');
 
@@ -57,7 +57,7 @@ module.exports = function(server) {
         });
         socket.on('getStartBoard', function(gameLength, gameId, userIds, roomName) {
             //initialize GameObj for the room in the mapper
-            roomGameMapper[roomName] = new game.GameObject(game.tileCounts, 6, 2);
+            roomGameMapper[roomName] = new game.GameObject(game.tileCounts, 6, 2); //you are going to make these variable right? how big the board can be and the min length of words?
             roomWordMapper[roomName] = {};
             var thisGame = roomGameMapper[roomName];
             var ourWords = roomWordMapper[roomName];

@@ -10,7 +10,7 @@ var ENABLED_AUTH_STRATEGIES = [
     'facebook',
     'google'
 ];
-
+//nice that you guys are using oauth!
 module.exports = function (app, db) {
 
     var dbStore = new SequelizeStore({

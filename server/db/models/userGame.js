@@ -15,4 +15,4 @@ module.exports = db.define('userGame', {
         	type: Sequelize.STRING
         }	
     }
-);
+); //nice, so each user can know their score and longest word for each game :)
