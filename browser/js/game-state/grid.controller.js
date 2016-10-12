@@ -15,14 +15,14 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.roomName = $stateParams.roomname;
 
     $scope.hideBoard = true;
-    $scope.hideStart = true;
+    $scope.hideStart = false;
     $scope.hideCrabdance = true;
     $scope.crabdances = 0;
     $rootScope.hideNavbar = true;
     $scope.freeze = false;
 
     $scope.otherPlayers = [];
-    $scope.gameLength = 90;
+    $scope.gameLength = 45;
     $scope.mouseIsDown = false;
     $scope.draggingAllowed = false;
 
@@ -488,11 +488,26 @@ console.log('update 1.2')
 
         function removePlayer(user) {
             console.log('playerDisconnected', user.id);
+            var player=user.username;
+            $scope.message=player+" has left the game!";
+            if ($scope.timeout) {
+                clearTimeout($scope.timeout);
+            }
+            $scope.timeout = setTimeout(function() {
+                $scope.message = '';
+                }, 3000);
             $scope.otherPlayers = $scope.otherPlayers.filter(otherPlayer => otherPlayer.id !== user.id);
-
             $scope.$evalAsync();
         }
-        Socket.on('playerDisconnected', removePlayer);
+
+        Socket.on('playerDisconnected', function(user){
+            console.log("!!!Player disconnected!!!");
+            console.log(user);
+            removePlayer(user);
+            if (($scope.otherPlayers.length===0) && ($scope.freeze===false)){
+                Socket.emit("lastPlayer", $scope.roomName, $scope.user);
+            }
+        });
 
         Socket.on('gameOver', function(winnersArray) {
             $scope.clear();
