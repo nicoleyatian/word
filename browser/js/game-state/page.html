@@ -34,7 +34,7 @@
             <div class="col-8 wood-board-sm">
                 <div id="your-word">
                     <h1 ng-hide="freeze" ng-click="submit(exports)"> {{ exports.word }} </h1>
-                    <h1 ng-show="freeze" ng-click="replay()">Play Again?</h1>
+                    <h1 ng-show="gameOver" ng-click="replay()">Play Again?</h1>
                 </div>
             </div>
             <div class="col-3 time-rock">

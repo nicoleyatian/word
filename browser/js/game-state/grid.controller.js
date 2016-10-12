@@ -20,10 +20,8 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.crabdances = 0;
     $rootScope.hideNavbar = true;
     $scope.freeze = false; //false; REVERT
+    $scope.gameOver = false;
 
-    var user1 = {username: 'michelangelo', score: 89};//REVERT
-    var user2 = {username: 'mustang', score: 6};
-    var user3 = {username: 'jeff', score: 1};
 
     $scope.otherPlayers = [];
     $scope.gameLength = 120;
@@ -38,7 +36,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     //gets set to the timeout that displays crabdance
     var dancing;
 
-    $scope.score = 288;
+    $scope.score = 0;
 
     $scope.board = [['A', 'B', 'C','A', 'B', 'C'],
                     ['D', 'E', 'F','A', 'B', 'C'],
@@ -263,9 +261,14 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     }
 
     function clearIfConflicting(updateWordObj, exportWordObj) {
+
         var tilesMoved = Object.keys(updateWordObj);
         var myWordTiles = Object.keys(exportWordObj);
-        if (tilesMoved.some(coord => myWordTiles.includes(coord))) $scope.clear();
+        console.log("clear-if", tilesMoved, myWordTiles);
+        if (tilesMoved.some(coord => myWordTiles.includes(coord))) {
+            $scope.clear();
+            console.log("cleared!");
+        }
     }
 
     $scope.clear = function() {
@@ -313,7 +316,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.update = function(updateObj) {
         $scope.updateScore(updateObj.pointsEarned, updateObj.playerId);
         $scope.updateBoard(updateObj.wordObj);
-        if (updateObj.word.length > 3 && updateObj.playerId != $scope.user.id) {
+        if (updateObj.word.length > 5 && updateObj.playerId != $scope.user.id) {
             if (!$scope.crabdances) crabdance();
             $scope.crabdances++;
         }
@@ -335,9 +338,9 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             $scope.message = ' ';
         }, 3000);
         console.log('its updating!');
-        clearIfConflicting(updateObj, $scope.exports.wordObj);
+        clearIfConflicting(updateObj.wordObj, $scope.exports.wordObj);
         $scope.exports.stateNumber = updateObj.stateNumber;
-        console.log('updated obj', updateObj)
+        console.log('updated obj', updateObj);
     };
 
     function crabdance() {
@@ -355,7 +358,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
                 // $scope.hideBoard = false;
                 $scope.freeze = false;
             }
-        }, 7000);
+        }, 3000);
     }
 
     $scope.replay = function() {
@@ -472,10 +475,11 @@ console.log('update 1.2')
 
         Socket.on('startBoard', function(board) {
             $scope.freeze = false; //false; REVERT
+            $scope.gameOver = false;
             console.log('board! ', board);
             $scope.board = board;
             $scope.otherPlayers.forEach(player => { player.score = 0 });
-            $scope.score = 388;
+            $scope.score = 0;
             $scope.hideBoard = false;
             $scope.hideStart = true;
             $scope.message = ' ';
@@ -512,6 +516,7 @@ console.log('update 1.2')
         Socket.on('gameOver', function(winnersArray) {
             $scope.clear();
             $scope.freeze = true;
+            $scope.gameOver = true;
             $scope.determineWinner(winnersArray);
             $scope.$evalAsync();
             console.log('game is over, winners: ', winnersArray);

@@ -6,5 +6,6 @@ app.factory('LeaderBoardFactory', function ($http) {
 		.then(res=>res.data)
 	}
 
+
 	return LeaderBoardFactory;
 });

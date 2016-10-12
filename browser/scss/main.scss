@@ -7,7 +7,6 @@ $number-cells: 6;
 $cell-diameter: 100%/($number-cells+.5);
 $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
 $letter-width: $cell-height/2;
-
 body {
     background: url(images/coral-background.jpg) no-repeat center center;
     height: 100%;
@@ -86,7 +85,6 @@ body {
     background: rgba(11, 61, 142, 0.8);
 }
 
-
 .btn-lobby:active {
     border: 2px solid rgba(33, 224, 163, 1);
     background: rgba(33, 224, 163, 1);
@@ -145,7 +143,7 @@ div #start {
 #message {
     text-align: center;
     margin: 0;
-    font-size: $letter-width/2;
+    font-size: $letter-width*2/3;
 }
 
 #grid {
@@ -263,12 +261,19 @@ div #start {
     text-align: center;
 }
 
+#profile-page {
+    margin-top: 40px;
+    color: #FFFFFF;
+}
+
 #profile {
+    padding: 10px;
     border: 5px dotted black;
     width: 50%;
     text-align: center;
     margin: auto;
 }
+
 
 #timer {
     margin: auto;
@@ -288,6 +293,8 @@ div.oauth {
     width: $board-width;
     // margin-top: 100px;
     position: absolute;
+    margin: auto;
+    right: 0px;
 }
 
 .flexbox {
@@ -1776,7 +1783,6 @@ div.oauth {
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
     html,
     body {
         width: 100%;
@@ -1790,7 +1796,6 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     #crab {
         max-width: 150px;
         max-height: 150px;
@@ -1798,8 +1803,6 @@ div.oauth {
         margin-top: 20px;
         margin-bottom: 20px;
     }
-
-
     .project-title {
         margin: 0;
         font: bold 50px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -1808,13 +1811,11 @@ div.oauth {
         text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
         -webkit-transition: .2s all linear;
     }
-
     .lobby-button {
         margin-top: 10px;
         margin-right: 10px;
         text-align: center;
     }
-
     .btn-lobby {
         -webkit-box-sizing: content-box;
         -moz-box-sizing: content-box;
@@ -1838,12 +1839,10 @@ div.oauth {
         -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
     }
-
     .btn-lobby:hover {
         color: rgba(255, 255, 255, 1);
         background: rgb(30, 205, 151);
     }
-
     .btn-lobby:active {
         border: 2px solid rgba(33, 224, 163, 1);
         background: rgba(33, 224, 163, 1);
@@ -1852,7 +1851,6 @@ div.oauth {
         -o-transition: none;
         transition: none;
     }
-
     #grid {
         width: $board-width;
     }
@@ -1879,7 +1877,6 @@ div.oauth {
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
     html,
     body {
         width: 100%;
@@ -1893,7 +1890,6 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     #crab {
         max-width: 150px;
         max-height: 150px;
@@ -1901,8 +1897,6 @@ div.oauth {
         margin-top: 20px;
         margin-bottom: 20px;
     }
-
-
     .project-title {
         margin: 0;
         font: bold 50px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -1911,13 +1905,11 @@ div.oauth {
         text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
         -webkit-transition: .2s all linear;
     }
-
     .lobby-button {
         margin-top: 10px;
         margin-right: 10px;
         text-align: center;
     }
-
     .btn-lobby {
         -webkit-box-sizing: content-box;
         -moz-box-sizing: content-box;
@@ -1941,12 +1933,10 @@ div.oauth {
         -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
     }
-
     .btn-lobby:hover {
         color: rgba(255, 255, 255, 1);
         background: rgb(30, 205, 151);
     }
-
     .btn-lobby:active {
         border: 2px solid rgba(33, 224, 163, 1);
         background: rgba(33, 224, 163, 1);
@@ -1955,7 +1945,6 @@ div.oauth {
         -o-transition: none;
         transition: none;
     }
-
     #grid {
         width: $board-width;
     }
@@ -1982,7 +1971,6 @@ div.oauth {
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
     html,
     body {
         width: 100%;
@@ -1996,7 +1984,6 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     #crab {
         max-width: 150px;
         max-height: 150px;
@@ -2004,8 +1991,6 @@ div.oauth {
         margin-top: 20px;
         margin-bottom: 20px;
     }
-
-
     .project-title {
         margin: 0;
         font: bold 50px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2014,13 +1999,11 @@ div.oauth {
         text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
         -webkit-transition: .2s all linear;
     }
-
     .lobby-button {
         margin-top: 10px;
         margin-right: 10px;
         text-align: center;
     }
-
     .btn-lobby {
         -webkit-box-sizing: content-box;
         -moz-box-sizing: content-box;
@@ -2044,12 +2027,10 @@ div.oauth {
         -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
     }
-
     .btn-lobby:hover {
         color: rgba(255, 255, 255, 1);
         background: rgb(30, 205, 151);
     }
-
     .btn-lobby:active {
         border: 2px solid rgba(33, 224, 163, 1);
         background: rgba(33, 224, 163, 1);
@@ -2058,7 +2039,6 @@ div.oauth {
         -o-transition: none;
         transition: none;
     }
-
     #grid {
         width: $board-width;
     }
@@ -2085,7 +2065,6 @@ div.oauth {
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
     html,
     body {
         width: 100%;
@@ -2099,7 +2078,6 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     #crab {
         max-width: 150px;
         max-height: 150px;
@@ -2107,7 +2085,6 @@ div.oauth {
         margin-top: 20px;
         margin-bottom: 20px;
     }
-
     .project-title {
         margin: 0;
         font: bold 50px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2116,13 +2093,11 @@ div.oauth {
         text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
         -webkit-transition: .2s all linear;
     }
-
     .lobby-button {
         margin-top: 10px;
         margin-right: 10px;
         text-align: center;
     }
-
     .btn-lobby {
         -webkit-box-sizing: content-box;
         -moz-box-sizing: content-box;
@@ -2146,12 +2121,10 @@ div.oauth {
         -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
     }
-
     .btn-lobby:hover {
         color: rgba(255, 255, 255, 1);
         background: rgb(30, 205, 151);
     }
-
     .btn-lobby:active {
         border: 2px solid rgba(33, 224, 163, 1);
         background: rgba(33, 224, 163, 1);
@@ -2160,7 +2133,6 @@ div.oauth {
         -o-transition: none;
         transition: none;
     }
-
     #grid {
         width: $board-width;
     }
@@ -2184,7 +2156,6 @@ div.oauth {
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
     html,
     body {
         width: 100%;
@@ -2198,7 +2169,6 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     #crab {
         max-width: 150px;
         max-height: 150px;
@@ -2206,8 +2176,6 @@ div.oauth {
         margin-top: 20px;
         margin-bottom: 20px;
     }
-
-
     .project-title {
         margin: 0;
         font: bold 50px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2216,13 +2184,11 @@ div.oauth {
         text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
         -webkit-transition: .2s all linear;
     }
-
     .lobby-button {
         margin-top: 10px;
         margin-right: 10px;
         text-align: center;
     }
-
     .btn-lobby {
         -webkit-box-sizing: content-box;
         -moz-box-sizing: content-box;
@@ -2246,12 +2212,10 @@ div.oauth {
         -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
     }
-
     .btn-lobby:hover {
         color: rgba(255, 255, 255, 1);
         background: rgb(30, 205, 151);
     }
-
     .btn-lobby:active {
         border: 2px solid rgba(33, 224, 163, 1);
         background: rgba(33, 224, 163, 1);
@@ -2260,7 +2224,6 @@ div.oauth {
         -o-transition: none;
         transition: none;
     }
-
     #grid {
         width: $board-width;
     }
@@ -2284,7 +2247,6 @@ div.oauth {
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
     html,
     body {
         width: 100%;
@@ -2298,7 +2260,6 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     #crab {
         max-width: 150px;
         max-height: 150px;
@@ -2306,7 +2267,6 @@ div.oauth {
         margin-top: 20px;
         margin-bottom: 20px;
     }
-
     .project-title {
         margin: 0;
         font: bold 50px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2315,13 +2275,11 @@ div.oauth {
         text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
         -webkit-transition: .2s all linear;
     }
-
     .lobby-button {
         margin-top: 10px;
         margin-right: 10px;
         text-align: center;
     }
-
     .btn-lobby {
         -webkit-box-sizing: content-box;
         -moz-box-sizing: content-box;
@@ -2345,12 +2303,10 @@ div.oauth {
         -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
     }
-
     .btn-lobby:hover {
         color: rgba(255, 255, 255, 1);
         background: rgb(30, 205, 151);
     }
-
     .btn-lobby:active {
         border: 2px solid rgba(33, 224, 163, 1);
         background: rgba(33, 224, 163, 1);
@@ -2359,7 +2315,6 @@ div.oauth {
         -o-transition: none;
         transition: none;
     }
-
     #grid {
         width: $board-width;
     }
@@ -2383,7 +2338,6 @@ div.oauth {
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
     html,
     body {
         width: 100%;
@@ -2397,7 +2351,6 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     #crab {
         max-width: 150px;
         max-height: 150px;
@@ -2405,8 +2358,6 @@ div.oauth {
         margin-top: 20px;
         margin-bottom: 20px;
     }
-
-
     .project-title {
         margin: 0;
         font: bold 50px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2415,13 +2366,11 @@ div.oauth {
         text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
         -webkit-transition: .2s all linear;
     }
-
     .lobby-button {
         margin-top: 10px;
         margin-right: 10px;
         text-align: center;
     }
-
     .btn-lobby {
         -webkit-box-sizing: content-box;
         -moz-box-sizing: content-box;
@@ -2445,12 +2394,10 @@ div.oauth {
         -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
     }
-
     .btn-lobby:hover {
         color: rgba(255, 255, 255, 1);
         background: rgb(30, 205, 151);
     }
-
     .btn-lobby:active {
         border: 2px solid rgba(33, 224, 163, 1);
         background: rgba(33, 224, 163, 1);
@@ -2459,7 +2406,6 @@ div.oauth {
         -o-transition: none;
         transition: none;
     }
-
     #grid {
         width: $board-width;
     }
@@ -2483,7 +2429,6 @@ div.oauth {
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
     html,
     body {
         width: 100%;
@@ -2497,7 +2442,6 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     #crab {
         max-width: 150px;
         max-height: 150px;
@@ -2505,8 +2449,6 @@ div.oauth {
         margin-top: 20px;
         margin-bottom: 20px;
     }
-
-
     .project-title {
         margin: 0;
         font: bold 100px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2515,13 +2457,11 @@ div.oauth {
         text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
         -webkit-transition: .2s all linear;
     }
-
     .lobby-button {
         margin-top: 10px;
         margin-right: 10px;
         text-align: center;
     }
-
     .btn-lobby {
         -webkit-box-sizing: content-box;
         -moz-box-sizing: content-box;
@@ -2545,12 +2485,10 @@ div.oauth {
         -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
     }
-
     .btn-lobby:hover {
         color: rgba(255, 255, 255, 1);
         background: rgb(30, 205, 151);
     }
-
     .btn-lobby:active {
         border: 2px solid rgba(33, 224, 163, 1);
         background: rgba(33, 224, 163, 1);
@@ -2559,7 +2497,6 @@ div.oauth {
         -o-transition: none;
         transition: none;
     }
-
     #grid {
         width: $board-width;
     }
@@ -2583,7 +2520,6 @@ div.oauth {
     $cell-diameter: 100%/($number-cells+.5);
     $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
     $letter-width: $cell-height/2;
-
     html,
     body {
         width: 100%;
@@ -2597,7 +2533,6 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     #crab {
         max-width: 175px;
         max-height: 175px;
@@ -2605,8 +2540,6 @@ div.oauth {
         margin-top: 20px;
         margin-bottom: 20px;
     }
-
-
     .project-title {
         margin: 0;
         font: bold 80px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2615,13 +2548,11 @@ div.oauth {
         text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
         -webkit-transition: .2s all linear;
     }
-
     .lobby-button {
         margin-top: 10px;
         margin-right: 10px;
         text-align: center;
     }
-
     .btn-lobby {
         -webkit-box-sizing: content-box;
         -moz-box-sizing: content-box;
@@ -2645,12 +2576,10 @@ div.oauth {
         -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
     }
-
     .btn-lobby:hover {
         color: rgba(255, 255, 255, 1);
         background: rgb(30, 205, 151);
     }
-
     .btn-lobby:active {
         border: 2px solid rgba(33, 224, 163, 1);
         background: rgba(33, 224, 163, 1);
@@ -2659,7 +2588,6 @@ div.oauth {
         -o-transition: none;
         transition: none;
     }
-
     #grid {
         width: $board-width;
     }
@@ -2818,4 +2746,3 @@ div.oauth {
 //         line-height: $cell-height;
 //     }
 // }
-

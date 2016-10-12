@@ -1,1 +1,82 @@
-* {}
+#lobby {
+    .new {
+        margin-top: 80px;
+        margin-right: 10px;
+        text-align: center;
+        .btn-room {
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+            width: 225px;
+            height: 60px;
+            cursor: pointer;
+            margin: 0 auto;
+            border: 2px solid rgba(255, 255, 255, 1);
+            -webkit-border-radius: 40px;
+            border-radius: 40px;
+            font: normal 25px/50px Quicksand;
+            color: rgba(255, 255, 255, 1);
+            text-align: center;
+            -o-text-overflow: clip;
+            text-overflow: clip;
+            letter-spacing: 1px;
+            background: rgba(179, 188, 204, 0.55);
+            -webkit-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+            -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+            -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+            transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        }
+        .btn-room:hover {
+            color: rgba(255, 255, 255, 1);
+            background: rgba(11, 61, 142, 0.8);
+        }
+        .btn-room:active {
+            border: 2px solid rgba(33, 224, 163, 1);
+            background: rgba(33, 224, 163, 1);
+            -webkit-transition: none;
+            -moz-transition: none;
+            -o-transition: none;
+            transition: none;
+        }
+        form {
+            margin: 30px auto;
+            width: 400px;
+            display: flex;
+            justify-content: center;
+            .btn-submit {
+                background-image: url(images/submit-btn.png);
+                background-color: transparent;
+                background-size: 100% 100%;
+                border: none;
+                color: white;
+            }
+        }
+    }
+    
+    .row {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 80%;
+        margin: 30px auto;
+    }
+    
+    .room {
+        background-image: url(images/room.png);
+        background-color: transparent;
+        background-size: 100% 100%;
+        border: none;
+        width: 180px;
+        height: 120px;
+        line-height: 120px;
+        margin: 10px 10px;
+        text-decoration: none;
+        p {
+            text-align: center;
+            font-size: 20px;
+            color: black;
+             text-shadow: 1px 1px #222222;
+
+        }
+    }
+}
