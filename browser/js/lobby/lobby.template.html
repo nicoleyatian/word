@@ -1,21 +1,18 @@
 <div id='lobby'>
-        <div class='new'>
-            <button class="btn btn-primary" ng-click='showForm()'>New Room</button>
-            <form name="roomForm" ng-submit="newRoom(roomInfo)" ng-show="roomNameForm">
-                <div class="form-group">
-                    <label for="roomName">Room Name</label>
-                    <input type="text" ng-model="roomInfo.roomname" class="form-control" id="roomname" placeholder="Enter a Room Name" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
-        <div class='row'>
-            <a class='room col-md-4' ng-repeat='room in rooms' ui-sref='Game({roomname: room.roomname})' ui-sref-opts="{reload: true, notify: true}">
-                <!-- <ul> -->
-                <p>{{room.roomname}}</p>
-                <!-- <li>Players: {{room.users.length}}/4</li> -->
-                <!-- </ul> -->
-            </a>
-        </div>
+    <div class='new'>
+        <button class="btn btn-room" ng-click='showForm()'>New Room</button>
+        <form name="roomForm" ng-submit="newRoom(roomInfo)" ng-show="roomNameForm">
+            <input type="text" ng-model="roomInfo.roomname" class="form-control" id="roomname" placeholder="Enter a Room Name" required>
+            <button type="submit" class="btn btn-submit">Submit</button>
+        </form>
     </div>
+    <div class='row'>
+        <a class='room col-md-4' ng-repeat='room in rooms' ui-sref='Game({roomname: room.roomname})' ui-sref-opts="{reload: true, notify: true}">
+            <!-- <ul> -->
+            <p>{{room.roomname}}</p>
+            <!-- <li>Players: {{room.users.length}}/4</li> -->
+            <!-- </ul> -->
+        </a>
+    </div>
+</div>
 </div>
