@@ -1,7 +1,7 @@
 navbar {
 
   display: block;
-  background: white;
+  background: #04214f;
   border-bottom: 1px solid black;
   box-shadow: 1px 1px 14px -3px black;
 
@@ -18,7 +18,7 @@ navbar {
   }
 
   a {
-    color: black;
+    color: white;
     font-size: 16px;
   }
 
@@ -26,11 +26,12 @@ navbar {
     cursor: pointer;
     transition: color 0.2s;
     &.active {
-      color: darken(#f31214, 10%);
+      color: darken(white, 10%);
     }
     &:hover {
       background: none;
-      color: #f31214;
+      color: #f9de63
+;
     }
     &:focus {
       background: none;
@@ -54,7 +55,7 @@ navbar {
       margin-right: 5px;
     }
     a {
-      color: #f30046;
+      color: white;
       cursor: pointer;
     }
   }

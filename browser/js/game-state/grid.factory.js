@@ -1,17 +1,17 @@
 app.factory ("BoardFactory", function($http, Socket){
 	return{
-		getStartBoard: function(gameLength, gameId, userIds){
+		getStartBoard: function(gameLength, gameId, userIds, roomName){
 			console.log('factory. gl: ', gameLength);
-			Socket.emit('getStartBoard', gameLength, gameId, userIds);
+			Socket.emit('getStartBoard', gameLength, gameId, userIds, roomName);
 		},
 
-		submit: function(obj){
-			Socket.emit('submitWord', obj);
+		submit: function(obj, roomName){
+			Socket.emit('submitWord', obj, roomName);
 		},
 
-		shuffle: function(user){
+		shuffle: function(user, roomName){
 			console.log('gridfactory u',user.id);
-			Socket.emit('shuffleBoard',user.id);
+			Socket.emit('shuffleBoard',user, roomName);
 		},
 
 		// findAllOtherUsers: function(game) {
