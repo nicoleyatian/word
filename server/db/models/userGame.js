@@ -12,7 +12,8 @@ module.exports = db.define('userGame', {
             type: Sequelize.INTEGER
         },
         longestWord: {
-        	type: Sequelize.STRING
+        	type: Sequelize.STRING,
+        	defaultValue: ''
         }	
     }
 );
