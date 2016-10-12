@@ -14,25 +14,36 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.roomName = $stateParams.roomname;
 
-    $scope.hideBoard = true;
-    $scope.hideStart = true;
-    $scope.hideCrabdance = true;
+    $scope.hideBoard = true; //true; REVERT
+    $scope.hideStart = false; //false; REVERT
+    $scope.hideCrabdance = true; 
     $scope.crabdances = 0;
     $rootScope.hideNavbar = true;
-    $scope.freeze = false;
+    $scope.freeze = false; //false; REVERT
+    $scope.gameOver = false;
+
 
     $scope.otherPlayers = [];
-    $scope.gameLength = 90;
+    $scope.gameLength = 120;
     $scope.mouseIsDown = false;
     $scope.draggingAllowed = false;
 
     $scope.style = null;
-    $scope.message = '';
-    $scope.winOrLose = null;
+    $scope.message = ' ';
+    // $scope.winOrLose = null;
+    //gets set to the timeout that displays a message
     $scope.timeout = null;
+    //gets set to the timeout that displays crabdance
+    var dancing;
 
     $scope.score = 0;
 
+    $scope.board = [['A', 'B', 'C','A', 'B', 'C'],
+                    ['D', 'E', 'F','A', 'B', 'C'],
+                    ['G', 'H', 'I','A', 'B', 'C'],
+                    ['A', 'B', 'C','A', 'B', 'C'],
+                    ['D', 'E', 'F','A', 'B', 'C'],
+                    ['G', 'H', 'I','A', 'B', 'C']];
 
     $scope.exports = {
         wordObj: {},
@@ -222,7 +233,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         var userIds = $scope.otherPlayers.map(user => user.id);
         userIds.push($scope.user.id);
         console.log('op', $scope.otherPlayers, 'ui', userIds);
-        $scope.winOrLose = null;
+        // $scope.winOrLose = null;
         BoardFactory.getStartBoard($scope.gameLength, $scope.gameId, userIds, $scope.roomName);
     };
 
@@ -250,9 +261,14 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     }
 
     function clearIfConflicting(updateWordObj, exportWordObj) {
+
         var tilesMoved = Object.keys(updateWordObj);
         var myWordTiles = Object.keys(exportWordObj);
-        if (tilesMoved.some(coord => myWordTiles.includes(coord))) $scope.clear();
+        console.log("clear-if", tilesMoved, myWordTiles);
+        if (tilesMoved.some(coord => myWordTiles.includes(coord))) {
+            $scope.clear();
+            console.log("cleared!");
+        }
     }
 
     $scope.clear = function() {
@@ -300,7 +316,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.update = function(updateObj) {
         $scope.updateScore(updateObj.pointsEarned, updateObj.playerId);
         $scope.updateBoard(updateObj.wordObj);
-        if (updateObj.word.length > 3 && updateObj.playerId != $scope.user.id) {
+        if (updateObj.word.length > 5 && updateObj.playerId != $scope.user.id) {
             if (!$scope.crabdances) crabdance();
             $scope.crabdances++;
         }
@@ -319,27 +335,28 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
             clearTimeout($scope.timeout);
         }
         $scope.timeout = setTimeout(function() {
-            $scope.message = '';
+            $scope.message = ' ';
         }, 3000);
         console.log('its updating!');
-        clearIfConflicting(updateObj, $scope.exports.wordObj);
+        clearIfConflicting(updateObj.wordObj, $scope.exports.wordObj);
         $scope.exports.stateNumber = updateObj.stateNumber;
-        console.log('updated obj', updateObj)
-        //$scope.$evalAsync();
+        console.log('updated obj', updateObj);
     };
 
     function crabdance() {
-        $scope.hideBoard = true;
+        // $scope.hideBoard = true;
+        $scope.freeze = true;
         $scope.hideCrabdance = false;
         console.log('dance crab!', $scope.crabdances);
-        setTimeout(function() {
+        dancing = setTimeout(function() {
             $scope.crabdances--;
             if ($scope.crabdances) {
                 crabdance();
             }
             else {
                 $scope.hideCrabdance = true;
-                $scope.hideBoard = false;
+                // $scope.hideBoard = false;
+                $scope.freeze = false;
             }
         }, 3000);
     }
@@ -364,14 +381,16 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     };
 
     $scope.determineWinner = function(winnersArray) {
+        clearTimeout($scope.timeout);
+        clearTimeout(dancing);
         if (winnersArray.length === 1) {
             if (+winnersArray[0] === +$scope.user.id) {
-                $scope.winOrLose = "Congratulation! You are a word wizard! You won!!!";
+                $scope.message = "Congratulations, you won!";
             } else {
                 for (var player in $scope.otherPlayers) {
                     if (+$scope.otherPlayers[player].id === +winnersArray[0]) {
                         var winner = $scope.otherPlayers[player].username;
-                        $scope.winOrLose = "Tough luck. " + winner + " has beaten you. Better Luck next time. :("
+                        $scope.message = winner + " won. Better Luck next time.";
                     }
                 }
             }
@@ -387,13 +406,13 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
                     }
                 }
                 console.log(winners);
-                $scope.winOrLose = "The game was a tie between ";
-                for (var i = 0; i < winners.length; i++) {
-                    if (i === winners.length - 1) { $scope.winOrLose += "and " + winners[i] + "."; } else { $scope.winOrLose += winners[i] + ", "; }
-                }
+                $scope.message = "The game was a tie between "+winners.join(" and ")+".";
+                // for (var i = 0; i < winners.length; i++) {
+                //     if (i === winners.length - 1) { $scope.winOrLose += "and " + winners[i] + "."; } else { $scope.winOrLose += winners[i] + ", "; }
+                // }
             }
         }
-    }
+    };
 
 
     // $scope.$on('$stateChangeStart', function() {
@@ -439,8 +458,6 @@ console.log('update 1.2')
             })
         ]).then(function() {
             Socket.emit('joinRoom', $scope.user, $scope.roomName, $scope.gameId);
-            // $scope.hideStart = false;
-            // $scope.$evalAsync();
             console.log('emitting "join room" event to server 8P', $scope.roomName);
         }).catch(function(e) {
             console.error('error grabbing user or room from db: ', e);
@@ -457,14 +474,16 @@ console.log('update 1.2')
         });
 
         Socket.on('startBoard', function(board) {
-            $scope.freeze = false;
+            $scope.freeze = false; //false; REVERT
+            $scope.gameOver = false;
             console.log('board! ', board);
             $scope.board = board;
             $scope.otherPlayers.forEach(player => { player.score = 0 });
             $scope.score = 0;
             $scope.hideBoard = false;
-            $scope.message = '';
-            $scope.winOrLose = null;
+            $scope.hideStart = true;
+            $scope.message = ' ';
+            // $scope.winOrLose = null;
 
             $scope.$evalAsync();
         });
@@ -497,6 +516,7 @@ console.log('update 1.2')
         Socket.on('gameOver', function(winnersArray) {
             $scope.clear();
             $scope.freeze = true;
+            $scope.gameOver = true;
             $scope.determineWinner(winnersArray);
             $scope.$evalAsync();
             console.log('game is over, winners: ', winnersArray);
