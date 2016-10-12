@@ -32,12 +32,15 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.style = null;
     $scope.message = 'michelangelo played woooord for 44 points!';
-    $scope.winOrLose = null;
+    // $scope.winOrLose = null;
     $scope.timeout = null;
 
     $scope.score = 0;
 
     $scope.board = [['A', 'B', 'C','A', 'B', 'C'],
+                    ['D', 'E', 'F','A', 'B', 'C'],
+                    ['G', 'H', 'I','A', 'B', 'C'],
+                    ['A', 'B', 'C','A', 'B', 'C'],
                     ['D', 'E', 'F','A', 'B', 'C'],
                     ['G', 'H', 'I','A', 'B', 'C']];
 
@@ -229,7 +232,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         var userIds = $scope.otherPlayers.map(user => user.id);
         userIds.push($scope.user.id);
         console.log('op', $scope.otherPlayers, 'ui', userIds);
-        $scope.winOrLose = null;
+        // $scope.winOrLose = null;
         BoardFactory.getStartBoard($scope.gameLength, $scope.gameId, userIds);
     };
 
@@ -373,12 +376,12 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.determineWinner = function(winnersArray) {
         if (winnersArray.length === 1) {
             if (+winnersArray[0] === +$scope.user.id) {
-                $scope.winOrLose = "Congratulation! You are a word wizard! You won!!!";
+                $scope.message = "Congratulations, you won!";
             } else {
                 for (var player in $scope.otherPlayers) {
                     if (+$scope.otherPlayers[player].id === +winnersArray[0]) {
                         var winner = $scope.otherPlayers[player].username;
-                        $scope.winOrLose = "Tough luck. " + winner + " has beaten you. Better Luck next time. :("
+                        $scope.message = winner + " won. Better Luck next time."
                     }
                 }
             }
@@ -394,10 +397,10 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
                     }
                 }
                 console.log(winners);
-                $scope.winOrLose = "The game was a tie between ";
-                for (var i = 0; i < winners.length; i++) {
-                    if (i === winners.length - 1) { $scope.winOrLose += "and " + winners[i] + "."; } else { $scope.winOrLose += winners[i] + ", "; }
-                }
+                $scope.message = "The game was a tie between "+winners.join(", and")+".";
+                // for (var i = 0; i < winners.length; i++) {
+                //     if (i === winners.length - 1) { $scope.winOrLose += "and " + winners[i] + "."; } else { $scope.winOrLose += winners[i] + ", "; }
+                // }
             }
         }
     }
@@ -469,7 +472,7 @@ console.log('update')
             $scope.hideStart = true;
             $scope.hideBoard = false;
             $scope.message = '';
-            $scope.winOrLose = null;
+            // $scope.winOrLose = null;
 
             $scope.$evalAsync();
         });
