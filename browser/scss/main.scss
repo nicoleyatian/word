@@ -21,6 +21,8 @@ body {
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
+    position: absolute;
+    z-index: 2;
 }
 
 @mixin clearfix {
@@ -125,7 +127,7 @@ div #start {
     box-shadow: -1px 3px rgba(0, 0, 0, .5);
     width: $cell-diameter;
     height: $cell-height;
-    line-height: $cell-height/2 + 5.75;
+    line-height: $cell-height/2 + 4;
     // padding: 12%;
     // padding: 5px;
     background: url(images/sand.png);
@@ -156,11 +158,9 @@ div #start {
 //     padding: auto auto;
 //     vertical-align: center;
 // }
-
 // .flexbox {
 //     height: 5vh;
 // }
-
 #grid .selected {
     border: 5px solid #c3f4eb;
 }
@@ -194,7 +194,6 @@ div #start {
     height: 35vh;
     display: flex;
     flex-direction: column;
-
     ul {
         padding-left: 10px;
         padding-top: 20px;
@@ -222,8 +221,6 @@ div #start {
     font-weight: 800;
     text-shadow: 1px 1px black;
 }
-
-
 
 #timer {
     margin: auto;
@@ -353,1299 +350,12 @@ div.oauth {
 //     background-position: center;
 //     height: 80px
 // }
-// bubble animations
-.bubble_wrap {
-    height: 299px;
-    left: 100px;
-    position: absolute;
-    bottom: 0px;
-    width: 340px;
-}
-
-.bubbles {
-    background-color: rgba(255, 255, 255, 0.26);
-    border: 0px solid #585858;
-    border-radius: 100px 100px 100px 100px;
-    -moz-border-radius: 100px 100px 100px 100px;
-    -webkit-border-radius: 100px 100px 100px 100px;
-    -o-border-radius: 100px 100px 100px 100px;
-    -ms-border-radius: 100px 100px 100px 100px;
-    height: 20px;
-    left: 33px;
-    position: absolute;
-    top: 100px;
-    width: 20px;
-}
-
-.b2 {
-    left: 50px;
-    top: 260px;
-}
-
-.b3 {
-    left: 60px;
-    top: 260px;
-}
-
-.b4 {
-    left: 80px;
-    top: 260px;
-}
-
-.b5 {
-    left: 90px;
-    top: 260px;
-}
-
-
-/*start of bubble animations*/
-
-.b0 {
-    animation-name: bubbles;
-    animation-delay: 2s;
-    animation-duration: 4s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    -moz-animation-name: bubbles;
-    -moz-animation-delay: 2s;
-    -moz-animation-duration: 4s;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: linear;
-    -webkit-animation-name: bubbles;
-    -webkit-animation-delay: 2s;
-    -webkit-animation-duration: 4s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-}
-
-@keyframes bubbles {
-    from {
-        top: 260px;
-        left: 33px;
-    }
-    50% {
-        left: 39px;
-    }
-    to {
-        top: 0px;
-        left: 33px;
-    }
-}
-
-@-moz-keyframes bubbles {
-    from {
-        top: 260px;
-        left: 33px;
-    }
-    50% {
-        left: 39px;
-    }
-    to {
-        top: 0px;
-        left: 33px;
-    }
-}
-
-@-webkit-keyframes bubbles {
-    from {
-        top: 260px;
-        left: 33px;
-    }
-    50% {
-        left: 39px;
-    }
-    to {
-        top: 0px;
-        left: 33px;
-    }
-}
-
-.b1 {
-    animation-name: bubbles;
-    animation-duration: 7s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    -moz-animation-name: bubbles;
-    -moz-animation-duration: 7s;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: linear;
-    -webkit-animation-name: bubbles;
-    -webkit-animation-duration: 7s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-}
-
-@keyframes bubbles {
-    from {
-        top: 260px;
-    }
-    to {
-        top: 0px;
-    }
-}
-
-@-moz-keyframes bubbles {
-    from {
-        top: 260px;
-    }
-    to {
-        top: 0px;
-    }
-}
-
-@-webkit-keyframes bubbles {
-    from {
-        top: 260px;
-    }
-    to {
-        top: 0px;
-    }
-}
-
-.b2 {
-    animation-name: bubbles;
-    animation-delay: 1s;
-    animation-duration: 4s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    -moz-animation-name: bubbles;
-    -moz-animation-delay: 1s;
-    -moz-animation-duration: 4s;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: linear;
-    -webkit-animation-name: bubbles;
-    -webkit-animation-delay: 1s;
-    -webkit-animation-duration: 4s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-}
-
-@keyframes bubbles {
-    from {
-        top: 260px;
-    }
-    to {
-        top: 0px;
-    }
-}
-
-@-moz-keyframes bubbles {
-    from {
-        top: 260px;
-    }
-    to {
-        top: 0px;
-    }
-}
-
-@-webkit-keyframes bubbles {
-    from {
-        top: 260px;
-    }
-    to {
-        top: 0px;
-    }
-}
-
-.b3 {
-    animation-name: bubbles;
-    animation-delay: 3s;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    -moz-animation-name: bubbles;
-    -moz-animation-delay: 3s;
-    -moz-animation-duration: 3s;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: linear;
-    -webkit-animation-name: bubbles;
-    -webkit-animation-delay: 3s;
-    -webkit-animation-duration: 3s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-}
-
-@keyframes bubbles {
-    from {
-        top: 260px;
-        left: 60px;
-    }
-    25% {
-        left: 30px;
-    }
-    50% {
-        left: 58px;
-    }
-    75% {
-        left: 37px;
-    }
-    to {
-        top: 0px;
-        left: 60px;
-    }
-}
-
-@-moz-keyframes bubbles {
-    from {
-        top: 260px;
-        left: 60px;
-    }
-    25% {
-        left: 30px;
-    }
-    50% {
-        left: 58px;
-    }
-    75% {
-        left: 37px;
-    }
-    to {
-        top: 0px;
-        left: 60px;
-    }
-}
-
-@-webkit-keyframes bubbles {
-    from {
-        top: 260px;
-        left: 60px;
-    }
-    25% {
-        left: 30px;
-    }
-    50% {
-        left: 58px;
-    }
-    75% {
-        left: 37px;
-    }
-    to {
-        top: 0px;
-        left: 60px;
-    }
-}
-
-.b4 {
-    animation-name: bubbles;
-    animation-duration: 6s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    -moz-animation-name: bubbles;
-    -moz-animation-duration: 6s;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: linear;
-    -webkit-animation-name: bubbles;
-    -webkit-animation-duration: 6s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-}
-
-@keyframes bubbles {
-    from {
-        top: 260px;
-    }
-    to {
-        top: 0px;
-    }
-}
-
-@-moz-keyframes bubbles {
-    from {
-        top: 260px;
-    }
-    to {
-        top: 0px;
-    }
-}
-
-@-webkit-keyframes bubbles {
-    from {
-        top: 260px;
-    }
-    to {
-        top: 0px;
-    }
-}
-
-.b5 {
-    animation-name: bubbles;
-    animation-duration: 5s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    -moz-animation-name: bubbles;
-    -moz-animation-duration: 5s;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: linear;
-    -webkit-animation-name: bubbles;
-    -webkit-animation-duration: 5s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-}
-
-@keyframes bubbles {
-    from {
-        top: 260px;
-    }
-    to {
-        top: 0px;
-    }
-}
-
-@-moz-keyframes bubbles {
-    from {
-        top: 260px;
-    }
-    to {
-        top: 0px;
-    }
-}
-
-@-webkit-keyframes bubbles {
-    from {
-        top: 260px;
-    }
-    to {
-        top: 0px;
-    }
-}
-
-
-/*tail bubbles*/
-
-.b6,
-.b7,
-.b8 {
-    opacity: 0;
-}
-
-.b6,
-.b8 {
-    transform: scale(0.5);
-    -moz-transform: scale(0.5);
-    -webkit-transform: scale(0.5);
-    -ms-transform: scale(0.5);
-    -o-transform: scale(0.5);
-}
-
-.b7 {
-    transform: scale(0.8);
-    -moz-transform: scale(0.8);
-    -webkit-transform: scale(0.8);
-    -o-transform: scale(0.8);
-    -ms-transform: scale(0.8);
-}
-
-.bw2 {
-    width: 80px;
-    animation-name: tail_bubbles;
-    animation-duration: 30s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    -moz-animation-name: tail_bubbles;
-    -moz-animation-duration: 30s;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: linear;
-    -webkit-animation-name: tail_bubbles;
-    -webkit-animation-duration: 30s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-}
-
-@keyframes tail_bubbles {
-    from {
-        left: 30px;
-    }
-    48% {
-        left: 30px;
-    }
-    50.5% {
-        left: 760px;
-    }
-    65% {
-        left: 760px;
-    }
-    70.5% {
-        left: 30px;
-    }
-    78% {
-        left: 30px;
-    }
-    82.5% {
-        left: 720px;
-    }
-    92% {
-        left: 720px;
-    }
-    to {
-        left: 30px;
-    }
-}
-
-@-moz-keyframes tail_bubbles {
-    from {
-        left: 30px;
-    }
-    48% {
-        left: 30px;
-    }
-    50.5% {
-        left: 760px;
-    }
-    65% {
-        left: 760px;
-    }
-    70.5% {
-        left: 30px;
-    }
-    78% {
-        left: 30px;
-    }
-    82.5% {
-        left: 720px;
-    }
-    92% {
-        left: 720px;
-    }
-    to {
-        left: 30px;
-    }
-}
-
-@-webkit-keyframes tail_bubbles {
-    from {
-        left: 30px;
-    }
-    48% {
-        left: 30px;
-    }
-    50.5% {
-        left: 760px;
-    }
-    65% {
-        left: 760px;
-    }
-    70.5% {
-        left: 30px;
-    }
-    78% {
-        left: 30px;
-    }
-    82.5% {
-        left: 720px;
-    }
-    92% {
-        left: 720px;
-    }
-    to {
-        left: 30px;
-    }
-}
-
-.b6 {
-    animation-name: tail_bubble1;
-    animation-duration: 30s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    -moz-animation-name: tail_bubble1;
-    -moz-animation-duration: 30s;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: linear;
-    -webkit-animation-name: tail_bubble1;
-    -webkit-animation-duration: 30s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-}
-
-@keyframes tail_bubble1 {
-    from {
-        left: 30px;
-        top: 205px;
-    }
-    20.5% {
-        opacity: 0;
-    }
-    21% {
-        left: 30px;
-        top: 205px;
-        opacity: 1;
-    }
-    26% {
-        opacity: 1;
-        left: 60px;
-        top: 105px;
-    }
-    26.3% {
-        opacity: 0;
-    }
-    40% {
-        left: 60px;
-        top: 205px;
-    }
-    50% {
-        opacity: 0;
-    }
-    50.5% {
-        opacity: 1;
-        left: 60px;
-        top: 205px;
-    }
-    54.3% {
-        opacity: 0;
-    }
-    55% {
-        left: 60px;
-        top: 105px;
-    }
-    65% {
-        left: 60px;
-    }
-    70% {
-        opacity: 0;
-    }
-    70.5% {
-        opacity: 1;
-        left: 30px;
-        top: 210px;
-    }
-    73.3% {
-        opacity: 0;
-    }
-    73% {
-        left: 30px;
-        top: 105px;
-    }
-    78% {
-        left: 30px;
-    }
-    82.3% {
-        opacity: 0;
-    }
-    82.5% {
-        opacity: 1;
-        left: 20px;
-        top: 150px;
-    }
-    86.3% {
-        opacity: 0;
-    }
-    87% {
-        left: 20px;
-        top: 30px;
-    }
-    92% {
-        left: 20px;
-    }
-    to {
-        left: 30px;
-    }
-}
-
-@-moz-keyframes tail_bubble1 {
-    from {
-        left: 30px;
-        top: 205px;
-    }
-    20.5% {
-        opacity: 0;
-    }
-    21% {
-        left: 30px;
-        top: 205px;
-        opacity: 1;
-    }
-    26% {
-        opacity: 1;
-        left: 60px;
-        top: 105px;
-    }
-    26.3% {
-        opacity: 0;
-    }
-    40% {
-        left: 60px;
-        top: 205px;
-    }
-    50% {
-        opacity: 0;
-    }
-    50.5% {
-        opacity: 1;
-        left: 60px;
-        top: 205px;
-    }
-    54.3% {
-        opacity: 0;
-    }
-    55% {
-        left: 60px;
-        top: 105px;
-    }
-    65% {
-        left: 60px;
-    }
-    70% {
-        opacity: 0;
-    }
-    70.5% {
-        opacity: 1;
-        left: 30px;
-        top: 210px;
-    }
-    73.3% {
-        opacity: 0;
-    }
-    73% {
-        left: 30px;
-        top: 105px;
-    }
-    78% {
-        left: 30px;
-    }
-    82.3% {
-        opacity: 0;
-    }
-    82.5% {
-        opacity: 1;
-        left: 20px;
-        top: 150px;
-    }
-    86.3% {
-        opacity: 0;
-    }
-    87% {
-        left: 20px;
-        top: 30px;
-    }
-    92% {
-        left: 20px;
-    }
-    to {
-        left: 30px;
-    }
-}
-
-@-webkit-keyframes tail_bubble1 {
-    from {
-        left: 30px;
-        top: 205px;
-    }
-    20.5% {
-        opacity: 0;
-    }
-    21% {
-        left: 30px;
-        top: 205px;
-        opacity: 1;
-    }
-    26% {
-        opacity: 1;
-        left: 60px;
-        top: 105px;
-    }
-    26.3% {
-        opacity: 0;
-    }
-    40% {
-        left: 60px;
-        top: 205px;
-    }
-    50% {
-        opacity: 0;
-    }
-    50.5% {
-        opacity: 1;
-        left: 60px;
-        top: 205px;
-    }
-    54.3% {
-        opacity: 0;
-    }
-    55% {
-        left: 60px;
-        top: 105px;
-    }
-    65% {
-        left: 60px;
-    }
-    70% {
-        opacity: 0;
-    }
-    70.5% {
-        opacity: 1;
-        left: 30px;
-        top: 210px;
-    }
-    73.3% {
-        opacity: 0;
-    }
-    73% {
-        left: 30px;
-        top: 105px;
-    }
-    78% {
-        left: 30px;
-    }
-    82.3% {
-        opacity: 0;
-    }
-    82.5% {
-        opacity: 1;
-        left: 20px;
-        top: 150px;
-    }
-    86.3% {
-        opacity: 0;
-    }
-    87% {
-        left: 20px;
-        top: 30px;
-    }
-    92% {
-        left: 20px;
-    }
-    to {
-        left: 30px;
-    }
-}
-
-.b7 {
-    animation-name: tail_bubble2;
-    animation-duration: 30s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    -moz-animation-name: tail_bubble2;
-    -moz-animation-duration: 30s;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: linear;
-    -webkit-animation-name: tail_bubble2;
-    -webkit-animation-duration: 30s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-}
-
-@keyframes tail_bubble2 {
-    from {
-        left: 30px;
-        top: 205px;
-    }
-    20.5% {
-        opacity: 0;
-    }
-    21% {
-        /*turn one*/
-        opacity: 1;
-        left: 30px;
-        top: 205px;
-    }
-    25.5% {
-        opacity: 0;
-    }
-    26% {
-        left: -30px;
-        top: 105px;
-    }
-    40% {
-        left: 30px;
-        top: 205px;
-    }
-    49.5% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-        left: 30px;
-        top: 205px;
-    }
-    53% {
-        left: 70px;
-        top: 80px;
-    }
-    54.3% {
-        opacity: 0;
-    }
-    65% {
-        left: 30px;
-    }
-    69.5% {
-        opacity: 0;
-    }
-    70.5% {
-        opacity: 1;
-        left: 30px;
-        top: 210px;
-    }
-    73% {
-        left: 70px;
-        top: 55px;
-    }
-    73.5% {
-        opacity: 0;
-    }
-    78% {
-        left: 30px;
-    }
-    82% {
-        opacity: 0;
-    }
-    82.5% {
-        opacity: 1;
-        left: 50px;
-        top: 150px;
-    }
-    86.3% {
-        opacity: 0;
-    }
-    87% {
-        left: -20px;
-        top: 30px;
-    }
-    92% {
-        left: 20px;
-    }
-    to {
-        left: 30px;
-    }
-}
-
-@-moz-keyframes tail_bubble2 {
-    from {
-        left: 30px;
-        top: 205px;
-    }
-    20.5% {
-        opacity: 0;
-    }
-    21% {
-        /*turn one*/
-        opacity: 1;
-        left: 30px;
-        top: 205px;
-    }
-    25.5% {
-        opacity: 0;
-    }
-    26% {
-        left: -30px;
-        top: 105px;
-    }
-    40% {
-        left: 30px;
-        top: 205px;
-    }
-    49.5% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-        left: 30px;
-        top: 205px;
-    }
-    53% {
-        left: 70px;
-        top: 80px;
-    }
-    54.3% {
-        opacity: 0;
-    }
-    65% {
-        left: 30px;
-    }
-    69.5% {
-        opacity: 0;
-    }
-    70.5% {
-        opacity: 1;
-        left: 30px;
-        top: 210px;
-    }
-    73% {
-        left: 70px;
-        top: 55px;
-    }
-    73.5% {
-        opacity: 0;
-    }
-    78% {
-        left: 30px;
-    }
-    82% {
-        opacity: 0;
-    }
-    82.5% {
-        opacity: 1;
-        left: 50px;
-        top: 150px;
-    }
-    86.3% {
-        opacity: 0;
-    }
-    87% {
-        left: -20px;
-        top: 30px;
-    }
-    92% {
-        left: 20px;
-    }
-    to {
-        left: 30px;
-    }
-}
-
-@-webkit-keyframes tail_bubble2 {
-    from {
-        left: 30px;
-        top: 205px;
-    }
-    20.5% {
-        opacity: 0;
-    }
-    21% {
-        /*turn one*/
-        opacity: 1;
-        left: 30px;
-        top: 205px;
-    }
-    25.5% {
-        opacity: 0;
-    }
-    26% {
-        left: -30px;
-        top: 105px;
-    }
-    40% {
-        left: 30px;
-        top: 205px;
-    }
-    49.5% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-        left: 30px;
-        top: 205px;
-    }
-    53% {
-        left: 70px;
-        top: 80px;
-    }
-    54.3% {
-        opacity: 0;
-    }
-    65% {
-        left: 30px;
-    }
-    69.5% {
-        opacity: 0;
-    }
-    70.5% {
-        opacity: 1;
-        left: 30px;
-        top: 210px;
-    }
-    73% {
-        left: 70px;
-        top: 55px;
-    }
-    73.5% {
-        opacity: 0;
-    }
-    78% {
-        left: 30px;
-    }
-    82% {
-        opacity: 0;
-    }
-    82.5% {
-        opacity: 1;
-        left: 50px;
-        top: 150px;
-    }
-    86.3% {
-        opacity: 0;
-    }
-    87% {
-        left: -20px;
-        top: 30px;
-    }
-    92% {
-        left: 20px;
-    }
-    to {
-        left: 30px;
-    }
-}
-
-.b8 {
-    animation-name: tail_bubble3;
-    animation-duration: 30s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    -moz-animation-name: tail_bubble3;
-    -moz-animation-duration: 30s;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: linear;
-    -webkit-animation-name: tail_bubble3;
-    -webkit-animation-duration: 30s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-}
-
-@keyframes tail_bubble3 {
-    from {
-        left: 50px;
-        top: 205px;
-    }
-    20.5% {
-        opacity: 0;
-    }
-    21% {
-        opacity: 1;
-        left: 30px;
-        top: 205px;
-    }
-    25.5% {
-        opacity: 0;
-    }
-    26% {
-        left: 30px;
-        top: 105px;
-    }
-    40% {
-        left: 30px;
-        top: 205px;
-    }
-    49.5% {
-        opacity: 0;
-    }
-    50.5% {
-        opacity: 1;
-        left: 50px;
-        top: 205px;
-    }
-    53% {
-        left: 40px;
-        top: 80px;
-    }
-    54.3% {
-        opacity: 0;
-    }
-    65% {
-        left: 40px;
-    }
-    69.5% {
-        opacity: 0;
-    }
-    70.5% {
-        opacity: 1;
-        left: 40px;
-        top: 210px;
-    }
-    73% {
-        left: -20px;
-        top: 55px;
-    }
-    73.5% {
-        opacity: 0;
-    }
-    78% {
-        left: 40px;
-    }
-    82% {
-        opacity: 0;
-    }
-    82.5% {
-        opacity: 1;
-        left: 20px;
-        top: 150px;
-    }
-    86.3% {
-        opacity: 0;
-    }
-    87% {
-        left: 60px;
-        top: 30px;
-    }
-    92% {
-        left: 30px;
-    }
-    to {
-        left: 30px;
-    }
-}
-
-@-moz-keyframes tail_bubble3 {
-    from {
-        left: 50px;
-        top: 205px;
-    }
-    20.5% {
-        opacity: 0;
-    }
-    21% {
-        opacity: 1;
-        left: 30px;
-        top: 205px;
-    }
-    25.5% {
-        opacity: 0;
-    }
-    26% {
-        left: 30px;
-        top: 105px;
-    }
-    40% {
-        left: 30px;
-        top: 205px;
-    }
-    49.5% {
-        opacity: 0;
-    }
-    50.5% {
-        opacity: 1;
-        left: 50px;
-        top: 205px;
-    }
-    53% {
-        left: 40px;
-        top: 80px;
-    }
-    54.3% {
-        opacity: 0;
-    }
-    65% {
-        left: 40px;
-    }
-    69.5% {
-        opacity: 0;
-    }
-    70.5% {
-        opacity: 1;
-        left: 40px;
-        top: 210px;
-    }
-    73% {
-        left: -20px;
-        top: 55px;
-    }
-    73.5% {
-        opacity: 0;
-    }
-    78% {
-        left: 40px;
-    }
-    82% {
-        opacity: 0;
-    }
-    82.5% {
-        opacity: 1;
-        left: 20px;
-        top: 150px;
-    }
-    86.3% {
-        opacity: 0;
-    }
-    87% {
-        left: 60px;
-        top: 30px;
-    }
-    92% {
-        left: 30px;
-    }
-    to {
-        left: 30px;
-    }
-}
-
-@-webkit-keyframes tail_bubble3 {
-    from {
-        left: 50px;
-        top: 205px;
-    }
-    20.5% {
-        opacity: 0;
-    }
-    21% {
-        opacity: 1;
-        left: 30px;
-        top: 205px;
-    }
-    25.5% {
-        opacity: 0;
-    }
-    26% {
-        left: 30px;
-        top: 105px;
-    }
-    40% {
-        left: 30px;
-        top: 205px;
-    }
-    49.5% {
-        opacity: 0;
-    }
-    50.5% {
-        opacity: 1;
-        left: 50px;
-        top: 205px;
-    }
-    53% {
-        left: 40px;
-        top: 80px;
-    }
-    54.3% {
-        opacity: 0;
-    }
-    65% {
-        left: 40px;
-    }
-    69.5% {
-        opacity: 0;
-    }
-    70.5% {
-        opacity: 1;
-        left: 40px;
-        top: 210px;
-    }
-    73% {
-        left: -20px;
-        top: 55px;
-    }
-    73.5% {
-        opacity: 0;
-    }
-    78% {
-        left: 40px;
-    }
-    82% {
-        opacity: 0;
-    }
-    82.5% {
-        opacity: 1;
-        left: 20px;
-        top: 150px;
-    }
-    86.3% {
-        opacity: 0;
-    }
-    87% {
-        left: 60px;
-        top: 30px;
-    }
-    92% {
-        left: 30px;
-    }
-    to {
-        left: 30px;
-    }
-}
-
 @import 'directives/main';
+@import 'directives/bubbles';
 @import 'home/main';
 @import 'login/main';
 @import 'lobby/main';
 //game record state
-
-
 #header {
     text-align: center;
 }
@@ -1741,6 +451,9 @@ div.oauth {
         margin-top: 10px;
         margin-right: 10px;
         text-align: center;
+        position: absolute;
+        z-index: 3;
+        left: 50%;
     }
     .btn-lobby {
         -webkit-box-sizing: content-box;
@@ -1764,6 +477,9 @@ div.oauth {
         -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        position: absolute;
+        left: 50%;
+        z-index: 3;
     }
     .btn-lobby:hover {
         color: rgba(255, 255, 255, 1);
@@ -1784,22 +500,20 @@ div.oauth {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        line-height: $cell-height/2 + 6;
+        line-height: $cell-height/2 + 3.5;
     }
     .board-row {
         width: $board-width;
     }
-
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 
@@ -1852,6 +566,9 @@ div.oauth {
         margin-top: 10px;
         margin-right: 10px;
         text-align: center;
+        position: absolute;
+        z-index: 3;
+        left: 50%;
     }
     .btn-lobby {
         -webkit-box-sizing: content-box;
@@ -1875,6 +592,8 @@ div.oauth {
         -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        position: absolute;
+        z-index: 3;
     }
     .btn-lobby:hover {
         color: rgba(255, 255, 255, 1);
@@ -1895,22 +614,20 @@ div.oauth {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        line-height: $cell-height/2 + 6;
+        line-height: $cell-height/2 + 3.5;
     }
     .board-row {
         width: $board-width;
     }
-
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 
@@ -1963,6 +680,8 @@ div.oauth {
         margin-top: 10px;
         margin-right: 10px;
         text-align: center;
+        position: absolute;
+        z-index: 3;
     }
     .btn-lobby {
         -webkit-box-sizing: content-box;
@@ -1986,6 +705,8 @@ div.oauth {
         -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        position: absolute;
+        z-index: 3;
     }
     .btn-lobby:hover {
         color: rgba(255, 255, 255, 1);
@@ -2006,21 +727,20 @@ div.oauth {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        line-height: $cell-height/2 + 6;
+        line-height: $cell-height/2 + 3.5;
     }
     .board-row {
         width: $board-width;
     }
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 
@@ -2072,6 +792,8 @@ div.oauth {
         margin-top: 10px;
         margin-right: 10px;
         text-align: center;
+        position: absolute;
+        z-index: 3;
     }
     .btn-lobby {
         -webkit-box-sizing: content-box;
@@ -2095,6 +817,8 @@ div.oauth {
         -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        position: absolute;
+        z-index: 3;
     }
     .btn-lobby:hover {
         color: rgba(255, 255, 255, 1);
@@ -2115,18 +839,17 @@ div.oauth {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        line-height: $cell-height/2 + 6;
+        line-height: $cell-height/2 + 3.5;
     }
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 
@@ -2221,18 +944,17 @@ div.oauth {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        line-height: $cell-height/2 + 6;
+        line-height: $cell-height/2 + 3.5;
     }
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 
@@ -2327,18 +1049,17 @@ div.oauth {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        line-height: $cell-height/2 + 6;
+        line-height: $cell-height/2 + 3.5;
     }
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 
@@ -2433,7 +1154,7 @@ div.oauth {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        line-height: $cell-height/2 + 6;
+        line-height: $cell-height/2 + 3.5;
     }
     #score-board {
         height: 45vh;
@@ -2442,7 +1163,7 @@ div.oauth {
         vertical-align: center;
     }
     .flexbox {
-         height: 5vh;
+        height: 5vh;
     }
 }
 
@@ -2538,18 +1259,17 @@ div.oauth {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        line-height: $cell-height/2 + 6;
+        line-height: $cell-height/2 + 3.5;
     }
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 
@@ -2644,20 +1364,17 @@ div.oauth {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        line-height: $cell-height/2 + 6;
+        line-height: $cell-height/2 + 3.5;
     }
-
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
-
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 
@@ -2752,18 +1469,17 @@ div.oauth {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        line-height: $cell-height/2 + 6;
+        line-height: $cell-height/2 + 3.5;
     }
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 
@@ -2858,18 +1574,17 @@ div.oauth {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        line-height: $cell-height/2 + 6;
+        line-height: $cell-height/2 + 3.5;
     }
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 // /* ----------- Non-Retina Screens ----------- */
@@ -2928,6 +1643,13 @@ div.oauth {
         margin-top: 10px;
         margin-right: 10px;
         text-align: center;
+        position: absolute;
+        z-index: 3;
+        top: 40px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
     }
     .btn-lobby {
         -webkit-box-sizing: content-box;
@@ -2951,6 +1673,13 @@ div.oauth {
         -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        position: absolute;
+        z-index: 3;
+        top: 40px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
     }
     .btn-lobby:hover {
         color: rgba(255, 255, 255, 1);
@@ -3018,6 +1747,13 @@ div.oauth {
         margin-top: 10px;
         margin-right: 10px;
         text-align: center;
+        position: absolute;
+        z-index: 3;
+        top: 40px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
     }
     .btn-lobby {
         -webkit-box-sizing: content-box;
@@ -3041,6 +1777,13 @@ div.oauth {
         -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
         transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        position: absolute;
+        z-index: 3;
+        top: 40px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
     }
     .btn-lobby:hover {
         color: rgba(255, 255, 255, 1);
@@ -3061,7 +1804,7 @@ div.oauth {
         font-size: $letter-width;
         width: $cell-diameter;
         height: $cell-height;
-        line-height: $cell-height;
+        line-height: $cell-height/2 + 3.5;
     }
 }
 
