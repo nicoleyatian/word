@@ -6,17 +6,17 @@ app.directive("timer", function($q, $interval, Socket) {
         },
         templateUrl: "js/common/directives/timer/timer.html",
         link: function(scope) {
-            var time = scope.time;
+            scope.time_left = scope.time;
             var start=scope.time;
-            scope.time_remaining = convert(time);
+            scope.time_remaining = convert(scope.time_left);
             scope.countdown = function() {
                 var timer = $interval(function() {
-                    time -= 1;
-                    scope.time_remaining = convert(time);
-                    if (time < 1) {
+                    scope.time_left -= 1;
+                    scope.time_remaining = convert(scope.time_left);
+                    if (scope.time_left < 1) {
                         scope.time_remaining = "0:00";
                         $interval.cancel(timer);
-                        time=start;
+                        scope.time_left=start;
                     }
                 }, 1000);
             };
@@ -43,7 +43,7 @@ app.directive("timer", function($q, $interval, Socket) {
             // };
 
             Socket.on('startBoard', function() {
-                scope.countdown(time);
+                scope.countdown(scope.time_left);
             });
 
 
