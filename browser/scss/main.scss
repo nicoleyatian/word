@@ -156,17 +156,16 @@ div #start {
 //     padding: auto auto;
 //     vertical-align: center;
 // }
-
 // .flexbox {
 //     height: 5vh;
 // }
-
 #grid .selected {
     border: 5px solid #c3f4eb;
 }
 
-.selected {
-    border: 5px solid #c3f4eb;
+#grid .highlighted span {
+    color: rgb(188, 13, 16)
+;
 }
 
 .players {
@@ -194,7 +193,6 @@ div #start {
     height: 35vh;
     display: flex;
     flex-direction: column;
-
     ul {
         padding-left: 10px;
         padding-top: 20px;
@@ -222,8 +220,6 @@ div #start {
     font-weight: 800;
     text-shadow: 1px 1px black;
 }
-
-
 
 #timer {
     margin: auto;
@@ -1644,8 +1640,6 @@ div.oauth {
 @import 'login/main';
 @import 'lobby/main';
 //game record state
-
-
 #header {
     text-align: center;
 }
@@ -1789,17 +1783,15 @@ div.oauth {
     .board-row {
         width: $board-width;
     }
-
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 
@@ -1900,17 +1892,15 @@ div.oauth {
     .board-row {
         width: $board-width;
     }
-
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 
@@ -2012,15 +2002,14 @@ div.oauth {
         width: $board-width;
     }
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 
@@ -2118,15 +2107,14 @@ div.oauth {
         line-height: $cell-height/2 + 6;
     }
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 
@@ -2224,15 +2212,14 @@ div.oauth {
         line-height: $cell-height/2 + 6;
     }
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 
@@ -2330,15 +2317,14 @@ div.oauth {
         line-height: $cell-height/2 + 6;
     }
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 
@@ -2442,7 +2428,7 @@ div.oauth {
         vertical-align: center;
     }
     .flexbox {
-         height: 5vh;
+        height: 5vh;
     }
 }
 
@@ -2541,15 +2527,14 @@ div.oauth {
         line-height: $cell-height/2 + 6;
     }
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 
@@ -2646,18 +2631,15 @@ div.oauth {
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
-
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
-
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 
@@ -2755,15 +2737,14 @@ div.oauth {
         line-height: $cell-height/2 + 6;
     }
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 
@@ -2861,15 +2842,14 @@ div.oauth {
         line-height: $cell-height/2 + 6;
     }
     #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+        height: 5vh;
+    }
 }
 
 // /* ----------- Non-Retina Screens ----------- */
