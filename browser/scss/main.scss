@@ -227,6 +227,13 @@ div #start {
     h1 {
         font-size: $cell-height/2;
     }
+    .blinking{
+        color: red;
+        animation: blinker 1s linear infinite;
+    }
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
 }
 
 div.oauth {

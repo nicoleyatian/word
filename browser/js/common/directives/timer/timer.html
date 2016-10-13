@@ -1,5 +1,5 @@
 <div id="timer">
-<h1>{{time_remaining}}
+<h1 ng-class="{'blinking': time_left<10}">{{time_remaining}}
 </h1>
 <!-- <button ng-click="countdown()">Start</button> -->
 </div>
