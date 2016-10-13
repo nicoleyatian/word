@@ -8,6 +8,7 @@ var wordLookup = require('./dicTrie').isMatch;
 function GameObject(tileCountObj, sideLength, minWordLength) {
     var tileArray = tileCountToArray(tileCountObj);
     var board = generateBoardMutating(tileArray, sideLength);
+    this.tileCountObj = tileCountObj;
     this.sideLength = sideLength;
     this.stateNumber = 0;
     this.minWordLength = minWordLength;
@@ -65,6 +66,9 @@ function drawLetter(tileArray) {
     return tileArray.splice(rnd, 1)[0];
 }
 GameObject.prototype.drawLetter = function() {
+    if (!this.remainingTilesArray.length) {
+        this.remainingTilesArray = tileCountToArray(this.tileCountObj);
+    }
     return drawLetter(this.remainingTilesArray);
 };
 
