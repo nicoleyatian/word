@@ -50,15 +50,15 @@
         <div ng-hide="hideCrabdance">
             <img id="crabdance" src="/images/crabdance.gif">
         </div>
-        <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()">
+        <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()" ng-touchstart="touchActivated()" ng-touchend="touchStopped()">
             <div class="row" ng-repeat="(x,row) in board track by $index">
-                <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
+                <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" ng-touchstart="click(space, x+'-'+y)" ng-touchmove="mobileDrag(space, x+'-'+y)" ng-touchend="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
                     <span class="letters" id="space">{{space}}</span>
                 </div>
             </div>
         </div>
         <div class="flexbox">
-            <button class="btn btn-wood" ng-click="shuffle(user)">Shuffle</button>
+            <button class="btn btn-wood" ng-click="shuffle(user, roomName)">Shuffle</button>
             <button class="btn btn-wood" ng-click="toggleDrag()">{{ draggingAllowed ? 'Click ':'Drag '}}To Select</button>
             <button class='btn btn-primary' ng-click="quit()">Quit</button>
         </div>

@@ -16,7 +16,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.hideBoard = true; //true; REVERT
     $scope.hideStart = false; //false; REVERT
-    $scope.hideCrabdance = true; 
+    $scope.hideCrabdance = true;
     $scope.crabdances = 0;
     $rootScope.hideNavbar = true;
     $scope.freeze = false; //false; REVERT
@@ -85,24 +85,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         if ($scope.draggingAllowed && $scope.exports.word.length > 1) $scope.submit($scope.exports);
     }
 
-    // $element.bind('touchstart', function (e) {
-    //   $scope.isSelecting = true;
-    //   $scope.click(e)
-    // })
-
-
-    // $element.bind('mousemove touchmove', function (e) {
-    //   if ($scope.isSelecting) {
-    //     $scope.click(e)
-    //   }
-    // })
-
-    // $element.bind('mouseup touchend', function (e) {
-    //   $scope.isSelecting = false;
-    //   if ($scope.draggingAllowed && $scope.exports.word.length > 1) $scope.submit($scope.exports);
-    // })
-
-
     $scope.drag = function(space, id) {
         //console.log('mouse enter: ' + id);
         if ($scope.mouseIsDown && $scope.draggingAllowed) {
@@ -110,17 +92,19 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
         }
     };
 
-    // function div_overlap(jqo, left, top) {
-    //     console.log('div overlapped: ' + jqo);
-    //     var d = jqo.offset();
-    //     return top >= d.top && left >= d.left && left <= (d.left+jqo[0].offsetWidth) && top <= (d.top+jqo[0].offsetHeight);
-    // }
+    function div_overlap(jqo, left, top) {
+        console.log('div overlapped: ' + jqo);
+        var d = jqo.offset();
+        return top >= d.top && left >= d.left && left <= (d.left+jqo[0].offsetWidth) && top <= (d.top+jqo[0].offsetHeight);
+    }
 
     // touchmove = function(event) {
     //     // Prevent scrolling on this element
     //     event.preventDefault();
     // }
 
+    // Which one of the following should we use to bind touchmove?
+    // #1)
     // $(".cell").bind("mouseenter touchmove", function(evt){
     //     console.log('binding mouseenter and touchmove', evt);
     //     $(".cell").each(function() {
@@ -134,49 +118,10 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     //     });
     // });
 
-    // angular.element('.cell').on("click", function(evt){
-    //     console.log('binding mouseenter and touchmove', evt);
-        // $(".cell").each(function() {
-        //     console.log('for each element');
-        //    if (div_overlap(this, evt.pageX, evt.pageY)){
-        //     console.log('entering div_overlap');
-        //       if (!this.hasClass('selected')) {
-        //         this.addClass('selected');
-        //       }
-        //    }
-        // });
-    // });
-
+    // #2)
     // $element.children()(function(evt){
     //     console.log('binding mouseenter and touchmove', evt);
-        // $(".cell").each(function() {
-        //     console.log('for each element');
-        //    if (div_overlap(this, evt.pageX, evt.pageY)){
-        //     console.log('entering div_overlap');
-        //       if (!this.hasClass('selected')) {
-        //         this.addClass('selected');
-        //       }
-        //    }
-        // });
-    // });
-
-
-    // $element.bind("touchmove", function(evt){
-    //     console.log('binding mouseenter and touchmove', evt);
-    //     // $(".cell").each(function() {
-    //     //     console.log('for each element');
-    //     //    if (div_overlap(this, evt.pageX, evt.pageY)){
-    //     //     console.log('entering div_overlap');
-    //     //       if (!this.hasClass('selected')) {
-    //     //         this.addClass('selected');
-    //     //       }
-    //     //    }
-    //     // });
-    // });
-
-    // angular.element('.cell').bind("touchmove", function(evt){
-    //     console.log('binding mouseenter and touchmove', evt);
-    //     angular.element('.cell').each(function() {
+    //     $(".cell").each(function() {
     //         console.log('for each element');
     //        if (div_overlap(this, evt.pageX, evt.pageY)){
     //         console.log('entering div_overlap');
@@ -186,6 +131,36 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     //        }
     //     });
     // });
+
+
+    // #3)
+    // $element.bind("touchmove", function(evt){
+    //     console.log('binding mouseenter and touchmove', evt);
+    //     $(".cell").each(function() {
+    //         console.log('for each element');
+    //        if (div_overlap(this, evt.pageX, evt.pageY)){
+    //         console.log('entering div_overlap');
+    //           if (!this.hasClass('selected')) {
+    //             this.addClass('selected');
+    //           }
+    //        }
+    //     });
+    // });
+
+
+    // #4)
+    angular.element('.cell').bind("touchmove", function(evt){
+        console.log('binding mouseenter and touchmove', evt);
+        angular.element('.cell').each(function() {
+            console.log('for each element');
+           if (div_overlap(this, evt.pageX, evt.pageY)){
+            console.log('entering div_overlap');
+              if (!this.hasClass('selected')) {
+                this.addClass('selected');
+              }
+           }
+        });
+    });
 
     $scope.mobileDrag = function(space, id){
         console.log('touch is dragged: ' + space + " : " + id);
@@ -431,7 +406,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
 
 
-    
+
 
 console.log('update 1.2')
 
