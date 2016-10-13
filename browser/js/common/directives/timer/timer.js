@@ -14,7 +14,7 @@ app.directive("timer", function($q, $interval, Socket) {
                     time -= 1;
                     scope.time_remaining = convert(time);
                     if (time < 1) {
-                        scope.time_remaining = "Time up!";
+                        scope.time_remaining = "0:00";
                         $interval.cancel(timer);
                         time=start;
                     }

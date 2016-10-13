@@ -1,7 +1,8 @@
-<ul class='rank'>
+<div class='rank'>
 <h2>{{rankName}}</h2>
 <ul ng-repeat="player in players | orderBy: order | limitTo: 10 ">
 	<li>
 		{{player.username}}: {{player[rankBy]}}
 	</li>
 </ul>
+</div>
