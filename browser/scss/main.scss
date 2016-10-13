@@ -2,10 +2,15 @@
     box-sizing: border-box;
 }
 
-$board-width: 100%;
+// $board-width: 100%;
+// $number-cells: 6;
+// $cell-diameter: 100%/($number-cells+.5);
+// $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+// $letter-width: $cell-height/2;
+$board-width: 60vh;
 $number-cells: 6;
-$cell-diameter: 100%/($number-cells+.5);
-$cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+$cell-diameter: 60vh/($number-cells+.5);
+$cell-height: 60vh/($number-cells+.5);
 $letter-width: $cell-height/2;
 body {
     background: url(images/coral-background.jpg) no-repeat center center;
@@ -16,7 +21,6 @@ body {
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-
 }
 
 @mixin clearfix {
@@ -137,6 +141,26 @@ div #start {
     // padding: 1%;
 }
 
+// #grid {
+//         width: $board-width;
+//     }
+//     #grid .cell {
+//         font-size: $letter-width;
+//         width: $cell-diameter;
+//         height: $cell-height;
+//         line-height: $cell-height/2 + 6;
+//     }
+// #score-board {
+//     height: 45vh;
+//     margin: auto auto;
+//     padding: auto auto;
+//     vertical-align: center;
+// }
+
+// .flexbox {
+//     height: 5vh;
+// }
+
 #grid .selected {
     border: 5px solid #c3f4eb;
 }
@@ -165,10 +189,12 @@ div #start {
     }
 }
 
-
 #score-board {
-
     // margin-right: 25%;
+    height: 35vh;
+    display: flex;
+    flex-direction: column;
+
     ul {
         padding-left: 10px;
         padding-top: 20px;
@@ -197,28 +223,6 @@ div #start {
     text-shadow: 1px 1px black;
 }
 
-.user-info {
-    font-size: 18pt;
-}
-
-.user-title {
-    font-size: 32pt;
-    text-align: justify;
-    text-align: center;
-}
-
-#profile-page {
-    margin-top: 40px;
-    color: #FFFFF;
-}
-
-#profile {
-    padding: 10px;
-    border: 5px dotted black;
-    width: 50%;
-    text-align: center;
-    margin: auto;
-}
 
 
 #timer {
@@ -261,7 +265,7 @@ div.oauth {
 
 .board-row {
     width: $board-width;
-    margin-left: auto;
+    margin: auto auto;
     // padding: 1%;
     display: inline-block;
 }
@@ -289,6 +293,7 @@ div.oauth {
     width: 66%;
     // padding: 1%;
 }
+
 .col-9 {
     float: left;
     width: 75%;
@@ -335,7 +340,6 @@ div.oauth {
     height: 90px
 }
 
-
 // .btn-wood {
 //     background-image: url(images/woodBtn.png);
 //     background-color: transparent;
@@ -343,13 +347,11 @@ div.oauth {
 //     border: none;
 //     font-weight: 1000;
 // }
-
 // .wood-board-lg {
 //     background-image: url(images/woodBtn.png);
 //     background-size: 100% 100%;
 //     border: none;
 // }
-
 // .wood-board-sm {
 //     background-image: url(images/woodBtn.png);
 //     background-size: 80% 100%;
@@ -358,7 +360,6 @@ div.oauth {
 //     background-position: center;
 //     height: 80px
 // }
-
 // bubble animations
 .bubble_wrap {
     height: 299px;
@@ -1649,36 +1650,8 @@ div.oauth {
 @import 'home/main';
 @import 'login/main';
 @import 'lobby/main';
-
-
 //game record state
-#game_table {
-    width: 75%;
-    margin: auto;
-    border: 10px solid black;
-    background-color: white;
-}
 
-#game_table tr {
-    margin: auto;
-}
-
-#game_table .game_cell {
-    border: 5px solid black;
-    height: 50px;
-}
-
-#game_table .table_headers {
-    font-size: 24pt;
-    font-weight: bold;
-    text-align: center;
-}
-
-#game_table .cell_data {
-    font-size: 18pt;
-    text-align: center;
-    margin: auto;
-}
 
 #header {
     text-align: center;
@@ -1690,7 +1663,7 @@ div.oauth {
     margin: auto;
 }
 
-#dance{
+#dance {
     width: 20%;
     height: 20vw;
     margin: auto;
@@ -1701,26 +1674,27 @@ div.oauth {
     text-align: center;
 }
 
-.instructions > p{
+.instructions > p {
     width: 50%;
     margin: auto;
     background-color: white;
 }
 
-.instructions > h1{
+.instructions > h1 {
     color: red;
 }
 
-#clicker{
+#clicker {
     color: white;
     width: 25%;
     text-align: center;
     margin: auto;
 }
 
-#yeah{
+#yeah {
     font-size: 24pt;
 }
+
 
 /* ----------- Media Queries ----------- */
 
@@ -1731,10 +1705,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
-    $board-width: 100%;
+    $board-width: 50vh;
     $number-cells: 6;
-    $cell-diameter: 100%/($number-cells+.5);
-    $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+    $cell-diameter: 50vh/($number-cells+.5);
+    $cell-height: 50vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -1749,13 +1723,11 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     .crab-logo {
         text-align: center;
         margin-top: -35px;
         margin-bottom: -30px;
     }
-
     #crab {
         max-width: 100px;
         max-height: 100px;
@@ -1765,7 +1737,6 @@ div.oauth {
     }
     .project-title {
         // margin: 0;
-
         font: bold 10px "Helvetica Neue", Helvetica, Arial, sans-serif;
         letter-spacing: 3px;
         color: #fff;
@@ -1825,6 +1796,17 @@ div.oauth {
     .board-row {
         width: $board-width;
     }
+
+    #score-board {
+    height: 45vh;
+    margin: auto auto;
+    padding: auto auto;
+    vertical-align: center;
+}
+
+.flexbox {
+    height: 5vh;
+}
 }
 
 
@@ -1834,10 +1816,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) {
-    $board-width: 100%;
+    $board-width: 50vh;
     $number-cells: 6;
-    $cell-diameter: 100%/($number-cells+.5);
-    $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+    $cell-diameter: 50vh/($number-cells+.5);
+    $cell-height: 50vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -1852,13 +1834,11 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     .crab-logo {
         text-align: center;
         margin-top: -35px;
         margin-bottom: -30px;
     }
-
     #crab {
         max-width: 100px;
         max-height: 100px;
@@ -1927,6 +1907,17 @@ div.oauth {
     .board-row {
         width: $board-width;
     }
+
+    #score-board {
+    height: 45vh;
+    margin: auto auto;
+    padding: auto auto;
+    vertical-align: center;
+}
+
+.flexbox {
+    height: 5vh;
+}
 }
 
 
@@ -1936,10 +1927,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
-    $board-width: 100%;
+    $board-width: 50vh;
     $number-cells: 6;
-    $cell-diameter: 100%/($number-cells+.5);
-    $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+    $cell-diameter: 50vh/($number-cells+.5);
+    $cell-height: 50vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -1954,13 +1945,11 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     .crab-logo {
         text-align: center;
         margin-top: -35px;
         margin-bottom: -30px;
     }
-
     #crab {
         max-width: 100px;
         max-height: 100px;
@@ -2029,6 +2018,16 @@ div.oauth {
     .board-row {
         width: $board-width;
     }
+    #score-board {
+    height: 45vh;
+    margin: auto auto;
+    padding: auto auto;
+    vertical-align: center;
+}
+
+.flexbox {
+    height: 5vh;
+}
 }
 
 
@@ -2038,10 +2037,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) {
-    $board-width: 100%;
+    $board-width: 50vh;
     $number-cells: 6;
-    $cell-diameter: 100%/($number-cells+.5);
-    $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+    $cell-diameter: 50vh/($number-cells+.5);
+    $cell-height: 50vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -2056,13 +2055,11 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     .crab-logo {
         text-align: center;
         margin-top: -35px;
         margin-bottom: -30px;
     }
-
     #crab {
         max-width: 150px;
         max-height: 150px;
@@ -2127,6 +2124,16 @@ div.oauth {
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
+    #score-board {
+    height: 45vh;
+    margin: auto auto;
+    padding: auto auto;
+    vertical-align: center;
+}
+
+.flexbox {
+    height: 5vh;
+}
 }
 
 
@@ -2136,10 +2143,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
-    $board-width: 100%;
+    $board-width: 50vh;
     $number-cells: 6;
-    $cell-diameter: 100%/($number-cells+.5);
-    $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+    $cell-diameter: 50vh/($number-cells+.5);
+    $cell-height: 50vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -2154,13 +2161,11 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     .crab-logo {
         text-align: center;
         margin-top: -35px;
         margin-bottom: -30px;
     }
-
     #crab {
         max-width: 150px;
         max-height: 150px;
@@ -2225,6 +2230,16 @@ div.oauth {
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
+    #score-board {
+    height: 45vh;
+    margin: auto auto;
+    padding: auto auto;
+    vertical-align: center;
+}
+
+.flexbox {
+    height: 5vh;
+}
 }
 
 
@@ -2234,10 +2249,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) {
-    $board-width: 100%;
+    $board-width: 50vh;
     $number-cells: 6;
-    $cell-diameter: 100%/($number-cells+.5);
-    $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+    $cell-diameter: 50vh/($number-cells+.5);
+    $cell-height: 50vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -2252,13 +2267,11 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     .crab-logo {
         text-align: center;
         margin-top: -35px;
         margin-bottom: -30px;
     }
-
     #crab {
         max-width: 150px;
         max-height: 150px;
@@ -2323,6 +2336,16 @@ div.oauth {
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
+    #score-board {
+    height: 45vh;
+    margin: auto auto;
+    padding: auto auto;
+    vertical-align: center;
+}
+
+.flexbox {
+    height: 5vh;
+}
 }
 
 
@@ -2332,10 +2355,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) {
-    $board-width: 100%;
+    $board-width: 50vh;
     $number-cells: 6;
-    $cell-diameter: 100%/($number-cells+.5);
-    $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+    $cell-diameter: 50vh/($number-cells+.5);
+    $cell-height: 50vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -2350,13 +2373,11 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     .crab-logo {
         text-align: center;
         margin-top: -35px;
         margin-bottom: -30px;
     }
-
     #crab {
         max-width: 150px;
         max-height: 150px;
@@ -2420,6 +2441,15 @@ div.oauth {
         width: $cell-diameter;
         height: $cell-height;
         line-height: $cell-height/2 + 6;
+    }
+    #score-board {
+        height: 45vh;
+        margin: auto auto;
+        padding: auto auto;
+        vertical-align: center;
+    }
+    .flexbox {
+         height: 5vh;
     }
 }
 
@@ -2430,10 +2460,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
-    $board-width: 100%;
+    $board-width: 50vh;
     $number-cells: 6;
-    $cell-diameter: 100%/($number-cells+.5);
-    $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+    $cell-diameter: 50vh/($number-cells+.5);
+    $cell-height: 50vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -2448,13 +2478,11 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     .crab-logo {
         text-align: center;
         margin-top: -35px;
         margin-bottom: -30px;
     }
-
     #crab {
         max-width: 150px;
         max-height: 150px;
@@ -2519,6 +2547,16 @@ div.oauth {
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
+    #score-board {
+    height: 45vh;
+    margin: auto auto;
+    padding: auto auto;
+    vertical-align: center;
+}
+
+.flexbox {
+    height: 5vh;
+}
 }
 
 
@@ -2528,10 +2566,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
-    $board-width: 100%;
+    $board-width: 50vh;
     $number-cells: 6;
-    $cell-diameter: 100%/($number-cells+.5);
-    $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+    $cell-diameter: 50vh/($number-cells+.5);
+    $cell-height: 50vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -2546,13 +2584,11 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     .crab-logo {
         text-align: center;
         margin-top: -35px;
         margin-bottom: -30px;
     }
-
     #crab {
         max-width: 175px;
         max-height: 175px;
@@ -2617,6 +2653,18 @@ div.oauth {
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
+
+    #score-board {
+    height: 45vh;
+    margin: auto auto;
+    padding: auto auto;
+    vertical-align: center;
+}
+
+.flexbox {
+    height: 5vh;
+}
+
 }
 
 
@@ -2626,106 +2674,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
-    $board-width: 100%;
+    $board-width: 50vh;
     $number-cells: 6;
-    $cell-diameter: 100%/($number-cells+.5);
-    $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
-    $letter-width: $cell-height/2;
-    html,
-    body {
-        width: 100%;
-        height: 100%;
-        margin: 0px;
-        padding: 0px;
-        overflow-x: hidden;
-        position: relative;
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-        background: url(images/coral-background.jpg) no-repeat center center;
-        background-size: cover;
-    }
-    .crab-logo {
-        text-align: center;
-        margin-top: -35px;
-        margin-bottom: -30px;
-    }
-    #crab {
-        max-width: 175px;
-        max-height: 175px;
-        text-align: center;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-    .project-title {
-        margin: 0;
-        font: bold 100px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
-        letter-spacing: 3px;
-        color: #fff;
-        text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
-        -webkit-transition: .2s all linear;
-    }
-     .lobby-button {
-        margin-top: 10px;
-        margin-right: 10px;
-        text-align: center;
-    }
-    .btn-lobby {
-        -webkit-box-sizing: content-box;
-        -moz-box-sizing: content-box;
-        box-sizing: content-box;
-        width: 225px;
-        height: 55px;
-        cursor: pointer;
-        margin: 0 auto;
-        border: 2px solid rgba(255, 255, 255, 1);
-        -webkit-border-radius: 40px;
-        border-radius: 40px;
-        font: normal 25px/50px "Advent Pro", Helvetica, sans-serif;
-        color: rgba(255, 255, 255, 1);
-        text-align: center;
-        -o-text-overflow: clip;
-        text-overflow: clip;
-        letter-spacing: 1px;
-        background: rgba(179, 188, 204, 0.55);
-        -webkit-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
-        -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
-        -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
-        transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
-    }
-    .btn-lobby:hover {
-        color: rgba(255, 255, 255, 1);
-        background: rgba(11, 61, 142, 0.8);
-    }
-    .btn-lobby:active {
-        border: 2px solid rgba(255, 255, 255, 1);
-        background: rgba(5, 42, 105, 1);
-        -webkit-transition: none;
-        -moz-transition: none;
-        -o-transition: none;
-        transition: none;
-    }
-    #grid {
-        width: $board-width;
-    }
-    #grid .cell {
-        font-size: $letter-width;
-        width: $cell-diameter;
-        height: $cell-height;
-        line-height: $cell-height/2 + 6;
-    }
-}
-
-
-/* ----------- Galaxy Tab 10.1 ----------- */
-
-
-/* Portrait and Landscape */
-
-@media (min-device-width: 800px) and (max-device-width: 1280px) {
-    $board-width: 100%;
-    $number-cells: 6;
-    $cell-diameter: 100%/($number-cells+.5);
-    $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+    $cell-diameter: 50vh/($number-cells+.5);
+    $cell-height: 50vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -2809,6 +2761,122 @@ div.oauth {
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
+    #score-board {
+    height: 45vh;
+    margin: auto auto;
+    padding: auto auto;
+    vertical-align: center;
+}
+
+.flexbox {
+    height: 5vh;
+}
+}
+
+
+/* ----------- Galaxy Tab 10.1 ----------- */
+
+
+/* Portrait and Landscape */
+
+@media (min-device-width: 800px) and (max-device-width: 1280px) {
+    $board-width: 50vh;
+    $number-cells: 6;
+    $cell-diameter: 50vh/($number-cells+.5);
+    $cell-height: 50vh/($number-cells+.5);
+    $letter-width: $cell-height/2;
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        overflow-x: hidden;
+        position: relative;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        background: url(images/coral-background.jpg) no-repeat center center;
+        background-size: cover;
+    }
+    .crab-logo {
+        text-align: center;
+        margin-top: -35px;
+        margin-bottom: -30px;
+    }
+    #crab {
+        max-width: 175px;
+        max-height: 175px;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .project-title {
+        margin: 0;
+        font: bold 100px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        letter-spacing: 3px;
+        color: #fff;
+        text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+        -webkit-transition: .2s all linear;
+    }
+    .lobby-button {
+        margin-top: 10px;
+        margin-right: 10px;
+        text-align: center;
+    }
+    .btn-lobby {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        width: 225px;
+        height: 55px;
+        cursor: pointer;
+        margin: 0 auto;
+        border: 2px solid rgba(255, 255, 255, 1);
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        font: normal 25px/50px "Advent Pro", Helvetica, sans-serif;
+        color: rgba(255, 255, 255, 1);
+        text-align: center;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        letter-spacing: 1px;
+        background: rgba(179, 188, 204, 0.55);
+        -webkit-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+    }
+    .btn-lobby:hover {
+        color: rgba(255, 255, 255, 1);
+        background: rgba(11, 61, 142, 0.8);
+    }
+    .btn-lobby:active {
+        border: 2px solid rgba(255, 255, 255, 1);
+        background: rgba(5, 42, 105, 1);
+        -webkit-transition: none;
+        -moz-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+    #grid {
+        width: $board-width;
+    }
+    #grid .cell {
+        font-size: $letter-width;
+        width: $cell-diameter;
+        height: $cell-height;
+        line-height: $cell-height/2 + 6;
+    }
+    #score-board {
+    height: 45vh;
+    margin: auto auto;
+    padding: auto auto;
+    vertical-align: center;
+}
+
+.flexbox {
+    height: 5vh;
+}
 }
 
 // /* ----------- Non-Retina Screens ----------- */
@@ -2824,12 +2892,11 @@ div.oauth {
 //   and (-webkit-min-device-pixel-ratio: 2)
 //   and (min-resolution: 192dpi) {
 // }
-
 @media screen and (min-width: 0px) {
-    $board-width: 100%;
+    $board-width: 50vh;
     $number-cells: 6;
-    $cell-diameter: 100%/($number-cells+.5);
-    $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
+    $cell-diameter: 50vh/($number-cells+.5);
+    $cell-height: 50vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -2904,22 +2971,22 @@ div.oauth {
         -o-transition: none;
         transition: none;
     }
-    #grid {
-        width: $board-width;
-    }
-    #grid .cell {
-        font-size: $letter-width;
-        width: $cell-diameter;
-        height: $cell-height;
-        line-height: $cell-height;
-    }
+    // #grid {
+    //     width: $board-width;
+    // }
+    // #grid .cell {
+    //     font-size: $letter-width;
+    //     width: $cell-diameter;
+    //     height: $cell-height;
+    //     line-height: $cell-height;
+    // }
 }
 
 @media screen and (min-width: 1200px) {
-    $board-width: 1000px;
+    $board-width: 60vh;
     $number-cells: 6;
-    $cell-diameter: 1000px/($number-cells+.5);
-    $cell-height: 1000px * ($board-width/1000px)/($number-cells+.5);
+    $cell-diameter: 60vh/($number-cells+.5);
+    $cell-height: 60vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -2934,7 +3001,6 @@ div.oauth {
         background: url(images/coral-background.jpg) no-repeat center center;
         background-size: cover;
     }
-
     .crab-logo {
         text-align: center;
         margin-top: -50px;
@@ -3013,75 +3079,61 @@ div.oauth {
 //     border: 10px solid black;
 //     background-color: white;
 // }
-
 // #game_table tr {
 //     margin: auto;
 // }
-
 // #game_table .game_cell {
 //     border: 5px solid black;
 //     height: 50px;
 // }
-
 // #game_table .table_headers {
 //     font-size: 24pt;
 //     font-weight: bold;
 //     text-align: center;
 // }
-
 // #game_table .cell_data {
 //     font-size: 18pt;
 //     text-align: center;
 //     margin: auto;
 // }
-
 // #header {
 //     text-align: center;
 // }
-
 // #ugly {
 //     width: 50%;
 //     height: 30vw;
 //     margin: auto;
 // }
-
 // #dance {
 //     width: 20%;
 //     height: 20vw;
 //     margin: auto;
 // }
-
 // .instructions {
 //     margin: auto;
 //     text-align: center;
 // }
-
 // .instructions > p {
 //     width: 50%;
 //     margin: auto;
 //     background-color: white;
 // }
-
 // .instructions > h1 {
 //     color: red;
 // }
-
 // #clicker {
 //     color: white;
 //     width: 25%;
 //     text-align: center;
 //     margin: auto;
 // }
-
 // #yeah {
 //     font-size: 24pt;
 // }
-
 //     #grid {
 //         width: $board-width;
 //     }
 // }
-
 //     #grid .cell {
 //         font-size: $letter-width;
 //         width: $cell-diameter;
@@ -3089,4 +3141,3 @@ div.oauth {
 //         line-height: $cell-height;
 //     }
 // }
-

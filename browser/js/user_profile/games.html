@@ -8,8 +8,8 @@
 		<td class="game_cell"><span class="table_headers">Time Played</span></td>
 		<td class="game_cell"><span class="table_headers">Resullt</span></td>
 	</tr>
-	<tr ng-repeat="game in user.games">
-		<td class="game_cell"><span class="cell_data">Game # {{game.id}}</span></td>
+	<tr ng-repeat="game in user.games | orderBy: 'date'">
+		<td class="game_cell"><span class="cell_data">{{game.id}}</span></td>
 		<td class="game_cell"> <span class="cell_data">{{game.userGame.score}}</span></td>
 		<td class="game_cell"><span class="cell_data">{{game.userGame.longestWord}}</span></td>
 		<td class="game_cell"><span class="cell_data">{{game.date}}</span></td>
