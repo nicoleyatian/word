@@ -38,8 +38,7 @@
                 </div>
             </div>
             <div class="col-3 time-rock">
-                <timer time="gameLength" ng-hide="gameOver"></timer>
-                <h1 ng-show="gameOver">Time Up!</h1>
+                <timer time="gameLength"></timer>
             </div>
         </div>
         <!--         <div id="win?" ng-show="winOrLose">
@@ -65,6 +64,4 @@
         </div>
         <br>
     </div>
-    <button ng-show="freeze && otherPlayers.length>0" ng-click="replay()">Play Again
-    </button>
 </div>
