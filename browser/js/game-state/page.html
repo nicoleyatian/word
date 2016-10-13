@@ -45,7 +45,7 @@
             <h1> {{ winOrLose }}</h1>
         </div> -->
         <div id="message">
-            <p>{{ message }}</p>
+            <p>{{ message }} &nbsp; </p>
         </div>
         <div ng-hide="hideCrabdance">
             <img id="crabdance" src="/images/crabdance.gif">
@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="flexbox">
-            <button class="btn btn-wood" ng-click="shuffle(user)">Shuffle</button>
+            <button class="btn btn-wood" ng-click="shuffle(user, roomName)">Shuffle</button>
             <button class="btn btn-wood" ng-click="toggleDrag()">{{ draggingAllowed ? 'Click ':'Drag '}}To Select</button>
             <button class='btn btn-primary' ng-click="quit()">Quit</button>
         </div>
