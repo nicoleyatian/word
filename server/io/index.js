@@ -37,9 +37,10 @@ module.exports = function(server) {
     }
 
     io.on('connection', function(socket) {
-        console.log("ROOMYTHINGY!", roomGameMapper);
         // Now have access to socket, wowzers!
-        console.log('A new client with the socket ID of ' + socket.id + ' has connected');
+        var timeout;
+        //console.log('A new client with the socket ID of ' + socket.id + ' has connected');
+        console.log('_________________'+socket.id+'_______________')
 
         socket.on('joinRoom', function(user, roomName, gameId) {
 
@@ -75,7 +76,7 @@ module.exports = function(server) {
             //set isPlaying to true in db
             persistGame.startGame(thisGame.id);
 
-            setTimeout(function() {
+            timeout=setTimeout(function() {
 
                 console.log('game over', gameId);
                 var winnersArray = getWinner(thisGame.playerScores);
@@ -107,11 +108,19 @@ module.exports = function(server) {
         });
 
         socket.on('leaveRoom', function(user, roomName, gameId) {
-            console.log('A client with the socket ID of ' + socket.id + ' has diconnected :(');
+            console.log('A client with the socket ID of ' + socket.id + ' has disconnected :(');
             persistGame.quitGame(gameId, user.id);
             socket.broadcast.to(roomName).emit('playerDisconnected', user);
             socket.leave(roomName);
         });
+
+        socket.on('lastPlayer', function(roomName, user){
+            clearTimeout(timeout);
+            var thisGame = roomGameMapper[roomName];
+            var ourWords = roomWordMapper[roomName];
+            io.to(roomName).emit('gameOver', [user.id]);
+                persistGame.saveGame(thisGame, [user.id], ourWords);
+        })
     });
     return io;
 
