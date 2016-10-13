@@ -68,11 +68,6 @@ body {
     background-size: 100% 100%;
 }
 
-#your-word {
-    height: $cell-height/2;
-    text-align: center;
-}
-
 #signup-form {
     width: 60%;
     margin: 0 auto;
@@ -91,16 +86,66 @@ div #start {
     text-align: center;
 }
 
+// to see position and size
+#head #players #your-word #message .buttons {
+    border: 1px solid black;
+}
+
+.row1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.row2 {
+    //display: inline;
+}
+
+#head {
+    width: 90%;
+    height: 10vh;
+}
+
+#players {
+    width: $board-width;
+    height: 20vh;
+}
+
+#your-word {
+    width: $board-width;
+    height: 5vh;
+    text-align: center;
+}
+
+#message {
+    width: $board-width;
+    height: 5vh;
+    text-align: center;
+}
+
 #message {
     text-align: center;
     margin: 0;
     font-size: $letter-width*2/3;
 }
 
+#players2 {
+    width: 20vw;
+}
+#messages {
+    width: 20vw;
+}
+
+
 #grid {
     width: $board-width;
     margin: auto;
     padding: 1%;
+    .row {
+        margin: auto;
+        padding: auto;
+    }
 }
 
 #space {
@@ -141,25 +186,15 @@ div #start {
     // padding: 1%;
 }
 
-// #grid {
-//         width: $board-width;
-//     }
-//     #grid .cell {
-//         font-size: $letter-width;
-//         width: $cell-diameter;
-//         height: $cell-height;
-//         line-height: $cell-height/2 + 6;
-//     }
-// #score-board {
-//     height: 45vh;
-//     margin: auto auto;
-//     padding: auto auto;
-//     vertical-align: center;
-// }
-
-// .flexbox {
-//     height: 5vh;
-// }
+.buttons {
+    width: $board-width;
+    height: 5vh;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
 
 #grid .selected {
     border: 5px solid #c3f4eb;
@@ -194,7 +229,6 @@ div #start {
     height: 35vh;
     display: flex;
     flex-direction: column;
-
     ul {
         padding-left: 10px;
         padding-top: 20px;
@@ -223,8 +257,6 @@ div #start {
     text-shadow: 1px 1px black;
 }
 
-
-
 #timer {
     margin: auto;
     text-align: center;
@@ -245,15 +277,6 @@ div.oauth {
     position: absolute;
     margin: auto;
     right: 0px;
-}
-
-.flexbox {
-    width: 80%;
-    margin: auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
 }
 
 .board-row {
@@ -1644,8 +1667,6 @@ div.oauth {
 @import 'login/main';
 @import 'lobby/main';
 //game record state
-
-
 #header {
     text-align: center;
 }
@@ -1698,10 +1719,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
-    $board-width: 50vh;
+    $board-width: 55vh;
     $number-cells: 6;
-    $cell-diameter: 50vh/($number-cells+.5);
-    $cell-height: 50vh/($number-cells+.5);
+    $cell-diameter: 55vh/($number-cells+.5);
+    $cell-height: 55vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -1789,17 +1810,24 @@ div.oauth {
     .board-row {
         width: $board-width;
     }
-
-    #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+    #head {
+        width: 90%;
+        height: 10vh;
+    }
+    #players {
+        width: $board-width;
+        height: 20vh;
+    }
+    #your-word {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
+    #message {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
 }
 
 
@@ -1809,10 +1837,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) {
-    $board-width: 50vh;
+    $board-width: 55vh;
     $number-cells: 6;
-    $cell-diameter: 50vh/($number-cells+.5);
-    $cell-height: 50vh/($number-cells+.5);
+    $cell-diameter: 55vh/($number-cells+.5);
+    $cell-height: 55vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -1900,17 +1928,24 @@ div.oauth {
     .board-row {
         width: $board-width;
     }
-
-    #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+    #head {
+        width: 90%;
+        height: 10vh;
+    }
+    #players {
+        width: $board-width;
+        height: 20vh;
+    }
+    #your-word {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
+    #message {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
 }
 
 
@@ -1920,10 +1955,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
-    $board-width: 50vh;
+    $board-width: 55vh;
     $number-cells: 6;
-    $cell-diameter: 50vh/($number-cells+.5);
-    $cell-height: 50vh/($number-cells+.5);
+    $cell-diameter: 55vh/($number-cells+.5);
+    $cell-height: 55vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -2011,16 +2046,24 @@ div.oauth {
     .board-row {
         width: $board-width;
     }
-    #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+    #head {
+        width: 90%;
+        height: 10vh;
+    }
+    #players {
+        width: $board-width;
+        height: 20vh;
+    }
+    #your-word {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
+    #message {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
 }
 
 
@@ -2030,10 +2073,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) {
-    $board-width: 50vh;
+    $board-width: 55vh;
     $number-cells: 6;
-    $cell-diameter: 50vh/($number-cells+.5);
-    $cell-height: 50vh/($number-cells+.5);
+    $cell-diameter: 55vh/($number-cells+.5);
+    $cell-height: 55vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -2117,16 +2160,24 @@ div.oauth {
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
-    #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+    #head {
+        width: 90%;
+        height: 10vh;
+    }
+    #players {
+        width: $board-width;
+        height: 20vh;
+    }
+    #your-word {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
+    #message {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
 }
 
 
@@ -2136,10 +2187,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 2) {
-    $board-width: 50vh;
+    $board-width: 55vh;
     $number-cells: 6;
-    $cell-diameter: 50vh/($number-cells+.5);
-    $cell-height: 50vh/($number-cells+.5);
+    $cell-diameter: 55vh/($number-cells+.5);
+    $cell-height: 55vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -2223,16 +2274,24 @@ div.oauth {
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
-    #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+    #head {
+        width: 90%;
+        height: 10vh;
+    }
+    #players {
+        width: $board-width;
+        height: 20vh;
+    }
+    #your-word {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
+    #message {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
 }
 
 
@@ -2242,10 +2301,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) {
-    $board-width: 50vh;
+    $board-width: 55vh;
     $number-cells: 6;
-    $cell-diameter: 50vh/($number-cells+.5);
-    $cell-height: 50vh/($number-cells+.5);
+    $cell-diameter: 55vh/($number-cells+.5);
+    $cell-height: 55vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -2329,16 +2388,24 @@ div.oauth {
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
-    #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+    #head {
+        width: 90%;
+        height: 10vh;
+    }
+    #players {
+        width: $board-width;
+        height: 20vh;
+    }
+    #your-word {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
+    #message {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
 }
 
 
@@ -2348,10 +2415,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) {
-    $board-width: 50vh;
+    $board-width: 55vh;
     $number-cells: 6;
-    $cell-diameter: 50vh/($number-cells+.5);
-    $cell-height: 50vh/($number-cells+.5);
+    $cell-diameter: 55vh/($number-cells+.5);
+    $cell-height: 55vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -2435,14 +2502,23 @@ div.oauth {
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
-    #score-board {
-        height: 45vh;
-        margin: auto auto;
-        padding: auto auto;
-        vertical-align: center;
+    #head {
+        width: 90%;
+        height: 10vh;
     }
-    .flexbox {
-         height: 5vh;
+    #players {
+        width: $board-width;
+        height: 20vh;
+    }
+    #your-word {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
+    #message {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
     }
 }
 
@@ -2453,7 +2529,7 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
-    $board-width: 50vh;
+    $board-width: 55vh;
     $number-cells: 6;
     $cell-diameter: 50vh/($number-cells+.5);
     $cell-height: 50vh/($number-cells+.5);
@@ -2540,16 +2616,24 @@ div.oauth {
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
-    #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+    #head {
+        width: 90%;
+        height: 10vh;
+    }
+    #players {
+        width: $board-width;
+        height: 20vh;
+    }
+    #your-word {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
+    #message {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
 }
 
 
@@ -2559,7 +2643,7 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
-    $board-width: 50vh;
+    $board-width: 55vh;
     $number-cells: 6;
     $cell-diameter: 50vh/($number-cells+.5);
     $cell-height: 50vh/($number-cells+.5);
@@ -2646,18 +2730,24 @@ div.oauth {
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
-
-    #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
-
+    #head {
+        width: 90%;
+        height: 10vh;
+    }
+    #players {
+        width: $board-width;
+        height: 20vh;
+    }
+    #your-word {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
+    #message {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
 }
 
 
@@ -2667,10 +2757,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
-    $board-width: 50vh;
+    $board-width: 55vh;
     $number-cells: 6;
-    $cell-diameter: 50vh/($number-cells+.5);
-    $cell-height: 50vh/($number-cells+.5);
+    $cell-diameter: 55vh/($number-cells+.5);
+    $cell-height: 55vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -2754,16 +2844,24 @@ div.oauth {
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
-    #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+    #head {
+        width: 90%;
+        height: 10vh;
+    }
+    #players {
+        width: $board-width;
+        height: 20vh;
+    }
+    #your-word {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
+    #message {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
 }
 
 
@@ -2773,10 +2871,10 @@ div.oauth {
 /* Portrait and Landscape */
 
 @media (min-device-width: 800px) and (max-device-width: 1280px) {
-    $board-width: 50vh;
+    $board-width: 55vh;
     $number-cells: 6;
-    $cell-diameter: 50vh/($number-cells+.5);
-    $cell-height: 50vh/($number-cells+.5);
+    $cell-diameter: 55vh/($number-cells+.5);
+    $cell-height: 55vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -2860,16 +2958,24 @@ div.oauth {
         height: $cell-height;
         line-height: $cell-height/2 + 6;
     }
-    #score-board {
-    height: 45vh;
-    margin: auto auto;
-    padding: auto auto;
-    vertical-align: center;
-}
-
-.flexbox {
-    height: 5vh;
-}
+    #head {
+        width: 90%;
+        height: 10vh;
+    }
+    #players {
+        width: $board-width;
+        height: 20vh;
+    }
+    #your-word {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
+    #message {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
 }
 
 // /* ----------- Non-Retina Screens ----------- */
