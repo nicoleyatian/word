@@ -34,18 +34,18 @@
             <div class="col-8 wood-board-sm">
                 <div id="your-word">
                     <h1 ng-hide="freeze" ng-click="submit(exports)"> {{ exports.word }} </h1>
-                    <h1 ng-show="gameOver" ng-click="replay()">Play Again?</h1>
+                    <h1 ng-show="gameOver&&otherPlayers.length>0" ng-click="replay()">Play Again?</h1>
                 </div>
             </div>
             <div class="col-3 time-rock">
-                <timer time="gameLength"></timer>
-            </div>
+                <timer time="gameLength" ng-hide="gameOver"></timer>
+                <h1 ng-show="gameOver">0:00</h1> </div>
         </div>
         <!--         <div id="win?" ng-show="winOrLose">
             <h1> {{ winOrLose }}</h1>
         </div> -->
         <div id="message">
-            <p>{{ message }}</p>
+            <p>{{ message }} &nbsp; </p>
         </div>
         <div ng-hide="hideCrabdance">
             <img id="crabdance" src="/images/crabdance.gif">
@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="flexbox">
-            <button class="btn btn-wood" ng-click="shuffle(user)">Shuffle</button>
+            <button class="btn btn-wood" ng-click="shuffle(user, roomName)">Shuffle</button>
             <button class="btn btn-wood" ng-click="toggleDrag()">{{ draggingAllowed ? 'Click ':'Drag '}}To Select</button>
             <button class='btn btn-primary' ng-click="quit()">Quit</button>
         </div>
