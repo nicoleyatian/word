@@ -1,0 +1,61 @@
+.user-info {
+    font-size: 18pt;
+}
+
+.user-title {
+    font-size: 32pt;
+    text-align: justify;
+    text-align: center;
+}
+
+#profile-page {
+    margin-top: 40px;
+    color: #FFFFFF;
+}
+
+#profile {
+    padding: 10px;
+    border: 5px dotted black;
+    width: 50%;
+    text-align: center;
+    margin: auto;
+}
+
+#game-status {
+	color: #FFFFFF;
+}
+
+#game_table {
+    width: 75%;
+    margin: auto;
+    border: none;
+    background-color: transparent;
+    text-align: center;
+
+    .title {
+    	border-bottom-style: solid;
+    	border-bottom-color: #FFFFFF;
+    }
+}
+
+#game_table tr {
+    margin: auto;
+}
+
+#game_table .game_cell {
+    border: none;
+    height: 50px;
+}
+
+#game_table .table_headers {
+    font-size: 24pt;
+    font-weight: bold;
+    text-align: center;
+
+}
+
+#game_table .cell_data {
+    font-size: 18pt;
+    text-align: center;
+    margin: auto;
+}
