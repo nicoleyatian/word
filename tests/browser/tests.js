@@ -34,9 +34,15 @@ describe("front-end testing", function(){
    			it("exists", function(){
    				expect(scope).to.be.an("object");
    			})
-   			it("has submit and click methods", function(){
+   			it("has submit, click, update, quit, clear, crabdance, replay, and determineWinner methods", function(){
    				expect(scope.click).to.be.a('function');
    				expect(scope.submit).to.be.a('function');
+          expect(scope.update).to.be.a('function');
+          expect(scope.quit).to.be.a('function');
+          expect(scope.clear).to.be.a('function');
+          expect(scope.crabdance).to.be.a('function');
+          expect(scope.replay).to.be.a('function');
+          expect(scope.determineWinner).to.be.a('function');
    			})
    			it("click adds letters to the word and wordObj", function(){
    				scope.click(scope.board[0][0],'0-0');
@@ -46,6 +52,7 @@ describe("front-end testing", function(){
    				expect(scope.exports.word).to.be.equal("abc");
    				expect(scope.exports.wordObj).to.deep.equal({'0-0': 'a', '0-1': 'b', '0-2': 'c'});
    			})
+        xit("")
     	})
     // 	beforeEach("get Controllers", inject)
     // })
