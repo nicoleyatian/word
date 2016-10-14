@@ -20,13 +20,13 @@
             <div class="board-row wood-board-lg">
                 <div class="vcenter">
                     <ul id="yours">
-                        <li class="letters"> Score: {{ score }}</li>
+                        <li> Score: {{ score }}</li>
                     </ul>
                 </div>
                 <div class="col-6 vcenter">
                     <ul id="other-players">
                         <div ng-repeat="otherPlayer in otherPlayers | orderBy: '-score'">
-                            <li class="letters">{{ otherPlayer.username }}: {{ otherPlayer.score}}</li>
+                            <li>{{ otherPlayer.username }}: {{ otherPlayer.score}}</li>
                         </div>
                     </ul>
                 </div>
@@ -43,9 +43,6 @@
                 </div>
             </div>
         </div>
-        <!--         <div id="win?" ng-show="winOrLose">
-            <h1> {{ winOrLose }}</h1>
-        </div> -->
         <div id="message">
             <p>{{ message }} &nbsp; </p>
         </div>
@@ -54,8 +51,8 @@
         </div>
         <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()">
             <div class="row" ng-repeat="(x,row) in board track by $index">
-                <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
-                    <span class="letters" id="space">{{space}}</span>
+                <div ng-class="{'highlighted': checkHighlighted(x+'-'+y),'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
+                    <span id="space">{{space}}</span>
                 </div>
             </div>
         </div>

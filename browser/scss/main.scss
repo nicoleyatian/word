@@ -165,8 +165,9 @@ div #start {
     border: 5px solid #c3f4eb;
 }
 
-.selected {
-    border: 5px solid #c3f4eb;
+#grid .highlighted span {
+    color: rgb(188, 13, 16)
+;
 }
 
 .players {
