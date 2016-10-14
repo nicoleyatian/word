@@ -13,7 +13,7 @@ app.config(function($stateProvider) {
 app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory, $rootScope, $q) {
 
     $scope.roomName = $stateParams.roomname;
-    $scope.hideBoard = false; //true; REVERT
+    $scope.hideBoard = true; //true; REVERT
     $scope.hideStart = false; //false; REVERT
     $scope.hideCrabdance = true;
     $scope.crabdances = 0;
@@ -23,7 +23,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.highlighted = [];
 
     $scope.otherPlayers = [];
-    $scope.gameLength = 45;
+    $scope.gameLength = 180;
     $scope.mouseIsDown = false;
     $scope.draggingAllowed = false;
 
