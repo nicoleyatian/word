@@ -36,6 +36,11 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
                 scope.user = null;
             };
 
+            scope.hide =true;
+            scope.toggle = function() {
+                 scope.hide = !scope.hide;
+            }
+
             setUser();
 
             $rootScope.$on(AUTH_EVENTS.loginSuccess, setUser);
