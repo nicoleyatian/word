@@ -82,6 +82,15 @@ describe("front-end testing", function(){
           expect(scope.board[0][0]+scope.board[0][1]+scope.board[0][2]).to.equal('BAD');
           expect(scope.score).to.equal(55);
         })
+        it ("validSelect allows only legal clicks", function(){
+          scope.click(scope.board[0][0], '0-0');
+          scope.click(scope.board[3][3], '3-3');
+          expect(scope.exports.word).to.be.equal('A');
+          scope.click(scope.board[0][1], '0-1');
+          expect(scope.exports.word).to.be.equal('AB');
+          scope.click(scope.board[0][0], '0-0');
+          expect(scope.exports.word).to.be.equal('A');
+        })
       })
     // 	beforeEach("get Controllers", inject)
     // })
