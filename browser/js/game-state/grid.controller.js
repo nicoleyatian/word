@@ -13,8 +13,8 @@ app.config(function($stateProvider) {
 app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory, $rootScope, $q) {
 
     $scope.roomName = $stateParams.roomname;
-    $scope.hideBoard = false; //true; REVERT
-    $scope.hideStart = true; //false; REVERT
+    $scope.hideBoard = true; //true; REVERT
+    $scope.hideStart = false; //false; REVERT
     $scope.hideCrabdance = true;
     $scope.crabdances = 0;
     $rootScope.hideNavbar = true;
