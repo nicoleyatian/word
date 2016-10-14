@@ -58,7 +58,7 @@ module.exports = function(server) {
         });
         socket.on('getStartBoard', function(gameLength, gameId, userIds, roomName) {
             //initialize GameObj for the room in the mapper
-            roomGameMapper[roomName] = new game.GameObject(game.tileCounts, 6, 2);
+            roomGameMapper[roomName] = new game.GameObject(game.tileCounts, 6, 3);
             roomWordMapper[roomName] = {};
             var thisGame = roomGameMapper[roomName];
             var ourWords = roomWordMapper[roomName];
