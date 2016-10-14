@@ -51,7 +51,6 @@
             <div class="row" ng-repeat="(x,row) in board track by $index">
                 <div ng-class="{'highlighted': checkHighlighted(x+'-'+y),'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
                     <span id="space">{{space}}</span>
-                    <!--  -->
                 </div>
             </div>
         </div>
