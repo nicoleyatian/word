@@ -13,7 +13,7 @@ app.config(function($stateProvider) {
 app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, AuthService, $state, LobbyFactory, $rootScope, $q) {
 
     $scope.roomName = $stateParams.roomname;
-    $scope.hideBoard = true; //true; REVERT
+    $scope.hideBoard = false; //true; REVERT
     $scope.hideStart = false; //false; REVERT
     $scope.hideCrabdance = true;
     $scope.crabdances = 0;
@@ -285,6 +285,16 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     };
 
     $scope.shuffle = BoardFactory.shuffle;
+
+    //Shake logic: use Shake.js to allow mobile users to 
+    //shuffle board by shaking
+    var myShakeEvent = new Shake({
+        threshold: 15
+    });
+    myShakeEvent.start();
+    window.addEventListener('shake', function(){
+        BoardFactory.shuffle($scope.user, $scope.roomName);
+    }, false);
 
 
     $scope.updateBoard = function(wordObj) {
