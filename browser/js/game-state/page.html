@@ -13,8 +13,8 @@
             <button class="btn btn-primary" ng-click="startGame()" ng-hide="otherPlayers.length===0">Start Game</button>
         </ul>
     </div> -->
-    <!--     <div id="start" ng-hide="hideBoard">
-        <div id="score-board">
+    <div id="start" ng-hide="!hideBoard">
+        <!-- <div id="score-board">
             <div class="board-row wood-board-lg">
                 <div class="vcenter">
                     <ul id="yours">
@@ -41,37 +41,33 @@
                 </div>
             </div>
         </div> -->
-    <div id='head'>head</div>
-    <div class='row1'>
-        <!-- <div id='players'>players</div> -->
-        <div id='your-word'>word</div>
-        <!-- <div id="message">
-            <p>message{{ message }} &nbsp; </p>
-        </div> -->
-    </div>
-
-    <div class='row2'>
-        <div id='players'>players</div>
-
-        <div ng-hide="hideCrabdance">
-            <img id="crabdance" src="/images/crabdance.gif">
-        </div>
-        <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()">
-            <div class="row" ng-repeat="(x,row) in board track by $index">
-                <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
-                    <span class="letters" id="space">{{space}}</span>
-                </div>
+        <div id='head'>head</div>
+        <div class='row1'>
+            <div id='players'>players</div>
+            <div id='your-word'>word</div>
+            <div id="message">
+                <p>message{{ message }} &nbsp; </p>
             </div>
         </div>
-
-         <div id='messages'>messages</div>
+        <div class='row2'>
+            <div id='players2'>players</div>
+            <div ng-hide="hideCrabdance">
+                <img id="crabdance" src="/images/crabdance.gif">
+            </div>
+            <div id="grid" class="board" ng-mousedown="mouseDown()" ng-mouseup="mouseUp()" ng-mouseleave="mouseUp()">
+                <div class="row" ng-repeat="(x,row) in board track by $index">
+                    <div ng-class="{'selected': checkSelected(x+'-'+y)}" ng-mouseenter="drag(space, x+'-'+y)" ng-mousedown="click(space, x+'-'+y)" id="{{x}}-{{y}}" class="cell unselected" ng-repeat="(y, space) in row track by $index">
+                        <span class="letters" id="space">{{space}}</span>
+                    </div>
+                </div>
+            </div>
+            <div id='messages'>messages</div>
+        </div>
+        <div class="buttons">
+            <button class="btn btn-wood" ng-click="shuffle(user, roomName)">Shuffle</button>
+            <button class="btn btn-wood" ng-click="toggleDrag()">{{ draggingAllowed ? 'Click ':'Drag '}}To Select</button>
+            <button class='btn btn-primary' ng-click="quit()">Quit</button>
+        </div>
+        <br>
     </div>
-
-    <div class="buttons">
-        <button class="btn btn-wood" ng-click="shuffle(user, roomName)">Shuffle</button>
-        <button class="btn btn-wood" ng-click="toggleDrag()">{{ draggingAllowed ? 'Click ':'Drag '}}To Select</button>
-        <button class='btn btn-primary' ng-click="quit()">Quit</button>
-    </div>
-    <br>
-</div>
 </div>

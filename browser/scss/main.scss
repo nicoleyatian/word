@@ -7,10 +7,10 @@
 // $cell-diameter: 100%/($number-cells+.5);
 // $cell-height: 100vw * ($board-width/100%)/($number-cells+.5);
 // $letter-width: $cell-height/2;
-$board-width: 60vh;
+$board-width: 55vh;
 $number-cells: 6;
-$cell-diameter: 60vh/($number-cells+.5);
-$cell-height: 60vh/($number-cells+.5);
+$cell-diameter: 55vh/($number-cells+.5);
+$cell-height: 55vh/($number-cells+.5);
 $letter-width: $cell-height/2;
 body {
     background: url(images/coral-background.jpg) no-repeat center center;
@@ -96,10 +96,11 @@ div #start {
     flex-direction: column;
     justify-content: center;
     align-content: center;
+    text-align: center;
 }
 
 .row2 {
-    //display: inline;
+    display: flex;
 }
 
 #head {
@@ -116,6 +117,7 @@ div #start {
     width: $board-width;
     height: 5vh;
     text-align: center;
+    margin: auto auto;
 }
 
 #message {
@@ -132,20 +134,21 @@ div #start {
 
 #players2 {
     width: 20vw;
-}
-#messages {
-    width: 20vw;
+    margin: auto auto;
+    display: none;
 }
 
+#messages {
+    width: 20vw;
+    margin: auto auto;
+    display: none;
+}
 
 #grid {
     width: $board-width;
     margin: auto;
     padding: 1%;
-    .row {
-        margin: auto;
-        padding: auto;
-    }
+    flex-shrink: 0;
 }
 
 #space {
@@ -181,7 +184,7 @@ div #start {
     display: inline-block;
     margin: 0 !important;
     padding: 0 !important;
-    vertical-align: bottom;
+    vertical-align: middle;
     // height: 8vw;
     // padding: 1%;
 }
@@ -1828,6 +1831,9 @@ div.oauth {
         height: 5vh;
         text-align: center;
     }
+    #players2 #messages {
+        display: none;
+    }
 }
 
 
@@ -1939,12 +1945,15 @@ div.oauth {
     #your-word {
         width: $board-width;
         height: 5vh;
-        text-align: center;
     }
     #message {
         width: $board-width;
         height: 5vh;
         text-align: center;
+        display: block;
+    }
+    #players2 #messages {
+        display: none;
     }
 }
 
@@ -2064,6 +2073,9 @@ div.oauth {
         height: 5vh;
         text-align: center;
     }
+    #players2 #messages {
+        display: none;
+    }
 }
 
 
@@ -2177,6 +2189,9 @@ div.oauth {
         width: $board-width;
         height: 5vh;
         text-align: center;
+    }
+    #players2 #messages {
+        display: none;
     }
 }
 
@@ -2292,6 +2307,9 @@ div.oauth {
         height: 5vh;
         text-align: center;
     }
+    #players2 #messages {
+        display: none;
+    }
 }
 
 
@@ -2405,6 +2423,9 @@ div.oauth {
         width: $board-width;
         height: 5vh;
         text-align: center;
+    }
+    #players2 #messages {
+        display: none;
     }
 }
 
@@ -2520,6 +2541,9 @@ div.oauth {
         height: 5vh;
         text-align: center;
     }
+    #players2 #messages {
+        display: none;
+    }
 }
 
 
@@ -2633,6 +2657,9 @@ div.oauth {
         width: $board-width;
         height: 5vh;
         text-align: center;
+    }
+    #players2 #messages {
+        display: none;
     }
 }
 
@@ -2748,6 +2775,9 @@ div.oauth {
         height: 5vh;
         text-align: center;
     }
+    #players2 #messages {
+        display: none;
+    }
 }
 
 
@@ -2861,6 +2891,9 @@ div.oauth {
         width: $board-width;
         height: 5vh;
         text-align: center;
+    }
+    #players2 #messages {
+        display: none;
     }
 }
 
@@ -2976,6 +3009,9 @@ div.oauth {
         height: 5vh;
         text-align: center;
     }
+    #players2 #messages {
+        display: none;
+    }
 }
 
 // /* ----------- Non-Retina Screens ----------- */
@@ -2991,101 +3027,100 @@ div.oauth {
 //   and (-webkit-min-device-pixel-ratio: 2)
 //   and (min-resolution: 192dpi) {
 // }
-@media screen and (min-width: 0px) {
-    $board-width: 50vh;
-    $number-cells: 6;
-    $cell-diameter: 50vh/($number-cells+.5);
-    $cell-height: 50vh/($number-cells+.5);
-    $letter-width: $cell-height/2;
-    html,
-    body {
-        width: 100%;
-        height: 100%;
-        margin: 0px;
-        padding: 0px;
-        overflow-x: hidden;
-        position: relative;
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-        background: url(images/coral-background.jpg) no-repeat center center;
-        background-size: cover;
-    }
-    .crab-logo {
-        text-align: center;
-        margin-top: -45px;
-        margin-bottom: -30px;
-    }
-    #crab {
-        max-width: 175px;
-        max-height: 175px;
-        text-align: center;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-    .project-title {
-        margin: 0;
-        font: bold 70px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
-        letter-spacing: 3px;
-        color: #fff;
-        text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
-        -webkit-transition: .2s all linear;
-    }
-    .lobby-button {
-        margin-top: 10px;
-        margin-right: 10px;
-        text-align: center;
-    }
-    .btn-lobby {
-        -webkit-box-sizing: content-box;
-        -moz-box-sizing: content-box;
-        box-sizing: content-box;
-        width: 150px;
-        height: 40px;
-        cursor: pointer;
-        margin: 0 auto;
-        border: 2px solid rgba(255, 255, 255, 1);
-        -webkit-border-radius: 40px;
-        border-radius: 40px;
-        font: normal 17px/0px "Advent Pro", Helvetica, sans-serif;
-        color: rgba(255, 255, 255, 1);
-        text-align: center;
-        -o-text-overflow: clip;
-        text-overflow: clip;
-        letter-spacing: 1px;
-        background: rgba(179, 188, 204, 0.55);
-        -webkit-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
-        -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
-        -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
-        transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
-    }
-    .btn-lobby:hover {
-        color: rgba(255, 255, 255, 1);
-        background: rgba(11, 61, 142, 0.8);
-    }
-    .btn-lobby:active {
-        border: 2px solid rgba(255, 255, 255, 1);
-        background: rgba(5, 42, 105, 1);
-        -webkit-transition: none;
-        -moz-transition: none;
-        -o-transition: none;
-        transition: none;
-    }
-    // #grid {
-    //     width: $board-width;
-    // }
-    // #grid .cell {
-    //     font-size: $letter-width;
-    //     width: $cell-diameter;
-    //     height: $cell-height;
-    //     line-height: $cell-height;
-    // }
-}
-
+// @media screen and (min-width: 0px) {
+//     $board-width: 50vh;
+//     $number-cells: 6;
+//     $cell-diameter: 50vh/($number-cells+.5);
+//     $cell-height: 50vh/($number-cells+.5);
+//     $letter-width: $cell-height/2;
+//     html,
+//     body {
+//         width: 100%;
+//         height: 100%;
+//         margin: 0px;
+//         padding: 0px;
+//         overflow-x: hidden;
+//         position: relative;
+//         overflow-y: scroll;
+//         -webkit-overflow-scrolling: touch;
+//         background: url(images/coral-background.jpg) no-repeat center center;
+//         background-size: cover;
+//     }
+//     .crab-logo {
+//         text-align: center;
+//         margin-top: -45px;
+//         margin-bottom: -30px;
+//     }
+//     #crab {
+//         max-width: 175px;
+//         max-height: 175px;
+//         text-align: center;
+//         margin-top: 20px;
+//         margin-bottom: 20px;
+//     }
+//     .project-title {
+//         margin: 0;
+//         font: bold 70px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+//         letter-spacing: 3px;
+//         color: #fff;
+//         text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+//         -webkit-transition: .2s all linear;
+//     }
+//     .lobby-button {
+//         margin-top: 10px;
+//         margin-right: 10px;
+//         text-align: center;
+//     }
+//     .btn-lobby {
+//         -webkit-box-sizing: content-box;
+//         -moz-box-sizing: content-box;
+//         box-sizing: content-box;
+//         width: 150px;
+//         height: 40px;
+//         cursor: pointer;
+//         margin: 0 auto;
+//         border: 2px solid rgba(255, 255, 255, 1);
+//         -webkit-border-radius: 40px;
+//         border-radius: 40px;
+//         font: normal 17px/0px "Advent Pro", Helvetica, sans-serif;
+//         color: rgba(255, 255, 255, 1);
+//         text-align: center;
+//         -o-text-overflow: clip;
+//         text-overflow: clip;
+//         letter-spacing: 1px;
+//         background: rgba(179, 188, 204, 0.55);
+//         -webkit-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+//         -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+//         -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+//         transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+//     }
+//     .btn-lobby:hover {
+//         color: rgba(255, 255, 255, 1);
+//         background: rgba(11, 61, 142, 0.8);
+//     }
+//     .btn-lobby:active {
+//         border: 2px solid rgba(255, 255, 255, 1);
+//         background: rgba(5, 42, 105, 1);
+//         -webkit-transition: none;
+//         -moz-transition: none;
+//         -o-transition: none;
+//         transition: none;
+//     }
+//     // #grid {
+//     //     width: $board-width;
+//     // }
+//     // #grid .cell {
+//     //     font-size: $letter-width;
+//     //     width: $cell-diameter;
+//     //     height: $cell-height;
+//     //     line-height: $cell-height;
+//     // }
+// }
 @media screen and (min-width: 1200px) {
-    $board-width: 60vh;
+    $board-width: 80vh;
     $number-cells: 6;
-    $cell-diameter: 60vh/($number-cells+.5);
-    $cell-height: 60vh/($number-cells+.5);
+    $cell-diameter: 80vh/($number-cells+.5);
+    $cell-height: 80vh/($number-cells+.5);
     $letter-width: $cell-height/2;
     html,
     body {
@@ -3168,6 +3203,240 @@ div.oauth {
         width: $cell-diameter;
         height: $cell-height;
         line-height: $cell-height;
+    }
+    #players #message {
+        display: none;
+    }
+    #messages {
+        width: 20vw;
+        margin: auto auto;
+        display: block;
+    }
+    #players2 {
+        width: 20vw;
+        margin: auto auto;
+        display: block;
+    }
+}
+
+@media screen and (min-aspect-ratio: 80/100) and (max-aspect-ratio: 120/100) {
+    $board-width: 60vh;
+    $number-cells: 6;
+    $cell-diameter: 60vh/($number-cells+.5);
+    $cell-height: 60vh/($number-cells+.5);
+    $letter-width: $cell-height/2;
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        overflow-x: hidden;
+        position: relative;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        background: url(images/coral-background.jpg) no-repeat center center;
+        background-size: cover;
+    }
+    .crab-logo {
+        text-align: center;
+        margin-top: -35px;
+        margin-bottom: -30px;
+    }
+    #crab {
+        max-width: 150px;
+        max-height: 150px;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .project-title {
+        margin: 0;
+        font: bold 50px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        letter-spacing: 3px;
+        color: #fff;
+        text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+        -webkit-transition: .2s all linear;
+    }
+    .lobby-button {
+        margin-top: 10px;
+        margin-right: 10px;
+        text-align: center;
+    }
+    .btn-lobby {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        width: 225px;
+        height: 55px;
+        cursor: pointer;
+        margin: 0 auto;
+        border: 2px solid rgba(255, 255, 255, 1);
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        font: normal 25px/50px "Advent Pro", Helvetica, sans-serif;
+        color: rgba(255, 255, 255, 1);
+        text-align: center;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        letter-spacing: 1px;
+        background: rgba(179, 188, 204, 0.55);
+        -webkit-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+    }
+    .btn-lobby:hover {
+        color: rgba(255, 255, 255, 1);
+        background: rgba(11, 61, 142, 0.8);
+    }
+    .btn-lobby:active {
+        border: 2px solid rgba(255, 255, 255, 1);
+        background: rgba(5, 42, 105, 1);
+        -webkit-transition: none;
+        -moz-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+    #grid {
+        width: $board-width;
+    }
+    #grid .cell {
+        font-size: $letter-width;
+        width: $cell-diameter;
+        height: $cell-height;
+        line-height: $cell-height/2 + 6;
+    }
+    #head {
+        width: 90%;
+        height: 10vh;
+    }
+    #players {
+        width: $board-width;
+        height: 20vh;
+        display: block;
+    }
+    #your-word {
+        width: $board-width;
+        height: 5vh;
+        text-align: center;
+    }
+    #message {
+        display: none
+    }
+    #players2 {
+        display: none;
+    }
+    #messages {
+        width: 20vw;
+        margin: auto auto;
+        display: block;
+    }
+}
+
+@media screen and (min-aspect-ratio: 120/100) {
+    $board-width: 80vh;
+    $number-cells: 6;
+    $cell-diameter: 80vh/($number-cells+.5);
+    $cell-height: 80vh/($number-cells+.5);
+    $letter-width: $cell-height/2;
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        overflow-x: hidden;
+        position: relative;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        background: url(images/coral-background.jpg) no-repeat center center;
+        background-size: cover;
+    }
+    .crab-logo {
+        text-align: center;
+        margin-top: -50px;
+        margin-bottom: -30px;
+    }
+    #crab {
+        max-width: 190px;
+        max-height: 190px;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .project-title {
+        margin: 0;
+        font: bold 110px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        letter-spacing: 3px;
+        color: #fff;
+        text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+        -webkit-transition: .2s all linear;
+    }
+    .lobby-button {
+        margin-top: 10px;
+        margin-right: 10px;
+        text-align: center;
+    }
+    .btn-lobby {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        width: 225px;
+        height: 55px;
+        cursor: pointer;
+        margin: 0 auto;
+        border: 2px solid rgba(255, 255, 255, 1);
+        -webkit-border-radius: 40px;
+        border-radius: 40px;
+        font: normal 25px/50px "Advent Pro", Helvetica, sans-serif;
+        color: rgba(255, 255, 255, 1);
+        text-align: center;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        letter-spacing: 1px;
+        background: rgba(179, 188, 204, 0.55);
+        -webkit-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -moz-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        -o-transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+        transition: background-color 0.3s cubic-bezier(0, 0, 0, 0), color 0.3s cubic-bezier(0, 0, 0, 0), width 0.3s cubic-bezier(0, 0, 0, 0), border-width 0.3s cubic-bezier(0, 0, 0, 0), border-color 0.3s cubic-bezier(0, 0, 0, 0);
+    }
+    .btn-lobby:hover {
+        color: rgba(255, 255, 255, 1);
+        background: rgba(11, 61, 142, 0.8);
+    }
+    .btn-lobby:active {
+        border: 2px solid rgba(255, 255, 255, 1);
+        background: rgba(5, 42, 105, 1);
+        -webkit-transition: none;
+        -moz-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+    #grid {
+        width: $board-width;
+    }
+    #grid .cell {
+        font-size: $letter-width;
+        width: $cell-diameter;
+        height: $cell-height;
+        line-height: $cell-height;
+    }
+    #players {
+        display: none;
+    }
+    #message {
+        display: none;
+    }
+    #messages {
+        width: 20vw;
+        margin: auto auto;
+        display: block;
+    }
+    #players2 {
+        width: 20vw;
+        margin: auto auto;
+        display: block;
     }
 }
 
