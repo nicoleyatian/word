@@ -34,13 +34,12 @@ describe("front-end testing", function(){
    			it("exists", function(){
    				expect(scope).to.be.an("object");
    			})
-   			it("has submit, click, update, quit, clear, crabdance, replay, and determineWinner methods", function(){
+   			it("has submit, click, update, quit, clear, replay, and determineWinner methods", function(){
    				expect(scope.click).to.be.a('function');
    				expect(scope.submit).to.be.a('function');
           expect(scope.update).to.be.a('function');
           expect(scope.quit).to.be.a('function');
           expect(scope.clear).to.be.a('function');
-          expect(scope.crabdance).to.be.a('function');
           expect(scope.replay).to.be.a('function');
           expect(scope.determineWinner).to.be.a('function');
    			})
@@ -49,11 +48,41 @@ describe("front-end testing", function(){
    				scope.click(scope.board[0][1], '0-1');
    				scope.click(scope.board[0][2], '0-2');
    				console.log(scope.exports.wordObj);
-   				expect(scope.exports.word).to.be.equal("abc");
-   				expect(scope.exports.wordObj).to.deep.equal({'0-0': 'a', '0-1': 'b', '0-2': 'c'});
+   				expect(scope.exports.word).to.be.equal("ABC");
+   				expect(scope.exports.wordObj).to.deep.equal({'0-0': 'A', '0-1': 'B', '0-2': 'C'});
    			})
-        xit("")
-    	})
+        it("clear clears the word and wordObj", function(){
+          scope.click(scope.board[0][1], '0-1');
+          scope.click(scope.board[1][1], '1-1');
+          scope.click(scope.board[1][0], '1-0');
+          expect(scope.exports.word).to.be.equal("BED");
+          scope.clear();
+          expect(scope.exports.word).to.be.equal("");
+          expect(scope.exports.wordObj).to.deep.equal({});
+        })
+        it("determineWinner correctly sets the message", function(){
+          var winnersArray=[51, 52];
+          scope.user={id: 51, username: "boss"};
+          scope.otherPlayers=[{id:52, username: "Your mom"}, {id: 49, username:"Morgoth"}];
+          scope.determineWinner(winnersArray);
+          expect(scope.message).to.be.equal("The game was a tie between boss and Your mom.");
+          winnersArray=[49];
+          scope.determineWinner(winnersArray);
+          expect(scope.message).to.be.equal("Morgoth won. Better luck next time.");
+          winnersArray=[51];
+          scope.determineWinner(winnersArray);
+          expect(scope.message).to.be.equal("Congratulations, you won!");
+        })
+        it("update correctly updates the board and the score", function(){
+          scope.user={id: 51, username: 'boss'};
+          expect(scope.board[0][0]+scope.board[0][1]+scope.board[0][2]).to.equal("ABC");
+          expect(scope.score).to.equal(0);
+          var updateObj={wordObj:{'0-0':'B', '0-1':'A', '0-2':'D'}, word:'', playerId:51, stateNumber:null, pointsEarned:55}
+          scope.update(updateObj);
+          expect(scope.board[0][0]+scope.board[0][1]+scope.board[0][2]).to.equal('BAD');
+          expect(scope.score).to.equal(55);
+        })
+      })
     // 	beforeEach("get Controllers", inject)
     // })
 	})

@@ -408,7 +408,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
                 for (var player in $scope.otherPlayers) {
                     if (+$scope.otherPlayers[player].id === +winnersArray[0]) {
                         var winner = $scope.otherPlayers[player].username;
-                        $scope.message = winner + " won. Better Luck next time.";
+                        $scope.message = winner + " won. Better luck next time.";
                     }
                 }
             }
@@ -425,9 +425,6 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
                 }
                 console.log(winners);
                 $scope.message = "The game was a tie between " + winners.join(" and ") + ".";
-                // for (var i = 0; i < winners.length; i++) {
-                //     if (i === winners.length - 1) { $scope.winOrLose += "and " + winners[i] + "."; } else { $scope.winOrLose += winners[i] + ", "; }
-                // }
             }
         }
     };
@@ -441,7 +438,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     // });
 
     $scope.$on('$destroy', function() {
-        console.log('changestate close', $scope.user.id);
+        //console.log('changestate close', $scope.user.id);
         Socket.emit('leaveRoom', $scope.user, $scope.roomName, $scope.gameId);
         Socket.removeAllListeners();
         // Socket.removeListener('playerDisconnected', removePlayer);
