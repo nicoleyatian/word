@@ -5,7 +5,7 @@ var util = require('util');
 
 var rootPath = path.join(__dirname, '../../../');
 var indexPath = path.join(rootPath, './server/app/views/index.html');
-var faviconPath = path.join(rootPath, './images/favicon.ico');
+var faviconPath = path.join(rootPath, './public/images/favicon.ico');
 
 var env = require(path.join(rootPath, './server/env'));
 
