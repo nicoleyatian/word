@@ -15,13 +15,14 @@
            <!--  <button class="btn btn-primary" ng-click="startGame()" ng-hide="otherPlayers.length===0">Start Game</button> -->
         </ul>
     </div>
-    <div id="start" ng-hide="hideBoard">
+    <div ng-hide="hideBoard">
         <div id="score-board">
             <div class="board-row wood-board-lg">
                 <div class="vcenter">
                     <ul id="yours">
                         <li> Score: {{ score }}</li>
                     </ul>
+                    <timer time="gameLength"></timer>
                 </div>
                 <div class="col-6 vcenter">
                     <ul id="other-players">
@@ -32,19 +33,19 @@
                 </div>
             </div>
             <div class="board-row">
-                <div class="col-8 wood-board-sm">
+                <div class="col-12 wood-board-sm">
                     <div id="your-word">
                         <h1 ng-hide="freeze" ng-click="submit(exports)"> {{ exports.word }} </h1>
                         <h1 ng-show="gameOver" ng-click="replay()">Play Again?</h1>
                     </div>
                 </div>
-                <div class="col-3 time-rock">
-                    <timer time="gameLength"></timer>
+                <div class="col-3">
+                    
                 </div>
             </div>
         </div>
-        <div id="message">
-            <p>{{ message }} &nbsp; </p>
+        <div>
+            <h1 id="message">{{ message }} &nbsp; </h1>
         </div>
         <div ng-hide="hideCrabdance">
             <img id="crabdance" src="/images/crabdance.gif">

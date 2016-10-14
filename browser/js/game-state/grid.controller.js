@@ -14,7 +14,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
     $scope.roomName = $stateParams.roomname;
     $scope.hideBoard = false; //true; REVERT
-    $scope.hideStart = false; //false; REVERT
+    $scope.hideStart = true; //false; REVERT
     $scope.hideCrabdance = true;
     $scope.crabdances = 0;
     $rootScope.hideNavbar = true;
@@ -28,7 +28,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.draggingAllowed = false;
 
     $scope.style = null;
-    $scope.message = ' ';
+    $scope.message = 'The mongoose is in the auditorium';
     // $scope.winOrLose = null;
     //gets set to the timeout that displays a message
     $scope.timeout = null;
