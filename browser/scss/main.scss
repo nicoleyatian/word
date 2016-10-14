@@ -233,7 +233,7 @@ div #start {
         color: red;
         animation: blinker 1s linear infinite;
     }
-@keyframes blinker {  
+@keyframes blinker {
   50% { opacity: 0; }
 }
 }
@@ -360,6 +360,7 @@ div.oauth {
 // }
 @import 'directives/main';
 @import 'directives/bubbles';
+@import 'directives/crab-animation';
 @import 'home/main';
 @import 'login/main';
 @import 'lobby/main';
