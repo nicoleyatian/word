@@ -9,24 +9,57 @@ describe("front-end testing", function(){
     }));
 
     describe("game state", function(){
-    	var Board_Factory;
-    	beforeEach("get factories", inject(function(BoardFactory){
+    	var Board_Factory, Lobby_Factory, Signup_Factory, User_Factory;
+    	beforeEach("get factories", inject(function(SignupFactory, BoardFactory, LobbyFactory, UserFactory){
     		Board_Factory=BoardFactory;
+        Lobby_Factory=LobbyFactory;
+        Signup_Factory=SignupFactory;
+        User_Factory=UserFactory;
     	}))
     	describe("BoardFactory", function(){
     		it ("exists", function(){
     			expect(Board_Factory).to.be.an('object');
     		})
+        it ("has methods getStartBoard, submit, shuffle, getCurrentRoom, quitFromRoom", function(){
+          expect(Board_Factory.getStartBoard).to.be.a('function');
+          expect(Board_Factory.submit).to.be.a("function");
+          expect(Board_Factory.shuffle).to.be.a('function');
+          expect(Board_Factory.getCurrentRoom).to.be.a('function');
+          expect(Board_Factory.quitFromRoom).to.be.a('function');
+        })
     	})
+      describe("LobbyFactory",function(){
+        it ("exists", function(){
+          expect(Lobby_Factory).to.be.an('object');
+        })
+        it ("has methods getAllRooms, joinGame, newGame, and AllPlayers", function(){
+          expect(Lobby_Factory.getAllRooms).to.be.a("function");
+          expect(Lobby_Factory.joinGame).to.be.a("function");
+          expect(Lobby_Factory.newGame).to.be.a("function");
+          expect(Lobby_Factory.AllPlayers).to.be.a("function");
+        })
+      })
+      describe ("SignupFactory", function(){
+        it ("exists", function(){
+          expect(Signup_Factory).to.be.an('object');
+        })
+        it ("has method createUser", function(){
+          expect(Signup_Factory.createUser).to.be.a('function');
+        })
+      })
+      describe ("UserFactory", function(){
+        it ("exists", function(){
+          expect(User_Factory).to.be.an('object');
+        })
+        it ("has methods fetchInformation and fetchGames", function(){
+          expect(User_Factory.fetchInformation).to.be.a("function");
+          expect(User_Factory.fetchGames).to.be.a('function');
+        })
+      })
     	describe("GameCtrl", function(){
    			var scope, createController, controller;
    			beforeEach("create controller", inject(function($rootScope, $controller){
    				scope=$rootScope.$new();
-   				// createController=function(){
-   				// 	return $controller("GameCtrl",{
-   				// 		'$scope': scope
-   				// 	})
-   				// }
    				controller=$controller("GameCtrl", {
    					'$scope': scope
    				})
