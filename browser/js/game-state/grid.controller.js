@@ -18,7 +18,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.hideCrabdance = true;
     $scope.crabdances = 0;
     $rootScope.hideNavbar = true;
-    $scope.freeze = false; //false; REVERT
+    $scope.freeze = true; //false; REVERT
     $scope.gameOver = false;
     $scope.highlighted = [];
 
@@ -28,7 +28,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.draggingAllowed = true;
 
     $scope.style = null;
-    $scope.message = 'The mongoose is in the auditorium';
+    $scope.message = ' ';
     // $scope.winOrLose = null;
     //gets set to the timeout that displays a message
     $scope.timeout = null;
@@ -461,7 +461,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
 
 
 
-    console.log('update 1.2')
+
 
     // Socket.on('connect', function() {
     // $scope.checkConnect();
