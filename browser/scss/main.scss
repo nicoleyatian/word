@@ -79,9 +79,18 @@ body {
     background-size: 100% 100%;
 }
 
+#room-name {
+    font-size: 28px;
+    text-decoration: underline;
+}
+
 #your-word {
     height: $cell-height/2;
     text-align: center;
+}
+
+#start {
+    padding-top: 30vh;
 }
 
 #signup-form {
@@ -97,8 +106,6 @@ body {
 #title {
     text-align: center;
 }
-
-
 
 #message {
     text-align: center;
@@ -169,7 +176,7 @@ body {
 //     height: 5vh;
 // }
 #grid .selected {
-    border: 5px solid #c3f4eb;
+    border: 5px solid #d0eeee;
 }
 
 #grid .highlighted span {
@@ -187,14 +194,19 @@ body {
 }
 
 .Game-info {
+
     li {
         list-style: none;
         font-weight: 600;
     }
     #user {
-        font-size: 16px;
+        font-size: 22px;
+    }
+    .others {
+        font-size: 18px;
     }
 }
+
 
 #score-board {
     // margin-right: 25%;
@@ -237,6 +249,7 @@ body {
     font-family:'digital7';
     h1 {
         font-size: $cell-height;
+        line-height: .5;
         color: #4f584f;
         margin: 0;
     }
@@ -334,7 +347,7 @@ div.oauth {
     background-image: url(images/driftwood_.png);
     background-size: 100% 100%;
     border: none;
-    height: 140px;
+    height: $letter-width*4.5;
 }
 
 .wood-board-sm {
@@ -540,7 +553,7 @@ div.oauth {
         height: 5vh;
     }
     div #game {
-    height: 100%;
+    height: 100vh;
     }
 }
 
@@ -657,7 +670,7 @@ div.oauth {
         height: 5vh;
     }
     div #game {
-    height: 100vh;
+    height: 100vhh;
     }
 }
 
@@ -773,7 +786,7 @@ div.oauth {
         height: 5vh;
     }
     div #game {
-    height: 100%;
+    height: 100vh;
     }
 }
 
@@ -885,7 +898,7 @@ div.oauth {
         height: 5vh;
     }
     div #game {
-    height: 100%;
+    height: 100vh;
     }
 }
 
@@ -993,7 +1006,7 @@ div.oauth {
         height: 5vh;
     }
     div #game {
-    height: 100%;
+    height: 100vh;
     }
 }
 
@@ -1101,7 +1114,7 @@ div.oauth {
         height: 5vh;
     }
     div #game {
-    height: 100%;
+    height: 100vh;
     }
 }
 
@@ -1209,7 +1222,7 @@ div.oauth {
         height: 5vh;
     }
     div #game {
-    height: 100%;
+    height: 100vh;
     }
 }
 
@@ -1317,7 +1330,7 @@ div.oauth {
         height: 5vh;
     }
     div #game {
-    height: 100%;
+    height: 100vh;
     }
 }
 
@@ -1425,7 +1438,7 @@ div.oauth {
         height: 5vh;
     }
     div #game {
-    height: 100%;
+    height: 100vh;
     }
 }
 
@@ -1533,7 +1546,7 @@ div.oauth {
         height: 5vh;
     }
     div #game {
-    height: 100%;
+    height: 100vh;
     }
 }
 
@@ -1641,7 +1654,7 @@ div.oauth {
         height: 5vh;
     }
     div #game {
-    height: 100%;
+    height: 100vh;
     }
 }
 

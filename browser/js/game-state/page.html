@@ -1,18 +1,13 @@
 <div id="game">
     <div id="start" ng-hide="hideStart">
         <ul class="Game-info">
+            <li id="room-name">{{ roomName }}</li>
             <li id="user">{{ user.username }}</li>
-            <div ng-hide="otherPlayers.length > 0">
-                <li>Waiting for other players</li>
-            </div>
-            <div ng-repeat="otherPlayer in otherPlayers track by $index">
-                <li>{{ otherPlayer.username }}</li>
-            </div>
-            <br>
+            <li class="others" ng-hide="otherPlayers.length > 0">Waiting for other players...</li>
+            <li class="others" ng-repeat="otherPlayer in otherPlayers track by $index">{{ otherPlayer.username }}</li>
+            <button class="btn btn-primary" ng-click="startGame()">Start Game</button>
             <button class="btn btn-primary" ng-click="quit()">Quit</button>
-             <button class="btn btn-primary" ng-click="startGame()">Start Game</button>
-
-           <!--  <button class="btn btn-primary" ng-click="startGame()" ng-hide="otherPlayers.length===0">Start Game</button> -->
+            <!--  <button class="btn btn-primary" ng-click="startGame()" ng-hide="otherPlayers.length===0">Start Game</button> -->
         </ul>
     </div>
     <div ng-hide="hideBoard">
@@ -40,7 +35,6 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    
                 </div>
             </div>
         </div>
@@ -60,7 +54,7 @@
         <div class="flexbox">
             <button class="btn btn-wood" ng-click="shuffle(user, roomName)">Shuffle</button>
             <button class="btn btn-wood" ng-click="toggleDrag()">{{ draggingAllowed ? 'Click ':'Drag '}}To Select</button>
-            <button class='btn btn-primary' ng-click="quit()">Quit</button>
+            <button class='btn btn-wood' ng-click="quit()">Quit</button>
         </div>
         <br>
     </div>

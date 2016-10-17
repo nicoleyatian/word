@@ -25,7 +25,7 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.otherPlayers = [];
     $scope.gameLength = 180;
     $scope.mouseIsDown = false;
-    $scope.draggingAllowed = false;
+    $scope.draggingAllowed = true;
 
     $scope.style = null;
     $scope.message = 'The mongoose is in the auditorium';
