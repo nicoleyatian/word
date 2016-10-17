@@ -49,7 +49,7 @@ module.exports = {
                 } else return;
             })
             .catch(e => {
-                console.log('the user was not removed correctly!')
+                console.log('the user was not removed correctly!');
             });
     }
 };
