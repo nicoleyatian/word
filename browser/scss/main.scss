@@ -33,6 +33,15 @@ body {
     }
 }
 
+@font-face{
+ font-family:'orbitron';
+ src: url(/fonts/orbitron/Orbitron-Bold.ttf);
+}
+@font-face{
+ font-family:'digital7';
+ src: url(/fonts/digital-7/digital-7.ttf);
+}
+
 .crab-logo {
     text-align: center;
     margin-top: -50px;
@@ -70,9 +79,18 @@ body {
     background-size: 100% 100%;
 }
 
+#room-name {
+    font-size: 28px;
+    text-decoration: underline;
+}
+
 #your-word {
     height: $cell-height/2;
     text-align: center;
+}
+
+#start {
+    padding-top: 30vh;
 }
 
 #signup-form {
@@ -86,10 +104,6 @@ body {
 }
 
 #title {
-    text-align: center;
-}
-
-div #start {
     text-align: center;
 }
 
@@ -153,7 +167,7 @@ div #start {
 //         line-height: $cell-height/2 + 6;
 //     }
 // #score-board {
-//     height: 45vh;
+    // height: 45vh;
 //     margin: auto auto;
 //     padding: auto auto;
 //     vertical-align: center;
@@ -162,12 +176,11 @@ div #start {
 //     height: 5vh;
 // }
 #grid .selected {
-    border: 5px solid #c3f4eb;
+    border: 5px solid #d0eeee;
 }
 
 #grid .highlighted span {
-    color: rgb(188, 13, 16)
-;
+    color: rgb(188, 13, 16);
 }
 
 .players {
@@ -181,18 +194,23 @@ div #start {
 }
 
 .Game-info {
+
     li {
         list-style: none;
         font-weight: 600;
     }
     #user {
-        font-size: 16px;
+        font-size: 22px;
+    }
+    .others {
+        font-size: 18px;
     }
 }
 
+
 #score-board {
     // margin-right: 25%;
-    height: 35vh;
+    // height: 35vh;
     display: flex;
     flex-direction: column;
     ul {
@@ -221,16 +239,22 @@ div #start {
     color: rgb(237, 229, 206);
     font-weight: 800;
     text-shadow: 1px 1px black;
+    text-align: center;
+    height: 100vh;
 }
 
 #timer {
-    margin: auto;
+    // margin: auto;
     text-align: center;
+    font-family:'digital7';
     h1 {
-        font-size: $cell-height/2;
+        font-size: $cell-height;
+        line-height: .5;
+        color: #4f584f;
+        margin: 0;
     }
     .blinking{
-        color: red;
+        color: rgb(188, 13, 16);
         animation: blinker 1s linear infinite;
     }
 @keyframes blinker {  
@@ -298,6 +322,12 @@ div.oauth {
     // padding: 1%;
 }
 
+.col-12 {
+    float: left;
+    width: 100%;
+    // padding: 1%;
+}
+
 .vcenter {
     display: inline-block;
     vertical-align: middle;
@@ -317,7 +347,7 @@ div.oauth {
     background-image: url(images/driftwood_.png);
     background-size: 100% 100%;
     border: none;
-    height: 140px;
+    height: $letter-width*4.5;
 }
 
 .wood-board-sm {
@@ -514,13 +544,16 @@ div.oauth {
         width: $board-width;
     }
     #score-board {
-        height: 45vh;
+        // height: 45vh;
         margin: auto auto;
         padding: auto auto;
         vertical-align: center;
     }
     .flexbox {
         height: 5vh;
+    }
+    div #game {
+    height: 100vh;
     }
 }
 
@@ -628,13 +661,16 @@ div.oauth {
         width: $board-width;
     }
     #score-board {
-        height: 45vh;
+        // height: 45vh;
         margin: auto auto;
         padding: auto auto;
         vertical-align: center;
     }
     .flexbox {
         height: 5vh;
+    }
+    div #game {
+    height: 100vhh;
     }
 }
 
@@ -741,13 +777,16 @@ div.oauth {
         width: $board-width;
     }
     #score-board {
-        height: 45vh;
+        // height: 45vh;
         margin: auto auto;
         padding: auto auto;
         vertical-align: center;
     }
     .flexbox {
         height: 5vh;
+    }
+    div #game {
+    height: 100vh;
     }
 }
 
@@ -850,13 +889,16 @@ div.oauth {
         line-height: $cell-height/2 + 3.5;
     }
     #score-board {
-        height: 45vh;
+        // height: 45vh;
         margin: auto auto;
         padding: auto auto;
         vertical-align: center;
     }
     .flexbox {
         height: 5vh;
+    }
+    div #game {
+    height: 100vh;
     }
 }
 
@@ -955,13 +997,16 @@ div.oauth {
         line-height: $cell-height/2 + 3.5;
     }
     #score-board {
-        height: 45vh;
+        // height: 45vh;
         margin: auto auto;
         padding: auto auto;
         vertical-align: center;
     }
     .flexbox {
         height: 5vh;
+    }
+    div #game {
+    height: 100vh;
     }
 }
 
@@ -1060,13 +1105,16 @@ div.oauth {
         line-height: $cell-height/2 + 3.5;
     }
     #score-board {
-        height: 45vh;
+        // height: 45vh;
         margin: auto auto;
         padding: auto auto;
         vertical-align: center;
     }
     .flexbox {
         height: 5vh;
+    }
+    div #game {
+    height: 100vh;
     }
 }
 
@@ -1165,13 +1213,16 @@ div.oauth {
         line-height: $cell-height/2 + 3.5;
     }
     #score-board {
-        height: 45vh;
+        // height: 45vh;
         margin: auto auto;
         padding: auto auto;
         vertical-align: center;
     }
     .flexbox {
         height: 5vh;
+    }
+    div #game {
+    height: 100vh;
     }
 }
 
@@ -1270,13 +1321,16 @@ div.oauth {
         line-height: $cell-height/2 + 3.5;
     }
     #score-board {
-        height: 45vh;
+        // height: 45vh;
         margin: auto auto;
         padding: auto auto;
         vertical-align: center;
     }
     .flexbox {
         height: 5vh;
+    }
+    div #game {
+    height: 100vh;
     }
 }
 
@@ -1375,13 +1429,16 @@ div.oauth {
         line-height: $cell-height/2 + 3.5;
     }
     #score-board {
-        height: 45vh;
+        // height: 45vh;
         margin: auto auto;
         padding: auto auto;
         vertical-align: center;
     }
     .flexbox {
         height: 5vh;
+    }
+    div #game {
+    height: 100vh;
     }
 }
 
@@ -1480,13 +1537,16 @@ div.oauth {
         line-height: $cell-height/2 + 3.5;
     }
     #score-board {
-        height: 45vh;
+        // height: 45vh;
         margin: auto auto;
         padding: auto auto;
         vertical-align: center;
     }
     .flexbox {
         height: 5vh;
+    }
+    div #game {
+    height: 100vh;
     }
 }
 
@@ -1585,13 +1645,16 @@ div.oauth {
         line-height: $cell-height/2 + 3.5;
     }
     #score-board {
-        height: 45vh;
+        // height: 45vh;
         margin: auto auto;
         padding: auto auto;
         vertical-align: center;
     }
     .flexbox {
         height: 5vh;
+    }
+    div #game {
+    height: 100vh;
     }
 }
 

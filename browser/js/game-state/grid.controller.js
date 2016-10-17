@@ -25,10 +25,10 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     $scope.otherPlayers = [];
     $scope.gameLength = 180;
     $scope.mouseIsDown = false;
-    $scope.draggingAllowed = false;
+    $scope.draggingAllowed = true;
 
     $scope.style = null;
-    $scope.message = ' ';
+    $scope.message = 'The mongoose is in the auditorium';
     // $scope.winOrLose = null;
     //gets set to the timeout that displays a message
     $scope.timeout = null;
@@ -285,6 +285,16 @@ app.controller('GameCtrl', function($scope, BoardFactory, Socket, $stateParams, 
     };
 
     $scope.shuffle = BoardFactory.shuffle;
+
+    //Shake logic: use Shake.js to allow mobile users to 
+    //shuffle board by shaking
+    var myShakeEvent = new Shake({
+        threshold: 15
+    });
+    myShakeEvent.start();
+    window.addEventListener('shake', function(){
+        BoardFactory.shuffle($scope.user, $scope.roomName);
+    }, false);
 
 
     $scope.updateBoard = function(wordObj) {

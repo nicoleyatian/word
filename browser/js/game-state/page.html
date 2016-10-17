@@ -1,27 +1,23 @@
 <div id="game">
     <div id="start" ng-hide="hideStart">
         <ul class="Game-info">
+            <li id="room-name">{{ roomName }}</li>
             <li id="user">{{ user.username }}</li>
-            <div ng-hide="otherPlayers.length > 0">
-                <li>Waiting for other players</li>
-            </div>
-            <div ng-repeat="otherPlayer in otherPlayers track by $index">
-                <li>{{ otherPlayer.username }}</li>
-            </div>
-            <br>
+            <li class="others" ng-hide="otherPlayers.length > 0">Waiting for other players...</li>
+            <li class="others" ng-repeat="otherPlayer in otherPlayers track by $index">{{ otherPlayer.username }}</li>
+            <button class="btn btn-primary" ng-click="startGame()">Start Game</button>
             <button class="btn btn-primary" ng-click="quit()">Quit</button>
-             <button class="btn btn-primary" ng-click="startGame()">Start Game</button>
-
-           <!--  <button class="btn btn-primary" ng-click="startGame()" ng-hide="otherPlayers.length===0">Start Game</button> -->
+            <!--  <button class="btn btn-primary" ng-click="startGame()" ng-hide="otherPlayers.length===0">Start Game</button> -->
         </ul>
     </div>
-    <div id="start" ng-hide="hideBoard">
+    <div ng-hide="hideBoard">
         <div id="score-board">
             <div class="board-row wood-board-lg">
                 <div class="vcenter">
                     <ul id="yours">
                         <li> Score: {{ score }}</li>
                     </ul>
+                    <timer time="gameLength"></timer>
                 </div>
                 <div class="col-6 vcenter">
                     <ul id="other-players">
@@ -32,7 +28,7 @@
                 </div>
             </div>
             <div class="board-row">
-                <div class="col-8 wood-board-sm">
+                <div class="col-12 wood-board-sm">
                     <div id="your-word">
                         <h1 ng-hide="freeze" ng-click="submit(exports)"> {{ exports.word }} </h1>
                         <h1 ng-show="gameOver && otherPlayers.length" ng-click="replay()">Play Again?</h1>
@@ -44,8 +40,8 @@
                 </div>
             </div>
         </div>
-        <div id="message">
-            <p>{{ message }} &nbsp; </p>
+        <div>
+            <h1 id="message">{{ message }} &nbsp; </h1>
         </div>
         <div ng-hide="hideCrabdance">
             <img id="crabdance" src="/images/crabdance.gif">
@@ -60,7 +56,7 @@
         <div class="flexbox">
             <button class="btn btn-wood" ng-click="shuffle(user, roomName)">Shuffle</button>
             <button class="btn btn-wood" ng-click="toggleDrag()">{{ draggingAllowed ? 'Click ':'Drag '}}To Select</button>
-            <button class='btn btn-primary' ng-click="quit()">Quit</button>
+            <button class='btn btn-wood' ng-click="quit()">Quit</button>
         </div>
         <br>
     </div>

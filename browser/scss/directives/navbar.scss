@@ -38,6 +38,14 @@ navbar {
     }
   }
 
+  .icon {
+    display: none;
+  }
+
+  .phonenav {
+    display: none;
+  }
+
   .login-button {
     float: right;
     border: 1px solid black;
@@ -57,6 +65,19 @@ navbar {
     a {
       color: white;
       cursor: pointer;
+    }
+  }
+
+  @media (max-width:775px) {
+    .item {
+      display: none;
+    }
+    .icon {
+      display: inline-block;
+    }
+
+    .phonenav {
+      display: block;
     }
   }
 

@@ -4,19 +4,23 @@
             <logo></logo>
         </div>
         <ul class="nav navbar-nav">
-            <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
+            <li class='item' ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
+                <a ui-sref-active="active" ui-sref="{{ item.state }}({userId: user.id })">{{ item.label }}</a>
+            </li>
+            <li class="icon">
+                <a ng-click="toggle()">&#9776;</a>
+            </li>
+            <li  class='phonenav' ng-repeat="item in items" ng-show="(!item.auth || isLoggedIn()) && !hide">
                 <a ui-sref-active="active" ui-sref="{{ item.state }}({userId: user.id })">{{ item.label }}</a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-
             <li>
                 <button ng-show="!user" ui-sref="signup" class="btn btn-primary">Signup</button>
             </li>
             <li>
                 <button ng-show="!user" ui-sref="login" class="btn btn-primary">Login</button>
             </li>
-
         </ul>
         <div ng-show="user" class="welcome">
             <span>Welcome, {{ user.username }}!</span>

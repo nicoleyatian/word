@@ -1,0 +1,48 @@
+.crab-animation {
+    width: 1300px;
+    height: 88px;
+    background-image: url("http://i.imgur.com/nhng2gs.gif");
+
+    -webkit-animation: play .8s steps(5) infinite;
+       -moz-animation: play .8s steps(5) infinite;
+        -ms-animation: play .8s steps(5) infinite;
+         -o-animation: play .8s steps(5) infinite;
+            animation: play .8s steps(5) infinite;
+}
+
+@-webkit-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -1000px; }
+}
+
+@-moz-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -1000px; }
+}
+
+@-ms-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -1000px; }
+}
+
+@-o-keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -1000px; }
+}
+
+@keyframes play {
+   from { background-position:    0px; }
+     to { background-position: -1000px; }
+}
+
+// .move {
+//     position:relative;
+//     -webkit-animation: backandforth 10s ease 0s;
+//     -webkit-animation-iteration-count:infinite;
+//     animation: backandforth 10s ease 0s;
+//     animation-iteration-count:infinite;
+// }
+
+// @-webkit-keyframes backandforth {0%{left:0;} 50%{left:58%;} 100%{left:0;}}
+
+// @keyframes backandforth {0%{left:0;} 50%{left:100%;} 100%{left:0;}}
