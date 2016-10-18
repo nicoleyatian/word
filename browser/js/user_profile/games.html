@@ -1,12 +1,12 @@
 <div id='game-status'>
-<h1 id="header">Games for User {{user.username}}</h1>
+<h1 id="header">Games for user {{user.username}}</h1>
 <table id=game_table>
 	<tr class='title'>
-		<td class="game_cell"><span class="table_headers">Game id</span></td>
+		<td class="game_cell"><span class="table_headers">Game ID</span></td>
 		<td class="game_cell"><span class="table_headers">Your Score</span></td>
 		<td class="game_cell"><span class="table_headers">Longest Word</span></td>
 		<td class="game_cell"><span class="table_headers">Time Played</span></td>
-		<td class="game_cell"><span class="table_headers">Resullt</span></td>
+		<td class="game_cell"><span class="table_headers">Result</span></td>
 	</tr>
 	<tr ng-repeat="game in user.games | orderBy: 'date'">
 		<td class="game_cell"><span class="cell_data">{{game.id}}</span></td>

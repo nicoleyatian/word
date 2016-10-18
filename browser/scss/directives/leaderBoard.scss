@@ -1,12 +1,17 @@
 #leader-board {
-	width: 100%;
-	margin: 0 auto;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    // display: flex;
+    // flex-wrap: wrap;
+    // justify-content: center;
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
     .rank {
-    	width: 350px;
-    	height: 500px;
+        width: 350px;
+        height: 500px;
         background-image: url(images/leaderBoard.png);
         background-color: transparent;
         background-size: 100% 100%;
@@ -14,11 +19,9 @@
         padding-top: 70px;
         margin: 20px 80px;
         text-align: center;
-
         li {
-        	list-style: none;
-        	margin-left: -25px;
+            list-style: none;
+            margin-left: -25px;
         }
-
     }
 }
