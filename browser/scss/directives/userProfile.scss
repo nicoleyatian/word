@@ -6,6 +6,7 @@
     font-size: 32pt;
     text-align: justify;
     text-align: center;
+    text-shadow: 2px 2px #000000;
 }
 
 #profile-page {
@@ -19,17 +20,22 @@
     width: 50%;
     text-align: center;
     margin: auto;
+    background-color: rgba(0,0,0,0.75);
 }
 
 #game-status {
 	color: #FFFFFF;
 }
 
+#header {
+    text-shadow: 2px 2px #000000;
+}
+
 #game_table {
     width: 75%;
     margin: auto;
     border: none;
-    background-color: transparent;
+    background-color: rgba(0,0,0,0.75);
     text-align: center;
 
     .title {
