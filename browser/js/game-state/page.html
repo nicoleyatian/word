@@ -17,7 +17,8 @@
                     <ul id="yours">
                         <li> Score: {{ score }}</li>
                     </ul>
-                    <timer time="gameLength"></timer>
+                    <timer time="gameLength" ng-show="otherPlayers.length"></timer>
+                    <h1 ng-hide="otherPlayers.length">Time Up!</h1>
                 </div>
                 <div class="col-6 vcenter">
                     <ul id="other-players">
@@ -31,7 +32,7 @@
                 <div class="col-12 wood-board-sm">
                     <div id="your-word">
                         <h1 ng-hide="freeze" ng-click="submit(exports)"> {{ exports.word }} </h1>
-                        <h1 ng-show="gameOver" ng-click="replay()">Play Again?</h1>
+                        <h1 ng-show="gameOver && otherPlayers.length>0" ng-click="replay()">Play Again?</h1>
                     </div>
                 </div>
                 <div class="col-3">
