@@ -10,9 +10,11 @@ app.controller('LeaderBoardCtrl', function($scope, LeaderBoardFactory, $state, A
                 player.highestScore = Math.max(...scores)
                 player.longestWord =  player.games.sort((a, b) => b.userGame.longestWord.length - a.userGame.longestWord.length)[0].userGame.longestWord
                 player.win_percentage = ((player.winner.length/player.games.length)*100).toFixed(0) + '%';
+                player.win_percentageNum = player.winner.length/player.games.length;
             } else {
                 player.highestScore = 0;
                 player.win_percentage = 0 + '%';
+                player.win_percentageNum = 0;
                 player.longestWord = '';
             }
 
